@@ -1,0 +1,12 @@
+{
+    "t":  "data",
+    "ch": "market:wonbtc,kline:1m,version:1",
+    "b": {
+        "ts": 123400000,
+        "open": "0.0010",
+        "close": "0.0020",
+        "high": "0.0025",
+        "low": "0.0015",
+        "vol": "1000"
+    }
+}

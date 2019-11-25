@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  ZeroShare
+
+  Created by saeipi on 2019/9/23.
+  Copyright © 2019 saeipi. All rights reserved.
+*/
+
+"ks_app_global_text_buy_up"               = "買";
+"ks_app_global_text_sell_up"              = "賣";
+"ks_app_global_text_buy"                  = "買入";
+"ks_app_global_text_sell"                 = "賣出";
+"ks_app_global_text_amount"               = "數量";
+"ks_app_global_text_time"                 = "時間";
+"ks_app_global_text_price"                = "價格";
+"ks_app_global_text_type"                 = "類型";
+"ks_app_global_text_price_currency_unit"  = "價格(%@)";
+"ks_app_global_text_amount_currency_unit" = "數量(%@)";
+"ks_app_global_text_indicator"            = "指標";
+"ks_app_global_text_orderbook"            = "委託";
+"ks_app_global_text_info"                 = "詳情";
+"ks_app_global_text_market_trade"         = "成交";
+"ks_app_global_text_24h_high"             = "最高價";
+"ks_app_global_text_24h_low"              = "最低價";
+"ks_app_global_text_24h_vol"              = "成交量";
+"ks_app_global_text_line"                 = "分時";
+"ks_app_global_text_1m"                   = "1分";
+"ks_app_global_text_5m"                   = "5分";
+"ks_app_global_text_15m"                  = "15分";
+"ks_app_global_text_30m"                  = "30分";
+"ks_app_global_text_1h"                   = "1小時";
+"ks_app_global_text_2h"                   = "2小時";
+"ks_app_global_text_4h"                   = "4小時";
+"ks_app_global_text_6h"                   = "6小時";
+"ks_app_global_text_12h"                  = "12小時";
+"ks_app_global_text_1d"                   = "日線";
+"ks_app_global_text_1w"                   = "周線";
+"ks_app_global_text_open"                 = "開盤";
+"ks_app_global_text_close"                = "收盤";
+"ks_app_global_text_maxhigh"              = "最高";
+"ks_app_global_text_maxlow"               = "最低";
+"ks_app_global_text_chg"                  = "漲跌";
+"ks_app_global_text_date"                 = "時間";

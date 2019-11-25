@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  ZeroShare
+
+  Created by saeipi on 2019/9/23.
+  Copyright © 2019 saeipi. All rights reserved.
+*/
+
+"ks_app_global_text_buy_up"               = "Buy";
+"ks_app_global_text_sell_up"              = "Sell";
+"ks_app_global_text_buy"                  = "Buy";
+"ks_app_global_text_sell"                 = "Sell";
+"ks_app_global_text_amount"               = "Amount";
+"ks_app_global_text_time"                 = "Time";
+"ks_app_global_text_price"                = "Price";
+"ks_app_global_text_type"                 = "Type";
+"ks_app_global_text_price_currency_unit"  = "Price(%@)";
+"ks_app_global_text_amount_currency_unit" = "Amount(%@)";
+"ks_app_global_text_indicator"            = "Indicator";
+"ks_app_global_text_orderbook"            = "Book";
+"ks_app_global_text_info"                 = "Info";
+"ks_app_global_text_market_trade"         = "Market Trade";
+"ks_app_global_text_24h_high"             = "High";
+"ks_app_global_text_24h_low"              = "Low";
+"ks_app_global_text_24h_vol"              = "Vol";
+"ks_app_global_text_line"                 = "Line";
+"ks_app_global_text_1m"                   = "1m";
+"ks_app_global_text_5m"                   = "5m";
+"ks_app_global_text_15m"                  = "15m";
+"ks_app_global_text_30m"                  = "30m";
+"ks_app_global_text_1h"                   = "1h";
+"ks_app_global_text_2h"                   = "2h";
+"ks_app_global_text_4h"                   = "4h";
+"ks_app_global_text_6h"                   = "6h";
+"ks_app_global_text_12h"                  = "12h";
+"ks_app_global_text_1d"                   = "1d";
+"ks_app_global_text_1w"                   = "1w";
+"ks_app_global_text_open"                 = "Open";
+"ks_app_global_text_close"                = "Close";
+"ks_app_global_text_maxhigh"              = "High";
+"ks_app_global_text_maxlow"               = "Low";
+"ks_app_global_text_chg"                  = "Chg%";
+"ks_app_global_text_date"                 = "Date";
