@@ -473,13 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				E61E921B2338F00F00184885 /* Date+KSExtensions.swift */,
-				E61E921D2338F00F00184885 /* NSDecimalNumber+KSExtensions.swift */,
-				E61E921E2338F00F00184885 /* NSObject+KSExtensions.swift */,
 				E61E921F2338F00F00184885 /* String+KSExtensions.swift */,
-				E61E92202338F00F00184885 /* UIButton+KSExtensions.swift */,
-				E61E92212338F00F00184885 /* UIImage+KSExtensions.swift */,
-				E61E92222338F00F00184885 /* UILabel+KSExtensions.swift */,
-				E61E92242338F00F00184885 /* UIViewController+KSExtensions.swift */,
 				E6F6CCA6237588890097F8A6 /* UIColor+KSExtensions.swift */,
 				E6F6CCA8237588E70097F8A6 /* CGFloat+KSExtensions.swift */,
 				E6F6CCAA2375890B0097F8A6 /* Double+KSExtensions.swift */,
@@ -514,6 +508,7 @@
 		E61E92752338F01700184885 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				E6697DC0238BE3B300CE9CA3 /* Extensions */,
 				E61E922E2338F00F00184885 /* Const */,
 				E61E920E2338F00F00184885 /* View */,
 				E6697D39238BDC5000CE9CA3 /* Configure */,
@@ -881,6 +876,19 @@
 				E61E92072338F00F00184885 /* KSChartConfigure.swift */,
 			);
 			path = Configure;
+			sourceTree = "<group>";
+		};
+		E6697DC0238BE3B300CE9CA3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E61E921D2338F00F00184885 /* NSDecimalNumber+KSExtensions.swift */,
+				E61E921E2338F00F00184885 /* NSObject+KSExtensions.swift */,
+				E61E92202338F00F00184885 /* UIButton+KSExtensions.swift */,
+				E61E92212338F00F00184885 /* UIImage+KSExtensions.swift */,
+				E61E92222338F00F00184885 /* UILabel+KSExtensions.swift */,
+				E61E92242338F00F00184885 /* UIViewController+KSExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E6EF01E1238BADB700B96D5A /* ProExtensions */ = {
