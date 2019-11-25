@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "KSChart"
-  spec.version      = "1.0.0"
+  spec.version      = "1.0.1"
   spec.summary      = "KChart."
 
   # This description is used to generate tags and improve search results.
@@ -92,7 +92,7 @@ swift 版k线
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "KSChart", "KSChart/**/*.{swift}"
+  spec.source_files  = "KSChart", "KSChart/**/*"
   spec.exclude_files = "ZeroShare"
 
   # spec.public_header_files = "Classes/**/*.h"
