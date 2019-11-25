@@ -759,7 +759,7 @@ public extension KSChartModel {
         } else {
             isLeft = 1
         }
-        var mmPointY: CGFloat = 0
+        //var mmPointY: CGFloat = 0
         
         //context.setShouldAntialias(true)
         //context.setStrokeColor(self.titleColor.cgColor)
@@ -855,12 +855,12 @@ public extension KSChartModel {
             guideValueTextColor   = color
 
             let lineY             = point.y + arrowLineWidth * isUp * 2//point.y + arrowLineWidth * isUp - isUp * 4
-            mmPointY              = lineY
+            //mmPointY              = lineY
             linePath.move(to: CGPoint(x: point.x + 2 * isLeft, y: lineY))
             linePath.addLine(to: CGPoint(x: point.x + arrowLineWidth * 3.5 * isLeft, y:lineY))
 
             lineLayer.path        = linePath.cgPath
-            lineLayer.strokeColor = KS_Const_Color_Chart_Ink.cgColor
+            lineLayer.strokeColor = color.cgColor
             guideValueLayer.addSublayer(lineLayer)
         default:
             isShowValue = false
@@ -882,7 +882,7 @@ public extension KSChartModel {
             valueText.frame           = CGRect(origin: point, size: fontSize)
             valueText.string          = value
             valueText.fontSize        = section.labelFont.pointSize
-            valueText.foregroundColor = KS_Const_Color_Chart_Ink.cgColor
+            valueText.foregroundColor = guideValueTextColor.cgColor
             valueText.backgroundColor = UIColor.clear.cgColor
             valueText.contentsScale   = UIScreen.main.scale
 
