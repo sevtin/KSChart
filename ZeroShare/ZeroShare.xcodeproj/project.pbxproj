@@ -370,11 +370,8 @@
 			isa = PBXGroup;
 			children = (
 				E61E91F92338F00F00184885 /* Chart */,
-				E61E92062338F00F00184885 /* Configure */,
-				E61E92092338F00F00184885 /* Custom */,
+				E61E92092338F00F00184885 /* CustomModel */,
 				E61E92112338F00F00184885 /* Extensions */,
-				E61E92252338F00F00184885 /* Other */,
-				E61E922B2338F00F00184885 /* Tools */,
 			);
 			path = KSChart;
 			sourceTree = "<group>";
@@ -434,31 +431,13 @@
 			path = Chart;
 			sourceTree = "<group>";
 		};
-		E61E92062338F00F00184885 /* Configure */ = {
-			isa = PBXGroup;
-			children = (
-				E61E92072338F00F00184885 /* KSChartConfigure.swift */,
-				E622D1BE2339F3C000D233E0 /* KSSeriesParam.swift */,
-			);
-			path = Configure;
-			sourceTree = "<group>";
-		};
-		E61E92092338F00F00184885 /* Custom */ = {
-			isa = PBXGroup;
-			children = (
-				E61E920A2338F00F00184885 /* Model */,
-				E61E920E2338F00F00184885 /* View */,
-			);
-			path = Custom;
-			sourceTree = "<group>";
-		};
-		E61E920A2338F00F00184885 /* Model */ = {
+		E61E92092338F00F00184885 /* CustomModel */ = {
 			isa = PBXGroup;
 			children = (
 				E61E920B2338F00F00184885 /* KSBollModel.swift */,
 				E61E920D2338F00F00184885 /* KSTimeChartModel.swift */,
 			);
-			path = Model;
+			path = CustomModel;
 			sourceTree = "<group>";
 		};
 		E61E920E2338F00F00184885 /* View */ = {
@@ -508,30 +487,6 @@
 			path = ShareExtensions;
 			sourceTree = "<group>";
 		};
-		E61E92252338F00F00184885 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				E61E92262338F00F00184885 /* Configure */,
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
-		E61E92262338F00F00184885 /* Configure */ = {
-			isa = PBXGroup;
-			children = (
-				E622D1BA2339DDA700D233E0 /* KSChartStyles.swift */,
-			);
-			path = Configure;
-			sourceTree = "<group>";
-		};
-		E61E922B2338F00F00184885 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				E61E922E2338F00F00184885 /* Const */,
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
 		E61E922E2338F00F00184885 /* Const */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,6 +514,9 @@
 		E61E92752338F01700184885 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				E61E922E2338F00F00184885 /* Const */,
+				E61E920E2338F00F00184885 /* View */,
+				E6697D39238BDC5000CE9CA3 /* Configure */,
 				E61E92342338F00F00184885 /* Helpers */,
 				E61E92322338F00F00184885 /* File */,
 				E6EF01E1238BADB700B96D5A /* ProExtensions */,
@@ -913,6 +871,16 @@
 				E622D1C1233A213900D233E0 /* KSMyShareView.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		E6697D39238BDC5000CE9CA3 /* Configure */ = {
+			isa = PBXGroup;
+			children = (
+				E622D1BA2339DDA700D233E0 /* KSChartStyles.swift */,
+				E622D1BE2339F3C000D233E0 /* KSSeriesParam.swift */,
+				E61E92072338F00F00184885 /* KSChartConfigure.swift */,
+			);
+			path = Configure;
 			sourceTree = "<group>";
 		};
 		E6EF01E1238BADB700B96D5A /* ProExtensions */ = {

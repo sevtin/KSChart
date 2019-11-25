@@ -71,7 +71,8 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
         case 1:
             enterBinanceController()
         case 2:
-            enterShareController()
+            //enterShareController()
+            break
         default:
             break
         }
