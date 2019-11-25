@@ -18,7 +18,7 @@ class KSSingleton: NSObject {
     }()
     
     lazy var server: KSServer = {
-        let server = KSServer.init(domain: "gw.1won.com")
+        let server = KSServer.init(domain: "xxx.com")
         return server
     }()
     
