@@ -4,5 +4,7 @@
 #### pod 'KSChart', '~> 1.0.1'
 #### pod install --repo-update
 
+反馈/技术交流群:902071358
+
 ![Image](https://github.com/saeipi/KSChart/blob/master/Resources/wonbtc.png)
 ![Image](https://github.com/saeipi/KSChart/blob/master/Resources/mamacd.png)
