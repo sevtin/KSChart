@@ -72,9 +72,6 @@ extension KSKLineChartView {
                         }
                     }
                 }
-                print("~~~~~~~~~~~~~~~~~~~ master ~~~~~~~~~~~~~~~~~~~")
-                print(section.specifications)
-                print("~~~~~~~~~~~~~~~~~~~ master ~~~~~~~~~~~~~~~~~~~")
             }
         }
     }
@@ -108,16 +105,11 @@ extension KSKLineChartView {
                     }
                     serie.hidden = hidden
                     updateSerieHidden(section: section, serie: serie)
-                    print("Key + \(section.key)+ \(serie.key)")
                 }
                 else{
-                    print("Other + \(section.key)+ \(serie.key)")
                     serie.hidden = true
                 }
             }
-            print("~~~~~~~~~~~~~~~~~~~ assistant ~~~~~~~~~~~~~~~~~~~")
-            print(section.specifications)
-            print("~~~~~~~~~~~~~~~~~~~ assistant ~~~~~~~~~~~~~~~~~~~")
         }
     }
     
