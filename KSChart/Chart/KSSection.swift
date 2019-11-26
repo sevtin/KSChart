@@ -17,39 +17,38 @@ public enum KSSectionValueType {
 }
 
 /// K线的区域
-open class KSSection: NSObject {
+public class KSSection: NSObject {
     var specifications: [String: String]   = [String: String]()//记录显示所需的指标
     /// MARK: - 成员变量
-    open var upColor: UIColor              = UIColor.green//升的颜色
-    open var downColor: UIColor            = UIColor.red//跌的颜色
-    open var titleColor: UIColor           = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//文字颜色
-    open var labelFont                     = UIFont.systemFont(ofSize: 10)
-    open var valueType: KSSectionValueType = KSSectionValueType.master
-    open var key                           = ""
-    open var name: String                  = ""//区域的名称
-    open var hidden: Bool                  = false
-    open var paging: Bool                  = false
-    open var selectedIndex: Int            = 0
-    open var padding: UIEdgeInsets         = UIEdgeInsets.zero
-    open var series                        = [KSSeries]()//每个分区包含多组系列，每个系列包含多个点线模型
-    open var tickInterval: Int             = 0
-    open var title: String                 = ""//标题
-    open var titleShowOutSide: Bool        = false//标题是否显示在外面
-    open var showTitle: Bool               = true//是否显示标题文本
-    open var decimal: Int                  = 2//小数位的长度
-    open var ratios: Int                   = 0//所占区域比例
-    open var fixHeight: CGFloat            = 0//固定高度，为0则通过ratio计算高度
-    open var frame: CGRect                 = CGRect.zero
-    open var yAxis: KSYAxis                = KSYAxis()//Y轴参数
-    open var xAxis: KSXAxis                = KSXAxis()//X轴参数
-    open var backgroundColor: UIColor      = UIColor.black
-    open var index: Int                    = 0
+    public var upColor: UIColor              = UIColor.green//升的颜色
+    public var downColor: UIColor            = UIColor.red//跌的颜色
+    public var titleColor: UIColor           = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//文字颜色
+    public var labelFont                     = UIFont.systemFont(ofSize: 10)
+    public var valueType: KSSectionValueType = KSSectionValueType.master
+    public var key                           = ""
+    public var name: String                  = ""//区域的名称
+    public var hidden: Bool                  = false
+    public var paging: Bool                  = false
+    public var selectedIndex: Int            = 0
+    public var padding: UIEdgeInsets         = UIEdgeInsets.zero
+    public var series                        = [KSSeries]()//每个分区包含多组系列，每个系列包含多个点线模型
+    public var tickInterval: Int             = 0
+    public var title: String                 = ""//标题
+    public var titleShowOutSide: Bool        = false//标题是否显示在外面
+    public var showTitle: Bool               = true//是否显示标题文本
+    public var decimal: Int                  = 2//小数位的长度
+    public var ratios: Int                   = 0//所占区域比例
+    public var fixHeight: CGFloat            = 0//固定高度，为0则通过ratio计算高度
+    public var frame: CGRect                 = CGRect.zero
+    public var yAxis: KSYAxis                = KSYAxis()//Y轴参数
+    public var xAxis: KSXAxis                = KSXAxis()//X轴参数
+    public var backgroundColor: UIColor      = UIColor.black
+    public var index: Int                    = 0
     var titleLayer: KSShapeLayer           = KSShapeLayer()//显示顶部标题内容的层
     var sectionLayer: KSShapeLayer         = KSShapeLayer()//分区的绘图层
     var titleView: UIView?                 //用户自定义的View
     var isOpenIndex: Bool                  = true//是否开启头部技术指标值绘制
     
-
     /// 初始化分区
     ///
     /// - Parameters:

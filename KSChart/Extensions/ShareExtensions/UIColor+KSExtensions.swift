@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     class func ks_rgba(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat = 1.0) -> UIColor {
         return UIColor.init(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: alpha)
     }
@@ -34,7 +34,7 @@ extension UIColor {
     
     convenience init(hexStr: String, alpha: CGFloat = 1.0) {
         let scanner = Scanner(string: hexStr)
-        scanner.scanLocation = 0
+        //scanner.scanLocation = 0
         
         var rgbValue: UInt64 = 0
         

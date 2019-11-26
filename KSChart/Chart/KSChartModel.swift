@@ -38,16 +38,16 @@ public enum KSGraphType: Int {
 }
 
 /// 数据元素
-open class KSChartItem: NSObject {
-    @objc open var time: Int           = 0
-    open var openPrice: CGFloat        = 0
-    open var closePrice: CGFloat       = 0
-    open var lowPrice: CGFloat         = 0
-    open var highPrice: CGFloat        = 0
-    open var vol: CGFloat              = 0
-    open var value: CGFloat?
-    open var extVal: [String: CGFloat] = [String: CGFloat]()//扩展值，用来记录各种技术指标
-    open var trend: KSChartItemTrend {
+public class KSChartItem: NSObject {
+    @objc public var time: Int           = 0
+    public var openPrice: CGFloat        = 0
+    public var closePrice: CGFloat       = 0
+    public var lowPrice: CGFloat         = 0
+    public var highPrice: CGFloat        = 0
+    public var vol: CGFloat              = 0
+    public var value: CGFloat?
+    public var extVal: [String: CGFloat] = [String: CGFloat]()//扩展值，用来记录各种技术指标
+    public var trend: KSChartItemTrend {
         //收盘价 = 开盘价
         if closePrice == openPrice {
             return .equal
@@ -64,20 +64,20 @@ open class KSChartItem: NSObject {
     }
     
     /// 以下为扩展属性
-    open var isUp:Bool                 = false
+    public var isUp:Bool                 = false
     public var yesterPrice: CGFloat    = 1
     
-    @objc open var low: String = "" {
+    @objc public var low: String = "" {
         didSet {
             lowPrice = low.ks_floatValue()
         }
     }
-    @objc open var high:String = "" {
+    @objc public var high:String = "" {
         didSet {
             highPrice = high.ks_floatValue()
         }
     }
-    @objc open var volume:String = "" {
+    @objc public var volume:String = "" {
         didSet {
             vol = volume.ks_floatValue()
         }
@@ -89,23 +89,23 @@ open class KSChartItem: NSObject {
         }
     }
     
-    @objc open var open:String = "" {
+    @objc public var open:String = "" {
         didSet {
             openPrice = open.ks_floatValue()
         }
     }
-    @objc open var close:String = "" {
+    @objc public var close:String = "" {
         didSet {
             closePrice    = close.ks_floatValue()
             isUp          = closePrice > openPrice
         }
     }
-    open var priceChange: String {
+    public var priceChange: String {
         get {
             return String.init(format: "%.2f", ((closePrice - yesterPrice)/yesterPrice))
         }
     }
-    open var changePercent: String {
+    public var changePercent: String {
         get {
             return String.init(format: "%.2f%%", ((closePrice - yesterPrice)/yesterPrice*100))
         }
@@ -157,26 +157,26 @@ open class KSChartItem: NSObject {
 }
 
 /// 定义图表数据模型
-open class KSChartModel {
+public class KSChartModel {
     
     /// MARK: - 成员变量
     //升的颜色
-    open var upStyle: (color: UIColor, isSolid: Bool)   = (.green, true)
+    public var upStyle: (color: UIColor, isSolid: Bool)   = (.green, true)
     //跌的颜色
-    open var downStyle: (color: UIColor, isSolid: Bool) = (.red, true)
-    open var titleColor                                 = UIColor.white//标题文本的颜色
-    open var datas: [KSChartItem]                       = [KSChartItem]()//数据值
-    open var decimal: Int                               = 2//小数位的长度
-    open var showMaxVal: Bool                           = false//是否显示最大值
-    open var showMinVal: Bool                           = false//是否显示最小值
-    open var title: String                              = ""//标题
-    open var useTitleColor                              = true
-    open var key: String                                = ""//key的名字
-    open var ultimateValueStyle: KSUltimateValueStyle   = .none// 最大最小值显示样式
-    open var lineWidth: CGFloat                         = 0.6//线段宽度
-    open var plotPaddingExt: CGFloat                    = 0.165//点与点之间间断所占点宽的比例
-    open var minCandleCount: Int                        = 30//最小蜡烛图数量
-    open var fixedWidth: CGFloat                        = 10//小于最小蜡烛图数量，蜡烛的宽度
+    public var downStyle: (color: UIColor, isSolid: Bool) = (.red, true)
+    public var titleColor                                 = UIColor.white//标题文本的颜色
+    public var datas: [KSChartItem]                       = [KSChartItem]()//数据值
+    public var decimal: Int                               = 2//小数位的长度
+    public var showMaxVal: Bool                           = false//是否显示最大值
+    public var showMinVal: Bool                           = false//是否显示最小值
+    public var title: String                              = ""//标题
+    public var useTitleColor                              = true
+    public var key: String                                = ""//key的名字
+    public var ultimateValueStyle: KSUltimateValueStyle   = .none// 最大最小值显示样式
+    public var lineWidth: CGFloat                         = 0.6//线段宽度
+    public var plotPaddingExt: CGFloat                    = 0.165//点与点之间间断所占点宽的比例
+    public var minCandleCount: Int                        = 30//最小蜡烛图数量
+    public var fixedWidth: CGFloat                        = 10//小于最小蜡烛图数量，蜡烛的宽度
     weak var section: KSSection!
     
     convenience init(upStyle: (color: UIColor, isSolid: Bool),
@@ -204,13 +204,13 @@ open class KSChartModel {
      - parameter endIndex:       结束索引
      - parameter plotPaddingExt: 点与点之间间断所占点宽的比例
      */
-    open func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    public func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
         return CAShapeLayer()
     }
 }
 
 /// 线点样式模型
-open class KSLineModel: KSChartModel {
+public class KSLineModel: KSChartModel {
     
     /// 曲线类型
     var graphType: KSGraphType = .normal
@@ -227,7 +227,7 @@ open class KSLineModel: KSChartModel {
     ///   - startIndex: 起始索引
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
-    open override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    public override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
         if self.graphType == .timeChart {
             return self.drawTimeChartSerie(startIndex, endIndex: endIndex)
         }
@@ -317,7 +317,7 @@ open class KSLineModel: KSChartModel {
 }
 
 /// 蜡烛样式模型
-open class KSCandleModel: KSChartModel {
+public class KSCandleModel: KSChartModel {
     //是否绘制阴影
     var drawShadow = true
     
@@ -327,7 +327,7 @@ open class KSCandleModel: KSChartModel {
     ///   - startIndex: 起始索引
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
-    open override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    public override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
         
         let serieLayer        = CAShapeLayer()
         let modelLayer        = CAShapeLayer()
@@ -467,7 +467,7 @@ open class KSCandleModel: KSChartModel {
 }
 
 /// 交易量样式模型
-open class KSColumnModel: KSChartModel {
+public class KSColumnModel: KSChartModel {
     
     /// 绘制成交量
     ///
@@ -475,7 +475,7 @@ open class KSColumnModel: KSChartModel {
     ///   - startIndex: 起始索引
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
-    open override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    public override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
         
         let serieLayer  = CAShapeLayer()
         let modelLayer  = CAShapeLayer()
@@ -538,7 +538,7 @@ open class KSColumnModel: KSChartModel {
 }
 
 /// MACD模型
-open class KSBarModel: KSChartModel {
+public class KSBarModel: KSChartModel {
     
     /// 绘制MACD指标附图
     ///
@@ -546,7 +546,7 @@ open class KSBarModel: KSChartModel {
     ///   - startIndex: 起始索引
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
-    open override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    public override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
         
         let serieLayer  = CAShapeLayer()
         let modelLayer  = CAShapeLayer()
@@ -621,7 +621,7 @@ open class KSBarModel: KSChartModel {
 }
 
 /// 圆点样式模型
-open class KSRoundModel: KSChartModel {
+public class KSRoundModel: KSChartModel {
     
     /// SAR指标
     ///
@@ -629,7 +629,7 @@ open class KSRoundModel: KSChartModel {
     ///   - startIndex: 起始索引
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
-    open override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    public override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
 
         let serieLayer         = CAShapeLayer()
         let modelLayer         = CAShapeLayer()

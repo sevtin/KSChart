@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension String {
+public extension String {
     
     static func ks_localizde(_ text: String) -> String {
         return NSLocalizedString(text, comment: "")

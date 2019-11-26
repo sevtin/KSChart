@@ -222,6 +222,7 @@ public class KSZeroChartView: KSKLineChartView {
         self.delegate?.kLineChart?(chart: self, displayCross: false)
     }
 }
+
 extension KSZeroChartView {
     /// 通过CALayer方式画图表
     override func drawLayerView() {

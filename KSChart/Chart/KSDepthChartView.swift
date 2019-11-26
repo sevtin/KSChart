@@ -26,11 +26,11 @@ public enum KSDepthChartOnDirection {
 }
 
 /// 深度数据元素
-open class KSDepthChartItem: NSObject {
-    open var value: CGFloat = 0                              //数值
-    open var amount: CGFloat = 0                             //数量
-    open var depthAmount: CGFloat = 0                        //计算得到的深度
-    open var type: KSDepthChartItemType = .bid               //数据类型
+public class KSDepthChartItem: NSObject {
+    public var value: CGFloat = 0                              //数值
+    public var amount: CGFloat = 0                             //数量
+    public var depthAmount: CGFloat = 0                        //计算得到的深度
+    public var type: KSDepthChartItemType = .bid               //数据类型
 }
 
 /**
@@ -142,23 +142,23 @@ open class KSDepthChartItem: NSObject {
     
 }
 
-open class KSDepthChartView: UIView {
+public class KSDepthChartView: UIView {
     
     /// MARK: - 常量
     let kYAxisLabelWidth: CGFloat                                           = 46//默认宽度
     let kXAxisHegiht: CGFloat                                               = 16//默认X坐标的高度
 
     /// MARK: - 成员变量
-    open var bidColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.green, .green, 1)
-    open var askColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.red, .red, 1)
-    @IBInspectable open var labelFont                                       = UIFont.systemFont(ofSize: 10)
-    @IBInspectable open var lineColor: UIColor                              = UIColor(white: 0.2, alpha: 1)//线条颜色
-    @IBInspectable open var textColor: UIColor                              = UIColor(white: 0.8, alpha: 1)//文字颜色
-    @IBInspectable open var xAxisPerInterval: Int                           = 4//x轴的间断个数
+    public var bidColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.green, .green, 1)
+    public var askColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.red, .red, 1)
+    public var labelFont                                       = UIFont.systemFont(ofSize: 10)
+    public var lineColor: UIColor                              = UIColor(white: 0.2, alpha: 1)//线条颜色
+    public var textColor: UIColor                              = UIColor(white: 0.8, alpha: 1)//文字颜色
+    public var xAxisPerInterval: Int                           = 4//x轴的间断个数
 
-    open var yAxis: KSYAxis                                                 = KSYAxis()//Y轴参数
-    open var xAxis: KSXAxis                                                 = KSXAxis()//X轴参数
-    open var yAxisLabelWidth: CGFloat                                       = 0//Y轴的宽度
+    public var yAxis: KSYAxis                                                 = KSYAxis()//Y轴参数
+    public var xAxis: KSXAxis                                                 = KSXAxis()//X轴参数
+    public var yAxisLabelWidth: CGFloat                                       = 0//Y轴的宽度
 
     /// 价格小数位
     private var decimal: Int                                                = 2
@@ -167,35 +167,35 @@ open class KSDepthChartView: UIView {
     private var numDecimal:Int                                              = 4
 
     /// 内边距
-    open var padding: UIEdgeInsets                                          = UIEdgeInsets.zero
+    public var padding: UIEdgeInsets                                          = UIEdgeInsets.zero
 
     /// 显示y的位置，默认右边
-    open var showYAxisLabel                                                 = KSYAxisShowPosition.right
+    public var showYAxisLabel                                                 = KSYAxisShowPosition.right
 
     /// 是否把y坐标内嵌到图表仲
-    open var isInnerYAxis: Bool                                             = false
+    public var isInnerYAxis: Bool                                             = false
 
     /// 买单在右边
-    open var bidChartOnDirection: KSDepthChartOnDirection                   = .right
+    public var bidChartOnDirection: KSDepthChartOnDirection                   = .right
 
     /// 是否显示X轴标签
-    open var showXAxisLabel: Bool                                           = true
+    public var showXAxisLabel: Bool                                           = true
 
     /// 代理
     open weak var delegate: KSDepthChartDelegate?
 
     //是否可点选
-    open var enableTap: Bool                                                = true
+    public var enableTap: Bool                                                = true
     
     /// 显示边线上左下有
-    open var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
+    public var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
     
     var lineWidth: CGFloat     = 0.5
 
     /// 档位个数
     var plotCount: Int         = 0
 
-    open var labelSize         = CGSize(width: 40, height: 16)
+    public var labelSize         = CGSize(width: 40, height: 16)
 
     /// 点击选中的点
     var selectedPoint: CGPoint = CGPoint.zero
@@ -216,15 +216,15 @@ open class KSDepthChartView: UIView {
     }
     
     /// 买方深度数据
-    open var bidItems = [KSDepthChartItem]()
+    public var bidItems = [KSDepthChartItem]()
     
     /// 卖方深度数据
-    open var askItems = [KSDepthChartItem]()
+    public var askItems = [KSDepthChartItem]()
     
     /// 用于图表的图层
     var drawLayer: KSShapeLayer = KSShapeLayer()
     
-    open var style: KSKLineChartStyle! {           //显示样式
+    public var style: KSKLineChartStyle! {           //显示样式
         didSet {
             //重新配置样式
             self.backgroundColor     = self.style.backgroundColor
@@ -254,7 +254,7 @@ open class KSDepthChartView: UIView {
         super.init(coder: aDecoder)
     }
     
-    open override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
     }
     
@@ -275,7 +275,7 @@ open class KSDepthChartView: UIView {
     }
     
     //MARK: - 内部方法
-    open override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         //布局完成重绘
         self.drawLayerView()
