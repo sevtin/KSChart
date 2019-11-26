@@ -13,7 +13,7 @@ extension KSSection {
     /// 画分区的标题
     ///
     /// - Parameter chartSelectedIndex: 分区
-    public func drawCustomTitle(_ chartSelectedIndex: Int) {
+    func drawCustomTitle(_ chartSelectedIndex: Int) {
         
         guard self.showTitle else {
             return
@@ -49,7 +49,7 @@ extension KSSection {
     ///   - chartSelectedIndex: 图表选中位置
     ///   - series: 线
     /// - Returns: 标题属性
-    public func getCustomTitleAttributesByIndex(_ chartSelectedIndex: Int, series: KSSeries) -> [(title: String, color: UIColor)]? {
+    func getCustomTitleAttributesByIndex(_ chartSelectedIndex: Int, series: KSSeries) -> [(title: String, color: UIColor)]? {
         
         if series.hidden {
             return nil

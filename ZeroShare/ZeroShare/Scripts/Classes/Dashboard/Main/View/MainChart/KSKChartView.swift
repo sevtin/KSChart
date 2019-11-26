@@ -42,7 +42,6 @@ class KSKChartView: KSBaseView {
 }
 
 extension KSKChartView: KSKLineChartDelegate {
-    
     /**
      数据源总数
      

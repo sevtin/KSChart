@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KSBollModel: KSChartModel {
+public class KSBollModel: KSChartModel {
 
     /// 绘制Boll
     ///
@@ -16,7 +16,7 @@ class KSBollModel: KSChartModel {
     ///   - startIndex: 起始索引
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
-    open override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    override public func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
 
         let serieLayer  = CAShapeLayer()
         //每个点的间隔宽度  BOLL宽度 =（宽度 - 左边间隔 - 右边间隔）/（结束点 - 开始点）
@@ -40,9 +40,11 @@ class KSBollModel: KSChartModel {
             let iyh       = self.section.getLocalY(item.highPrice)//最高
             let iyl       = self.section.getLocalY(item.lowPrice)//最低
             //如果最高价 > 收盘价 || 最高价 > 开盘价
+            /*
             if iyh > iyc || iyh > iyo {
                 NSLog("highPrice = \(item.highPrice), closePrice = \(item.closePrice), openPrice = \(item.openPrice)")
             }
+             */
             
             switch item.trend {
             case .equal:

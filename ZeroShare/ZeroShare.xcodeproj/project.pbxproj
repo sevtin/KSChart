@@ -402,14 +402,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		E61E920E2338F00F00184885 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E61E92102338F00F00184885 /* KSZeroChartView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		E61E922E2338F00F00184885 /* Const */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,7 +431,6 @@
 			children = (
 				E6697DC0238BE3B300CE9CA3 /* Extensions */,
 				E61E922E2338F00F00184885 /* Const */,
-				E61E920E2338F00F00184885 /* View */,
 				E6697D39238BDC5000CE9CA3 /* Configure */,
 				E61E92342338F00F00184885 /* Helpers */,
 				E61E92322338F00F00184885 /* File */,
@@ -834,6 +825,7 @@
 		E6AB6E49238BEA5900C9BCF3 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				E61E92102338F00F00184885 /* KSZeroChartView.swift */,
 				E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */,
 				E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */,
 				E6AB6E4C238BEA5900C9BCF3 /* KSChartModel.swift */,

@@ -16,7 +16,7 @@ class KSChartConfigure: NSObject {
 // MARK: - 自定义样式
 extension KSChartConfigure {
     
-    func loadConfigure() -> KSKLineChartStyle {
+    public func loadConfigure() -> KSKLineChartStyle {
 
         /// 默认指标
         var seriesParams: [KSSeriesParam] {

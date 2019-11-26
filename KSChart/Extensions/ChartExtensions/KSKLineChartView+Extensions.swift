@@ -15,7 +15,7 @@ extension KSKLineChartView {
     ///
     /// - Parameter plotCount: 所有数据的个数
     /// - Returns:
-    func isActiveRefresh(plotCount:Int) -> Bool{
+    public func isActiveRefresh(plotCount:Int) -> Bool{
         //print(String.init(format: "rangeFrom:%d,rangeTo:%d,range:%d,plotCount:%d", self.rangeFrom,self.rangeTo,self.range,plotCount))
         // 如果图表尽头的索引为0，或者全部数据小于设定显示数量
         if self.rangeTo == 0 || plotCount < self.range {
@@ -37,7 +37,7 @@ extension KSKLineChartView {
 // MARK: - CPU优化调试
 extension KSKLineChartView {
 
-    func updateMasterChartSerie(key: String, hidden: Bool) {
+    public func updateMasterChartSerie(key: String, hidden: Bool) {
         
         var isCandle: Bool = false
         if key == KSSeriesKey.candle {
@@ -76,7 +76,7 @@ extension KSKLineChartView {
         }
     }
     
-    func updateSerieHidden(section: KSSection, serie: KSSeries) {
+    public func updateSerieHidden(section: KSSection, serie: KSSeries) {
         if serie.hidden == false {
             section.specifications[serie.key] = serie.key
         }
@@ -84,7 +84,7 @@ extension KSKLineChartView {
     
     /// 通过key隐藏或显示线系列
     /// inSection = -1时，全section都隐藏，否则只隐藏对应的索引的section
-    func updateSerie(hidden: Bool, by key: String, inSection: Int = -1) {
+    public func updateSerie(hidden: Bool, by key: String, inSection: Int = -1) {
         var hideSections = [KSSection]()
         if inSection < 0 {
             hideSections = self.sections
@@ -113,7 +113,7 @@ extension KSKLineChartView {
         }
     }
     
-    func updateHeader(sectionType:KSSectionValueType, isOpenIndex:Bool) {
+    public func updateHeader(sectionType:KSSectionValueType, isOpenIndex:Bool) {
         for section in self.sections {
             if section.valueType == sectionType {
                 section.isOpenIndex = isOpenIndex

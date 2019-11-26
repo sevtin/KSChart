@@ -8,15 +8,10 @@
 
 import UIKit
 
-class KSZeroChartView: KSKLineChartView {
+public class KSZeroChartView: KSKLineChartView {
 
-    open var minPlotCount: Int = 20//最小蜡烛数量
+    private var minPlotCount: Int = 20//最小蜡烛数量
     
-    override func initializeKit() {
-        super.initializeKit()
-        
-    }
-
     /// 设置选中的数据点,并回调
     ///
     /// - Parameter index: 选中位置
@@ -297,11 +292,11 @@ extension KSZeroChartView {
 // MARK: - 额为的初始化方法
 extension KSZeroChartView {
     /// 设置style后，方可调用
-    func extraSetting() {
+    public func extraSetting() {
         
         self.isCrosshair                         = false
         self.showSelection                       = false
-        self.animator.delegate                   = self
+        //self.animator.delegate                 = self
         //重置文字颜色和字体
         self.selectedYAxisLabel?.font            = self.labelFont
         self.selectedYAxisLabel?.backgroundColor = self.selectedBGColor
@@ -312,8 +307,8 @@ extension KSZeroChartView {
     }
 }
 
-extension KSZeroChartView: UIDynamicAnimatorDelegate {
-    func dynamicAnimatorDidPause(_ animator: UIDynamicAnimator) {
-
-    }
-}
+//extension KSZeroChartView: UIDynamicAnimatorDelegate {
+//    public func dynamicAnimatorDidPause(_ animator: UIDynamicAnimator) {
+//
+//    }
+//}

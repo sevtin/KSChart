@@ -393,5 +393,4 @@ extension KSSeries {
         series.chartModels = [sam, candle]
         return series
     }
-    
 }

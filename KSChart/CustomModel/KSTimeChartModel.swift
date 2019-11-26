@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KSTimeChartModel: KSChartModel {
+public class KSTimeChartModel: KSChartModel {
     /// 曲线类型
     var graphType: KSGraphType = .normal
     /// 渐变颜色
@@ -19,7 +19,7 @@ class KSTimeChartModel: KSChartModel {
     var shadowOpacity: Float = 0.5;
     
     ///绘制渐变曲线
-    open override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    override public func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
         let serieLayer               = KSShapeLayer()
         let timelineLayer            = KSShapeLayer()
         let curvelineLayer           = KSShapeLayer()
