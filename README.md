@@ -5,3 +5,6 @@
 
 ![Image](https://github.com/saeipi/KSChart/blob/master/Resources/wonbtc.png)
 ![Image](https://github.com/saeipi/KSChart/blob/master/Resources/mamacd.png)
+
+待完成功能：
+1、点击副图，切换副图技术指标
