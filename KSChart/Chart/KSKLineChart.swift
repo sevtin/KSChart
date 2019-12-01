@@ -424,7 +424,7 @@ public class KSKLineChartView: UIView {
     /// - Parameters:
     ///   - isAll: 是否刷新全部数据
     ///   - isDraw: 是否绘制
-    func refreshChart(isAll: Bool = true, isDraw: Bool = true) {
+    public func refreshChart(isAll: Bool = true, isDraw: Bool = true) {
         calculatorTai(isAll: isAll)
         if isDraw {
             self.scrollToPosition = .end

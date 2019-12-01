@@ -83,7 +83,7 @@ public class KSChartItem: NSObject {
         }
     }
     
-    var volumeDisplay: String {
+    public var volumeDisplay: String {
         get {
             return volume.ks_volume()
         }

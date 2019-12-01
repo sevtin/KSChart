@@ -65,9 +65,12 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        enterBinanceController()
+        return;
+        /*
         switch indexPath.row {
         case 0:
-            enterLineChartController()
+            //enterLineChartController()
         case 1:
             enterBinanceController()
         case 2:
@@ -76,6 +79,7 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
         default:
             break
         }
+         */
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
