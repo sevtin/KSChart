@@ -375,11 +375,9 @@ public class KSKLineChartView: UIView {
     */
     
     /// 更新数据
-    private func updateDataSource() {
+    private func resetDataSource() {
         self.plotCount = self.delegate?.numberOfPointsInKLineChart(chart: self) ?? 0
         if self.plotCount != self.datas.count {
-            //self.datas.removeAll()
-            //self.datas = self.delegate?.dataSource(in: self) ?? [KSChartItem]()
             calculatorTai(isAll: true)
         }
     }
@@ -742,7 +740,7 @@ extension KSKLineChartView {
     /// 初始化图表结构 -> 是否初始化数据
     func initChart() -> Bool {
         
-        updateDataSource()
+        resetDataSource()
         
         if plotCount > 0 {
             //如果显示全部，显示范围为全部数据量
@@ -1246,7 +1244,7 @@ extension KSKLineChartView {
     public func reloadData(toPosition: KSChartViewScrollPosition = .none, resetData: Bool = true) {
         self.scrollToPosition = toPosition
         if resetData {
-            self.updateDataSource()
+            self.resetDataSource()
         }
         self.drawLayerView()
     }
