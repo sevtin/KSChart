@@ -26,6 +26,20 @@ class KSChartTai: NSObject {
         return chartTai
     }()
     
+    lazy var indicators:[String] = {
+        let indicators:[String] = [KSSeriesKey.volume,
+                                   KSSeriesKey.ma,
+                                   KSSeriesKey.ema,
+                                   KSSeriesKey.kdj,
+                                   KSSeriesKey.macd,
+                                   KSSeriesKey.boll,
+                                   KSSeriesKey.rsi,
+                                   KSSeriesKey.avg]
+        return indicators
+    }()
+    
+    var index:Int = 0
+    
     var masterAlgorithm: KSIndexAlgorithm? {
         get{
             return chartTai[masterTai]
@@ -38,4 +52,11 @@ class KSChartTai: NSObject {
         }
     }
     
+    func nextAlgorithm() -> KSIndexAlgorithm {
+        index += 1
+        if index >= indicators.count {
+            index = 0
+        }
+        return chartTai[indicators[index]] ?? .none
+    }
 }
