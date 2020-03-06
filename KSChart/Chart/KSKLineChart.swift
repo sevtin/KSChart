@@ -120,6 +120,9 @@ public enum KSChartSelectedPosition {
     /// 切换分区用分页方式展示的线组
     @objc optional func kLineChart(chart: KSKLineChartView, didFlipPageSeries section: KSSection, series: KSSeries, seriesIndex: Int)
     
+    /// 附图切换技术指标回调
+    @objc optional func kLineChart(chart: KSKLineChartView, tai: String, sectionIndex: Int)
+    
     /// 十字架显示和影藏
     @objc optional func kLineChart(chart: KSKLineChartView, displayCross: Bool)
     
@@ -1613,6 +1616,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                 _ = chartTai.nextAlgorithm()
                 updateSerie(hidden: false, by: chartTai.assistTai, inSection: section.index)
                 refreshChart(isAll: true, isDraw: true)
+                self.delegate?.kLineChart?(chart: self, tai: chartTai.assistTai, sectionIndex: section.index)
                 /*
                 section.nextPage()
                 self.drawLayerView()
