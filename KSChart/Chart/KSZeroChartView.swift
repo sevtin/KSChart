@@ -28,6 +28,8 @@ public class KSZeroChartView: KSKLineChartView {
     
     /// 点击事件处理
     @objc override func doTapAction(_ sender: UITapGestureRecognizer) {
+        super.doTapAction(sender);
+        
         self.delegate?.kLineChartTapAction?(chart: self)
     }
     

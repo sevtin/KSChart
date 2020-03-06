@@ -1609,15 +1609,19 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         let tuple = self.getSectionByTouchPoint(point)
         if let section = tuple.1 {
             if section.paging {
+                _ = chartTai.nextAlgorithm()
+                updateSerie(hidden: false, by: chartTai.assistTai, inSection: 1)
+                refreshChart(isAll: true, isDraw: true)
+                /*
                 section.nextPage()
                 self.drawLayerView()
                 self.delegate?.kLineChart?(chart: self, didFlipPageSeries: section, series: section.series[section.selectedIndex], seriesIndex: section.selectedIndex)
+                 */
             }
             else{
                 //显示点击选中的内容
                 self.setSelectedIndexByPoint(point)
             }
-            
         }
     }
     

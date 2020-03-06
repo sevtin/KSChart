@@ -124,7 +124,7 @@ extension KSChartConfigure {
         assistSection1.key                  = "assist1"
         assistSection1.hidden               = false//视图是否显示false:显示true:影藏
         assistSection1.ratios               = 1
-        assistSection1.paging               = false
+        assistSection1.paging               = true
         assistSection1.yAxis.tickInterval   = 5
         assistSection1.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
         assistSection1.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 4, right: 0)

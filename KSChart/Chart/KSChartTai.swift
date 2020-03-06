@@ -28,13 +28,10 @@ class KSChartTai: NSObject {
     
     lazy var indicators:[String] = {
         let indicators:[String] = [KSSeriesKey.volume,
-                                   KSSeriesKey.ma,
-                                   KSSeriesKey.ema,
-                                   KSSeriesKey.kdj,
                                    KSSeriesKey.macd,
-                                   KSSeriesKey.boll,
+                                   KSSeriesKey.kdj,
                                    KSSeriesKey.rsi,
-                                   KSSeriesKey.avg]
+                                   KSSeriesKey.boll]
         return indicators
     }()
     
@@ -57,6 +54,7 @@ class KSChartTai: NSObject {
         if index >= indicators.count {
             index = 0
         }
-        return chartTai[indicators[index]] ?? .none
+        assistTai = indicators[index]
+        return assistAlgorithm ?? .none
     }
 }
