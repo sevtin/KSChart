@@ -128,7 +128,19 @@ extension KSChartConfigure {
         assistSection1.yAxis.tickInterval   = 5
         assistSection1.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
         assistSection1.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 4, right: 0)
-
+        /*
+        /// 副图2
+        let assistSection2                  = KSSection()
+        assistSection2.backgroundColor      = style.backgroundColor
+        assistSection2.valueType            = .assistant
+        assistSection2.key                  = "assist1"
+        assistSection2.hidden               = false//视图是否显示false:显示true:影藏
+        assistSection2.ratios               = 1
+        assistSection2.paging               = true
+        assistSection2.yAxis.tickInterval   = 5
+        assistSection2.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
+        assistSection2.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 4, right: 0)
+        */
         //====================== 配置分区样式 ======================
         /// 时分线
         let timelineSeries = KSSeries.getTimeChart(
@@ -162,12 +174,17 @@ extension KSChartConfigure {
             print("---------- \(series.seriesKey) ----------")
             //添加指标线段
             series.appendCustomIn(masterSection: priceSection, assistSections: assistSection1)
+            //series.appendCustomIn(masterSection: priceSection, assistSections: assistSection2)
         }
         
         style.sections.append(priceSection)
         if assistSection1.series.count > 0 {
             style.sections.append(assistSection1)
         }
+        /*
+        if assistSection2.series.count > 0 {
+            style.sections.append(assistSection2)
+        }*/
         return style
     }
 }

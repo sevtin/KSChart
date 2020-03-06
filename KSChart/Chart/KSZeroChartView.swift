@@ -15,7 +15,7 @@ public class KSZeroChartView: KSKLineChartView {
     /// 设置选中的数据点,并回调
     ///
     /// - Parameter index: 选中位置
-    override func setSelectedIndexByIndex(_ index: Int) {
+    override func setSelectedByIndex(_ index: Int) {
         //如果不在区间内return
         guard index >= self.rangeFrom && index < self.rangeTo else {
             return
@@ -25,14 +25,7 @@ public class KSZeroChartView: KSKLineChartView {
         //回调给代理委托方法
         self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
     }
-    
-    /// 点击事件处理
-    @objc override func doTapAction(_ sender: UITapGestureRecognizer) {
-        super.doTapAction(sender);
-        
-        self.delegate?.kLineChartTapAction?(chart: self)
-    }
-    
+
     /// 平移拖动操作
     ///
     /// - Parameter sender: 手势
@@ -86,7 +79,6 @@ public class KSZeroChartView: KSKLineChartView {
                 serie.seriesLayer.addSublayer(serieLayer)
             }
         }
-        
         return serie.seriesLayer
     }
     
@@ -212,7 +204,7 @@ public class KSZeroChartView: KSKLineChartView {
                 self.bringSubviewToFront(self.selectedYAxisLabel!)
 
                 //设置选中点
-                self.setSelectedIndexByIndex(i)
+                self.setSelectedByIndex(i)
                 self.selectedYAxisLabel?.isHidden = false
                 break
             }

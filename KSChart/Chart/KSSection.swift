@@ -43,7 +43,7 @@ public class KSSection: NSObject {
     public var yAxis: KSYAxis                = KSYAxis()//Y轴参数
     public var xAxis: KSXAxis                = KSXAxis()//X轴参数
     public var backgroundColor: UIColor      = UIColor.black
-    public var index: Int                    = 0
+    public var index: Int                    = 0//分组
     var titleLayer: KSShapeLayer           = KSShapeLayer()//显示顶部标题内容的层
     var sectionLayer: KSShapeLayer         = KSShapeLayer()//分区的绘图层
     var titleView: UIView?                 //用户自定义的View

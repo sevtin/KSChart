@@ -610,7 +610,7 @@ public class KSKLineChartView: UIView {
                 self.bringSubviewToFront(self.sightView!)
                 
                 //设置选中点
-                self.setSelectedIndexByIndex(i)
+                self.setSelectedByIndex(i)
                 
                 break
             }
@@ -620,7 +620,7 @@ public class KSKLineChartView: UIView {
     /// 设置选中的数据点,并回调
     ///
     /// - Parameter index: 选中位置
-    func setSelectedIndexByIndex(_ index: Int) {
+    func setSelectedByIndex(_ index: Int) {
         //如果不在区间内return
         guard index >= self.rangeFrom && index < self.rangeTo else {
             return
@@ -1609,20 +1609,23 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         let tuple = self.getSectionByTouchPoint(point)
         if let section = tuple.1 {
             if section.paging {
+                
                 _ = chartTai.nextAlgorithm()
-                updateSerie(hidden: false, by: chartTai.assistTai, inSection: 1)
+                updateSerie(hidden: false, by: chartTai.assistTai, inSection: section.index)
                 refreshChart(isAll: true, isDraw: true)
                 /*
                 section.nextPage()
                 self.drawLayerView()
                 self.delegate?.kLineChart?(chart: self, didFlipPageSeries: section, series: section.series[section.selectedIndex], seriesIndex: section.selectedIndex)
-                 */
+                */
             }
             else{
                 //显示点击选中的内容
                 self.setSelectedIndexByPoint(point)
             }
         }
+        
+        self.delegate?.kLineChartTapAction?(chart: self)
     }
     
     /// 双指手势缩放图表
