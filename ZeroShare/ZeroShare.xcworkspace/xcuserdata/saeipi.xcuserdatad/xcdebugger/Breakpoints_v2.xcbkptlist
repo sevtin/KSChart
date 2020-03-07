@@ -14,8 +14,8 @@
             filePath = "../KSChart/Chart/KSKLineChart.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "422"
-            endingLineNumber = "422"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "calculatorTai(isAll:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -33,6 +33,22 @@
             startingLineNumber = "207"
             endingLineNumber = "207"
             landmarkName = "ksviewTouche(view:identifier:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB6D8634-103B-4E55-A019-D5F70B330C0E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/View/MainChart/KSKChartView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "kLineChart(chart:displayCross:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

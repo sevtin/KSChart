@@ -137,8 +137,8 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     // MARK: - 14、懒加载
     //======================================================================
     lazy var datas : [String] = {
-        let datas = ["MyChart","Binance","Share"];
-        return datas;
+        //let datas = ["MyChart","Binance","Share"]
+        return ["Binance"]
     }()
     //======================================================================
     // MARK: - 15、TEST

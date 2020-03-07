@@ -242,9 +242,8 @@ public class KSKLineChartView: UIView {
 
     /// 图表数据信息显示层，显示每个分区的数值内容
     var chartInfoLayer: KSShapeLayer     = KSShapeLayer()
-    
+    /// 技术指标名称:算法
     var chartTais: [String: KSIndexAlgorithm]!
-    
     
     public var style: KSKLineChartStyle! {           //显示样式
         didSet {
