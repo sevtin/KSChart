@@ -33,8 +33,7 @@ public struct KSSeriesKey {
 /// KDJ线段：包含3个线点线模型（KSLineModel），3个点线的数值根据KDJ指标算法计算所得
 /// MACD线段：包含2个线点线模型（KSLineModel），1个条形点线模型
 public class KSSeries: NSObject {
-
-    public var key                  = ""
+    public var key                  = ""//技术指标「KDJ,MACD,BOLL等」
     public var title: String        = ""
     public var chartModels          = [KSChartModel]()//每个系列包含多个点线模型
     public var hidden: Bool         = false

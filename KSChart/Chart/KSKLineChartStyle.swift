@@ -26,7 +26,8 @@ public class KSKLineChartStyle {
     
     /// 分区样式配置
     public var sections: [KSSection]                  = [KSSection]()
-
+    /// 支持的指标
+    public var chartTais: [String: KSIndexAlgorithm]!
     /// 背景颜色
     public var backgroundColor: UIColor               = UIColor.white
 

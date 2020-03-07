@@ -120,9 +120,6 @@ public enum KSChartSelectedPosition {
     /// 切换分区用分页方式展示的线组
     @objc optional func kLineChart(chart: KSKLineChartView, didFlipPageSeries section: KSSection, series: KSSeries, seriesIndex: Int)
     
-    /// 附图切换技术指标回调
-    @objc optional func kLineChart(chart: KSKLineChartView, tai: String, sectionIndex: Int)
-    
     /// 十字架显示和影藏
     @objc optional func kLineChart(chart: KSKLineChartView, displayCross: Bool)
     
@@ -246,10 +243,14 @@ public class KSKLineChartView: UIView {
     /// 图表数据信息显示层，显示每个分区的数值内容
     var chartInfoLayer: KSShapeLayer     = KSShapeLayer()
     
+    var chartTais: [String: KSIndexAlgorithm]!
+    
+    
     public var style: KSKLineChartStyle! {           //显示样式
         didSet {
             //重新配置样式
             self.sections            = self.style.sections
+            self.chartTais           = self.style.chartTais
             self.backgroundColor     = self.style.backgroundColor
             self.padding             = self.style.padding
             self.lineColor           = self.style.lineColor
@@ -284,12 +285,6 @@ public class KSKLineChartView: UIView {
         }
     }
 
-    /// 指标管理
-    lazy var chartTai: KSChartTai = {
-        let chartTai = KSChartTai.init()
-        return chartTai
-    }()
-    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.initializeKit()
@@ -389,37 +384,20 @@ public class KSKLineChartView: UIView {
     ///
     /// - Parameter isAll: 是否计算全部指标
     private func calculatorTai(isAll: Bool = true) {
-        guard let datas = self.delegate?.dataSource(in: self) else {
+        guard let myDatas = self.delegate?.dataSource(in: self) else {
             return
         }
+        self.datas = myDatas;
         
         var index: Int = 0
         if isAll == false {
-            index = datas.count - 1
+            index = self.datas.count - 1
         }
-        if let masterAlgorithm = chartTai.masterAlgorithm {
-            self.datas.removeAll()
-            self.datas = KSCalculator.ks_calculator(algorithm: masterAlgorithm, index: index, datas: datas)
-        }
-        if let assistAlgorithm = chartTai.assistAlgorithm {
-            self.datas.removeAll()
-            self.datas = KSCalculator.ks_calculator(algorithm: assistAlgorithm, index: index, datas: datas)
+        for section in self.sections {
+            _ = KSCalculator.ks_calculator(algorithm: chartTais[section.tai] ?? KSIndexAlgorithm.none, index: index, datas: self.datas)
         }
     }
-    
-    func updateMasterTai(tai:String) {
-        chartTai.masterTai = tai
-    }
-    
-    func updateAssistTai(tai:String) {
-        chartTai.assistTai = tai
-    }
-    
-    func updateTai(masterTai: String, assistTai: String) {
-        chartTai.masterTai = masterTai
-        chartTai.assistTai = assistTai
-    }
-    
+        
     /// 刷新k线
     ///
     /// - Parameters:
@@ -472,7 +450,7 @@ public class KSKLineChartView: UIView {
     }
     
     func latticeWidth(section: KSSection) -> CGFloat {
-        if datas.count < minCandleCount {
+        if self.datas.count < minCandleCount {
             return fixedWidth
         }
         let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
@@ -894,8 +872,8 @@ extension KSKLineChartView {
         //绘制x轴标签
         //每个点的间隔宽度
         let perPlotWidth: CGFloat  = latticeWidth(section: section)//(secWidth - secPaddingLeft - secPaddingRight) / CGFloat(self.rangeTo - self.rangeFrom)
-        if datas.count < minCandleCount {
-            if datas.count < (minCandleCount/fixedGrid) {
+        if self.datas.count < minCandleCount {
+            if self.datas.count < (minCandleCount/fixedGrid) {
                 xTickInterval = dataRange
             }
             else {
@@ -1520,7 +1498,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     /// - Parameter sender: 手势
     @objc func doPanAction(_ sender: UIPanGestureRecognizer) {
         
-        if datas.count < minCandleCount {
+        if self.datas.count < minCandleCount {
             return
         }
         
@@ -1612,16 +1590,10 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         let tuple = self.getSectionByTouchPoint(point)
         if let section = tuple.1 {
             if section.paging {
-                
-                _ = chartTai.nextAlgorithm()
-                updateSerie(hidden: false, by: chartTai.assistTai, inSection: section.index)
-                refreshChart(isAll: true, isDraw: true)
-                self.delegate?.kLineChart?(chart: self, tai: chartTai.assistTai, sectionIndex: section.index)
-                /*
                 section.nextPage()
-                self.drawLayerView()
+                updateSerie(hidden: false, key: section.tai, isMasterCandle: false, index: section.index)
+                refreshChart(isAll: true, isDraw: true)
                 self.delegate?.kLineChart?(chart: self, didFlipPageSeries: section, series: section.series[section.selectedIndex], seriesIndex: section.selectedIndex)
-                */
             }
             else{
                 //显示点击选中的内容
@@ -1636,7 +1608,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     ///
     /// - Parameter sender: 手势
     @objc func doPinchAction(_ sender: UIPinchGestureRecognizer) {
-        if datas.count < minCandleCount {
+        if self.datas.count < minCandleCount {
             return
         }
         

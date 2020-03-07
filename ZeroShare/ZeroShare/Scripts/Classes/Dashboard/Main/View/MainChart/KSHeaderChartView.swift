@@ -23,15 +23,15 @@ class KSHeaderChartView: KSBaseView {
         self.addSubview(self.valueView)
         self.valueView.isHidden = true
         self.addSubview(self.chartView)
-
+        
         timeConfigure           = KSTimeMenuConfigure.defaultConfigure()
-
+        
         funcsView.timeBtn.addTarget(self, action: #selector(onTimeBtnClick), for: UIControl.Event.touchUpInside)
         funcsView.taiBtn.addTarget(self, action: #selector(onTaiBtnClick), for: UIControl.Event.touchUpInside)
         funcsView.updateTime(menuInfo: timeConfigure.selectdInfo)
-
+        
         updateDate(timeId: timeConfigure.selectdInfo.ID)
-
+        
         menuBarView             = KSMenuBarView.init(frame: CGRect.init(x: 0, y: 390, width: self.ks_screenWidth(), height: 44))
         self.addSubview(menuBarView)
     }
@@ -139,7 +139,7 @@ class KSHeaderChartView: KSBaseView {
 
 // MARK: - 回调方法
 extension KSHeaderChartView: KSKChartViewDelegate, TimePickerViewDelegate, TaiPickerViewDelegate, KSViewDelegate {
-
+    
     // MARK: - KSKChartViewDelegate
     //显示对应数据
     func kchartView(chart: KSKChartView, didSelectAt index: Int, item: KSChartItem) {
@@ -153,7 +153,7 @@ extension KSHeaderChartView: KSKChartViewDelegate, TimePickerViewDelegate, TaiPi
     //十字架影藏显示回调
     func kchartView(chart: KSKChartView, displayCross: Bool) {
         if displayCross {
-             self.valueView.showKit()
+            self.valueView.showKit()
         }
         else{
             self.valueView.hiddenKit()
@@ -183,24 +183,21 @@ extension KSHeaderChartView: KSKChartViewDelegate, TimePickerViewDelegate, TaiPi
     //指标回调
     func taiPickerViewCallback(taiPickerView: Any, menuInfo: KSChartMenuInfo, groupType: KSSectionValueType) {
         self.funcsView.updateTai(menuInfo: menuInfo, groupType: groupType)
-        resetDrawChart(isAll: true)
+        resetDrawChart(groupType: groupType,isAll: true)
     }
     
     //更新K线
-    func resetDrawChart(isAll: Bool = false) {
+    func resetDrawChart(groupType: KSSectionValueType = .assistant, isAll: Bool = false) {
         self.funcsView.updateTai(isEnabled: KSSingleton.shared.indexConfigure.isChart)
-        let seriesKey = KSSingleton.shared.indexConfigure.isChart ? KSSeriesKey.candle : KSSeriesKey.timeline
-        if KSSingleton.shared.indexConfigure.isChart == false {
-            self.chartView.chartView.updateSerie(hidden: false, by: "", inSection: 0)
-            self.chartView.chartView.updateSerie(hidden: false, by: KSSeriesKey.volume, inSection: 1)
-            self.chartView.chartView.updateTai(masterTai: "", assistTai: KSSeriesKey.volume)
+        /*
+        if groupType == .master {
+            self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.masterSeriesKey, isMasterCandle: KSSingleton.shared.indexConfigure.isChart)
         }
-        else{
-            self.chartView.chartView.updateSerie(hidden: false, by: self.funcsView.masterSeriesKey, inSection: 0)
-            self.chartView.chartView.updateSerie(hidden: false, by: self.funcsView.assistSeriesKey, inSection: 1)
-            self.chartView.chartView.updateTai(masterTai: self.funcsView.masterSeriesKey, assistTai: self.funcsView.assistSeriesKey)
-        }
-        self.chartView.chartView.updateMasterChartSerie(key: seriesKey, hidden: false)
+        else {
+            self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.assistSeriesKey, isMasterCandle: false, index: 1)
+        }*/
+        self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.masterSeriesKey, isMasterCandle: KSSingleton.shared.indexConfigure.isChart)
+        self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.assistSeriesKey, isMasterCandle: false, index: 1)
         self.chartView.chartView.refreshChart(isAll: isAll, isDraw: true)
     }
     

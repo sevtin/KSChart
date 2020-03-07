@@ -37,86 +37,23 @@ extension KSKLineChartView {
 // MARK: - CPU优化调试
 extension KSKLineChartView {
 
-    public func updateMasterChartSerie(key: String, hidden: Bool) {
-        
-        var isCandle: Bool = false
-        if key == KSSeriesKey.candle {
-            isCandle = true
-        }
-        else if key == KSSeriesKey.timeline {
-            isCandle = false
-        }
-        else{
+    /// 通过key隐藏或显示线系列
+    public func updateSerie(hidden: Bool, key: String, isMasterCandle: Bool, index: Int = 0) {
+        if index >= self.sections.count {
             return
         }
+        let section = self.sections[index]
+        section.updateTai(_tai: key)
         
-        for section in self.sections {
+        for serie in section.series {
+            serie.hidden = (serie.key == key) ? hidden : true
             if section.valueType == .master {
-                section.specifications[KSSeriesKey.candle]   = nil
-                section.specifications[KSSeriesKey.timeline] = nil
-                for serie in section.series {
-                    if serie.key == key {
-                        serie.hidden                = hidden
-                        updateSerieHidden(section: section, serie: serie)
-                    }
-                    if isCandle {
-                        if serie.key == KSSeriesKey.timeline {
-                            serie.hidden = !hidden
-                            updateSerieHidden(section: section, serie: serie)
-                        }
-                    }
-                    else{
-                        if serie.key == KSSeriesKey.candle {
-                            serie.hidden = !hidden
-                            updateSerieHidden(section: section, serie: serie)
-                        }
-                    }
+                if serie.key == KSSeriesKey.timeline {
+                    serie.hidden = isMasterCandle ? true : false
                 }
-            }
-        }
-    }
-    
-    public func updateSerieHidden(section: KSSection, serie: KSSeries) {
-        if serie.hidden == false {
-            section.specifications[serie.key] = serie.key
-        }
-    }
-    
-    /// 通过key隐藏或显示线系列
-    /// inSection = -1时，全section都隐藏，否则只隐藏对应的索引的section
-    public func updateSerie(hidden: Bool, by key: String, inSection: Int = -1) {
-        var hideSections = [KSSection]()
-        if inSection < 0 {
-            hideSections = self.sections
-        } else {
-            if inSection >= self.sections.count {
-                return //超过界限
-            }
-            hideSections.append(self.sections[inSection])
-        }
-        for section in hideSections {
-            section.specifications.removeAll()
-            for (index, serie)in section.series.enumerated() {
-                if serie.key == key {
-                    if section.paging {//section.paging 初始化设置为true
-                        if hidden == false {
-                            section.selectedIndex = index//记录选中的index
-                        }
-                    }
-                    serie.hidden = hidden
-                    updateSerieHidden(section: section, serie: serie)
+                else if serie.key == KSSeriesKey.candle {
+                    serie.hidden = isMasterCandle ? false : true
                 }
-                else{
-                    serie.hidden = true
-                }
-            }
-        }
-    }
-    
-    public func updateHeader(sectionType:KSSectionValueType, isOpenIndex:Bool) {
-        for section in self.sections {
-            if section.valueType == sectionType {
-                section.isOpenIndex = isOpenIndex
             }
         }
     }

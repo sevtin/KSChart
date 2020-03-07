@@ -88,20 +88,30 @@ extension KSChartConfigure {
             ]
         }
         
-        let styleParams: KSStyleParam  = KSStyleParam.styleParams
+        let styleParams: KSStyleParam = KSStyleParam.styleParams
         
-        let style               = KSKLineChartStyle()
-        style.labelFont         = KS_Const_Font_Normal_10
-        style.lineColor         = KS_Const_Color_Chart_Line//UIColor(hex: styleParams.lineColor)//边框线颜色
-        style.textColor         = UIColor(hex: styleParams.textColor)//下边和右边字的颜色
-        style.selectedBGColor   = UIColor(hex: 0x666F80)//选中时下边右边字的背景颜色
-        style.selectedTextColor = UIColor(hex: styleParams.selectedTextColor)//选中时下边右边字的颜色
-        style.backgroundColor   = KS_Const_Color_Clear//UIColor(hex: styleParams.backgroundColor)//视图背景颜色
-        style.crosshairColor    = UIColor(hex: 0x666F80)//十字线颜色
-        style.isInnerYAxis      = styleParams.isInnerYAxis
-        style.showYAxisLabel    = KSYAxisShowPosition.none//显示y的位置，默认右边
-        style.padding           = UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 0)
-
+        let style                     = KSKLineChartStyle()
+        style.labelFont               = KS_Const_Font_Normal_10
+        style.lineColor               = KS_Const_Color_Chart_Line//UIColor(hex: styleParams.lineColor)//边框线颜色
+        style.textColor               = UIColor(hex: styleParams.textColor)//下边和右边字的颜色
+        style.selectedBGColor         = UIColor(hex: 0x666F80)//选中时下边右边字的背景颜色
+        style.selectedTextColor       = UIColor(hex: styleParams.selectedTextColor)//选中时下边右边字的颜色
+        style.backgroundColor         = KS_Const_Color_Clear//UIColor(hex: styleParams.backgroundColor)//视图背景颜色
+        style.crosshairColor          = UIColor(hex: 0x666F80)//十字线颜色
+        style.isInnerYAxis            = styleParams.isInnerYAxis
+        style.showYAxisLabel          = KSYAxisShowPosition.none//显示y的位置，默认右边
+        style.padding                 = UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 0)
+        style.chartTais                = [KSSeriesKey.candle: .none,
+                                         KSSeriesKey.timeline: .timeline,
+                                         KSSeriesKey.volume: .none,
+                                         KSSeriesKey.ma: .ma(5, 10, 30),
+                                         KSSeriesKey.ema: .ema(7, 25, 99),
+                                         KSSeriesKey.kdj: .kdj,
+                                         KSSeriesKey.macd: .macd(12, 26, 9),
+                                         KSSeriesKey.boll: .boll(20, 2),
+                                         KSSeriesKey.rsi: .rsi(6, 12, 24),
+                                         KSSeriesKey.avg: .avg(5)]
+        
         //====================== 配置分区样式 ======================
         /// 主图
         let upcolor                         = (UIColor.ks_hex(styleParams.upColor), true)
@@ -116,6 +126,7 @@ extension KSChartConfigure {
         priceSection.yAxis.tickInterval     = 5
         priceSection.xAxis.referenceStyle   = .solid(color: KS_Const_Color_Chart_Line)
         priceSection.padding                = UIEdgeInsets(top: 64, left: 0, bottom: 16, right: 0)
+        priceSection.tai                    = KSSeriesKey.ma
 
         /// 副图1
         let assistSection1                  = KSSection()
@@ -124,23 +135,25 @@ extension KSChartConfigure {
         assistSection1.key                  = "assist1"
         assistSection1.hidden               = false//视图是否显示false:显示true:影藏
         assistSection1.ratios               = 1
-        assistSection1.paging               = true
+        assistSection1.paging               = false
         assistSection1.yAxis.tickInterval   = 5
         assistSection1.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
         assistSection1.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 4, right: 0)
-        /*
+        assistSection1.tai                  = KSSeriesKey.volume
+
         /// 副图2
         let assistSection2                  = KSSection()
         assistSection2.backgroundColor      = style.backgroundColor
         assistSection2.valueType            = .assistant
-        assistSection2.key                  = "assist1"
+        assistSection2.key                  = "assist2"
         assistSection2.hidden               = false//视图是否显示false:显示true:影藏
         assistSection2.ratios               = 1
         assistSection2.paging               = true
         assistSection2.yAxis.tickInterval   = 5
         assistSection2.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
         assistSection2.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 4, right: 0)
-        */
+        assistSection2.tai                  = KSSeriesKey.volume
+
         //====================== 配置分区样式 ======================
         /// 时分线
         let timelineSeries = KSSeries.getTimeChart(
@@ -171,20 +184,18 @@ extension KSChartConfigure {
             if series.hidden {
                 continue
             }
-            print("---------- \(series.seriesKey) ----------")
             //添加指标线段
-            series.appendCustomIn(masterSection: priceSection, assistSections: assistSection1)
-            //series.appendCustomIn(masterSection: priceSection, assistSections: assistSection2)
+            series.appendCustomIn(masterSection: priceSection, assistSections: assistSection1, assistSection2)
         }
         
         style.sections.append(priceSection)
         if assistSection1.series.count > 0 {
             style.sections.append(assistSection1)
         }
-        /*
+        
         if assistSection2.series.count > 0 {
             style.sections.append(assistSection2)
-        }*/
+        }
         return style
     }
 }

@@ -40,12 +40,8 @@ class KSCalculator: NSObject {
             return ks_calculateBOLL(index: index, num: num, arg: arg, datas: datas)
         case let .rsi(avgSmall, avgMiddle, avgBig):
             return ks_calculateRSI(index: index, avgSmall: CGFloat(avgSmall), avgMiddle: CGFloat(avgMiddle), avgBig: CGFloat(avgBig), datas: datas)
-        /*
         case let .avg(num):
             return ks_calculateAvgPrice(index: index, num: num, datas: datas)
-        */
-        default:
-            return datas
         }
     }
 }

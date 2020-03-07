@@ -253,8 +253,8 @@ extension KSZeroChartView {
                 
                 //绘制顶部指标
                 if showSelection == false {
-                    if datas.count > 0 {
-                        self.selectedIndex = datas.count - 1
+                    if self.datas.count > 0 {
+                        self.selectedIndex = self.datas.count - 1
                     }
                 }
                 section.drawCustomTitle(self.selectedIndex)
@@ -271,15 +271,6 @@ extension KSZeroChartView {
             }
             self.delegate?.didFinishKLineChartRefresh?(chart: self)
             */
-        }
-    }
-
-    func updateMasterHeader(isOpenIndex:Bool) {
-        for section in self.sections {
-            if section.valueType == .master {
-                section.isOpenIndex = isOpenIndex
-                break
-            }
         }
     }
 }

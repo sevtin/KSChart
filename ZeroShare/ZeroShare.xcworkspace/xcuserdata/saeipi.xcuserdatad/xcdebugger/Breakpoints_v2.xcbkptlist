@@ -7,16 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D0B92FAB-37F2-46AD-B8CD-C80549A074A4"
+            uuid = "71624E2D-41BB-4F27-A8A6-BDE24E71CD28"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../KSChart/Chart/KSKLineChart.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
+            landmarkName = "calculatorTai(isAll:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3BBB0F13-853B-43DE-9C2D-87BC3EA93306"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Library/KSChart/Chart/KSCalculator.swift"
+            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/View/MainChart/KSHeaderChartView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "ks_calculateRSI(index:avgSmall:avgMiddle:avgBig:datas:)"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "ksviewTouche(view:identifier:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

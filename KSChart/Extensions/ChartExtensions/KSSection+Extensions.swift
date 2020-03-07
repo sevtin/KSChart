@@ -23,10 +23,6 @@ extension KSSection {
             return//没有数据返回
         }
         
-        if isOpenIndex == false {
-            return
-        }
-        
         if self.paging {//如果分页
             let series = self.series[self.selectedIndex]
             if let attributes = self.getCustomTitleAttributesByIndex(chartSelectedIndex, series: series) {

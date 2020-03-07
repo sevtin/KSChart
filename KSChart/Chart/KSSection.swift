@@ -18,7 +18,6 @@ public enum KSSectionValueType {
 
 /// K线的区域
 public class KSSection: NSObject {
-    var specifications: [String: String]   = [String: String]()//记录显示所需的指标
     /// MARK: - 成员变量
     public var upColor: UIColor              = UIColor.green//升的颜色
     public var downColor: UIColor            = UIColor.red//跌的颜色
@@ -44,11 +43,11 @@ public class KSSection: NSObject {
     public var xAxis: KSXAxis                = KSXAxis()//X轴参数
     public var backgroundColor: UIColor      = UIColor.black
     public var index: Int                    = 0//分组
-    var titleLayer: KSShapeLayer           = KSShapeLayer()//显示顶部标题内容的层
-    var sectionLayer: KSShapeLayer         = KSShapeLayer()//分区的绘图层
-    var titleView: UIView?                 //用户自定义的View
-    var isOpenIndex: Bool                  = true//是否开启头部技术指标值绘制
-    
+    var titleLayer: KSShapeLayer             = KSShapeLayer()//显示顶部标题内容的层
+    var sectionLayer: KSShapeLayer           = KSShapeLayer()//分区的绘图层
+    var titleView: UIView? //用户自定义的View
+    var tai: String                          = ""//当前技术指标
+
     /// 初始化分区
     ///
     /// - Parameters:
@@ -224,6 +223,15 @@ extension KSSection {
             self.selectedIndex += 1
         } else {
             self.selectedIndex = 0
+        }
+        tai = series[self.selectedIndex].key
+    }
+    func updateTai(_tai:String) {
+        self.tai = _tai
+        for i in 0 ..< series.count{
+            if _tai == series[i].key {
+                self.selectedIndex = i
+            }
         }
     }
 }
