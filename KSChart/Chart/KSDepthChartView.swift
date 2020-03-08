@@ -145,48 +145,48 @@ class KSDepthChartItem: NSObject {
 class KSDepthChartView: UIView {
     
     /// MARK: - 常量
-    let kYAxisLabelWidth: CGFloat                                           = 46//默认宽度
-    let kXAxisHegiht: CGFloat                                               = 16//默认X坐标的高度
+    let kYAxisLabelWidth: CGFloat                    = 46//默认宽度
+    let kXAxisHegiht: CGFloat                        = 16//默认X坐标的高度
 
     /// MARK: - 成员变量
     var bidColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.green, .green, 1)
     var askColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.red, .red, 1)
-    var labelFont                                       = UIFont.systemFont(ofSize: 10)
-    var lineColor: UIColor                              = UIColor(white: 0.2, alpha: 1)//线条颜色
-    var textColor: UIColor                              = UIColor(white: 0.8, alpha: 1)//文字颜色
-    var xAxisPerInterval: Int                           = 4//x轴的间断个数
+    var labelFont                                    = UIFont.systemFont(ofSize: 10)
+    var lineColor: UIColor                           = UIColor(white: 0.2, alpha: 1)//线条颜色
+    var textColor: UIColor                           = UIColor(white: 0.8, alpha: 1)//文字颜色
+    var xAxisPerInterval: Int                        = 4//x轴的间断个数
 
-    var yAxis: KSYAxis                                                 = KSYAxis()//Y轴参数
-    var xAxis: KSXAxis                                                 = KSXAxis()//X轴参数
-    var yAxisLabelWidth: CGFloat                                       = 0//Y轴的宽度
+    var yAxis: KSYAxis                               = KSYAxis()//Y轴参数
+    var xAxis: KSXAxis                               = KSXAxis()//X轴参数
+    var yAxisLabelWidth: CGFloat                     = 0//Y轴的宽度
 
     /// 价格小数位
-    private var decimal: Int                                                = 2
+    private var decimal: Int                         = 2
 
     /// 量小数位
-    private var numDecimal:Int                                              = 4
+    private var numDecimal: Int                      = 4
 
     /// 内边距
-    var padding: UIEdgeInsets                                          = UIEdgeInsets.zero
+    var padding: UIEdgeInsets                        = UIEdgeInsets.zero
 
     /// 显示y的位置，默认右边
-    var showYAxisLabel                                                 = KSYAxisShowPosition.right
+    var showYAxisLabel                               = KSYAxisShowPosition.right
 
     /// 是否把y坐标内嵌到图表仲
-    var isInnerYAxis: Bool                                             = false
+    var isInnerYAxis: Bool                           = false
 
     /// 买单在右边
-    var bidChartOnDirection: KSDepthChartOnDirection                   = .right
+    var bidChartOnDirection: KSDepthChartOnDirection = .right
 
     /// 是否显示X轴标签
-    var showXAxisLabel: Bool                                           = true
+    var showXAxisLabel: Bool                         = true
 
     /// 代理
     open weak var delegate: KSDepthChartDelegate?
 
     //是否可点选
-    var enableTap: Bool                                                = true
-    
+    var enableTap: Bool                              = true
+
     /// 显示边线上左下有
     var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
     
@@ -195,7 +195,7 @@ class KSDepthChartView: UIView {
     /// 档位个数
     var plotCount: Int         = 0
 
-    var labelSize         = CGSize(width: 40, height: 16)
+    var labelSize              = CGSize(width: 40, height: 16)
 
     /// 点击选中的点
     var selectedPoint: CGPoint = CGPoint.zero

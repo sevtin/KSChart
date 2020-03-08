@@ -130,41 +130,41 @@ enum KSChartSelectedPosition {
 class KSKLineChartView: UIView {
     
     /// MARK: - 常量
-    let kMinRange                                            = 13//最小缩放范围
-    let kMaxRange                                            = 133//最大缩放范围
-    let kPerInterval                                         = 4//缩放的每段间隔
-    let kYAxisLabelWidth: CGFloat                            = 46//默认文字宽度
-    let kXAxisHegiht: CGFloat                                = 16//默认X坐标的高度
-    
-    var minCandleCount: Int                             = 30//最小蜡烛图数量
-    var fixedWidth: CGFloat                             = 10//小于最小蜡烛图数量，蜡烛的宽度
-    var fixedGrid: Int                                  = 2//最小格子数
-    
-    /// MARK: - 成员变量
-    var upColor: UIColor                                = UIColor.green//升的颜色
-    var downColor: UIColor                              = UIColor.red//跌的颜色
-    var labelFont                                       = UIFont.systemFont(ofSize: 10)
-    var lineColor: UIColor                              = UIColor(white: 0.2, alpha: 1)//线条颜色
-    var textColor: UIColor                              = UIColor(white: 0.8, alpha: 1)//文字颜色
-    var xAxisPerInterval: Int                           = 4//x轴的间断个数
+    let kMinRange                                   = 13//最小缩放范围
+    let kMaxRange                                   = 133//最大缩放范围
+    let kPerInterval                                = 4//缩放的每段间隔
+    let kYAxisLabelWidth: CGFloat                   = 46//默认文字宽度
+    let kXAxisHegiht: CGFloat                       = 16//默认X坐标的高度
 
-    var yAxisLabelWidth: CGFloat                        = 0//Y轴的宽度
-    var padding: UIEdgeInsets                           = UIEdgeInsets.zero//内边距
-    var showYAxisLabel                                  = KSYAxisShowPosition.right//显示y的位置，默认右边
-    var isInnerYAxis: Bool                              = false// 是否把y坐标内嵌到图表中
-    var selectedPosition: KSChartSelectedPosition       = .onClosePrice//选中显示y值的位置
+    var minCandleCount: Int                         = 30//最小蜡烛图数量
+    var fixedWidth: CGFloat                         = 10//小于最小蜡烛图数量，蜡烛的宽度
+    var fixedGrid: Int                              = 2//最小格子数
+
+    /// MARK: - 成员变量
+    var upColor: UIColor                            = UIColor.green//升的颜色
+    var downColor: UIColor                          = UIColor.red//跌的颜色
+    var labelFont                                   = UIFont.systemFont(ofSize: 10)
+    var lineColor: UIColor                          = UIColor(white: 0.2, alpha: 1)//线条颜色
+    var textColor: UIColor                          = UIColor(white: 0.8, alpha: 1)//文字颜色
+    var xAxisPerInterval: Int                       = 4//x轴的间断个数
+
+    var yAxisLabelWidth: CGFloat                    = 0//Y轴的宽度
+    var padding: UIEdgeInsets                       = UIEdgeInsets.zero//内边距
+    var showYAxisLabel                              = KSYAxisShowPosition.right//显示y的位置，默认右边
+    var isInnerYAxis: Bool                          = false// 是否把y坐标内嵌到图表中
+    var selectedPosition: KSChartSelectedPosition   = .onClosePrice//选中显示y值的位置
 
     open weak var delegate: KSKLineChartDelegate?             //代理
 
-    var sections                                        = [KSSection]()//分区样式Demo中3个样式，分别是k线/成交量/技术指标
-    var selectedIndex: Int                              = -1//选择索引位
-    var scrollToPosition: KSChartViewScrollPosition     = .none//图表刷新后开始显示位置
-    var selectedPoint: CGPoint                               = CGPoint.zero
+    var sections                                    = [KSSection]()//分区样式Demo中3个样式，分别是k线/成交量/技术指标
+    var selectedIndex: Int                          = -1//选择索引位
+    var scrollToPosition: KSChartViewScrollPosition = .none//图表刷新后开始显示位置
+    var selectedPoint: CGPoint                      = CGPoint.zero
 
     //是否可缩放
-    var enablePinch: Bool                               = true
+    var enablePinch: Bool                           = true
     //是否可滑动
-    var enablePan: Bool                                 = true
+    var enablePan: Bool                             = true
     //是否可点选
     var enableTap: Bool = true {
         didSet {
@@ -204,21 +204,21 @@ class KSKLineChartView: UIView {
     var plotCount: Int                   = 0//所有蜡烛图的个数
     var rangeFrom: Int                   = 0//可见区域的开始索引位
     var rangeTo: Int                     = 0//可见区域的结束索引位
-    var range: Int                  = 60//显示在可见区域的个数
+    var range: Int                       = 60//显示在可见区域的个数
     var borderColor: UIColor             = UIColor.gray
-    var labelSize                   = CGSize(width: 40, height: 16)
+    var labelSize                        = CGSize(width: 40, height: 16)
 
     var datas: [KSChartItem]             = [KSChartItem]()//数据源,不能直接赋值，后面会被清空
 
-    var selectedBGColor: UIColor    = UIColor(white: 0.4, alpha: 1)//选中点的显示的框背景颜色
-    var selectedTextColor: UIColor  = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//选中点的显示的文字颜色
+    var selectedBGColor: UIColor         = UIColor(white: 0.4, alpha: 1)//选中点的显示的框背景颜色
+    var selectedTextColor: UIColor       = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//选中点的显示的文字颜色
     var verticalLineView: UIView?
     var horizontalLineView: UIView?
     var selectedXAxisLabel: UILabel?
     var selectedYAxisLabel: UILabel?
     var sightView: UIView?//点击出现的准星
-    var isCrosshair:Bool = true//是否显示准星
-    
+    var isCrosshair:Bool                 = true//是否显示准星
+
     //动力学引擎
     lazy var animator: UIDynamicAnimator = UIDynamicAnimator(referenceView: self)
 
