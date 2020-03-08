@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class KSZeroChartView: KSKLineChartView {
+class KSZeroChartView: KSKLineChartView {
 
     private var minPlotCount: Int = 20//最小蜡烛数量
     
@@ -278,7 +278,7 @@ extension KSZeroChartView {
 // MARK: - 额为的初始化方法
 extension KSZeroChartView {
     /// 设置style后，方可调用
-    public func extraSetting() {
+    func extraSetting() {
         
         self.isCrosshair                         = false
         self.showSelection                       = false
@@ -294,7 +294,7 @@ extension KSZeroChartView {
 }
 
 //extension KSZeroChartView: UIDynamicAnimatorDelegate {
-//    public func dynamicAnimatorDidPause(_ animator: UIDynamicAnimator) {
+//    func dynamicAnimatorDidPause(_ animator: UIDynamicAnimator) {
 //
 //    }
 //}

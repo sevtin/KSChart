@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension CGFloat {
+extension CGFloat {
     
     /// 转化为字符串格式
     ///

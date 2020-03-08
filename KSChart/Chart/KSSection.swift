@@ -11,38 +11,38 @@ import UIKit
 ///
 /// - master: 主图
 /// - assistant: 副图
-public enum KSSectionValueType {
+enum KSSectionValueType {
     case master
     case assistant
 }
 
 /// K线的区域
-public class KSSection: NSObject {
+class KSSection: NSObject {
     /// MARK: - 成员变量
-    public var upColor: UIColor              = UIColor.green//升的颜色
-    public var downColor: UIColor            = UIColor.red//跌的颜色
-    public var titleColor: UIColor           = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//文字颜色
-    public var labelFont                     = UIFont.systemFont(ofSize: 10)
-    public var valueType: KSSectionValueType = KSSectionValueType.master
-    public var key                           = ""
-    public var name: String                  = ""//区域的名称
-    public var hidden: Bool                  = false
-    public var paging: Bool                  = false
-    public var selectedIndex: Int            = 0
-    public var padding: UIEdgeInsets         = UIEdgeInsets.zero
-    public var series                        = [KSSeries]()//每个分区包含多组系列，每个系列包含多个点线模型
-    public var tickInterval: Int             = 0
-    public var title: String                 = ""//标题
-    public var titleShowOutSide: Bool        = false//标题是否显示在外面
-    public var showTitle: Bool               = true//是否显示标题文本
-    public var decimal: Int                  = 2//小数位的长度
-    public var ratios: Int                   = 0//所占区域比例
-    public var fixHeight: CGFloat            = 0//固定高度，为0则通过ratio计算高度
-    public var frame: CGRect                 = CGRect.zero
-    public var yAxis: KSYAxis                = KSYAxis()//Y轴参数
-    public var xAxis: KSXAxis                = KSXAxis()//X轴参数
-    public var backgroundColor: UIColor      = UIColor.black
-    public var index: Int                    = 0//分组
+    var upColor: UIColor              = UIColor.green//升的颜色
+    var downColor: UIColor            = UIColor.red//跌的颜色
+    var titleColor: UIColor           = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//文字颜色
+    var labelFont                     = UIFont.systemFont(ofSize: 10)
+    var valueType: KSSectionValueType = KSSectionValueType.master
+    var key                           = ""
+    var name: String                  = ""//区域的名称
+    var hidden: Bool                  = false
+    var paging: Bool                  = false
+    var selectedIndex: Int            = 0
+    var padding: UIEdgeInsets         = UIEdgeInsets.zero
+    var series                        = [KSSeries]()//每个分区包含多组系列，每个系列包含多个点线模型
+    var tickInterval: Int             = 0
+    var title: String                 = ""//标题
+    var titleShowOutSide: Bool        = false//标题是否显示在外面
+    var showTitle: Bool               = true//是否显示标题文本
+    var decimal: Int                  = 2//小数位的长度
+    var ratios: Int                   = 0//所占区域比例
+    var fixHeight: CGFloat            = 0//固定高度，为0则通过ratio计算高度
+    var frame: CGRect                 = CGRect.zero
+    var yAxis: KSYAxis                = KSYAxis()//Y轴参数
+    var xAxis: KSXAxis                = KSXAxis()//X轴参数
+    var backgroundColor: UIColor      = UIColor.black
+    var index: Int                    = 0//分组
     var titleLayer: KSShapeLayer             = KSShapeLayer()//显示顶部标题内容的层
     var sectionLayer: KSShapeLayer           = KSShapeLayer()//分区的绘图层
     var titleView: UIView? //用户自定义的View
@@ -245,7 +245,7 @@ extension KSSection {
     ///   - startIndex: 计算范围的开始数据点
     ///   - endIndex: 计算范围的结束数据点
     ///   - datas: 数据集合
-    public func buildYAxis(startIndex: Int, endIndex: Int, datas: [KSChartItem]) {
+    func buildYAxis(startIndex: Int, endIndex: Int, datas: [KSChartItem]) {
         self.yAxis.isUsed   = false
         var baseValueSticky = false
         var symmetrical     = false
@@ -321,7 +321,7 @@ extension KSSection {
     ///
     /// - Parameter val: 标签值
     /// - Returns: 坐标系中实际的y值
-    public func getLocalY(_ val: CGFloat) -> CGFloat {
+    func getLocalY(_ val: CGFloat) -> CGFloat {
         /*
         //SAR容错
         if val > self.yAxis.max {
@@ -358,7 +358,7 @@ extension KSSection {
     ///
     /// - Parameter y:
     /// - Returns:
-    public func getRawValue(_ y: CGFloat) -> CGFloat {
+    func getRawValue(_ y: CGFloat) -> CGFloat {
         let max = self.yAxis.max
         let min = self.yAxis.min
         
@@ -377,7 +377,7 @@ extension KSSection {
     /// 画分区的标题
     ///
     /// - Parameter chartSelectedIndex:
-    public func drawTitle(_ chartSelectedIndex: Int) {
+    func drawTitle(_ chartSelectedIndex: Int) {
         
         guard self.showTitle else {
             return
@@ -407,7 +407,7 @@ extension KSSection {
     /// 添加用户自定义的View层到主页面
     ///
     /// - Parameter view: 用户自定义view
-    public func addCustomView(_ view: UIView, inView mainView: UIView) {
+    func addCustomView(_ view: UIView, inView mainView: UIView) {
         
         if self.titleView !== view {
             
@@ -444,7 +444,7 @@ extension KSSection {
     ///
     /// - Parameters:
     ///   - titles: 文本内容及颜色元组
-    public func setHeader(titles: [(title: String, color: UIColor)])  {
+    func setHeader(titles: [(title: String, color: UIColor)])  {
         
         var start = 0
         let titleString = NSMutableAttributedString()
@@ -462,7 +462,7 @@ extension KSSection {
     
     /// 根据seriesKey获取线段的数值标题
     ///
-    public func getTitleAttributesByIndex(_ chartSelectedIndex: Int, seriesKey: String) -> [(title: String, color: UIColor)]? {
+    func getTitleAttributesByIndex(_ chartSelectedIndex: Int, seriesKey: String) -> [(title: String, color: UIColor)]? {
         guard let series = self.getSeries(key: seriesKey) else {
             return nil
         }
@@ -475,7 +475,7 @@ extension KSSection {
     ///   - chartSelectedIndex: 图表选中位置
     ///   - series: 线
     /// - Returns: 标题属性
-    public func getTitleAttributesByIndex(_ chartSelectedIndex: Int, series: KSSeries) -> [(title: String, color: UIColor)]? {
+    func getTitleAttributesByIndex(_ chartSelectedIndex: Int, series: KSSeries) -> [(title: String, color: UIColor)]? {
         
         if series.hidden {
             return nil
@@ -557,7 +557,7 @@ extension KSSection {
     ///
     /// - Parameter key: 线段唯一key
     /// - Returns: 线段对象
-    public func getSeries(key: String) -> KSSeries? {
+    func getSeries(key: String) -> KSSeries? {
         var series: KSSeries?
         for s in self.series {
             if s.key == key {
@@ -571,7 +571,7 @@ extension KSSection {
     /// 删除线段
     ///
     /// - Parameter key: 线段主键名
-    public func removeSeries(key: String) {
+    func removeSeries(key: String) {
         for (index, s) in self.series.enumerated() {
             if s.key == key {
                 self.series.remove(at: index)

@@ -15,7 +15,7 @@ extension KSKLineChartView {
     ///
     /// - Parameter plotCount: 所有数据的个数
     /// - Returns:
-    public func isActiveRefresh(plotCount:Int) -> Bool{
+    func isActiveRefresh(plotCount:Int) -> Bool{
         //print(String.init(format: "rangeFrom:%d,rangeTo:%d,range:%d,plotCount:%d", self.rangeFrom,self.rangeTo,self.range,plotCount))
         // 如果图表尽头的索引为0，或者全部数据小于设定显示数量
         if self.rangeTo == 0 || plotCount < self.range {
@@ -38,7 +38,7 @@ extension KSKLineChartView {
 extension KSKLineChartView {
 
     /// 通过key隐藏或显示线系列
-    public func updateSerie(hidden: Bool, key: String, isMasterCandle: Bool, index: Int = 0) {
+    func updateSerie(hidden: Bool, key: String, isMasterCandle: Bool, index: Int = 0) {
         if index >= self.sections.count {
             return
         }

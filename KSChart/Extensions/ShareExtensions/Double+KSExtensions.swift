@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Double {
+extension Double {
     
     /// 转化为字符串格式
     ///

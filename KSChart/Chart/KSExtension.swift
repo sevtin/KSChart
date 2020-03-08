@@ -7,7 +7,7 @@
 
 import UIKit
 
-public extension Array where Element: Equatable {
+extension Array where Element: Equatable {
     
     subscript (safe index: Int) -> Element? {
         return (0..<count).contains(index) ? self[index] : nil

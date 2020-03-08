@@ -8,20 +8,20 @@
 import UIKit
 
 /// 系列对应的key值
-public struct KSSeriesKey {
-    public static let candle    = "CANDLE"
-    public static let timeline  = "TIMELINE"
-    public static let volume    = "VOLUME"
-    public static let ma        = "MA"
-    public static let ema       = "EMA"
-    public static let kdj       = "KDJ"
-    public static let macd      = "MACD"
-    public static let boll      = "BOLL"
-    public static let sar       = "SAR"
-    public static let sam       = "SAM"
-    public static let rsi       = "RSI"
-    public static let wr        = "WR"
-    public static let avg       = "AVG"
+struct KSSeriesKey {
+    static let candle    = "CANDLE"
+    static let timeline  = "TIMELINE"
+    static let volume    = "VOLUME"
+    static let ma        = "MA"
+    static let ema       = "EMA"
+    static let kdj       = "KDJ"
+    static let macd      = "MACD"
+    static let boll      = "BOLL"
+    static let sar       = "SAR"
+    static let sam       = "SAM"
+    static let rsi       = "RSI"
+    static let wr        = "WR"
+    static let avg       = "AVG"
 }
 
 /// 线段组
@@ -32,14 +32,14 @@ public struct KSSeriesKey {
 /// MA/EMA线段：包含一个线点线模型（KSLineModel）
 /// KDJ线段：包含3个线点线模型（KSLineModel），3个点线的数值根据KDJ指标算法计算所得
 /// MACD线段：包含2个线点线模型（KSLineModel），1个条形点线模型
-public class KSSeries: NSObject {
-    public var key                  = ""//技术指标「KDJ,MACD,BOLL等」
-    public var title: String        = ""
-    public var chartModels          = [KSChartModel]()//每个系列包含多个点线模型
-    public var hidden: Bool         = false
-    public var showTitle: Bool      = true//是否显示标题文本
-    public var baseValueSticky      = false//是否以固定基值显示最小或最大值，若超过范围
-    public var symmetrical          = false//是否以固定基值为中位数，对称显示最大最小值
+class KSSeries: NSObject {
+    var key                  = ""//技术指标「KDJ,MACD,BOLL等」
+    var title: String        = ""
+    var chartModels          = [KSChartModel]()//每个系列包含多个点线模型
+    var hidden: Bool         = false
+    var showTitle: Bool      = true//是否显示标题文本
+    var baseValueSticky      = false//是否以固定基值显示最小或最大值，若超过范围
+    var symmetrical          = false//是否以固定基值为中位数，对称显示最大最小值
     var seriesLayer: KSShapeLayer = KSShapeLayer()//点线模型的绘图层
 
     /// 清空图表的子图层
@@ -59,7 +59,7 @@ extension KSSeries {
     ///   - section: 分区
     ///   - showGuide: 是否显示最大最小值
     /// - Returns: 线系列模型
-    public class func getTimelinePrice(color: UIColor, section: KSSection, showGuide: Bool = false, ultimateValueStyle: KSUltimateValueStyle = .none, graphType: KSGraphType = .normal, lineWidth: CGFloat = 1) -> KSSeries {
+    class func getTimelinePrice(color: UIColor, section: KSSection, showGuide: Bool = false, ultimateValueStyle: KSUltimateValueStyle = .none, graphType: KSGraphType = .normal, lineWidth: CGFloat = 1) -> KSSeries {
         let series                  = KSSeries()
         series.key                  = KSSeriesKey.timeline
         let timeline                = KSChartModel.getLine(color, title: NSLocalizedString("Price", comment: ""), key: "\(KSSeriesKey.timeline)_\(KSSeriesKey.timeline)")
@@ -87,7 +87,7 @@ extension KSSeries {
     ///   - showGuide:
     ///   - ultimateValueStyle:
     /// - Returns:
-    public class func getCandlePrice(upStyle: (color: UIColor, isSolid: Bool),
+    class func getCandlePrice(upStyle: (color: UIColor, isSolid: Bool),
                                      downStyle: (color: UIColor, isSolid: Bool),
                                      titleColor: UIColor,
                                      section: KSSection,
@@ -112,7 +112,7 @@ extension KSSeries {
     ///   - downStyle:
     ///   - section:
     /// - Returns:
-    public class func getDefaultVolume(upStyle: (color: UIColor, isSolid: Bool),
+    class func getDefaultVolume(upStyle: (color: UIColor, isSolid: Bool),
                                        downStyle: (color: UIColor, isSolid: Bool),
                                        section: KSSection) -> KSSeries {
         let series         = KSSeries()
@@ -126,7 +126,7 @@ extension KSSeries {
     
     /// 获取交易量的MA线
     ///
-    public class func getVolumeMA(isEMA: Bool = false, num: [Int], colors: [UIColor], section: KSSection) -> KSSeries {
+    class func getVolumeMA(isEMA: Bool = false, num: [Int], colors: [UIColor], section: KSSection) -> KSSeries {
         let series = self.getMA(isEMA: isEMA, num: num, colors: colors, section: section)
         return series
     }
@@ -141,7 +141,7 @@ extension KSSeries {
     ///   - colors:
     ///   - section:
     /// - Returns:
-    public class func getVolumeWithMA(upStyle: (color: UIColor, isSolid: Bool),
+    class func getVolumeWithMA(upStyle: (color: UIColor, isSolid: Bool),
                                        downStyle: (color: UIColor, isSolid: Bool),
                                        isEMA: Bool = false,
                                        num: [Int],
@@ -172,7 +172,7 @@ extension KSSeries {
     ///   - lineColor:
     ///   - section:
     /// - Returns:
-    public class func getVolumeWithSAM(upStyle: (color: UIColor, isSolid: Bool),
+    class func getVolumeWithSAM(upStyle: (color: UIColor, isSolid: Bool),
                                       downStyle: (color: UIColor, isSolid: Bool),
                                       num: Int,
                                       barStyle: (color: UIColor, isSolid: Bool),
@@ -191,7 +191,7 @@ extension KSSeries {
     
     /// 获取交易量的MA线
     ///
-    public class func getPriceMA(isEMA: Bool = false, num: [Int], colors: [UIColor], section: KSSection) -> KSSeries {
+    class func getPriceMA(isEMA: Bool = false, num: [Int], colors: [UIColor], section: KSSection) -> KSSeries {
         let series   = self.getMA(isEMA: isEMA, num: num, colors: colors, section: section)
         return series
     }
@@ -204,7 +204,7 @@ extension KSSeries {
     ///   - colors:
     ///   - section:
     /// - Returns:
-    public class func getMA(isEMA: Bool = false, num: [Int], colors: [UIColor], section: KSSection) -> KSSeries {
+    class func getMA(isEMA: Bool = false, num: [Int], colors: [UIColor], section: KSSection) -> KSSeries {
         var key = ""
         if isEMA {
             key = KSSeriesKey.ema
@@ -229,7 +229,7 @@ extension KSSeries {
     ///   - colors:
     ///   - section:
     /// - Returns:
-    public class func getRSI(num: [Int], colors: [UIColor], section: KSSection) -> KSSeries {
+    class func getRSI(num: [Int], colors: [UIColor], section: KSSection) -> KSSeries {
         let series = KSSeries()
         series.key = KSSeriesKey.rsi
         for (i, n) in num.enumerated() {
@@ -248,7 +248,7 @@ extension KSSeries {
     ///   - jc:
     ///   - section:
     /// - Returns:
-    public class func getKDJ(_ kc: UIColor, dc: UIColor, jc: UIColor, section: KSSection) -> KSSeries {
+    class func getKDJ(_ kc: UIColor, dc: UIColor, jc: UIColor, section: KSSection) -> KSSeries {
         let series         = KSSeries()
         series.key         = KSSeriesKey.kdj
         let k              = KSChartModel.getLine(kc, title: "K", key: "\(KSSeriesKey.kdj)_K")
@@ -271,7 +271,7 @@ extension KSSeries {
     ///   - downStyle:
     ///   - section:
     /// - Returns:
-    public class func getMACD(_ difc: UIColor,
+    class func getMACD(_ difc: UIColor,
                               deac: UIColor,
                               barc: UIColor,
                               upStyle: (color: UIColor, isSolid: Bool),
@@ -297,7 +297,7 @@ extension KSSeries {
     ///   - lbc:
     ///   - section:
     /// - Returns:
-    public class func getBOLL(_ bollc: UIColor, ubc: UIColor, lbc: UIColor, section: KSSection) -> KSSeries {
+    class func getBOLL(_ bollc: UIColor, ubc: UIColor, lbc: UIColor, section: KSSection) -> KSSeries {
         let series         = KSSeries()
         series.key         = KSSeriesKey.boll
         let boll           = KSChartModel.getLine(ubc, title: "MID", key: "\(KSSeriesKey.boll)_BOLL")
@@ -319,7 +319,7 @@ extension KSSeries {
     ///   - plotPaddingExt:
     ///   - section:
     /// - Returns:
-    public class func getSAR(
+    class func getSAR(
         upStyle: (color: UIColor, isSolid: Bool),
         downStyle: (color: UIColor, isSolid: Bool),
         titleColor: UIColor,
@@ -343,7 +343,7 @@ extension KSSeries {
     ///   - lineColor:
     ///   - section:
     /// - Returns:
-    public class func getVolumeSAM(num: Int,
+    class func getVolumeSAM(num: Int,
                                    barStyle: (color: UIColor, isSolid: Bool),
                                    lineColor: UIColor,
                                    section: KSSection) -> KSSeries {
@@ -372,7 +372,7 @@ extension KSSeries {
     ///   - lineColor:
     ///   - section:
     /// - Returns:
-    public class func getPriceSAM(num: Int,
+    class func getPriceSAM(num: Int,
                                   barStyle: (color: UIColor, isSolid: Bool),
                                   lineColor: UIColor,
                                   section: KSSection) -> KSSeries {

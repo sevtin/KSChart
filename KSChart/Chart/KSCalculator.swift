@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum KSIndexAlgorithm {
+enum KSIndexAlgorithm {
     case none //无算法
     case timeline //时分
     case ma(Int, Int, Int) //简单移动平均数

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class KSBollModel: KSChartModel {
+class KSBollModel: KSChartModel {
 
     /// 绘制Boll
     ///
@@ -16,7 +16,7 @@ public class KSBollModel: KSChartModel {
     ///   - startIndex: 起始索引
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
-    override public func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+    override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
 
         let serieLayer  = CAShapeLayer()
         //每个点的间隔宽度  BOLL宽度 =（宽度 - 左边间隔 - 右边间隔）/（结束点 - 开始点）

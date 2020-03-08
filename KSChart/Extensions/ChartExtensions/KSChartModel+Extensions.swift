@@ -11,7 +11,7 @@ import UIKit
 // MARK: - 扩展方法
 extension KSChartModel {
     //生成一个BOLL样式
-    public class func getBoll(upStyle: (color: UIColor, isSolid: Bool),
+    class func getBoll(upStyle: (color: UIColor, isSolid: Bool),
                          downStyle: (color: UIColor, isSolid: Bool),
                          titleColor: UIColor,
                          key: String = KSSeriesKey.candle) -> KSBollModel {
@@ -29,7 +29,7 @@ extension KSChartModel {
     }
 
     //生成分时图
-    public class func geTimeChart(_ color: UIColor, title: String, key: String) -> KSTimeChartModel {
+    class func geTimeChart(_ color: UIColor, title: String, key: String) -> KSTimeChartModel {
         let model   = KSTimeChartModel(upStyle: (color, true), downStyle: (color, true), titleColor: color)
         model.title = title
         model.key   = key
