@@ -95,7 +95,7 @@ extension KSSection {
                 */
             case is KSColumnModel:
                 if model.key != KSSeriesKey.volume {
-                    continue  //不是量线
+                    continue //不是量线
                 }
                 //title += model.title + ": " + item.vol.ks_toString(maximum: self.decimal) + "  "
                 title += model.title + ": " + item.volume.ks_volume()
@@ -109,7 +109,7 @@ extension KSSection {
                 }
             }
             
-            if model.useTitleColor {    //是否用标题颜色
+            if model.useTitleColor { //是否用标题颜色
                 textColor = model.titleColor
             } else {
                 switch item.trend {

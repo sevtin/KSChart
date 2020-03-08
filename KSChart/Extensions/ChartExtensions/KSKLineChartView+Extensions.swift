@@ -34,7 +34,6 @@ extension KSKLineChartView {
     }
 }
 
-// MARK: - CPU优化调试
 extension KSKLineChartView {
 
     /// 通过key隐藏或显示线系列
