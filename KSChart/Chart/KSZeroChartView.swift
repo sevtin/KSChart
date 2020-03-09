@@ -30,7 +30,7 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter sender: 手势
     override func doPanAction(_ sender: UIPanGestureRecognizer) {
-        if (self.delegate?.numberOfPointsInKLineChart(chart: self) ?? 0) < self.minPlotCount {
+        if (self.delegate?.numberOfPoints(chart: self) ?? 0) < self.minPlotCount {
             return
         }
         super.doPanAction(sender)
@@ -60,7 +60,7 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter sender: 手势
     @objc override func doPinchAction(_ sender: UIPinchGestureRecognizer) {
-        if (self.delegate?.numberOfPointsInKLineChart(chart: self) ?? 0) < self.minPlotCount {
+        if (self.delegate?.numberOfPoints(chart: self) ?? 0) < self.minPlotCount {
             return
         }
         super.doPinchAction(sender)

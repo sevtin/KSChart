@@ -38,7 +38,7 @@ class KSStyleParam: NSObject, Codable {
     
     static var styleParams: KSStyleParam {
         let style               = KSStyleParam()
-        style.theme             = "Dark"//风格名，Dark，Light
+        style.theme             = "Light"//风格名，Dark，Light
         style.candleColors      = "Green/Red"
         style.showYAxisLabel    = "right"
         style.isInnerYAxis      = false

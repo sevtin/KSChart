@@ -64,7 +64,7 @@ class KSChartItem: NSObject {
     }
     
     /// 以下为扩展属性
-    var isUp:Bool                 = false
+    var isUp:Bool               = false
     var yesterPrice: CGFloat    = 1
     
     @objc var low: String = "" {

@@ -37,7 +37,7 @@ extension KSMyShareView: KSKLineChartDelegate {
      
      - returns:
      */
-    func numberOfPointsInKLineChart(chart: KSKLineChartView) -> Int {
+    func numberOfPoints(chart: KSKLineChartView) -> Int {
         return self.klineData.count
     }
     
@@ -99,7 +99,7 @@ extension KSMyShareView: KSKLineChartDelegate {
         return 6
     }
     
-    func dataSource(in chart: KSKLineChartView) -> [KSChartItem] {
+    func dataSource(chart: KSKLineChartView) -> [KSChartItem] {
         return self.klineData
     }
     

@@ -31,12 +31,12 @@ enum KSSelectedPosition {
     /// 数据源总数
     ///
     /// - Parameter chart:
-    func numberOfPointsInKLineChart(chart: KSKLineChartView) -> Int
+    func numberOfPoints(chart: KSKLineChartView) -> Int
     
     /// 更新chart datas:[KSChartItem]数据
     ///
     /// - Parameter chart: 视图
-    @objc func dataSource(in chart: KSKLineChartView) -> [KSChartItem]
+    @objc func dataSource(chart: KSKLineChartView) -> [KSChartItem]
     
     /// 获取图表Y轴的显示的内容
     ///
@@ -72,7 +72,7 @@ enum KSSelectedPosition {
     /// - parameter chart:
     ///
     /// - returns:
-    @objc optional func widthForYAxisLabelInKLineChart(in chart: KSKLineChartView) -> CGFloat
+    @objc optional func widthForYAxisLabelInKLineChart(chart: KSKLineChartView) -> CGFloat
     
     /// 点击图表列响应方法
     ///
@@ -86,12 +86,12 @@ enum KSSelectedPosition {
     ///
     /// - Parameter chart: 图表
     /// - Returns: 返回自定义的高度
-    @objc optional func heightForXAxisInKLineChart(in chart: KSKLineChartView) -> CGFloat
+    @objc optional func heightForXAxisInKLineChart(chart: KSKLineChartView) -> CGFloat
     
     /// 初始化时的显示范围长度
     ///
     /// - Parameter chart: 图表
-    @objc optional func initRangeInKLineChart(in chart: KSKLineChartView) -> Int
+    @objc optional func initRangeInKLineChart(chart: KSKLineChartView) -> Int
     
     /// 自定义选择点时出现的标签样式
     ///
@@ -373,7 +373,7 @@ class KSKLineChartView: UIView {
     
     /// 更新数据
     private func resetDataSource() {
-        self.plotCount = self.delegate?.numberOfPointsInKLineChart(chart: self) ?? 0
+        self.plotCount = self.delegate?.numberOfPoints(chart: self) ?? 0
         if self.plotCount != self.datas.count {
             calculatorTai(isAll: true)
         }
@@ -383,7 +383,7 @@ class KSKLineChartView: UIView {
     ///
     /// - Parameter isAll: 是否计算全部指标
     private func calculatorTai(isAll: Bool = true) {
-        guard let myDatas = self.delegate?.dataSource(in: self) else {
+        guard let myDatas = self.delegate?.dataSource(chart: self) else {
             return
         }
         self.datas = myDatas;
@@ -812,7 +812,7 @@ extension KSKLineChartView {
         let width       = self.frame.size.width - (self.padding.left + self.padding.right)
 
         //X轴的布局高度
-        let xAxisHeight = self.delegate?.heightForXAxisInKLineChart?(in: self) ?? self.kXAxisHegiht
+        let xAxisHeight = self.delegate?.heightForXAxisInKLineChart?(chart: self) ?? self.kXAxisHegiht
         height          = height - xAxisHeight
 
         var total       = 0
@@ -845,7 +845,7 @@ extension KSKLineChartView {
             }
             
             //设置y轴标签的宽度
-            self.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(in: self) ?? self.kYAxisLabelWidth
+            self.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.kYAxisLabelWidth
             
             //y轴的标签显示方位
             switch self.showYAxisLabel {

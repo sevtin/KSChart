@@ -49,11 +49,11 @@ extension KSKChartView: KSKLineChartDelegate {
      
      - returns:
      */
-    func numberOfPointsInKLineChart(chart: KSKLineChartView) -> Int {
+    func numberOfPoints(chart: KSKLineChartView) -> Int {
         return self.klineData.count
     }
     
-    func dataSource(in chart: KSKLineChartView) -> [KSChartItem] {
+    func dataSource(chart: KSKLineChartView) -> [KSChartItem] {
         return klineData
     }
     /**
