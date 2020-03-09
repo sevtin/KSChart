@@ -418,6 +418,27 @@ class KSKLineChartView: UIView {
             self.scrollToPosition = .none
         }*/
     }
+    
+    /// 通过key隐藏或显示线系列
+    func updateSerie(hidden: Bool, key: String, isMasterCandle: Bool, index: Int = 0) {
+        if index >= self.sections.count {
+            return
+        }
+        let section = self.sections[index]
+        section.updateTai(_tai: key)
+        
+        for serie in section.series {
+            serie.hidden = (serie.key == key) ? hidden : true
+            if section.valueType == .master {
+                if serie.key == KSSeriesKey.timeline {
+                    serie.hidden = isMasterCandle ? true : false
+                }
+                else if serie.key == KSSeriesKey.candle {
+                    serie.hidden = isMasterCandle ? false : true
+                }
+            }
+        }
+    }
 
     /// 获取点击区域所在分区位
     ///

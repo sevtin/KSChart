@@ -390,10 +390,6 @@ extension KSBinanceController: KSWebSocketDelegate {
     func socketDidFail(_ socket: KSWebSocket!) {
         self.msgMgr.messages.removeAll()
     }
-    
-    func refreshChartKit() {
-        self.headerChartView.resetDrawChart(isAll: self.headerChartView.chartView.chartView.isActiveRefresh(plotCount: self.headerChartView.chartView.klineData.count))
-    }
 }
 
 extension KSBinanceController: KSViewDelegate {
@@ -423,8 +419,7 @@ extension KSBinanceController {
         }
         else{
             self.msgMgr.messageAppend(klineDatas: &self.headerChartView.chartView.klineData, chartItem: msg)
-            self.headerChartView.chartView.chartView.refreshChart(isAll: false,
-                                                                  isDraw: self.headerChartView.chartView.chartView.isActiveRefresh(plotCount: self.headerChartView.chartView.klineData.count))
+            self.headerChartView.chartView.chartView.refreshChart(isAll: false, isDraw: false)
         }
     }
     
@@ -441,11 +436,7 @@ extension KSBinanceController {
                 return
             }
             self.msgMgr.messageAppend(klineDatas: &self.headerChartView.chartView.klineData, chartItem: msg)
-            //if self.msgMgr.isProcessing {
-            self.headerChartView.chartView.chartView.refreshChart(isAll: false,
-                                                                  isDraw: self.headerChartView.chartView.chartView.isActiveRefresh(plotCount: self.headerChartView.chartView.klineData.count))
-            //self.refreshChartKit()
-            //}
+            self.headerChartView.chartView.chartView.refreshChart(isAll: false, isDraw: false)
         }
     }
     

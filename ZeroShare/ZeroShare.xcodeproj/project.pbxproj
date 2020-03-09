@@ -111,7 +111,6 @@
 		E6AB6E72238BEA5900C9BCF3 /* KSBollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E57238BEA5900C9BCF3 /* KSBollModel.swift */; };
 		E6AB6E73238BEA5900C9BCF3 /* KSTimeChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E58238BEA5900C9BCF3 /* KSTimeChartModel.swift */; };
 		E6AB6E74238BEA5900C9BCF3 /* KSChartModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5B238BEA5900C9BCF3 /* KSChartModel+Extensions.swift */; };
-		E6AB6E75238BEA5900C9BCF3 /* KSKLineChartView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5C238BEA5900C9BCF3 /* KSKLineChartView+Extensions.swift */; };
 		E6AB6E76238BEA5900C9BCF3 /* KSLineModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5D238BEA5900C9BCF3 /* KSLineModel+Extensions.swift */; };
 		E6AB6E77238BEA5900C9BCF3 /* KSSection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5E238BEA5900C9BCF3 /* KSSection+Extensions.swift */; };
 		E6AB6E78238BEA5900C9BCF3 /* KSSeries+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5F238BEA5900C9BCF3 /* KSSeries+Extensions.swift */; };
@@ -237,7 +236,6 @@
 		E6AB6E57238BEA5900C9BCF3 /* KSBollModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSBollModel.swift; sourceTree = "<group>"; };
 		E6AB6E58238BEA5900C9BCF3 /* KSTimeChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSTimeChartModel.swift; sourceTree = "<group>"; };
 		E6AB6E5B238BEA5900C9BCF3 /* KSChartModel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSChartModel+Extensions.swift"; sourceTree = "<group>"; };
-		E6AB6E5C238BEA5900C9BCF3 /* KSKLineChartView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSKLineChartView+Extensions.swift"; sourceTree = "<group>"; };
 		E6AB6E5D238BEA5900C9BCF3 /* KSLineModel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSLineModel+Extensions.swift"; sourceTree = "<group>"; };
 		E6AB6E5E238BEA5900C9BCF3 /* KSSection+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSSection+Extensions.swift"; sourceTree = "<group>"; };
 		E6AB6E5F238BEA5900C9BCF3 /* KSSeries+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSSeries+Extensions.swift"; sourceTree = "<group>"; };
@@ -861,7 +859,6 @@
 			isa = PBXGroup;
 			children = (
 				E6AB6E5B238BEA5900C9BCF3 /* KSChartModel+Extensions.swift */,
-				E6AB6E5C238BEA5900C9BCF3 /* KSKLineChartView+Extensions.swift */,
 				E6AB6E5D238BEA5900C9BCF3 /* KSLineModel+Extensions.swift */,
 				E6AB6E5E238BEA5900C9BCF3 /* KSSection+Extensions.swift */,
 				E6AB6E5F238BEA5900C9BCF3 /* KSSeries+Extensions.swift */,
@@ -1053,7 +1050,6 @@
 				E61E92682338F00F00184885 /* UIView+KSExtensions.swift in Sources */,
 				E61E92BD2338F05500184885 /* KSDoubleLabelView.swift in Sources */,
 				E61E92BB2338F05500184885 /* KSOrderBookCell.swift in Sources */,
-				E6AB6E75238BEA5900C9BCF3 /* KSKLineChartView+Extensions.swift in Sources */,
 				E6AB6E78238BEA5900C9BCF3 /* KSSeries+Extensions.swift in Sources */,
 				E6AB6E6B238BEA5900C9BCF3 /* KSDynamicItem.swift in Sources */,
 				E622D1BB2339DDA700D233E0 /* KSChartStyles.swift in Sources */,
