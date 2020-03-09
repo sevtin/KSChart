@@ -12,7 +12,7 @@ import UIKit
 /// - top: 头部
 /// - end: 尾部
 /// - none: 不处理
-enum KSChartViewScrollPosition {
+enum KSScrollPosition {
     case top, end, none
 }
 
@@ -20,7 +20,7 @@ enum KSChartViewScrollPosition {
 ///
 /// - free: 自由就在显示的点上
 /// - onClosePrice: 在收盘价上
-enum KSChartSelectedPosition {
+enum KSSelectedPosition {
     case free
     case onClosePrice
 }
@@ -152,13 +152,13 @@ class KSKLineChartView: UIView {
     var padding: UIEdgeInsets                       = UIEdgeInsets.zero//内边距
     var showYAxisLabel                              = KSYAxisShowPosition.right//显示y的位置，默认右边
     var isInnerYAxis: Bool                          = false// 是否把y坐标内嵌到图表中
-    var selectedPosition: KSChartSelectedPosition   = .onClosePrice//选中显示y值的位置
+    var selectedPosition: KSSelectedPosition   = .onClosePrice//选中显示y值的位置
 
     open weak var delegate: KSKLineChartDelegate?             //代理
 
     var sections                                    = [KSSection]()//分区样式Demo中3个样式，分别是k线/成交量/技术指标
     var selectedIndex: Int                          = -1//选择索引位
-    var scrollToPosition: KSChartViewScrollPosition = .none//图表刷新后开始显示位置
+    var scrollToPosition: KSScrollPosition = .none//图表刷新后开始显示位置
     var selectedPoint: CGPoint                      = CGPoint.zero
 
     //是否可缩放
@@ -401,16 +401,22 @@ class KSKLineChartView: UIView {
     ///
     /// - Parameters:
     ///   - isAll: 是否刷新全部数据
+    ///   - position: 位置
     ///   - isDraw: 是否绘制
-    func refreshChart(isAll: Bool = true, isDraw: Bool = true) {
+    func refreshChart(isAll: Bool = true, position: KSScrollPosition = .none, isDraw: Bool = true) {
         calculatorTai(isAll: isAll)
+        self.scrollToPosition = position
+        if isDraw {
+            self.drawLayerView()
+        }
+        /*
         if isDraw {
             self.scrollToPosition = .end
             self.drawLayerView()
         }
-        else{
+        else {
             self.scrollToPosition = .none
-        }
+        }*/
     }
 
     /// 获取点击区域所在分区位
@@ -1221,7 +1227,7 @@ extension KSKLineChartView {
     /// - Parameters:
     ///   - toPosition:
     ///   - resetData:
-    func reloadData(toPosition: KSChartViewScrollPosition = .none, resetData: Bool = true) {
+    func reloadData(toPosition: KSScrollPosition = .none, resetData: Bool = true) {
         self.scrollToPosition = toPosition
         if resetData {
             self.resetDataSource()
