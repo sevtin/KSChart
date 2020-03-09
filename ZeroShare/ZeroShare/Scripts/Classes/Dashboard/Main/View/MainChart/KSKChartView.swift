@@ -115,7 +115,7 @@ extension KSKChartView: KSKLineChartDelegate {
         return configure.decimal
     }
 
-    func widthForYAxisLabelInKLineChart(in chart: KSKLineChartView) -> CGFloat {
+    func widthForYAxisLabelInKLineChart(chart: KSKLineChartView) -> CGFloat {
         return 0
     }
     

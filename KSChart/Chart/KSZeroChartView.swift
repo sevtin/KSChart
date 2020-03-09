@@ -252,7 +252,7 @@ extension KSZeroChartView {
                 self.drawLayer.addSublayer(section.titleLayer)//[绘制最顶部价格/指标值等数据]
                 
                 //绘制顶部指标
-                if showSelection == false {
+                if self.showSelection == false {
                     if self.datas.count > 0 {
                         self.selectedIndex = self.datas.count - 1
                     }
@@ -264,8 +264,8 @@ extension KSZeroChartView {
             //显示在分区下面绘制X轴坐标[底部时间]
             self.drawXAxisLabel(showXAxisSection, xAxisToDraw: xAxisToDraw)
             
-            //重新显示点击选中的坐标
             /*
+            //重新显示点击选中的坐标
             if self.showSelection {
                 self.setSelectedIndexByPoint(self.selectedPoint)
             }

@@ -123,7 +123,7 @@ enum KSSelectedPosition {
     /// 十字架显示和影藏
     @objc optional func kLineChart(chart: KSKLineChartView, displayCross: Bool)
     
-    /// 点击事件回调
+    /// Tap事件回调
     @objc optional func kLineChartTapAction(chart: KSKLineChartView)
 }
 
@@ -888,7 +888,7 @@ extension KSKLineChartView {
         //let secPaddingLeft: CGFloat  = section.padding.left
         //let secPaddingRight: CGFloat = section.padding.right
 
-        //x轴分平均分4个间断，显示5个x轴坐标，按照图表的值个数，计算每个间断的个数
+        //x轴分平均分N个间断，显示N+1个x轴坐标，按照图表的值个数，计算每个间断的个数
         let dataRange                = self.rangeTo - self.rangeFrom
         var xTickInterval: Int       = dataRange / self.xAxisPerInterval
         if xTickInterval <= 0 {

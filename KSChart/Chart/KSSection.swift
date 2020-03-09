@@ -43,10 +43,10 @@ class KSSection: NSObject {
     var xAxis: KSXAxis                = KSXAxis()//X轴参数
     var backgroundColor: UIColor      = UIColor.black
     var index: Int                    = 0//分组
-    var titleLayer: KSShapeLayer             = KSShapeLayer()//显示顶部标题内容的层
-    var sectionLayer: KSShapeLayer           = KSShapeLayer()//分区的绘图层
+    var titleLayer: KSShapeLayer      = KSShapeLayer()//显示顶部标题内容的层
+    var sectionLayer: KSShapeLayer    = KSShapeLayer()//分区的绘图层
     var titleView: UIView? //用户自定义的View
-    var tai: String                          = ""//当前技术指标
+    var tai: String                   = ""//当前技术指标
 
     /// 初始化分区
     ///
@@ -226,7 +226,8 @@ extension KSSection {
         }
         tai = series[self.selectedIndex].key
     }
-    func updateTai(_tai:String) {
+    
+    func updateTai(_tai: String) {
         self.tai = _tai
         for i in 0 ..< series.count{
             if _tai == series[i].key {
