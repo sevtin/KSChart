@@ -10,8 +10,6 @@ import UIKit
 
 class KSZeroChartView: KSKLineChartView {
 
-    private var minPlotCount: Int = 20//最小蜡烛数量
-    
     /// 设置选中的数据点,并回调
     ///
     /// - Parameter index: 选中位置
@@ -30,7 +28,7 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter sender: 手势
     override func doPanAction(_ sender: UIPanGestureRecognizer) {
-        if (self.delegate?.numberOfPoints(chart: self) ?? 0) < self.minPlotCount {
+        if (self.delegate?.numberOfPoints(chart: self) ?? 0) < self.minCandleCount {
             return
         }
         super.doPanAction(sender)
@@ -60,7 +58,7 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter sender: 手势
     @objc override func doPinchAction(_ sender: UIPinchGestureRecognizer) {
-        if (self.delegate?.numberOfPoints(chart: self) ?? 0) < self.minPlotCount {
+        if (self.delegate?.numberOfPoints(chart: self) ?? 0) < self.minCandleCount {
             return
         }
         super.doPinchAction(sender)
