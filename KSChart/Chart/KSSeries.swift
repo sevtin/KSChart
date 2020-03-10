@@ -33,13 +33,13 @@ struct KSSeriesKey {
 /// KDJ线段：包含3个线点线模型（KSLineModel），3个点线的数值根据KDJ指标算法计算所得
 /// MACD线段：包含2个线点线模型（KSLineModel），1个条形点线模型
 class KSSeries: NSObject {
-    var key                  = ""//技术指标「KDJ,MACD,BOLL等」
-    var title: String        = ""
-    var chartModels          = [KSChartModel]()//每个系列包含多个点线模型
-    var hidden: Bool         = false
-    var showTitle: Bool      = true//是否显示标题文本
-    var baseValueSticky      = false//是否以固定基值显示最小或最大值，若超过范围
-    var symmetrical          = false//是否以固定基值为中位数，对称显示最大最小值
+    var key                       = ""//技术指标「KDJ,MACD,BOLL等」
+    var title: String             = ""
+    var chartModels               = [KSChartModel]()//每个系列包含多个点线模型
+    var hidden: Bool              = false//是否显示指标
+    var showTitle: Bool           = true//是否显示标题文本
+    var baseValueSticky           = false//是否以固定基值显示最小或最大值，若超过范围
+    var symmetrical               = false//是否以固定基值为中位数，对称显示最大最小值
     var seriesLayer: KSShapeLayer = KSShapeLayer()//点线模型的绘图层
 
     /// 清空图表的子图层

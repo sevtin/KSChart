@@ -28,10 +28,9 @@ class KSSection: NSObject {
     var name: String                  = ""//区域的名称
     var hidden: Bool                  = false
     var paging: Bool                  = false
-    var selectedIndex: Int            = 0
+    var selectedIndex: Int            = 0//选择的指标下标
     var padding: UIEdgeInsets         = UIEdgeInsets.zero
     var series                        = [KSSeries]()//每个分区包含多组系列，每个系列包含多个点线模型
-    var tickInterval: Int             = 0
     var title: String                 = ""//标题
     var titleShowOutSide: Bool        = false//标题是否显示在外面
     var showTitle: Bool               = true//是否显示标题文本
