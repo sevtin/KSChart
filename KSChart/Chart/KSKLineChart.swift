@@ -86,7 +86,7 @@ enum KSSelectedPosition {
     /// 初始化时的显示范围长度
     ///
     /// - Parameter chart: 图表
-    @objc optional func initRangeInKLineChart(chart: KSKLineChartView) -> Int
+    /// @objc optional func initRangeInKLineChart(chart: KSKLineChartView) -> Int
     
     /// 自定义选择点时出现的标签样式
     ///
@@ -125,8 +125,8 @@ enum KSSelectedPosition {
 class KSKLineChartView: UIView {
     
     /// MARK: - 常量
-    let kMinRange                            = 13//最小缩放范围
-    let kMaxRange                            = 133//最大缩放范围
+    let kMinRange                            = 16//最小缩放范围
+    let kMaxRange                            = 128//最大缩放范围
     let kPerInterval                         = 4//缩放的每段间隔
     let kYAxisLabelWidth: CGFloat            = 46//默认文字宽度
     let kXAxisHegiht: CGFloat                = 16//默认X坐标的高度
@@ -149,7 +149,7 @@ class KSKLineChartView: UIView {
     var isInnerYAxis: Bool                   = false// 是否把y坐标内嵌到图表中
     var selectedPosition: KSSelectedPosition = .onClosePrice//选中显示y值的位置
 
-    open weak var delegate: KSKLineChartDelegate?             //代理
+    open weak var delegate: KSKLineChartDelegate? //代理
 
     var sections                             = [KSSection]()//分区样式Demo中N个样式，分别是主图/附图1/附图2
     var selectedIndex: Int                   = -1//选择单个点的索引
@@ -391,6 +391,9 @@ class KSKLineChartView: UIView {
         var index: Int = 0
         if isAll == false {
             index = self.datas.count - 1
+            if index < 0 {
+                index = 0
+            }
         }
         for section in self.sections {
             _ = KSCalculator.ks_calculator(algorithm: chartTais[section.tai] ?? KSIndexAlgorithm.none, index: index, datas: self.datas)
@@ -403,28 +406,11 @@ class KSKLineChartView: UIView {
     ///   - isAll: 是否刷新全部数据
     ///   - isDraw: 是否绘制
     func refreshChart(isAll: Bool = true, isDraw: Bool = true) {
-        
-        calculatorTai(isAll: isAll)
-        
-        if self.scrollPositionEnd() {
-            self.scrollToPosition = .end
-        }
-        else{
-            self.scrollToPosition = .none
-        }
-        
+        self.calculatorTai(isAll: isAll)
         if isDraw {
+            self.scrollToPosition = self.scrollPositionEnd() ? .end : .none
             self.drawLayerView()
         }
-        
-        /*
-        if isDraw {
-            self.scrollToPosition = .end
-            self.drawLayerView()
-        }
-        else {
-            self.scrollToPosition = .none
-        }*/
     }
     
     /// 通过key隐藏或显示线系列
@@ -750,8 +736,10 @@ extension KSKLineChartView {
     
     /// 初始化图表结构 -> 是否初始化数据
     func initChart() -> Bool {
-        
-        self.calculatorTai(isAll: true)
+        if self.scrollToPosition == .end && self.plotCount != self.datas.count {
+            self.calculatorTai(isAll: true)
+        }
+
         if self.plotCount > 0 {
             drawRange()
         }
