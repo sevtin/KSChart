@@ -117,7 +117,7 @@ class KSMyShareController: KSBaseViewController {
     }
     
     @objc func updataChartData() {
-        if currentIndex > 20 {
+        if currentIndex > 100 {
             timerInvalidate()
             return
         }
@@ -142,9 +142,12 @@ class KSMyShareController: KSBaseViewController {
     //======================================================================
     // MARK: - 14、懒加载
     //======================================================================
-    lazy var chartView: KSMyShareView = {
-        let chartView = KSMyShareView.init(frame: CGRect.init(x: 0, y: 100, width: ks_screenWidth(), height: 360))
+    lazy var chartView: KSKChartView = {
+        let chartView = KSKChartView.init(frame: CGRect.init(x: 0, y: 100, width: ks_screenWidth(), height: 360))
         self.view.addSubview(chartView)
+        chartView.chartView.updateSerie(hidden: false, key: KSSeriesKey.ma, isMasterCandle: true)
+        chartView.chartView.updateSerie(hidden: false, key: KSSeriesKey.boll, isMasterCandle: false, index: 1)
+        //chartView.chartView.refreshChart(isAll: true, isDraw: true, isChangeTai: true)
         return chartView
     }()
     //======================================================================

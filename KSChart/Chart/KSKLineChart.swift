@@ -386,6 +386,7 @@ class KSKLineChartView: UIView {
         guard let myDatas = self.delegate?.dataSource(chart: self) else {
             return
         }
+        
         self.plotCount = self.datas.count
         self.datas     = myDatas
         var index: Int = 0
