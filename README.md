@@ -6,3 +6,8 @@
 
 反馈/技术交流群:902071358
 
+### 如果觉得好用就打个赏呗
+![Alipay](https://github.com/saeipi/KSChart/blob/master/Resources/Alipay.jpg)
+![WeChatPay](https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg)
+
+
