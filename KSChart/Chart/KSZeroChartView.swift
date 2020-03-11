@@ -216,9 +216,7 @@ class KSZeroChartView: KSKLineChartView {
         self.showSelection = false
         self.delegate?.kLineChart?(chart: self, displayCross: false)
     }
-}
 
-extension KSZeroChartView {
     /// 通过CALayer方式画图表
     override func drawLayerView() {
         //先清空图层
