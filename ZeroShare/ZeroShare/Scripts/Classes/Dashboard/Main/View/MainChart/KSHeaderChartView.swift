@@ -198,7 +198,7 @@ extension KSHeaderChartView: KSKChartViewDelegate, TimePickerViewDelegate, TaiPi
         }*/
         self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.masterSeriesKey, isMasterCandle: KSSingleton.shared.indexConfigure.isChart)
         self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.assistSeriesKey, isMasterCandle: false, index: 1)
-        self.chartView.chartView.refreshChart(isAll: isAll, isDraw: true)
+        self.chartView.chartView.refreshChart(isAll: isAll, isDraw: true, isChangeTai: true)
     }
     
     // MARK: - KSViewDelegate

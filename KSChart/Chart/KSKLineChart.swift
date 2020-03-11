@@ -405,11 +405,19 @@ class KSKLineChartView: UIView {
     /// - Parameters:
     ///   - isAll: 是否刷新全部数据
     ///   - isDraw: 是否绘制
-    func refreshChart(isAll: Bool = true, isDraw: Bool = true) {
+    ///   - isChangeTai: 是否修改了技术指标
+    func refreshChart(isAll: Bool = true, isDraw: Bool = true, isChangeTai: Bool = false) {
         self.calculatorTai(isAll: isAll)
         if isDraw {
             self.scrollToPosition = self.scrollPositionEnd() ? .end : .none
-            self.drawLayerView()
+            if isChangeTai {
+                self.drawLayerView()
+            }
+            else{
+                if self.scrollToPosition == .end {
+                    self.drawLayerView()
+                }
+            }
         }
     }
     
@@ -1612,7 +1620,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
             if section.paging {
                 section.nextPage()
                 updateSerie(hidden: false, key: section.tai, isMasterCandle: false, index: section.index)
-                refreshChart(isAll: true, isDraw: true)
+                refreshChart(isAll: true, isDraw: true, isChangeTai: true)
                 self.delegate?.kLineChart?(chart: self, didFlipPageSeries: section, series: section.series[section.selectedIndex], seriesIndex: section.selectedIndex)
             }
             else{
