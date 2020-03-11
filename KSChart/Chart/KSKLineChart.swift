@@ -28,11 +28,6 @@ enum KSSelectedPosition {
 /// K线数据源代理
 @objc protocol KSKLineChartDelegate: class {
     
-    /// 数据源总数
-    ///
-    /// - Parameter chart:
-    func numberOfPoints(chart: KSKLineChartView) -> Int
-    
     /// 更新chart datas:[KSChartItem]数据
     ///
     /// - Parameter chart: 视图
@@ -371,12 +366,17 @@ class KSKLineChartView: UIView {
     }
     */
     
-    /// 更新数据
-    private func resetDataSource() {
-        self.plotCount = self.delegate?.numberOfPoints(chart: self) ?? 0
-        if self.plotCount != self.datas.count {
-            calculatorTai(isAll: true)
+    public func scrollPositionEnd() -> Bool {
+        if self.rangeTo == 0 || self.plotCount < self.range {
+            return true
         }
+        if self.rangeTo >= self.plotCount {
+            return true
+        }
+        if (self.rangeFrom + self.range + 1) >= self.plotCount {
+            return true
+        }
+        return false
     }
     
     /// 计算技术指标
@@ -386,8 +386,8 @@ class KSKLineChartView: UIView {
         guard let myDatas = self.delegate?.dataSource(chart: self) else {
             return
         }
-        self.datas = myDatas;
-        
+        self.plotCount = self.datas.count
+        self.datas     = myDatas
         var index: Int = 0
         if isAll == false {
             index = self.datas.count - 1
@@ -396,19 +396,27 @@ class KSKLineChartView: UIView {
             _ = KSCalculator.ks_calculator(algorithm: chartTais[section.tai] ?? KSIndexAlgorithm.none, index: index, datas: self.datas)
         }
     }
-        
+
     /// 刷新k线
     ///
     /// - Parameters:
     ///   - isAll: 是否刷新全部数据
-    ///   - position: 位置
     ///   - isDraw: 是否绘制
-    func refreshChart(isAll: Bool = true, position: KSScrollPosition = .none, isDraw: Bool = true) {
+    func refreshChart(isAll: Bool = true, isDraw: Bool = true) {
+        
         calculatorTai(isAll: isAll)
-        self.scrollToPosition = position
+        
+        if self.scrollPositionEnd() {
+            self.scrollToPosition = .end
+        }
+        else{
+            self.scrollToPosition = .none
+        }
+        
         if isDraw {
             self.drawLayerView()
         }
+        
         /*
         if isDraw {
             self.scrollToPosition = .end
@@ -528,10 +536,7 @@ class KSKLineChartView: UIView {
             //每个点的宽度 * index + 内视图左边偏移 + 自身左边偏移
             let ixs = plotWidth * CGFloat(i - self.rangeFrom) + section!.padding.left + self.padding.left
             let ixe = plotWidth * CGFloat(i - self.rangeFrom + 1) + section!.padding.left + self.padding.left
-            //NSLog("ixs = \(ixs)")
-            //NSLog("ixe = \(ixe)")
-            //NSLog("point.x = \(point.x)")
-            
+
             //点在区间内
             if ixs <= point.x && point.x < ixe {
                 self.selectedIndex             = i
@@ -653,7 +658,7 @@ class KSKLineChartView: UIView {
             }
         }
         
-        //回调给代理委托方法
+        //回调
         self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
     }
 }
@@ -746,41 +751,9 @@ extension KSKLineChartView {
     /// 初始化图表结构 -> 是否初始化数据
     func initChart() -> Bool {
         
-        resetDataSource()
-        
-        if plotCount > 0 {
-            //如果显示全部，显示范围为全部数据量
-            if self.isShowAll {
-                self.range     = self.plotCount
-                self.rangeFrom = 0
-                self.rangeTo   = self.plotCount
-            }
-            
-            //图表刷新滚动为默认时，如果第一次初始化，就默认滚动到最后显示
-            if self.scrollToPosition == .none {
-                //如果图表尽头的索引为0，则进行初始化
-                if self.rangeTo == 0 || self.plotCount < self.rangeTo {
-                    self.scrollToPosition = .end
-                }
-            }
-            
-            if self.scrollToPosition == .top {
-                self.rangeFrom = 0
-                if self.rangeFrom + self.range < self.plotCount {
-                    self.rangeTo = self.rangeFrom + self.range//计算结束的显示的位置
-                } else {
-                    self.rangeTo = self.plotCount
-                }
-                self.selectedIndex = -1
-            } else if self.scrollToPosition == .end {
-                self.rangeTo = self.plotCount               //默认是数据最后一条为尽头
-                if self.rangeTo - self.range > 0 {          //如果尽头 - 默认显示数大于0
-                    self.rangeFrom = self.rangeTo - range   //计算开始的显示的位置
-                } else {
-                    self.rangeFrom = 0
-                }
-                self.selectedIndex = -1
-            }
+        self.calculatorTai(isAll: true)
+        if self.plotCount > 0 {
+            drawRange()
         }
         
         //重置图表刷新滚动默认不处理
@@ -800,6 +773,40 @@ extension KSKLineChartView {
         //context?.setFillColor(self.backgroundColor!.cgColor)
         //context?.fill (CGRect (x: 0, y: 0, width: self.bounds.size.width,height: self.bounds.size.height))
         return self.datas.count > 0 ? true : false
+    }
+    
+    func drawRange() {
+        //如果显示全部，显示范围为全部数据量
+        if self.isShowAll {
+            self.range     = self.plotCount
+            self.rangeFrom = 0
+            self.rangeTo   = self.plotCount
+        }
+        
+        //图表刷新滚动为默认时，如果第一次初始化，就默认滚动到最后显示
+        if self.scrollToPosition == .none {
+            //如果图表尽头的索引为0，则进行初始化
+            if self.rangeTo == 0 || self.plotCount < self.rangeTo {
+                self.scrollToPosition = .end
+            }
+        }
+        else if self.scrollToPosition == .top {
+            self.rangeFrom = 0
+            if self.rangeFrom + self.range < self.plotCount {
+                self.rangeTo = self.rangeFrom + self.range//计算结束的显示的位置
+            } else {
+                self.rangeTo = self.plotCount
+            }
+            self.selectedIndex = -1
+        } else if self.scrollToPosition == .end {
+            self.rangeTo = self.plotCount               //默认是数据最后一条为尽头
+            if self.rangeTo - self.range > 0 {          //如果尽头 - 默认显示数大于0
+                self.rangeFrom = self.rangeTo - range   //计算开始的显示的位置
+            } else {
+                self.rangeFrom = 0
+            }
+            self.selectedIndex = -1
+        }
     }
     
     /// 初始化各个分区
@@ -1250,7 +1257,7 @@ extension KSKLineChartView {
     func reloadData(toPosition: KSScrollPosition = .none, resetData: Bool = true) {
         self.scrollToPosition = toPosition
         if resetData {
-            self.resetDataSource()
+            self.calculatorTai(isAll: true)
         }
         self.drawLayerView()
     }
@@ -1633,6 +1640,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     ///
     /// - Parameter sender: 手势
     @objc func doPinchAction(_ sender: UIPinchGestureRecognizer) {
+        //防止数量较少时,显示异常
         if self.datas.count < minCandleCount {
             return
         }
@@ -1665,7 +1673,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
             //print("scale = \(scale)")
             let enlarge = scale > 1 ? true : false
             self.zoomChart(by: distance / 2, enlarge: enlarge)
-            sender.scale = 1    //恢复比例
+            sender.scale = 1 //恢复比例
         }
     }
     

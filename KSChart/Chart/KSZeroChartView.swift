@@ -14,6 +14,9 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter index: 选中位置
     override func setSelectedByIndex(_ index: Int) {
+        if index >= self.datas.count {
+            return
+        }
         //如果不在区间内return
         guard index >= self.rangeFrom && index < self.rangeTo else {
             return
@@ -28,7 +31,8 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter sender: 手势
     override func doPanAction(_ sender: UIPanGestureRecognizer) {
-        if (self.delegate?.numberOfPoints(chart: self) ?? 0) < self.minCandleCount {
+        //防止数量较少时,显示异常
+        if self.plotCount < self.minCandleCount {
             return
         }
         super.doPanAction(sender)
@@ -42,7 +46,7 @@ class KSZeroChartView: KSKLineChartView {
         super.doLongPressAction(sender)
         
         self.buildSections {(section, index) in
-            //绘制顶部指标
+            //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
             section.drawCustomTitle(self.selectedIndex)
         }
         
@@ -58,7 +62,7 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter sender: 手势
     @objc override func doPinchAction(_ sender: UIPinchGestureRecognizer) {
-        if (self.delegate?.numberOfPoints(chart: self) ?? 0) < self.minCandleCount {
+        if self.plotCount < self.minCandleCount {
             return
         }
         super.doPinchAction(sender)
@@ -72,7 +76,6 @@ class KSZeroChartView: KSKLineChartView {
         if !serie.hidden {
             //循环画出每个模型的线
             for model in serie.chartModels {
-                //model.isPinch  = self.isPinch
                 let serieLayer = model.drawSerie(self.rangeFrom, endIndex: self.rangeTo)
                 serie.seriesLayer.addSublayer(serieLayer)
             }
@@ -261,14 +264,6 @@ extension KSZeroChartView {
             let showXAxisSection = self.getSecionWhichShowXAxis()
             //显示在分区下面绘制X轴坐标[底部时间]
             self.drawXAxisLabel(showXAxisSection, xAxisToDraw: xAxisToDraw)
-            
-            /*
-            //重新显示点击选中的坐标
-            if self.showSelection {
-                self.setSelectedIndexByPoint(self.selectedPoint)
-            }
-            self.delegate?.didFinishKLineChartRefresh?(chart: self)
-            */
         }
     }
 }
