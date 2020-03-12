@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "36EF0875-B93F-424B-81D3-47F645A229BF"
+            uuid = "9FB59E10-8F5D-452F-AD3D-A64B22A7D908"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../KSChart/Chart/KSZeroChartView.swift"
+            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/View/MainChart/KSHeaderChartView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "drawLayerView()"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "resetDrawChart(groupType:isAll:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

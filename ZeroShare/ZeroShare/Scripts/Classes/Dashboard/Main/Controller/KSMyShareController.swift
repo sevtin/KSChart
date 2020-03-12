@@ -147,7 +147,7 @@ class KSMyShareController: KSBaseViewController {
         self.view.addSubview(chartView)
         chartView.chartView.updateSerie(hidden: false, key: KSSeriesKey.ma, isMasterCandle: true)
         chartView.chartView.updateSerie(hidden: false, key: KSSeriesKey.boll, isMasterCandle: false, index: 1)
-        //chartView.chartView.refreshChart(isAll: true, isDraw: true, isChangeTai: true)
+        chartView.backgroundColor = UIColor.white
         return chartView
     }()
     //======================================================================

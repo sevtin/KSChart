@@ -95,7 +95,6 @@
 		E622D1BB2339DDA700D233E0 /* KSChartStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1BA2339DDA700D233E0 /* KSChartStyles.swift */; };
 		E622D1BD2339E06300D233E0 /* KSBinanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1BC2339E06300D233E0 /* KSBinanceController.swift */; };
 		E622D1BF2339F3C000D233E0 /* KSSeriesParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1BE2339F3C000D233E0 /* KSSeriesParam.swift */; };
-		E622D1C2233A213900D233E0 /* KSMyShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1C1233A213900D233E0 /* KSMyShareView.swift */; };
 		E622D1C4233A224500D233E0 /* KSMyShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1C3233A224500D233E0 /* KSMyShareController.swift */; };
 		E6AB6E66238BEA5900C9BCF3 /* KSAxisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */; };
 		E6AB6E67238BEA5900C9BCF3 /* KSCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */; };
@@ -220,7 +219,6 @@
 		E622D1BA2339DDA700D233E0 /* KSChartStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSChartStyles.swift; sourceTree = "<group>"; };
 		E622D1BC2339E06300D233E0 /* KSBinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSBinanceController.swift; sourceTree = "<group>"; };
 		E622D1BE2339F3C000D233E0 /* KSSeriesParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSeriesParam.swift; sourceTree = "<group>"; };
-		E622D1C1233A213900D233E0 /* KSMyShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSMyShareView.swift; sourceTree = "<group>"; };
 		E622D1C3233A224500D233E0 /* KSMyShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSMyShareController.swift; sourceTree = "<group>"; };
 		E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSAxisModel.swift; sourceTree = "<group>"; };
 		E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSCalculator.swift; sourceTree = "<group>"; };
@@ -779,7 +777,6 @@
 		E622D1C0233A210F00D233E0 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				E622D1C1233A213900D233E0 /* KSMyShareView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1033,7 +1030,6 @@
 				E61E92D02338F05500184885 /* KSChartIndexView.swift in Sources */,
 				E61E923B2338F00F00184885 /* MarginLabel.swift in Sources */,
 				E61E92662338F00F00184885 /* UIImage+KSExtensions.swift in Sources */,
-				E622D1C2233A213900D233E0 /* KSMyShareView.swift in Sources */,
 				E61E92632338F00F00184885 /* NSObject+KSExtensions.swift in Sources */,
 				E6AB6E70238BEA5900C9BCF3 /* KSSeries.swift in Sources */,
 				E61E92442338F00F00184885 /* KSBaseView.swift in Sources */,

@@ -242,6 +242,7 @@ class KSKLineChartView: UIView {
     
     var style: KSKLineChartStyle! {           //显示样式
         didSet {
+            assert(self.style.chartTais != nil, "chartTais 不能为nil")
             //重新配置样式
             self.sections            = self.style.sections
             self.chartTais           = self.style.chartTais

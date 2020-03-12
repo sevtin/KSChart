@@ -66,7 +66,7 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         enterBinanceController()
-        return;
+        return
         /*
         switch indexPath.row {
         case 0:
