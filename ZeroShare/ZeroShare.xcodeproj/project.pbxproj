@@ -124,7 +124,7 @@
 		078502BD5C7E716DD24FEE07 /* Pods-ZeroShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeroShare.release.xcconfig"; path = "Target Support Files/Pods-ZeroShare/Pods-ZeroShare.release.xcconfig"; sourceTree = "<group>"; };
 		976229B2BDF5A2CDC61A932A /* Pods-ZeroShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeroShare.debug.xcconfig"; path = "Target Support Files/Pods-ZeroShare/Pods-ZeroShare.debug.xcconfig"; sourceTree = "<group>"; };
 		C770F7DE7EBA95D21074E78E /* Pods_ZeroShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZeroShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E61E91BE2338EE7C00184885 /* ZeroShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeroShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E61E91BE2338EE7C00184885 /* KSChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E61E91C12338EE7C00184885 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E61E91C32338EE7C00184885 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E61E91C62338EE7C00184885 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 		E61E91BF2338EE7C00184885 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E61E91BE2338EE7C00184885 /* ZeroShare.app */,
+				E61E91BE2338EE7C00184885 /* KSChart.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -912,7 +912,7 @@
 			);
 			name = ZeroShare;
 			productName = ZeroShare;
-			productReference = E61E91BE2338EE7C00184885 /* ZeroShare.app */;
+			productReference = E61E91BE2338EE7C00184885 /* KSChart.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1284,7 +1284,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.saeipi.ZeroShare;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = KSChart;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZeroShare/Scripts/Objectc/ZeroShare-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1305,7 +1305,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.saeipi.ZeroShare;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = KSChart;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZeroShare/Scripts/Objectc/ZeroShare-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
