@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E61E91BD2338EE7C00184885"
-               BuildableName = "ZeroShare.app"
+               BuildableName = "KSChart.app"
                BlueprintName = "ZeroShare"
                ReferencedContainer = "container:ZeroShare.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E61E91BD2338EE7C00184885"
-            BuildableName = "ZeroShare.app"
+            BuildableName = "KSChart.app"
             BlueprintName = "ZeroShare"
             ReferencedContainer = "container:ZeroShare.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E61E91BD2338EE7C00184885"
-            BuildableName = "ZeroShare.app"
+            BuildableName = "KSChart.app"
             BlueprintName = "ZeroShare"
             ReferencedContainer = "container:ZeroShare.xcodeproj">
          </BuildableReference>

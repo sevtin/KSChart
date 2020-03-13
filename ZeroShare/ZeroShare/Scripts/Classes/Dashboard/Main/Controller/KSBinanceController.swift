@@ -436,7 +436,7 @@ extension KSBinanceController {
                 return
             }
             self.msgMgr.messageAppend(klineDatas: &self.headerChartView.chartView.klineData, chartItem: msg)
-            self.headerChartView.chartView.chartView.refreshChart(isAll: false, isDraw: false)
+            self.headerChartView.chartView.chartView.refreshChart(isAll: false, isDraw: true)
         }
     }
     
