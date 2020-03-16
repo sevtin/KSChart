@@ -212,7 +212,7 @@ class KSKLineChartView: UIView {
     var selectedXAxisLabel: UILabel?
     var selectedYAxisLabel: UILabel?
     var sightView: UIView?//点击出现的准星
-    var isCrosshair:Bool                 = true//是否显示准星
+    var isCrosshair:Bool                 = false//是否显示准星
 
     //动力学引擎
     lazy var animator: UIDynamicAnimator = UIDynamicAnimator(referenceView: self)
@@ -258,6 +258,7 @@ class KSKLineChartView: UIView {
             self.enableTap           = self.style.enableTap
             self.enablePinch         = self.style.enablePinch
             self.enablePan           = self.style.enablePan
+            self.isCrosshair         = self.style.isCrosshair
             self.showSelection       = self.style.showSelection
             self.showXAxisOnSection  = self.style.showXAxisOnSection
             self.isShowAll           = self.style.isShowAll
