@@ -23,7 +23,7 @@ class KSSeriesParam: NSObject, Codable {
         self.order = order
         self.hidden = hidden
     }
-
+    /*
     /// 获取指标线段组
     func appendIn(masterSection: KSSection,
                   assistSections: KSSection...) {
@@ -211,7 +211,7 @@ class KSSeriesParam: NSObject, Codable {
         default:break
         }
     }
-    
+    */
     
     /// 获取指标线段组
     func appendCustomIn(masterSection: KSSection,

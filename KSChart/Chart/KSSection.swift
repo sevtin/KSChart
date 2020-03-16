@@ -262,7 +262,6 @@ extension KSSection {
             }
         } else {
             for serie in self.series {//不分页，计算所有系列作为坐标系的数据源
-                
                 //隐藏的不计算
                 if serie.hidden {
                     continue
@@ -346,11 +345,6 @@ extension KSSection {
          4、当前y值的实际坐标 = 分区高度 + 分区y坐标 - paddingBottom - 当前y值的实际的相对y轴有值的区间的高度:
          */
         let baseY = self.frame.size.height + self.frame.origin.y - self.padding.bottom - (self.frame.size.height - self.padding.top - self.padding.bottom) * (val - min) / (max - min)
-        //NSLog("baseY(val) = \(baseY)(\(val))")
-        //NSLog("fra.size.height = \(self.frame.size.height)");
-        //NSLog("max = \(max)");
-        //NSLog("min = \(min)");
-        //print("---------- yAxis.max:\(self.yAxis.max) yAxis.min:\(self.yAxis.min) ----------")
         return baseY
     }
     
@@ -451,8 +445,6 @@ extension KSSection {
         for (title, color) in titles {
             titleString.append(NSAttributedString(string: title))
             let range          = NSMakeRange(start, title.ks_length)
-            //NSLog("title = \(title)")
-            //NSLog("range = \(range)")
             let colorAttribute = [NSAttributedString.Key.foregroundColor: color]
             titleString.addAttributes(colorAttribute, range: range)
             start              += title.ks_length
@@ -521,7 +513,7 @@ extension KSSection {
                 title += NSLocalizedString("C", comment: "") + ": " +
                     item.closePrice.ks_toString(maximum: self.decimal) + "  "  //收市
                 title += NSLocalizedString("R", comment: "") + ": " +
-                    amplitude.ks_toString(maximum: self.decimal) + "%   "       //振幅
+                    amplitude.ks_toString(maximum: self.decimal) + "%   "      //振幅
                 
             case is KSColumnModel:
                 if model.key != KSSeriesKey.volume {

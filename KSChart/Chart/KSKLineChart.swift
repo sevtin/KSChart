@@ -1305,7 +1305,6 @@ extension KSKLineChartView {
                 }
             }
         }
-        //self.drawLayerView()
     }
     
     /// 通过key隐藏或显示分区
@@ -1321,7 +1320,6 @@ extension KSKLineChartView {
                 break
             }
         }
-        //self.drawLayerView()
     }
     
     /// 通过索引位隐藏或显示分区
@@ -1336,7 +1334,6 @@ extension KSKLineChartView {
         }
         
         section.hidden = hidden
-        //self.drawLayerView()
     }
     
     
@@ -1694,7 +1691,6 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                 //显示点击选中的内容
                 self.setSelectedIndexByPoint(point)
             }
-            //self.drawLayerView()
         }
     }
 }
