@@ -24,7 +24,6 @@ class KSKChartView: KSBaseView {
         let style             = configure.loadConfigure()
         chartView.style       = style
         chartView.delegate    = self
-        chartView.extraSetting()
         self.addSubview(chartView)
         return chartView
     }()

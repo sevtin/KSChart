@@ -265,27 +265,3 @@ class KSZeroChartView: KSKLineChartView {
         }
     }
 }
-
-// MARK: - 额为的初始化方法
-extension KSZeroChartView {
-    /// 设置style后，方可调用
-    func extraSetting() {
-        
-        self.isCrosshair                         = false
-        self.showSelection                       = false
-        //self.animator.delegate                 = self
-        //重置文字颜色和字体
-        self.selectedYAxisLabel?.font            = self.labelFont
-        self.selectedYAxisLabel?.backgroundColor = self.selectedBGColor
-        self.selectedYAxisLabel?.textColor       = self.selectedTextColor
-        self.selectedXAxisLabel?.font            = self.labelFont
-        self.selectedXAxisLabel?.backgroundColor = self.selectedBGColor
-        self.selectedXAxisLabel?.textColor       = self.selectedTextColor
-    }
-}
-
-//extension KSZeroChartView: UIDynamicAnimatorDelegate {
-//    func dynamicAnimatorDidPause(_ animator: UIDynamicAnimator) {
-//
-//    }
-//}

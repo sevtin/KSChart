@@ -277,6 +277,8 @@ class KSKLineChartView: UIView {
                     }
                 }
             }
+            
+            UpdateSelectedXYAxisLabel()
         }
     }
 
@@ -357,6 +359,15 @@ class KSKLineChartView: UIView {
         //长按时间为0.5秒
         longPress.minimumPressDuration                     = 0.5
         self.addGestureRecognizer(longPress)
+    }
+
+    private func UpdateSelectedXYAxisLabel() {
+        self.selectedYAxisLabel?.font            = self.labelFont
+        self.selectedYAxisLabel?.backgroundColor = self.selectedBGColor
+        self.selectedYAxisLabel?.textColor       = self.selectedTextColor
+        self.selectedXAxisLabel?.font            = self.labelFont
+        self.selectedXAxisLabel?.backgroundColor = self.selectedBGColor
+        self.selectedXAxisLabel?.textColor       = self.selectedTextColor
     }
     
     /*
@@ -628,6 +639,10 @@ class KSKLineChartView: UIView {
     ///
     /// - Parameter index: 选中位置
     func setSelectedByIndex(_ index: Int) {
+        if index >= self.datas.count {
+            return
+        }
+        
         //如果不在区间内return
         guard index >= self.rangeFrom && index < self.rangeTo else {
             return
