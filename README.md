@@ -16,5 +16,5 @@
 ![WeChatPay](https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg)
 
 ## 开发环境
-- Xcode 11.0
-- Swift 5.1
+- Xcode 11.0+
+- Swift 5.1+
