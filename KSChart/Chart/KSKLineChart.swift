@@ -246,7 +246,6 @@ class KSKLineChartView: UIView {
             //重新配置样式
             self.sections            = self.style.sections
             self.chartTais           = self.style.chartTais
-            self.backgroundColor     = self.style.backgroundColor
             self.padding             = self.style.padding
             self.lineColor           = self.style.lineColor
             self.textColor           = self.style.textColor
@@ -318,7 +317,6 @@ class KSKLineChartView: UIView {
         self.addSubview(self.selectedXAxisLabel!)
 
         self.sightView                                     = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 6))
-        self.sightView?.backgroundColor                    = UIColor.white
         self.sightView?.layer.cornerRadius                 = 3
         self.addSubview(self.sightView!)
 
@@ -348,11 +346,11 @@ class KSKLineChartView: UIView {
     }
 
     private func initViewState() {
-
+        self.backgroundColor                     = self.style.backgroundColor
         self.verticalLineView?.backgroundColor   = self.style.crosshairColor
         self.horizontalLineView?.backgroundColor = self.style.crosshairColor
         self.sightView?.backgroundColor          = self.style.crosshairColor
-        
+
         self.selectedYAxisLabel?.font            = self.labelFont
         self.selectedYAxisLabel?.backgroundColor = self.selectedBGColor
         self.selectedYAxisLabel?.textColor       = self.selectedTextColor
@@ -1019,7 +1017,6 @@ extension KSKLineChartView {
             xAxis.addSublayer(xLabelText)
         }
         self.drawLayer.addSublayer(xAxis)
-        //context?.strokePath()
     }
     
     /// 绘制分区

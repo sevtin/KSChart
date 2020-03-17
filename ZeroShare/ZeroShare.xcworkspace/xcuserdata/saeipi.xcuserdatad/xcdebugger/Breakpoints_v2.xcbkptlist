@@ -14,8 +14,8 @@
             filePath = "../KSChart/Chart/KSKLineChart.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
+            startingLineNumber = "616"
+            endingLineNumber = "616"
             landmarkName = "setSelectedIndexByPoint(_:)"
             landmarkType = "7">
          </BreakpointContent>
