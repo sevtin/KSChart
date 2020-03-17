@@ -603,7 +603,7 @@ class KSBarModel: KSChartModel {
             }
             
             if isSolid {
-                barLayer.lineWidth = self.lineWidth      //不设置为0会受到抗锯齿处理导致变大
+                barLayer.lineWidth = self.lineWidth //不设置为0会受到抗锯齿处理导致变大
             } else {
                 barLayer.fillColor = section.backgroundColor.cgColor
                 barLayer.lineWidth = self.lineWidth
@@ -750,7 +750,7 @@ extension KSChartModel {
         var isShowValue: Bool            = true//是否显示值，圆形样式可以不显示值，只显示圆形
         var guideValueTextColor: UIColor = UIColor.white//显示最大最小的文字颜色
         //判断绘画完整时是否超过界限
-        var maxPriceStartX               = point.x + arrowLineWidth * 4 + 2
+        var maxPriceStartX               = point.x + arrowLineWidth * 2
         var maxPriceStartY: CGFloat      = 0
         if maxPriceStartX + fontSize.width > section.frame.origin.x + section.frame.size.width - section.padding.right {
             //超过了最右边界，则反方向画
@@ -759,10 +759,7 @@ extension KSChartModel {
         } else {
             isLeft = 1
         }
-        //var mmPointY: CGFloat = 0
-        
-        //context.setShouldAntialias(true)
-        //context.setStrokeColor(self.titleColor.cgColor)
+
         var fillColor: UIColor = self.upStyle.color
         switch trend {
         case .up:
@@ -777,7 +774,7 @@ extension KSChartModel {
             maxPriceStartY = point.y + arrowLineWidth / 2
         default:break
         }
-        /****** 根据样式类型绘制 ******/
+        //根据样式类型绘制
         switch self.ultimateValueStyle {
         case let .arrow(color)://箭头风格
             
@@ -797,9 +794,8 @@ extension KSChartModel {
             
             arrowLayer.path        = arrowPath.cgPath
             arrowLayer.strokeColor = self.titleColor.cgColor
-            
             guideValueLayer.addSublayer(arrowLayer)
-            
+            break
         case let .tag(color)://标签风格
             
             let tagLayer         = CAShapeLayer()
@@ -818,13 +814,11 @@ extension KSChartModel {
 
             let tagPath          = UIBezierPath(
                 roundedRect: CGRect(x: maxPriceStartX - arrowLineWidth, y: tagStartY, width: fontSize.width + arrowLineWidth * 2, height: fontSize.height + arrowLineWidth), cornerRadius: arrowLineWidth * 2)
-            //tagPath.fill()
 
             tagLayer.path        = tagPath.cgPath
             tagLayer.fillColor   = fillColor.cgColor
-
             guideValueLayer.addSublayer(tagLayer)
-            
+            break
         case let .circle(color, show)://空心圆风格
 
             let circleLayer          = CAShapeLayer()
@@ -837,43 +831,31 @@ extension KSChartModel {
             let circleSize           = CGSize(width: circleWidth, height: circleWidth)
             let circlePath           = UIBezierPath(ovalIn: CGRect(origin: circlePoint, size: circleSize))
 
-            //fillColor.set()
-            //circlePath.stroke()
-            //
-            //self.section.backgroundColor.set()
-            //circlePath.fill()
-
             circleLayer.lineWidth    = self.lineWidth
             circleLayer.path         = circlePath.cgPath
             circleLayer.fillColor    = self.section.backgroundColor.cgColor
             circleLayer.strokeColor  = fillColor.cgColor
-
             guideValueLayer.addSublayer(circleLayer)
+            break
+            /*
         case let .line(color)://线风格
             let linePath          = UIBezierPath()
             let lineLayer         = CAShapeLayer()
             guideValueTextColor   = color
 
             let lineY             = point.y + arrowLineWidth * isUp * 2//point.y + arrowLineWidth * isUp - isUp * 4
-            //mmPointY              = lineY
             linePath.move(to: CGPoint(x: point.x + 2 * isLeft, y: lineY))
             linePath.addLine(to: CGPoint(x: point.x + arrowLineWidth * 3.5 * isLeft, y:lineY))
 
             lineLayer.path        = linePath.cgPath
             lineLayer.strokeColor = color.cgColor
-            guideValueLayer.addSublayer(lineLayer)
+            guideValueLayer.addSublayer(lineLayer)*/
         default:
             isShowValue = false
             break
         }
         
         if isShowValue {
-            
-            //let fontAttributes = [
-            //                NSFontAttributeName: section.labelFont,
-            //                NSForegroundColorAttributeName: guideValueTextColor
-            //                ] as [String : Any]
-
             //计算画文字的位置
             let point                 = CGPoint(x: maxPriceStartX, y: maxPriceStartY)
             //let point                 = CGPoint(x: maxPriceStartX, y: mmPointY - textSize.height/2)

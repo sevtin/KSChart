@@ -174,7 +174,7 @@ extension KSChartConfigure {
             showGuide: true,
             ultimateValueStyle: .arrow(UIColor(white: 0.8, alpha: 1)))
         priceSeries.showTitle = true
-        priceSeries.chartModels.first?.ultimateValueStyle = .line(UIColor(white: 0.8, alpha: 1))
+        priceSeries.chartModels.first?.ultimateValueStyle = .tag(UIColor(white: 0.8, alpha: 1))
         
         priceSection.series.append(timelineSeries)
         priceSection.series.append(priceSeries)
