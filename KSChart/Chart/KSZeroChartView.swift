@@ -198,11 +198,16 @@ class KSZeroChartView: KSKLineChartView {
                 self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
                 
                 self.showSelection = true
-                
+                if self.isCrosshair {
+                    self.sightView?.center     = CGPoint(x: hx, y: vy)
+                }
                 self.bringSubviewToFront(self.verticalLineView!)
                 self.bringSubviewToFront(self.horizontalLineView!)
                 self.bringSubviewToFront(self.selectedXAxisLabel!)
                 self.bringSubviewToFront(self.selectedYAxisLabel!)
+                if self.isCrosshair {
+                    self.bringSubviewToFront(self.sightView!)
+                }
 
                 //设置选中点
                 self.setSelectedByIndex(i)

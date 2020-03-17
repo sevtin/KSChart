@@ -264,11 +264,7 @@ class KSKLineChartView: UIView {
             self.isShowAll           = self.style.isShowAll
             self.showXAxisLabel      = self.style.showXAxisLabel
             self.borderWidth         = self.style.borderWidth
-            
-            self.verticalLineView?.backgroundColor   = self.style.crosshairColor
-            self.horizontalLineView?.backgroundColor = self.style.crosshairColor
-            self.sightView?.backgroundColor          = self.style.crosshairColor
-            
+
             minCandleCount           = range/2
             for section in sections {
                 for serie in section.series {
@@ -279,7 +275,7 @@ class KSKLineChartView: UIView {
                 }
             }
             
-            UpdateSelectedXYAxisLabel()
+            initViewState()
         }
     }
 
@@ -303,37 +299,26 @@ class KSKLineChartView: UIView {
 
         //初始化点击选择的辅助线显示
         self.verticalLineView                              = UIView(frame: CGRect(x: 0, y: 0, width: lineWidth, height: 0))
-        self.verticalLineView?.isHidden                    = true
         self.addSubview(self.verticalLineView!)
 
         self.horizontalLineView                            = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: lineWidth))
-        self.horizontalLineView?.isHidden                  = true
         self.addSubview(self.horizontalLineView!)
 
         //用户点击图表显示当前y轴的实际值
         self.selectedYAxisLabel                            = UILabel(frame: CGRect.zero)
-        self.selectedYAxisLabel?.backgroundColor           = self.selectedBGColor
-        self.selectedYAxisLabel?.isHidden                  = true
-        self.selectedYAxisLabel?.font                      = self.labelFont
         self.selectedYAxisLabel?.minimumScaleFactor        = 0.5
         self.selectedYAxisLabel?.lineBreakMode             = .byClipping
         self.selectedYAxisLabel?.adjustsFontSizeToFitWidth = true
-        self.selectedYAxisLabel?.textColor                 = self.selectedTextColor
         self.selectedYAxisLabel?.textAlignment             = NSTextAlignment.center
         self.addSubview(self.selectedYAxisLabel!)
 
         //用户点击图表显示当前x轴的实际值
         self.selectedXAxisLabel                            = UILabel(frame: CGRect.zero)
-        self.selectedXAxisLabel?.backgroundColor           = self.selectedBGColor
-        self.selectedXAxisLabel?.isHidden                  = true
-        self.selectedXAxisLabel?.font                      = self.labelFont
-        self.selectedXAxisLabel?.textColor                 = self.selectedTextColor
         self.selectedXAxisLabel?.textAlignment             = NSTextAlignment.center
         self.addSubview(self.selectedXAxisLabel!)
 
         self.sightView                                     = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 6))
         self.sightView?.backgroundColor                    = UIColor.white
-        self.sightView?.isHidden                           = true
         self.sightView?.layer.cornerRadius                 = 3
         self.addSubview(self.sightView!)
 
@@ -362,13 +347,25 @@ class KSKLineChartView: UIView {
         self.addGestureRecognizer(longPress)
     }
 
-    private func UpdateSelectedXYAxisLabel() {
+    private func initViewState() {
+
+        self.verticalLineView?.backgroundColor   = self.style.crosshairColor
+        self.horizontalLineView?.backgroundColor = self.style.crosshairColor
+        self.sightView?.backgroundColor          = self.style.crosshairColor
+        
         self.selectedYAxisLabel?.font            = self.labelFont
         self.selectedYAxisLabel?.backgroundColor = self.selectedBGColor
         self.selectedYAxisLabel?.textColor       = self.selectedTextColor
+
         self.selectedXAxisLabel?.font            = self.labelFont
         self.selectedXAxisLabel?.backgroundColor = self.selectedBGColor
         self.selectedXAxisLabel?.textColor       = self.selectedTextColor
+
+        self.verticalLineView?.isHidden          = true
+        self.horizontalLineView?.isHidden        = true
+        self.selectedYAxisLabel?.isHidden        = true
+        self.selectedXAxisLabel?.isHidden        = true
+        self.sightView?.isHidden                 = true
     }
     
     /*
@@ -614,9 +611,11 @@ class KSKLineChartView: UIView {
                 }
                 
                 self.selectedXAxisLabel?.frame = CGRect(x: x, y: showXAxisSection.frame.maxY, width: size.width  + 6, height: self.labelSize.height)
-
-                self.sightView?.center         = CGPoint(x: hx, y: vy)
-
+                
+                if self.isCrosshair {
+                    self.sightView?.center     = CGPoint(x: hx, y: vy)
+                }
+                
                 //给用户进行最后的自定义
                 self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
                 
@@ -626,7 +625,9 @@ class KSKLineChartView: UIView {
                 self.bringSubviewToFront(self.horizontalLineView!)
                 self.bringSubviewToFront(self.selectedXAxisLabel!)
                 self.bringSubviewToFront(self.selectedYAxisLabel!)
-                self.bringSubviewToFront(self.sightView!)
+                if self.isCrosshair {
+                    self.bringSubviewToFront(self.sightView!)
+                }
                 
                 //设置选中点
                 self.setSelectedByIndex(i)

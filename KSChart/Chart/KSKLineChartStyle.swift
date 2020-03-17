@@ -72,7 +72,7 @@ class KSKLineChartStyle {
     var showSelection: Bool        = true
     
     /// 是否显示准星
-    var isCrosshair:Bool          = false
+    var isCrosshair:Bool          = true
     
     /// 把X坐标内容显示到哪个索引分区上，默认为-1，表示最后一个，如果用户设置溢出的数值，也以最后一个
     var showXAxisOnSection: Int    = -1
