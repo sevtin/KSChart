@@ -13,7 +13,7 @@ enum KSIndexAlgorithm {
     case timeline //时分
     case ma(Int, Int, Int) //简单移动平均数
     case ema(Int, Int, Int) //指数移动平均数
-    case kdj //随机指标
+    case kdj(Int, Int, Int) //随机指标
     case macd(Int, Int, Int) //指数平滑异同平均线
     case boll(Int, Int) //布林线
     case rsi(Int, Int, Int) //RSI指标公式
@@ -32,11 +32,11 @@ class KSCalculator: NSObject {
             return ks_calculateMA(index: index, small: small, middle: middle, big: big, datas: datas)
         case let .ema(emaSmall, emaMiddle, emaBig):
             return ks_calculateEMA(index: index, emaSmall: emaSmall, emaMiddle: emaMiddle, emaBig: emaBig, datas: datas)
-        case .kdj:
-            return ks_calculateKDJ(index: index, datas: datas)
+        case let .kdj(rsvArg, kArg, dArg):
+            return ks_calculateKDJ(index: index, rsvArg: rsvArg, kArg: kArg, dArg: dArg, datas: datas)
         case let .macd(emaSmall, emaBig, dea):
             return ks_calculateMACD(from: index, emaSmall: emaSmall, emaBig: emaBig, dea: dea, datas: datas)
-        case let .boll(num,arg):
+        case let .boll(num, arg):
             return ks_calculateBOLL(index: index, num: num, arg: arg, datas: datas)
         case let .rsi(avgSmall, avgMiddle, avgBig):
             return ks_calculateRSI(index: index, avgSmall: CGFloat(avgSmall), avgMiddle: CGFloat(avgMiddle), avgBig: CGFloat(avgBig), datas: datas)
@@ -328,11 +328,9 @@ extension KSCalculator {
      @param index 结束的下标
      @param datas 需要处理的数据
      */
-    class func ks_calculateKDJ(index: Int, datas: [KSChartItem]) -> [KSChartItem] {
-        var index = index
-        
+    class func ks_calculateKDJ(index: Int, rsvArg: Int = 9, kArg: Int = 3, dArg: Int = 3, datas: [KSChartItem]) -> [KSChartItem] {
         if index > (datas.count - 1) {
-            index = datas.count - 1
+            return datas
         }
         
         if datas.count >= 1 {
@@ -342,8 +340,8 @@ extension KSCalculator {
                     data.k = 50.0
                     data.d = 50.0
                 } else {
-                    data.rsv = self.calculateRsv(endindex: i, datas: datas)
-                    self.calculateKD(index: i, datas: datas)
+                    data.rsv = self.calculateRsv(endindex: i, rsvArg: rsvArg, datas: datas)
+                    self.calculateKD(index: i, kArg: kArg, dArg: dArg, datas: datas)
                 }
                 data.j = (3.0 * data.k) - (2.0 * data.d)
                 
@@ -362,13 +360,11 @@ extension KSCalculator {
      @param datas 需要处理的数据
      @return 计算后的RSV9
      */
-    private class func calculateRsv(endindex: Int, datas: [KSChartItem]) -> CGFloat {
-        var result: CGFloat = 0.0
+    private class func calculateRsv(endindex: Int, rsvArg: Int = 9, datas: [KSChartItem]) -> CGFloat {
         var low             = CGFloat(MAXFLOAT)
         var high            = CGFloat(-MAXFLOAT)
-        var close: CGFloat  = 0.0
-        
-        var startIndex = endindex - (9 - 1)
+        let close: CGFloat  = datas[endindex].closePrice
+        var startIndex      = endindex - rsvArg
         if startIndex < 0 {
             startIndex = 0
         }
@@ -376,22 +372,16 @@ extension KSCalculator {
         var i = endindex
         while i >= startIndex {
             let tempModel = datas[i]
-            
             if tempModel.lowPrice < low {
                 low = tempModel.lowPrice
             }
-            
             if tempModel.highPrice > high {
                 high = tempModel.highPrice
-            }
-            
-            if i == endindex {
-                close = tempModel.closePrice
             }
             i -= 1
         }
         
-        result = (close - low) / (high - low) * 100.0
+        let result: CGFloat = (close - low) / (high - low) * 100.0
         return result.isNaN ? 0 : result
     }
     
@@ -401,11 +391,11 @@ extension KSCalculator {
      @param index 需要计算的模型的下标
      @param datas 需要处理的数据
      */
-    private class func calculateKD(index: Int, datas: [KSChartItem]) {
+    private class func calculateKD(index: Int, kArg: Int = 3, dArg: Int = 3, datas: [KSChartItem]) {
         let currentModel = datas[index]
         let lastModel    = datas[index - 1]
-        currentModel.k   = ((2.0 * lastModel.k) + currentModel.rsv) / 3.0
-        currentModel.d   = ((2.0 * lastModel.d) + currentModel.k) / 3.0
+        currentModel.k   = ((2.0 * lastModel.k) + currentModel.rsv) / CGFloat(kArg)
+        currentModel.d   = ((2.0 * lastModel.d) + currentModel.k) / CGFloat(dArg)
     }
 }
 

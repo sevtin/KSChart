@@ -106,7 +106,7 @@ extension KSChartConfigure {
                                          KSSeriesKey.volume: .none,
                                          KSSeriesKey.ma: .ma(5, 10, 30),
                                          KSSeriesKey.ema: .ema(7, 25, 99),
-                                         KSSeriesKey.kdj: .kdj,
+                                         KSSeriesKey.kdj: .kdj(9, 3, 3),
                                          KSSeriesKey.macd: .macd(12, 26, 9),
                                          KSSeriesKey.boll: .boll(20, 2),
                                          KSSeriesKey.rsi: .rsi(6, 12, 24),
