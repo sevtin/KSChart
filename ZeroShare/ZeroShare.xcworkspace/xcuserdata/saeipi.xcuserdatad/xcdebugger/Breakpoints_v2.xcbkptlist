@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7461CF89-23BC-43D8-9A1C-8BC73AE4A9A0"
+            uuid = "C2AD2AB1-5D32-48D6-8D1B-33D4F54DF26B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../KSChart/Chart/KSKLineChart.swift"
+            filePath = "../KSChart/Chart/KSCalculator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "616"
-            endingLineNumber = "616"
-            landmarkName = "setSelectedIndexByPoint(_:)"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "ks_calculateKDJ(index:rsvArg:kArg:dArg:datas:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

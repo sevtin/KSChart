@@ -364,11 +364,21 @@ extension KSCalculator {
         var low             = CGFloat(MAXFLOAT)
         var high            = CGFloat(-MAXFLOAT)
         let close: CGFloat  = datas[endindex].closePrice
-        var startIndex      = endindex - rsvArg
+
+        var startIndex      = endindex - (rsvArg - 1)
         if startIndex < 0 {
             startIndex = 0
         }
-        
+        for index in startIndex...endindex {
+            let tempModel = datas[index]
+            if tempModel.lowPrice < low {
+                low = tempModel.lowPrice
+            }
+            if tempModel.highPrice > high {
+                high = tempModel.highPrice
+            }
+        }
+        /*
         var i = endindex
         while i >= startIndex {
             let tempModel = datas[i]
@@ -379,8 +389,7 @@ extension KSCalculator {
                 high = tempModel.highPrice
             }
             i -= 1
-        }
-        
+        }*/
         let result: CGFloat = (close - low) / (high - low) * 100.0
         return result.isNaN ? 0 : result
     }

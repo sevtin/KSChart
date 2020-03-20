@@ -118,6 +118,7 @@
 		E6AB6E7B238BEA5900C9BCF3 /* Double+KSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E63238BEA5900C9BCF3 /* Double+KSExtensions.swift */; };
 		E6AB6E7C238BEA5900C9BCF3 /* String+KSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E64238BEA5900C9BCF3 /* String+KSExtensions.swift */; };
 		E6AB6E7D238BEA5900C9BCF3 /* UIColor+KSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E65238BEA5900C9BCF3 /* UIColor+KSExtensions.swift */; };
+		E6CF4D112423A1580029E29F /* 3songshu.txt in Resources */ = {isa = PBXBuildFile; fileRef = E6CF4D102423A1580029E29F /* 3songshu.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -242,6 +243,7 @@
 		E6AB6E63238BEA5900C9BCF3 /* Double+KSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+KSExtensions.swift"; sourceTree = "<group>"; };
 		E6AB6E64238BEA5900C9BCF3 /* String+KSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+KSExtensions.swift"; sourceTree = "<group>"; };
 		E6AB6E65238BEA5900C9BCF3 /* UIColor+KSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KSExtensions.swift"; sourceTree = "<group>"; };
+		E6CF4D102423A1580029E29F /* 3songshu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3songshu.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -749,6 +751,7 @@
 		E61E92E42338F46300184885 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				E6CF4D102423A1580029E29F /* 3songshu.txt */,
 				E61E92E52338F46300184885 /* candles.txt */,
 				E61E92E62338F46300184885 /* depth.json */,
 				E61E92E72338F46300184885 /* ethbtc.txt */,
@@ -966,6 +969,7 @@
 				E61E92F42338F46300184885 /* ethbtc.txt in Resources */,
 				E61E92F62338F46300184885 /* kLineForDay.json in Resources */,
 				E61E92FE2338F46300184885 /* wonbtctrade.txt in Resources */,
+				E6CF4D112423A1580029E29F /* 3songshu.txt in Resources */,
 				E61E91C92338EE7D00184885 /* Assets.xcassets in Resources */,
 				E61E92F82338F46300184885 /* orderbook.txt in Resources */,
 				E61E92FD2338F46300184885 /* wonbtc_kline.txt in Resources */,
