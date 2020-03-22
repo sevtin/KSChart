@@ -40,3 +40,5 @@ class KSKChartView: KSBaseView {
     ......
 }
 ```
+## Next Version
+进一步优化CUP占用率
