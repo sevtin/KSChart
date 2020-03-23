@@ -35,8 +35,8 @@ class KSKChartView: KSBaseView {
     }
     
     func resetChart(datas: [KSChartItem]) {
-        chartView.selectedIndex = -1
-        klineData               = datas
+        chartView.pref.selectedIndex = -1
+        klineData                    = datas
     }
 }
 

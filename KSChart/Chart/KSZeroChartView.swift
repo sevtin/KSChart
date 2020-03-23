@@ -18,10 +18,10 @@ class KSZeroChartView: KSKLineChartView {
             return
         }
         //如果不在区间内return
-        guard index >= self.rangeFrom && index < self.rangeTo else {
+        guard index >= self.pref.rangeFrom && index < self.pref.rangeTo else {
             return
         }
-        self.selectedIndex = index
+        self.pref.selectedIndex = index
         let item           = self.datas[index]
         //回调给代理委托方法
         self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
@@ -32,7 +32,7 @@ class KSZeroChartView: KSKLineChartView {
     /// - Parameter sender: 手势
     override func doPanAction(_ sender: UIPanGestureRecognizer) {
         //防止数量较少时,显示异常
-        if self.plotCount < self.minCandleCount {
+        if self.pref.plotCount < self.pref.minCandleCount {
             return
         }
         super.doPanAction(sender)
@@ -47,7 +47,7 @@ class KSZeroChartView: KSKLineChartView {
         
         self.buildSections {(section, index) in
             //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
-            section.drawCustomTitle(self.selectedIndex)
+            section.drawCustomTitle(self.pref.selectedIndex)
         }
         
         switch sender.state {
@@ -62,7 +62,7 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter sender: 手势
     @objc override func doPinchAction(_ sender: UIPinchGestureRecognizer) {
-        if self.plotCount < self.minCandleCount {
+        if self.pref.plotCount < self.pref.minCandleCount {
             return
         }
         super.doPinchAction(sender)
@@ -76,7 +76,7 @@ class KSZeroChartView: KSKLineChartView {
         if !serie.hidden {
             //循环画出每个模型的线
             for model in serie.chartModels {
-                let serieLayer = model.drawSerie(self.rangeFrom, endIndex: self.rangeTo)
+                let serieLayer = model.drawSerie(self.pref.rangeFrom, endIndex: self.pref.rangeTo)
                 serie.seriesLayer.addSublayer(serieLayer)
             }
         }
@@ -101,13 +101,13 @@ class KSZeroChartView: KSKLineChartView {
             return
         }
         
-        let visiableSections = self.sections.filter { !$0.hidden }
+        let visiableSections = self.style.sections.filter { !$0.hidden }
         guard let lastSection = visiableSections.last else {
             return
         }
         
         let showXAxisSection                     = self.getSecionWhichShowXAxis()
-        self.selectedPoint                       = point
+        self.pref.selectedPoint                       = point
         
         //每个点的宽度
         let plotWidth                            = self.latticeWidth(section: section!)
@@ -116,27 +116,27 @@ class KSZeroChartView: KSKLineChartView {
         let isLeft                               = point.x < (self.frame.width / 2)
         let horizontalValueWidth: CGFloat        = 60
         let offsetX: CGFloat                     = 5
-        for i in self.rangeFrom...self.rangeTo - 1 {
+        for i in self.pref.rangeFrom...self.pref.rangeTo - 1 {
             //每个点的宽度 * index + 内视图左边偏移 + 自身左边偏移
-            let ixs = plotWidth * CGFloat(i - self.rangeFrom) + section!.padding.left + self.padding.left
-            let ixe = plotWidth * CGFloat(i - self.rangeFrom + 1) + section!.padding.left + self.padding.left
+            let ixs = plotWidth * CGFloat(i - self.pref.rangeFrom) + section!.padding.left + self.style.padding.left
+            let ixe = plotWidth * CGFloat(i - self.pref.rangeFrom + 1) + section!.padding.left + self.style.padding.left
 
             //点在区间内
             if ixs <= point.x && point.x < ixe {
-                self.selectedIndex             = i
+                self.pref.selectedIndex             = i
                 let item                       = self.datas[i]
                 var hx                         = section!.frame.origin.x + section!.padding.left
-                hx                             = hx + plotWidth * CGFloat(i - self.rangeFrom) + plotWidth / 2
-                let hy                         = self.padding.top
+                hx                             = hx + plotWidth * CGFloat(i - self.pref.rangeFrom) + plotWidth / 2
+                let hy                         = self.style.padding.top
                 let hheight                    = lastSection.frame.maxY
                 //显示辅助线
-                self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: self.lineWidth, height: hheight - hy)
+                self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: self.pref.lineWidth, height: hheight - hy)
 
                 let vx                         = section!.frame.origin.x + section!.padding.left
                 var vy: CGFloat                = 0
                 
                 //处理水平线y的值
-                switch self.selectedPosition {
+                switch self.pref.selectedPosition {
                 case .free:
                     vy = point.y
                     yVal = section!.getRawValue(point.y) //获取y轴坐标的实际值
@@ -156,7 +156,7 @@ class KSZeroChartView: KSKLineChartView {
                 }
                 let hwidth                   = section!.frame.size.width - section!.padding.left - section!.padding.right
                 //显示辅助线
-                self.verticalLineView?.frame = CGRect(x: vx, y: vy - self.lineWidth / 2, width: hwidth, height: self.lineWidth)
+                self.verticalLineView?.frame = CGRect(x: vx, y: vy - self.pref.lineWidth / 2, width: hwidth, height: self.pref.lineWidth)
 
                 //显示y轴辅助内容
                 //控制y轴的label在左还是右显示
@@ -179,7 +179,7 @@ class KSZeroChartView: KSKLineChartView {
                 
                 let dateFormat                = self.delegate?.kLineChart?(chart: self, labelOnXAxisForIndex: i) ?? "MM-dd HH:mm"
                 let time                      = Date.ks_getTimeByStamp(item.time, format: dateFormat)//显示时间
-                let size                      = time.ks_sizeWithConstrained(self.labelFont)
+                let size                      = time.ks_sizeWithConstrained(self.style.labelFont)
                 self.selectedXAxisLabel?.text = time
 
                 //判断x是否超过左右边界
@@ -198,14 +198,14 @@ class KSZeroChartView: KSKLineChartView {
                 self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
                 
                 self.showSelection = true
-                if self.isCrosshair {
+                if self.pref.isCrosshair {
                     self.sightView?.center     = CGPoint(x: hx, y: vy)
                 }
                 self.bringSubviewToFront(self.verticalLineView!)
                 self.bringSubviewToFront(self.horizontalLineView!)
                 self.bringSubviewToFront(self.selectedXAxisLabel!)
                 self.bringSubviewToFront(self.selectedYAxisLabel!)
-                if self.isCrosshair {
+                if self.pref.isCrosshair {
                     self.bringSubviewToFront(self.sightView!)
                 }
 
@@ -245,9 +245,7 @@ class KSZeroChartView: KSKLineChartView {
                 //绘制每个区域
                 self.drawSection(section)//[绘制每个区域顶部区域]
                 
-                //绘制X轴坐标系，先绘制辅助线，记录标签位置
-                //返回出来，最后才在需要显示的分区上绘制
-                xAxisToDraw = self.drawXAxis(section)//[绘制最底部时间]
+                xAxisToDraw = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
 
                 //绘制图表的点线
                 self.drawChart(section)//[--- 绘制每个区域主视图(绘制K线/均价曲线/成交量/指数指标) ---]
@@ -258,10 +256,10 @@ class KSZeroChartView: KSKLineChartView {
                 //绘制顶部指标
                 if self.showSelection == false {
                     if self.datas.count > 0 {
-                        self.selectedIndex = self.datas.count - 1
+                        self.pref.selectedIndex = self.datas.count - 1
                     }
                 }
-                section.drawCustomTitle(self.selectedIndex)
+                section.drawCustomTitle(self.pref.selectedIndex)
             }
             
             let showXAxisSection = self.getSecionWhichShowXAxis()

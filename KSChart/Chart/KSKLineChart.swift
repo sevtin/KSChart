@@ -122,8 +122,7 @@ enum KSSelectedPosition {
     @objc optional func kLineChartTapAction(chart: KSKLineChartView)
 }
 
-class KSKLineChartView: UIView {
-    
+struct KSChartPref {
     /// MARK: - 常量
     let kMinRange                            = 16//最小缩放范围
     let kMaxRange                            = 128//最大缩放范围
@@ -135,31 +134,55 @@ class KSKLineChartView: UIView {
     var fixedWidth: CGFloat                  = 10//小于最小蜡烛图数量，蜡烛的宽度
     var fixedGrid: Int                       = 2//最小格子数
 
-    /// MARK: - 成员变量
-    var upColor: UIColor                     = UIColor.green//升的颜色
-    var downColor: UIColor                   = UIColor.red//跌的颜色
-    var labelFont                            = UIFont.systemFont(ofSize: 10)
-    var lineColor: UIColor                   = UIColor(white: 0.2, alpha: 1)//线条颜色
-    var textColor: UIColor                   = UIColor(white: 0.8, alpha: 1)//文字颜色
     var xAxisPerInterval: Int                = 4//x轴的间断个数
-
     var yAxisLabelWidth: CGFloat             = 0//Y轴的宽度
-    var padding: UIEdgeInsets                = UIEdgeInsets.zero//内边距
-    var showYAxisLabel                       = KSYAxisShowPosition.right//显示y的位置，默认右边
-    var isInnerYAxis: Bool                   = false// 是否把y坐标内嵌到图表中
+
     var selectedPosition: KSSelectedPosition = .onClosePrice//选中显示y值的位置
 
-    open weak var delegate: KSKLineChartDelegate? //代理
-
-    var sections                             = [KSSection]()//分区样式Demo中N个样式，分别是主图/附图1/附图2
     var selectedIndex: Int                   = -1//选择单个点的索引
     var scrollToPosition: KSScrollPosition   = .none//图表刷新后开始显示位置
     var selectedPoint: CGPoint               = CGPoint.zero
 
-    //是否可缩放
-    var enablePinch: Bool                    = true
-    //是否可滑动
-    var enablePan: Bool                      = true
+    var lineWidth: CGFloat                   = 0.5
+    var plotCount: Int                       = 0//所有蜡烛图的个数
+    var rangeFrom: Int                       = 0//可见区域的开始索引位
+    var rangeTo: Int                         = 0//可见区域的结束索引位
+    var range: Int                           = 60//显示在可见区域的个数
+
+    //减速开始x
+    var decelerationStartX: CGFloat          = 0
+
+    var isCrosshair: Bool                    = false//是否显示准星
+}
+
+class KSKLineChartView: UIView {
+    var pref: KSChartPref                = KSChartPref()//偏好设置
+    open weak var delegate: KSKLineChartDelegate? //代理
+    /// MARK: - 成员变量
+    var upColor: UIColor                 = UIColor.green//升的颜色
+    var downColor: UIColor               = UIColor.red//跌的颜色
+    var borderColor: UIColor             = UIColor.gray
+    var labelSize                        = CGSize(width: 40, height: 16)
+    var datas: [KSChartItem]             = [KSChartItem]()//数据源
+   
+    //动力学引擎
+    lazy var animator: UIDynamicAnimator = UIDynamicAnimator(referenceView: self)
+    //动力的作用点
+    lazy var dynamicItem                 = KSDynamicItem()
+    //滚动图表时用于处理线性减速
+    weak var decelerationBehavior: UIDynamicItemBehavior?
+
+    /// 用于图表的图层
+    var drawLayer: KSShapeLayer          = KSShapeLayer()
+    /// 格子图层
+    var gridLayer: KSShapeLayer          = KSShapeLayer()
+
+    var verticalLineView: UIView?
+    var horizontalLineView: UIView?
+    var selectedXAxisLabel: UILabel?
+    var selectedYAxisLabel: UILabel?
+    var sightView: UIView?//点击出现的准星
+    
     //是否可点选
     var enableTap: Bool = true {
         didSet {
@@ -174,7 +197,7 @@ class KSKLineChartView: UIView {
             self.selectedYAxisLabel?.isHidden = !self.showSelection
             self.verticalLineView?.isHidden   = !self.showSelection
             self.horizontalLineView?.isHidden = !self.showSelection
-            if isCrosshair {
+            if pref.isCrosshair {
                 self.sightView?.isHidden      = !self.showSelection
             }
             else{
@@ -183,99 +206,70 @@ class KSKLineChartView: UIView {
         }
     }
     
-    /// 把X坐标内容显示到哪个索引分区上，默认为-1，表示最后一个，如果用户设置溢出的数值，也以最后一个
-    var showXAxisOnSection: Int = -1
-
-    /// 是否显示X轴标签
-    var showXAxisLabel: Bool    = true
-
-    /// 是否显示所有内容
-    var isShowAll: Bool         = false
-    
-    /// 显示边线上左下有
-    var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
-    
-    var lineWidth: CGFloat               = 0.5
-    var plotCount: Int                   = 0//所有蜡烛图的个数
-    var rangeFrom: Int                   = 0//可见区域的开始索引位
-    var rangeTo: Int                     = 0//可见区域的结束索引位
-    var range: Int                       = 60//显示在可见区域的个数
-    var borderColor: UIColor             = UIColor.gray
-    var labelSize                        = CGSize(width: 40, height: 16)
-
-    var datas: [KSChartItem]             = [KSChartItem]()//数据源,不能直接赋值，后面会被清空
-
-    var selectedBGColor: UIColor         = UIColor(white: 0.4, alpha: 1)//选中点的显示的框背景颜色
-    var selectedTextColor: UIColor       = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//选中点的显示的文字颜色
-    var verticalLineView: UIView?
-    var horizontalLineView: UIView?
-    var selectedXAxisLabel: UILabel?
-    var selectedYAxisLabel: UILabel?
-    var sightView: UIView?//点击出现的准星
-    var isCrosshair:Bool                 = false//是否显示准星
-
-    //动力学引擎
-    lazy var animator: UIDynamicAnimator = UIDynamicAnimator(referenceView: self)
-
-    //动力的作用点
-    lazy var dynamicItem                 = KSDynamicItem()
-
-    //滚动图表时用于处理线性减速
-    weak var decelerationBehavior: UIDynamicItemBehavior?
-
-    //滚动释放后用于反弹回来
-    //weak var springBehavior: UIAttachmentBehavior?
-
-    //减速开始x
-    var decelerationStartX: CGFloat      = 0
-
-    /// 用于图表的图层
-    var drawLayer: KSShapeLayer          = KSShapeLayer()
-    
-    /// 格子图层
-    var gridLayer: KSShapeLayer          = KSShapeLayer()
-
-    /// 技术指标名称:算法
-    var chartTais: [String: KSIndexAlgorithm]!
-    
     var style: KSKLineChartStyle! {           //显示样式
         didSet {
             assert(self.style.chartTais != nil, "chartTais 不能为nil")
             //重新配置样式
-            self.sections            = self.style.sections
-            self.chartTais           = self.style.chartTais
-            self.padding             = self.style.padding
-            self.lineColor           = self.style.lineColor
-            self.textColor           = self.style.textColor
-            self.labelFont           = self.style.labelFont
-            self.showYAxisLabel      = self.style.showYAxisLabel
-            self.selectedBGColor     = self.style.selectedBGColor
-            self.selectedTextColor   = self.style.selectedTextColor
-            self.isInnerYAxis        = self.style.isInnerYAxis
+            //self.sections            = self.style.sections
+            //self.chartTais           = self.style.chartTais
+            //self.padding             = self.style.padding
+            //self.lineColor           = self.style.lineColor
+            //self.textColor           = self.style.textColor
+            //self.labelFont           = self.style.labelFont
+            //self.showYAxisLabel      = self.style.showYAxisLabel
+            //self.selectedBGColor     = self.style.selectedBGColor
+            //self.selectedTextColor   = self.style.selectedTextColor
+            //self.isInnerYAxis        = self.style.isInnerYAxis
             self.enableTap           = self.style.enableTap
-            self.enablePinch         = self.style.enablePinch
-            self.enablePan           = self.style.enablePan
-            self.isCrosshair         = self.style.isCrosshair
+            //self.enablePinch         = self.style.enablePinch
+            //self.enablePan           = self.style.enablePan
+            self.pref.isCrosshair    = self.style.isCrosshair
             self.showSelection       = self.style.showSelection
-            self.showXAxisOnSection  = self.style.showXAxisOnSection
-            self.isShowAll           = self.style.isShowAll
-            self.showXAxisLabel      = self.style.showXAxisLabel
-            self.borderWidth         = self.style.borderWidth
+            //self.showXAxisOnSection  = self.style.showXAxisOnSection
+            //self.isShowAll           = self.style.isShowAll
+            //self.showXAxisLabel      = self.style.showXAxisLabel
+            //self.borderWidth         = self.style.borderWidth
 
-            minCandleCount           = range/2
-            for section in sections {
+            self.pref.minCandleCount           = self.pref.range/2
+            for section in self.style.sections {
                 for serie in section.series {
                     for model in serie.chartModels {
-                        model.minCandleCount = minCandleCount
-                        model.fixedWidth     = fixedWidth
+                        model.minCandleCount = self.pref.minCandleCount
+                        model.fixedWidth     = self.pref.fixedWidth
                     }
                 }
             }
-            
             initViewState()
         }
     }
-
+    /*
+    var labelFont = UIFont.systemFont(ofSize: 10)
+    var lineColor: UIColor = UIColor(white: 0.2, alpha: 1)//线条颜色
+    var textColor: UIColor = UIColor(white: 0.8, alpha: 1)//文字颜色
+    var padding: UIEdgeInsets = UIEdgeInsets.zero//内边距
+    var showYAxisLabel = KSYAxisShowPosition.right//显示y的位置，默认右边
+    var isInnerYAxis: Bool = false// 是否把y坐标内嵌到图表中
+    var sections = [KSSection]()//分区样式Demo中N个样式，分别是主图/附图1/附图2
+    //是否可缩放
+    var enablePinch: Bool = true
+    //是否可滑动
+    var enablePan: Bool = true
+    //把X坐标内容显示到哪个索引分区上，默认为-1，表示最后一个，如果用户设置溢出的数值，也以最后一个
+    var showXAxisOnSection: Int = -1
+    //是否显示X轴标签
+    var showXAxisLabel: Bool = true
+    //是否显示所有内容
+    var isShowAll: Bool = false
+    //显示边线上左下有
+    var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
+    var selectedBGColor: UIColor = UIColor(white: 0.4, alpha: 1)//选中点的显示的框背景颜色
+    var selectedTextColor: UIColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//选中点的显示的文字颜色
+    //滚动释放后用于反弹回来
+    weak var springBehavior: UIAttachmentBehavior?
+    // 技术指标名称:算法
+    var chartTais: [String: KSIndexAlgorithm]!
+    */
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initializeKit()
@@ -295,10 +289,10 @@ class KSKLineChartView: UIView {
         self.isMultipleTouchEnabled                        = true
 
         //初始化点击选择的辅助线显示
-        self.verticalLineView                              = UIView(frame: CGRect(x: 0, y: 0, width: lineWidth, height: 0))
+        self.verticalLineView                              = UIView(frame: CGRect(x: 0, y: 0, width: self.pref.lineWidth, height: 0))
         self.addSubview(self.verticalLineView!)
 
-        self.horizontalLineView                            = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: lineWidth))
+        self.horizontalLineView                            = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: self.pref.lineWidth))
         self.addSubview(self.horizontalLineView!)
 
         //用户点击图表显示当前y轴的实际值
@@ -349,13 +343,13 @@ class KSKLineChartView: UIView {
         self.horizontalLineView?.backgroundColor = self.style.crosshairColor
         self.sightView?.backgroundColor          = self.style.crosshairColor
 
-        self.selectedYAxisLabel?.font            = self.labelFont
-        self.selectedYAxisLabel?.backgroundColor = self.selectedBGColor
-        self.selectedYAxisLabel?.textColor       = self.selectedTextColor
+        self.selectedYAxisLabel?.font            = self.style.labelFont
+        self.selectedYAxisLabel?.backgroundColor = self.style.selectedBGColor
+        self.selectedYAxisLabel?.textColor       = self.style.selectedTextColor
 
-        self.selectedXAxisLabel?.font            = self.labelFont
-        self.selectedXAxisLabel?.backgroundColor = self.selectedBGColor
-        self.selectedXAxisLabel?.textColor       = self.selectedTextColor
+        self.selectedXAxisLabel?.font            = self.style.labelFont
+        self.selectedXAxisLabel?.backgroundColor = self.style.selectedBGColor
+        self.selectedXAxisLabel?.textColor       = self.style.selectedTextColor
 
         self.verticalLineView?.isHidden          = true
         self.horizontalLineView?.isHidden        = true
@@ -373,13 +367,13 @@ class KSKLineChartView: UIView {
     */
     
     public func scrollPositionEnd() -> Bool {
-        if self.rangeTo == 0 || self.plotCount < self.range {
+        if self.pref.rangeTo == 0 || self.pref.plotCount < self.pref.range {
             return true
         }
-        if self.rangeTo >= self.plotCount {
+        if self.pref.rangeTo >= self.pref.plotCount {
             return true
         }
-        if (self.rangeFrom + self.range + 1) >= self.plotCount {
+        if (self.pref.rangeFrom + self.pref.range + 1) >= self.pref.plotCount {
             return true
         }
         return false
@@ -393,7 +387,7 @@ class KSKLineChartView: UIView {
             return
         }
         
-        self.plotCount = self.datas.count
+        self.pref.plotCount = self.datas.count
         self.datas     = myDatas
         var index: Int = 0
         if isAll == false {
@@ -402,8 +396,8 @@ class KSKLineChartView: UIView {
                 index = 0
             }
         }
-        for section in self.sections {
-            _ = KSCalculator.ks_calculator(algorithm: chartTais[section.tai] ?? KSIndexAlgorithm.none, index: index, datas: self.datas)
+        for section in self.style.sections {
+            _ = KSCalculator.ks_calculator(algorithm: self.style.chartTais[section.tai] ?? KSIndexAlgorithm.none, index: index, datas: self.datas)
         }
     }
 
@@ -416,12 +410,12 @@ class KSKLineChartView: UIView {
     func refreshChart(isAll: Bool = true, isDraw: Bool = true, isChangeTai: Bool = false) {
         self.calculatorTai(isAll: isAll)
         if isDraw {
-            self.scrollToPosition = self.scrollPositionEnd() ? .end : .none
+            self.pref.scrollToPosition = self.scrollPositionEnd() ? .end : .none
             if isChangeTai {
                 self.drawLayerView()
             }
             else{
-                if self.scrollToPosition == .end {
+                if self.pref.scrollToPosition == .end {
                     self.drawLayerView()
                 }
             }
@@ -430,10 +424,10 @@ class KSKLineChartView: UIView {
     
     /// 通过key隐藏或显示线系列
     func updateSerie(hidden: Bool, key: String, isMasterCandle: Bool, index: Int = 0) {
-        if index >= self.sections.count {
+        if index >= self.style.sections.count {
             return
         }
-        let section = self.sections[index]
+        let section = self.style.sections[index]
         section.updateTai(_tai: key)
         
         for serie in section.series {
@@ -454,8 +448,8 @@ class KSKLineChartView: UIView {
     /// - Parameter point: 点击坐标
     /// - Returns: 返回section和索引位
     func getSectionByTouchPoint(_ point: CGPoint) -> (Int, KSSection?) {
-        //self.sections 分区样式，Demo中3个样式，分别是k线/成交量/技术指标
-        for (i, section) in self.sections.enumerated() {
+        //self.style.sections 分区样式，Demo中3个样式，分别是k线/成交量/技术指标
+        for (i, section) in self.style.sections.enumerated() {
             if section.frame.contains(point) {
                 return (i, section)
             }
@@ -468,11 +462,11 @@ class KSKLineChartView: UIView {
     /// - Returns:
     func getSecionWhichShowXAxis() -> KSSection {
         //数组(Array)过滤器(filter)
-        let visiableSection = self.sections.filter { !$0.hidden }
+        let visiableSection = self.style.sections.filter { !$0.hidden }
         var showSection: KSSection?
         for (i, section) in visiableSection.enumerated() {
             //用户自定义显示X轴的分区
-            if section.index == self.showXAxisOnSection {
+            if section.index == self.style.showXAxisOnSection {
                 showSection = section
             }
             //如果最后都没有找到，取最后一个做显示
@@ -484,10 +478,10 @@ class KSKLineChartView: UIView {
     }
     
     func latticeWidth(section: KSSection) -> CGFloat {
-        if self.datas.count < minCandleCount {
-            return fixedWidth
+        if self.datas.count < self.pref.minCandleCount {
+            return self.pref.fixedWidth
         }
-        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
+        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.pref.rangeTo - self.pref.rangeFrom)
         return plotWidth
     }
     
@@ -508,7 +502,7 @@ class KSKLineChartView: UIView {
             return
         }
         
-        let visiableSections = self.sections.filter { !$0.hidden }
+        let visiableSections = self.style.sections.filter { !$0.hidden }
         guard let lastSection = visiableSections.last else {
             return
         }
@@ -516,45 +510,45 @@ class KSKLineChartView: UIView {
         let showXAxisSection                     = self.getSecionWhichShowXAxis()
 
         //重置文字颜色和字体
-        self.selectedYAxisLabel?.font            = self.labelFont
-        self.selectedYAxisLabel?.backgroundColor = self.selectedBGColor
-        self.selectedYAxisLabel?.textColor       = self.selectedTextColor
-        self.selectedXAxisLabel?.font            = self.labelFont
-        self.selectedXAxisLabel?.backgroundColor = self.selectedBGColor
-        self.selectedXAxisLabel?.textColor       = self.selectedTextColor
+        self.selectedYAxisLabel?.font            = self.style.labelFont
+        self.selectedYAxisLabel?.backgroundColor = self.style.selectedBGColor
+        self.selectedYAxisLabel?.textColor       = self.style.selectedTextColor
+        self.selectedXAxisLabel?.font            = self.style.labelFont
+        self.selectedXAxisLabel?.backgroundColor = self.style.selectedBGColor
+        self.selectedXAxisLabel?.textColor       = self.style.selectedTextColor
 
         let yaxis                                = section!.yAxis
         let format                               = "%.".appendingFormat("%df", yaxis.decimal)
 
-        self.selectedPoint                       = point
+        self.pref.selectedPoint                  = point
 
         //每个点的宽度
         let plotWidth                            = latticeWidth(section: section!)// (section!.frame.size.width - section!.padding.left - section!.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
 
         var yVal: CGFloat                        = 0//获取y轴坐标的实际值
         
-        for i in self.rangeFrom...self.rangeTo - 1 {
+        for i in self.pref.rangeFrom...self.pref.rangeTo - 1 {
             //每个点的宽度 * index + 内视图左边偏移 + 自身左边偏移
-            let ixs = plotWidth * CGFloat(i - self.rangeFrom) + section!.padding.left + self.padding.left
-            let ixe = plotWidth * CGFloat(i - self.rangeFrom + 1) + section!.padding.left + self.padding.left
+            let ixs = plotWidth * CGFloat(i - self.pref.rangeFrom) + section!.padding.left + self.style.padding.left
+            let ixe = plotWidth * CGFloat(i - self.pref.rangeFrom + 1) + section!.padding.left + self.style.padding.left
 
             //点在区间内
             if ixs <= point.x && point.x < ixe {
-                self.selectedIndex             = i
+                self.pref.selectedIndex             = i
                 let item                       = self.datas[i]
                 var hx                         = section!.frame.origin.x + section!.padding.left
-                hx                             = hx + plotWidth * CGFloat(i - self.rangeFrom) + plotWidth / 2
-                let hy                         = self.padding.top
+                hx                             = hx + plotWidth * CGFloat(i - self.pref.rangeFrom) + plotWidth / 2
+                let hy                         = self.style.padding.top
                 let hheight                    = lastSection.frame.maxY
                 //显示辅助线
-                self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: self.lineWidth, height: hheight - hy)
+                self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: self.pref.lineWidth, height: hheight - hy)
                 //self.horizontalLineView?.isHidden = false
 
                 let vx                         = section!.frame.origin.x + section!.padding.left
                 var vy: CGFloat                = 0
                 
                 //处理水平线y的值
-                switch self.selectedPosition {
+                switch self.pref.selectedPosition {
                 case .free:
                     vy = point.y
                     yVal = section!.getRawValue(point.y) //获取y轴坐标的实际值
@@ -574,7 +568,7 @@ class KSKLineChartView: UIView {
                 }
                 let hwidth = section!.frame.size.width - section!.padding.left - section!.padding.right
                 //显示辅助线
-                self.verticalLineView?.frame = CGRect(x: vx, y: vy - self.lineWidth / 2, width: hwidth, height: self.lineWidth)
+                self.verticalLineView?.frame = CGRect(x: vx, y: vy - self.pref.lineWidth / 2, width: hwidth, height: self.pref.lineWidth)
                 //self.verticalLineView?.isHidden = false
                 
                 //显示y轴辅助内容
@@ -582,18 +576,18 @@ class KSKLineChartView: UIView {
                 var yAxisStartX: CGFloat = 0
                 //self.selectedYAxisLabel?.isHidden = false
                 //self.selectedXAxisLabel?.isHidden = false
-                switch self.showYAxisLabel {
+                switch self.style.showYAxisLabel {
                 case .left:
                     yAxisStartX = section!.frame.origin.x
                 case .right:
-                    yAxisStartX = section!.frame.maxX - self.yAxisLabelWidth
+                    yAxisStartX = section!.frame.maxX - self.pref.yAxisLabelWidth
                 case .none:
                     self.selectedYAxisLabel?.isHidden = true
                 }
                 self.selectedYAxisLabel?.text  = String(format: format, yVal)//显示实际值
-                self.selectedYAxisLabel?.frame = CGRect(x: yAxisStartX, y: vy - self.labelSize.height / 2, width: self.yAxisLabelWidth, height: self.labelSize.height)
+                self.selectedYAxisLabel?.frame = CGRect(x: yAxisStartX, y: vy - self.labelSize.height / 2, width: self.pref.yAxisLabelWidth, height: self.labelSize.height)
                 let time                       = Date.ks_getTimeByStamp(item.time, format: "yyyy-MM-dd HH:mm")//显示实际值
-                let size                       = time.ks_sizeWithConstrained(self.labelFont)
+                let size                       = time.ks_sizeWithConstrained(self.style.labelFont)
                 self.selectedXAxisLabel?.text  = time
 
                 //判断x是否超过左右边界
@@ -608,7 +602,7 @@ class KSKLineChartView: UIView {
                 
                 self.selectedXAxisLabel?.frame = CGRect(x: x, y: showXAxisSection.frame.maxY, width: size.width  + 6, height: self.labelSize.height)
                 
-                if self.isCrosshair {
+                if self.pref.isCrosshair {
                     self.sightView?.center     = CGPoint(x: hx, y: vy)
                 }
                 
@@ -621,7 +615,7 @@ class KSKLineChartView: UIView {
                 self.bringSubviewToFront(self.horizontalLineView!)
                 self.bringSubviewToFront(self.selectedXAxisLabel!)
                 self.bringSubviewToFront(self.selectedYAxisLabel!)
-                if self.isCrosshair {
+                if self.pref.isCrosshair {
                     self.bringSubviewToFront(self.sightView!)
                 }
                 
@@ -642,15 +636,15 @@ class KSKLineChartView: UIView {
         }
         
         //如果不在区间内return
-        guard index >= self.rangeFrom && index < self.rangeTo else {
+        guard index >= self.pref.rangeFrom && index < self.pref.rangeTo else {
             return
         }
         
-        self.selectedIndex = index
+        self.pref.selectedIndex = index
         let item           = self.datas[index]
 
         //显示分区的header标题
-        for (_, section) in self.sections.enumerated() {
+        for (_, section) in self.style.sections.enumerated() {
             if section.hidden {
                 continue
             }
@@ -677,7 +671,7 @@ extension KSKLineChartView {
     
     /// 清空图表的子图层
     func removeLayerView() {
-        for section in self.sections {
+        for section in self.style.sections {
             section.removeLayerView()
             for series in section.series {
                 series.removeLayerView()
@@ -710,8 +704,7 @@ extension KSKLineChartView {
                 self.drawSection(section)//[绘制每个区域顶部区域]
 
                 //绘制X轴坐标系，先绘制辅助线，记录标签位置
-                //返回出来，最后才在需要显示的分区上绘制
-                xAxisToDraw     = self.drawXAxis(section)//[绘制最底部时间]
+                xAxisToDraw     = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
 
                 //绘制Y轴坐标系，但最后的y轴标签放到绘制完线段才做
                 let yAxisToDraw = self.drawYAxis(section)
@@ -734,13 +727,13 @@ extension KSKLineChartView {
                     
                     if let titleString = self.delegate?.kLineChart?(chart: self,
                                                                    titleForHeaderInSection: section,
-                                                                   index: self.selectedIndex,
-                                                                   item: self.datas[self.selectedIndex]) {
+                                                                   index: self.pref.selectedIndex,
+                                                                   item: self.datas[self.pref.selectedIndex]) {
                         //显示用户自定义的section title
                         section.drawTitleForHeader(title: titleString)
                     } else {
                         //显示范围最后一个点的内容
-                        section.drawTitle(self.selectedIndex)
+                        section.drawTitle(self.pref.selectedIndex)
                     }
                 }
             }
@@ -751,7 +744,7 @@ extension KSKLineChartView {
             
             //重新显示点击选中的坐标
             if self.showSelection {
-                self.setSelectedIndexByPoint(self.selectedPoint)
+                self.setSelectedIndexByPoint(self.pref.selectedPoint)
             }
             self.delegate?.didFinishKLineChartRefresh?(chart: self)
         }
@@ -759,20 +752,20 @@ extension KSKLineChartView {
     
     /// 初始化图表结构 -> 是否初始化数据
     func initChart() -> Bool {
-        if self.scrollToPosition == .end && self.plotCount != self.datas.count {
+        if self.pref.scrollToPosition == .end && self.pref.plotCount != self.datas.count {
             self.calculatorTai(isAll: true)
         }
 
-        if self.plotCount > 0 {
+        if self.pref.plotCount > 0 {
             drawRange()
         }
         
         //重置图表刷新滚动默认不处理
-        self.scrollToPosition = .none
+        self.pref.scrollToPosition = .none
         
         //选择最后一个元素选中
-        if selectedIndex == -1 {
-            self.selectedIndex = self.rangeTo - 1
+        if pref.selectedIndex == -1 {
+            self.pref.selectedIndex = self.pref.rangeTo - 1
         }
         /*
         let backgroundLayer       = KSShapeLayer()
@@ -786,35 +779,35 @@ extension KSKLineChartView {
     
     func drawRange() {
         //如果显示全部，显示范围为全部数据量
-        if self.isShowAll {
-            self.range     = self.plotCount
-            self.rangeFrom = 0
-            self.rangeTo   = self.plotCount
+        if self.style.isShowAll {
+            self.pref.range     = self.pref.plotCount
+            self.pref.rangeFrom = 0
+            self.pref.rangeTo   = self.pref.plotCount
         }
         
         //图表刷新滚动为默认时，如果第一次初始化，就默认滚动到最后显示
-        if self.scrollToPosition == .none {
+        if self.pref.scrollToPosition == .none {
             //如果图表尽头的索引为0，则进行初始化
-            if self.rangeTo == 0 || self.plotCount < self.rangeTo {
-                self.scrollToPosition = .end
+            if self.pref.rangeTo == 0 || self.pref.plotCount < self.pref.rangeTo {
+                self.pref.scrollToPosition = .end
             }
         }
-        else if self.scrollToPosition == .top {
-            self.rangeFrom = 0
-            if self.rangeFrom + self.range < self.plotCount {
-                self.rangeTo = self.rangeFrom + self.range//计算结束的显示的位置
+        else if self.pref.scrollToPosition == .top {
+            self.pref.rangeFrom = 0
+            if self.pref.rangeFrom + self.pref.range < self.pref.plotCount {
+                self.pref.rangeTo = self.pref.rangeFrom + self.pref.range//计算结束的显示的位置
             } else {
-                self.rangeTo = self.plotCount
+                self.pref.rangeTo = self.pref.plotCount
             }
-            self.selectedIndex = -1
-        } else if self.scrollToPosition == .end {
-            self.rangeTo = self.plotCount               //默认是数据最后一条为尽头
-            if self.rangeTo - self.range > 0 {          //如果尽头 - 默认显示数大于0
-                self.rangeFrom = self.rangeTo - range   //计算开始的显示的位置
+            self.pref.selectedIndex = -1
+        } else if self.pref.scrollToPosition == .end {
+            self.pref.rangeTo = self.pref.plotCount               //默认是数据最后一条为尽头
+            if self.pref.rangeTo - self.pref.range > 0 {          //如果尽头 - 默认显示数大于0
+                self.pref.rangeFrom = self.pref.rangeTo - self.pref.range   //计算开始的显示的位置
             } else {
-                self.rangeFrom = 0
+                self.pref.rangeFrom = 0
             }
-            self.selectedIndex = -1
+            self.pref.selectedIndex = -1
         }
     }
     
@@ -823,15 +816,15 @@ extension KSKLineChartView {
     /// - Parameter complete: 初始化后，执行每个分区绘制
     func buildSections(_ complete:(_ section: KSSection, _ index: Int) -> Void) {
         //计算实际的显示高度和宽度
-        var height      = self.frame.size.height - (self.padding.top + self.padding.bottom)
-        let width       = self.frame.size.width - (self.padding.left + self.padding.right)
+        var height      = self.frame.size.height - (self.style.padding.top + self.style.padding.bottom)
+        let width       = self.frame.size.width - (self.style.padding.left + self.style.padding.right)
 
         //X轴的布局高度
-        let xAxisHeight = self.delegate?.heightForXAxisInKLineChart?(chart: self) ?? self.kXAxisHegiht
+        let xAxisHeight = self.delegate?.heightForXAxisInKLineChart?(chart: self) ?? self.pref.kXAxisHegiht
         height          = height - xAxisHeight
 
         var total       = 0
-        for (index, section) in self.sections.enumerated() {
+        for (index, section) in self.style.sections.enumerated() {
             section.index = index
             if !section.hidden {
                 //如果使用fixHeight，ratios要设置为0
@@ -841,9 +834,9 @@ extension KSKLineChartView {
             }
         }
         
-        var offsetY: CGFloat = self.padding.top
+        var offsetY: CGFloat = self.style.padding.top
         //计算每个区域的高度，并绘制
-        for (index, section) in self.sections.enumerated() {
+        for (index, section) in self.style.sections.enumerated() {
 
             var heightOfSection: CGFloat = 0
             let WidthOfSection = width
@@ -860,27 +853,27 @@ extension KSKLineChartView {
             }
             
             //设置y轴标签的宽度
-            self.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.kYAxisLabelWidth
+            self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
             
             //y轴的标签显示方位
-            switch self.showYAxisLabel {
+            switch self.style.showYAxisLabel {
             case .left:         //左边显示
-                section.padding.left = self.isInnerYAxis ? section.padding.left : self.yAxisLabelWidth
+                section.padding.left = self.style.isInnerYAxis ? section.padding.left : self.pref.yAxisLabelWidth
                 section.padding.right = 0
             case .right:        //右边显示
                 section.padding.left = 0
-                section.padding.right = self.isInnerYAxis ? section.padding.right : self.yAxisLabelWidth
+                section.padding.right = self.style.isInnerYAxis ? section.padding.right : self.pref.yAxisLabelWidth
             case .none:         //都不显示
                 section.padding.left = 0
                 section.padding.right = 0
             }
             
             //计算每个section的坐标
-            section.frame = CGRect(x: 0 + self.padding.left, y: offsetY, width: WidthOfSection, height: heightOfSection)
+            section.frame = CGRect(x: 0 + self.style.padding.left, y: offsetY, width: WidthOfSection, height: heightOfSection)
             offsetY       = offsetY + section.frame.height
 
             //如果这个分区设置为显示X轴，下一个分区的Y起始位要加上X轴高度
-            if self.showXAxisOnSection == index {
+            if self.style.showXAxisOnSection == index {
                 offsetY = offsetY + xAxisHeight
             }
             
@@ -904,8 +897,8 @@ extension KSKLineChartView {
         //let secPaddingRight: CGFloat = section.padding.right
 
         //x轴分平均分N个间断，显示N+1个x轴坐标，按照图表的值个数，计算每个间断的个数
-        let dataRange                = self.rangeTo - self.rangeFrom
-        var xTickInterval: Int       = dataRange / self.xAxisPerInterval
+        let dataRange                = self.pref.rangeTo - self.pref.rangeFrom
+        var xTickInterval: Int       = dataRange / self.pref.xAxisPerInterval
         if xTickInterval <= 0 {
             xTickInterval = 1
         }
@@ -913,12 +906,12 @@ extension KSKLineChartView {
         //绘制x轴标签
         //每个点的间隔宽度
         let perPlotWidth: CGFloat  = latticeWidth(section: section)//(secWidth - secPaddingLeft - secPaddingRight) / CGFloat(self.rangeTo - self.rangeFrom)
-        if self.datas.count < minCandleCount {
-            if self.datas.count < (minCandleCount/fixedGrid) {
+        if self.datas.count < self.pref.minCandleCount {
+            if self.datas.count < (self.pref.minCandleCount/self.pref.fixedGrid) {
                 xTickInterval = dataRange
             }
             else {
-                xTickInterval = dataRange / fixedGrid - 1
+                xTickInterval = dataRange / self.pref.fixedGrid - 1
             }
         }
 
@@ -927,10 +920,10 @@ extension KSKLineChartView {
         var showXAxisReference = false
         
         //相当 for var i = self.rangeFrom; i < self.rangeTo; i = i + xTickInterval
-        for i in stride(from: self.rangeFrom, to: self.rangeTo, by: xTickInterval) {
+        for i in stride(from: self.pref.rangeFrom, to: self.pref.rangeTo, by: xTickInterval) {
             
             let xLabel     = self.delegate?.kLineChart?(chart: self, labelOnXAxisForIndex: i) ?? ""
-            let textSize   = xLabel.ks_sizeWithConstrained(self.labelFont)
+            let textSize   = xLabel.ks_sizeWithConstrained(self.style.labelFont)
             var xPox       = startX + (perPlotWidth / 2) - (textSize.width / 2)
             //计算最左最右的x轴标签不越过边界
             if (xPox < 0) {
@@ -946,7 +939,7 @@ extension KSKLineChartView {
             //绘制辅助线
             let referencePath        = UIBezierPath()
             let referenceLayer       = KSShapeLayer()
-            referenceLayer.lineWidth = self.lineWidth
+            referenceLayer.lineWidth = self.pref.lineWidth
 
             //处理辅助线样式
             switch section.xAxis.referenceStyle {
@@ -984,7 +977,7 @@ extension KSKLineChartView {
     ///   - xAxisToDraw: 待绘制的内容
     func drawXAxisLabel(_ section: KSSection, xAxisToDraw: [(CGRect, String)]) {
         
-        guard self.showXAxisLabel else {
+        guard self.style.showXAxisLabel else {
             return
         }
         
@@ -1005,8 +998,8 @@ extension KSKLineChartView {
             xLabelText.frame           = barLabelRect
             xLabelText.string          = xLabel
             xLabelText.alignmentMode   = CATextLayerAlignmentMode.center
-            xLabelText.fontSize        = self.labelFont.pointSize
-            xLabelText.foregroundColor = self.textColor.cgColor
+            xLabelText.fontSize        = self.style.labelFont.pointSize
+            xLabelText.foregroundColor = self.style.textColor.cgColor
             xLabelText.backgroundColor = UIColor.clear.cgColor
             xLabelText.contentsScale   = UIScreen.main.scale
 
@@ -1030,30 +1023,30 @@ extension KSKLineChartView {
         let borderPath         = UIBezierPath()
 
         //画底部边线
-        if self.borderWidth.bottom > 0 {
-            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.size.height + section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: self.borderWidth.bottom)))
+        if self.style.borderWidth.bottom > 0 {
+            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.size.height + section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: self.style.borderWidth.bottom)))
         }
         
         //画顶部边线
-        if self.borderWidth.top > 0 {
-            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: self.borderWidth.top)))
+        if self.style.borderWidth.top > 0 {
+            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: self.style.borderWidth.top)))
         }
 
         //画左边线
-        if self.borderWidth.left > 0 {
-            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.origin.y, width: self.borderWidth.left, height: section.frame.size.height)))
+        if self.style.borderWidth.left > 0 {
+            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.origin.y, width: self.style.borderWidth.left, height: section.frame.size.height)))
         }
         
         //画右边线
-        if self.borderWidth.right > 0 {
-            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.frame.size.width - section.padding.right, y: section.frame.origin.y, width: self.borderWidth.left, height: section.frame.size.height)))
+        if self.style.borderWidth.right > 0 {
+            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.frame.size.width - section.padding.right, y: section.frame.origin.y, width: self.style.borderWidth.left, height: section.frame.size.height)))
         }
         
         //添加到图层
         let borderLayer       = KSShapeLayer()
-        borderLayer.lineWidth = self.lineWidth
+        borderLayer.lineWidth = self.pref.lineWidth
         borderLayer.path      = borderPath.cgPath// 从贝塞尔曲线获取到形状
-        borderLayer.fillColor = self.lineColor.cgColor// 闭环填充的颜色
+        borderLayer.fillColor = self.style.lineColor.cgColor// 闭环填充的颜色
         self.drawLayer.addSublayer(borderLayer)
     }
     
@@ -1063,7 +1056,7 @@ extension KSKLineChartView {
     func initYAxis(_ section: KSSection) {
         if section.series.count > 0 {
             //建立分区每条线的坐标系
-            section.buildYAxis(startIndex: self.rangeFrom, endIndex: self.rangeTo, datas: self.datas)
+            section.buildYAxis(startIndex: self.pref.rangeFrom, endIndex: self.pref.rangeTo, datas: self.datas)
         }
     }
     
@@ -1082,12 +1075,12 @@ extension KSKLineChartView {
 
         //分区中各个y轴虚线和y轴的label
         //控制y轴的label在左还是右显示
-        switch self.showYAxisLabel {
+        switch self.style.showYAxisLabel {
         case .left:
-            startX  = section.frame.origin.x - 3 * (self.isInnerYAxis ? -1 : 1)
+            startX  = section.frame.origin.x - 3 * (self.style.isInnerYAxis ? -1 : 1)
             extrude = section.frame.origin.x + section.padding.left - 2
         case .right:
-            startX  = section.frame.maxX - self.yAxisLabelWidth + 3 * (self.isInnerYAxis ? -1 : 1)
+            startX  = section.frame.maxX - self.pref.yAxisLabelWidth + 3 * (self.style.isInnerYAxis ? -1 : 1)
             extrude = section.frame.origin.x + section.padding.left + section.frame.size.width - section.padding.right
         case .none:
             showYAxisLabel = false
@@ -1129,7 +1122,7 @@ extension KSKLineChartView {
             //画虚线和Y标签值
             let iy = section.getLocalY(yVal)
             
-            if self.isInnerYAxis {
+            if self.style.isInnerYAxis {
                 //y轴标签向内显示，为了不挡住辅助线，所以把y轴的数值位置向上移一些
                 startY = iy - 14
             } else {
@@ -1138,7 +1131,7 @@ extension KSKLineChartView {
             
             let referencePath = UIBezierPath()
             let referenceLayer = KSShapeLayer()
-            referenceLayer.lineWidth = self.lineWidth
+            referenceLayer.lineWidth = self.pref.lineWidth
             
             //处理辅助线样式
             switch section.yAxis.referenceStyle {
@@ -1157,7 +1150,7 @@ extension KSKLineChartView {
             if showYAxisReference {
                 
                 //突出的线段，y轴向外显示才划突出线段
-                if !self.isInnerYAxis {
+                if !self.style.isInnerYAxis {
                     referencePath.move(to: CGPoint(x: extrude, y: iy))
                     referencePath.addLine(to: CGPoint(x: extrude + 2, y: iy))
                 }
@@ -1176,7 +1169,7 @@ extension KSKLineChartView {
                 
                 let yLabelRect = CGRect(x: startX,
                                         y: startY,
-                                        width: yAxisLabelWidth,
+                                        width: self.pref.yAxisLabelWidth,
                                         height: 12
                 )
                 
@@ -1194,11 +1187,11 @@ extension KSKLineChartView {
         var alignmentMode = CATextLayerAlignmentMode.left
         //分区中各个y轴虚线和y轴的label
         //控制y轴的label在左还是右显示
-        switch self.showYAxisLabel {
+        switch self.style.showYAxisLabel {
         case .left:
-            alignmentMode = self.isInnerYAxis ? CATextLayerAlignmentMode.left : CATextLayerAlignmentMode.right
+            alignmentMode = self.style.isInnerYAxis ? CATextLayerAlignmentMode.left : CATextLayerAlignmentMode.right
         case .right:
-            alignmentMode = self.isInnerYAxis ? CATextLayerAlignmentMode.right : CATextLayerAlignmentMode.left
+            alignmentMode = self.style.isInnerYAxis ? CATextLayerAlignmentMode.right : CATextLayerAlignmentMode.left
         case .none:
             alignmentMode = CATextLayerAlignmentMode.left
         }
@@ -1208,8 +1201,8 @@ extension KSKLineChartView {
             let yAxisLabel             = KSTextLayer()
             yAxisLabel.frame           = yLabelRect
             yAxisLabel.string          = strValue
-            yAxisLabel.fontSize        = self.labelFont.pointSize
-            yAxisLabel.foregroundColor = self.textColor.cgColor
+            yAxisLabel.fontSize        = self.style.labelFont.pointSize
+            yAxisLabel.foregroundColor = self.style.textColor.cgColor
             yAxisLabel.backgroundColor = UIColor.clear.cgColor
             yAxisLabel.alignmentMode   = alignmentMode
             yAxisLabel.contentsScale   = UIScreen.main.scale
@@ -1246,7 +1239,7 @@ extension KSKLineChartView {
         if !serie.hidden {
             //循环画出每个模型的线
             for model in serie.chartModels {
-                let serieLayer = model.drawSerie(self.rangeFrom, endIndex: self.rangeTo)
+                let serieLayer = model.drawSerie(self.pref.rangeFrom, endIndex: self.pref.rangeTo)
                 serie.seriesLayer.addSublayer(serieLayer)
             }
         }
@@ -1263,7 +1256,7 @@ extension KSKLineChartView {
     ///   - toPosition:
     ///   - resetData:
     func reloadData(toPosition: KSScrollPosition = .none, resetData: Bool = true) {
-        self.scrollToPosition = toPosition
+        self.pref.scrollToPosition = toPosition
         if resetData {
             self.calculatorTai(isAll: true)
         }
@@ -1286,12 +1279,12 @@ extension KSKLineChartView {
         
         var hideSections = [KSSection]()
         if inSection < 0 {
-            hideSections = self.sections
+            hideSections = self.style.sections
         } else {
-            if inSection >= self.sections.count {
+            if inSection >= self.style.sections.count {
                 return //超过界限
             }
-            hideSections.append(self.sections[inSection])
+            hideSections.append(self.style.sections[inSection])
         }
         for section in hideSections {
             for (index, serie)  in section.series.enumerated() {
@@ -1323,7 +1316,7 @@ extension KSKLineChartView {
     ///   - hidden:
     ///   - key:
     func setSection(hidden: Bool, byKey key: String) {
-        for section in self.sections {
+        for section in self.style.sections {
             //副图才能隐藏
             if section.key == key && section.valueType == .assistant {
                 section.hidden = hidden
@@ -1339,7 +1332,7 @@ extension KSKLineChartView {
     ///   - index:
     func setSection(hidden: Bool, byIndex index: Int) {
         //副图才能隐藏
-        guard let section = self.sections[safe: index], section.valueType == .assistant else {
+        guard let section = self.style.sections[safe: index], section.valueType == .assistant else {
             return
         }
         
@@ -1360,53 +1353,53 @@ extension KSKLineChartView {
 
         if enlarge {
             //双指张开
-            newRangeTo   = self.rangeTo - interval
-            newRangeFrom = self.rangeFrom + interval
-            newRange     = self.rangeTo - self.rangeFrom
-            if newRange >= kMinRange {
+            newRangeTo   = self.pref.rangeTo - interval
+            newRangeFrom = self.pref.rangeFrom + interval
+            newRange     = self.pref.rangeTo - self.pref.rangeFrom
+            if newRange >= self.pref.kMinRange {
                 
-                if self.plotCount > self.rangeTo - self.rangeFrom {
-                    if newRangeFrom < self.rangeTo {
-                        self.rangeFrom = newRangeFrom
+                if self.pref.plotCount > self.pref.rangeTo - self.pref.rangeFrom {
+                    if newRangeFrom < self.pref.rangeTo {
+                        self.pref.rangeFrom = newRangeFrom
                     }
-                    if newRangeTo > self.rangeFrom {
-                        self.rangeTo = newRangeTo
+                    if newRangeTo > self.pref.rangeFrom {
+                        self.pref.rangeTo = newRangeTo
                     }
                 }else{
-                    if newRangeTo > self.rangeFrom {
-                        self.rangeTo = newRangeTo
+                    if newRangeTo > self.pref.rangeFrom {
+                        self.pref.rangeTo = newRangeTo
                     }
                 }
-                self.range = self.rangeTo - self.rangeFrom
+                self.pref.range = self.pref.rangeTo - self.pref.rangeFrom
                 self.drawLayerView()
             }
             
         } else {
             //双指合拢
-            newRangeTo   = self.rangeTo + interval
-            newRangeFrom = self.rangeFrom - interval
-            newRange     = self.rangeTo - self.rangeFrom
-            if newRange <= kMaxRange {
+            newRangeTo   = self.pref.rangeTo + interval
+            newRangeFrom = self.pref.rangeFrom - interval
+            newRange     = self.pref.rangeTo - self.pref.rangeFrom
+            if newRange <= self.pref.kMaxRange {
                 
                 if newRangeFrom >= 0 {
-                    self.rangeFrom = newRangeFrom
+                    self.pref.rangeFrom = newRangeFrom
                 } else {
-                    self.rangeFrom = 0
+                    self.pref.rangeFrom = 0
                     newRangeTo = newRangeTo - newRangeFrom //补充负数位到头部
                 }
-                if newRangeTo <= self.plotCount {
-                    self.rangeTo = newRangeTo
+                if newRangeTo <= self.pref.plotCount {
+                    self.pref.rangeTo = newRangeTo
                     
                 } else {
-                    self.rangeTo = self.plotCount
-                    newRangeFrom = newRangeFrom - (newRangeTo - self.plotCount)
+                    self.pref.rangeTo = self.pref.plotCount
+                    newRangeFrom = newRangeFrom - (newRangeTo - self.pref.plotCount)
                     if newRangeFrom < 0 {
-                        self.rangeFrom = 0
+                        self.pref.rangeFrom = 0
                     } else {
-                        self.rangeFrom = newRangeFrom
+                        self.pref.rangeFrom = newRangeFrom
                     }
                 }
-                self.range = self.rangeTo - self.rangeFrom
+                self.pref.range = self.pref.rangeTo - self.pref.rangeFrom
                 self.drawLayerView()
             }
         }
@@ -1421,33 +1414,33 @@ extension KSKLineChartView {
         if (interval > 0) {//有移动间隔才移动
             if direction {
                 //单指向右拖，往后查看数据
-                if self.plotCount > (self.rangeTo-self.rangeFrom) {
-                    if self.rangeFrom - interval >= 0 {
-                        self.rangeFrom -= interval
-                        self.rangeTo   -= interval
+                if self.pref.plotCount > (self.pref.rangeTo-self.pref.rangeFrom) {
+                    if self.pref.rangeFrom - interval >= 0 {
+                        self.pref.rangeFrom -= interval
+                        self.pref.rangeTo   -= interval
                         
                     } else {
-                        self.rangeFrom = 0
-                        self.rangeTo   -= self.rangeFrom
+                        self.pref.rangeFrom = 0
+                        self.pref.rangeTo   -= self.pref.rangeFrom
                     }
                     self.drawLayerView()
                 }
             } else {
                 //单指向左拖，往前查看数据
-                if self.plotCount > (self.rangeTo-self.rangeFrom) {
-                    if self.rangeTo + interval <= self.plotCount {
-                        self.rangeFrom += interval
-                        self.rangeTo += interval
+                if self.pref.plotCount > (self.pref.rangeTo-self.pref.rangeFrom) {
+                    if self.pref.rangeTo + interval <= self.pref.plotCount {
+                        self.pref.rangeFrom += interval
+                        self.pref.rangeTo += interval
                         
                     } else {
-                        self.rangeFrom += self.plotCount - self.rangeTo
-                        self.rangeTo  = self.plotCount
+                        self.pref.rangeFrom += self.pref.plotCount - self.pref.rangeTo
+                        self.pref.rangeTo  = self.pref.plotCount
                     }
                     self.drawLayerView()
                 }
             }
         }
-        self.range = self.rangeTo - self.rangeFrom
+        self.pref.range = self.pref.rangeTo - self.pref.rangeFrom
     }
     
     /*
@@ -1467,7 +1460,7 @@ extension KSKLineChartView {
     ///   - titles: 文本内容及颜色元组
     ///   - section: 分区位置
     func setHeader(titles: [(title: String, color: UIColor)], inSection section: Int)  {
-        guard let section = self.sections[safe: section] else {
+        guard let section = self.style.sections[safe: section] else {
             return
         }
         
@@ -1481,7 +1474,7 @@ extension KSKLineChartView {
     ///   - series: 线段
     ///   - section: 分区位置
     func addSeries(_ series: KSSeries, inSection section: Int) {
-        guard let section = self.sections[safe: section] else {
+        guard let section = self.style.sections[safe: section] else {
             return
         }
         section.series.append(series)
@@ -1495,7 +1488,7 @@ extension KSKLineChartView {
     ///   - key: 主键
     ///   - section: 分区位置
     func removeSeries(key: String, inSection section: Int) {
-        guard let section = self.sections[safe: section] else {
+        guard let section = self.style.sections[safe: section] else {
             return
         }
         
@@ -1515,9 +1508,9 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         case is UITapGestureRecognizer:
             return self.enableTap
         case is UIPanGestureRecognizer:
-            return self.enablePan
+            return self.style.enablePan
         case is UIPinchGestureRecognizer:
-            return self.enablePinch
+            return self.style.enablePinch
         default:
             return false
         }
@@ -1535,11 +1528,11 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     /// - Parameter sender: 手势
     @objc func doPanAction(_ sender: UIPanGestureRecognizer) {
         
-        if self.datas.count < minCandleCount {
+        if self.datas.count < self.pref.minCandleCount {
             return
         }
         
-        if self.enablePan == false {
+        if self.style.enablePan == false {
             return
         }
         
@@ -1551,13 +1544,13 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         let velocity        = sender.velocity(in: self)
 
         //获取可见的其中一个分区
-        let visiableSection = self.sections.filter { !$0.hidden }
+        let visiableSection = self.style.sections.filter { !$0.hidden }
         guard let section = visiableSection.first else {
             return
         }
         
         //该分区每个点的间隔宽度
-        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
+        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.pref.rangeTo - self.pref.rangeFrom)
         
         switch sender.state {
         case .began:
@@ -1579,7 +1572,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         case .ended, .cancelled:
             
             //重置减速开始
-            self.decelerationStartX         = 0
+            self.pref.decelerationStartX         = 0
             //添加减速行为
             self.dynamicItem.center         = self.bounds.origin
             let decelerationBehavior        = UIDynamicItemBehavior(items: [self.dynamicItem])
@@ -1589,12 +1582,12 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                 //print("self.dynamicItem.x = \(self?.dynamicItem.center.x ?? 0)")
                 
                 //到边界不执行移动
-                if self?.rangeFrom == 0 || self?.rangeTo == self?.plotCount{
+                if self?.pref.rangeFrom == 0 || self?.pref.rangeTo == self?.pref.plotCount{
                     return
                 }
                 
                 let itemX = self?.dynamicItem.center.x ?? 0
-                let startX = self?.decelerationStartX ?? 0
+                let startX = self?.pref.decelerationStartX ?? 0
                 //计算移动距离的绝对值，距离满足超过线条宽度就进行图表平移刷新
                 let distance = abs(itemX - startX)
                 //print("distance = \(distance)")
@@ -1603,7 +1596,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                     let interval             = lroundf(abs(Float(distance / plotWidth)))
                     self?.moveChart(by: interval, direction: isRight)
                     //重新计算起始位
-                    self?.decelerationStartX = itemX
+                    self?.pref.decelerationStartX = itemX
                 }
             }
             
@@ -1646,22 +1639,22 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     /// - Parameter sender: 手势
     @objc func doPinchAction(_ sender: UIPinchGestureRecognizer) {
         //防止数量较少时,显示异常
-        if self.datas.count < minCandleCount {
+        if self.datas.count < self.pref.minCandleCount {
             return
         }
         
-        if self.enablePinch == false {
+        if self.style.enablePinch == false {
             return
         }
         
         //获取可见的其中一个分区
-        let visiableSection = self.sections.filter { !$0.hidden }
+        let visiableSection = self.style.sections.filter { !$0.hidden }
         guard let section = visiableSection.first else {
             return
         }
         
         //该分区每个点的间隔宽度
-        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
+        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.pref.rangeTo - self.pref.rangeFrom)
 
         //双指合拢或张开
         let scale = sender.scale
@@ -1672,7 +1665,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         
         let newRangeF = (section.frame.size.width - section.padding.left - section.padding.right) / newPlotWidth
         newRange = scale > 1 ? Int(newRangeF + 1) : Int(newRangeF)
-        let distance = abs(self.range - newRange)
+        let distance = abs(self.pref.range - newRange)
         //放大缩小的距离为偶数
         if distance % 2 == 0 && distance > 0 {
             //print("scale = \(scale)")
@@ -1687,7 +1680,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     /// - Parameter sender:
     @objc func doLongPressAction(_ sender: UILongPressGestureRecognizer) {
         
-        if self.rangeFrom >= self.rangeTo {
+        if self.pref.rangeFrom >= self.pref.rangeTo {
             return
         }
         
