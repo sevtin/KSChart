@@ -776,15 +776,13 @@ extension KSKLineChartView {
         if selectedIndex == -1 {
             self.selectedIndex = self.rangeTo - 1
         }
-        
+        /*
         let backgroundLayer       = KSShapeLayer()
         let backgroundPath        = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: self.bounds.size.width,height: self.bounds.size.height), cornerRadius: 0)
         backgroundLayer.path      = backgroundPath.cgPath
         backgroundLayer.fillColor = self.backgroundColor?.cgColor
         self.drawLayer.addSublayer(backgroundLayer)
-        //let context = UIGraphicsGetCurrentContext()
-        //context?.setFillColor(self.backgroundColor!.cgColor)
-        //context?.fill (CGRect (x: 0, y: 0, width: self.bounds.size.width,height: self.bounds.size.height))
+         */
         return self.datas.count > 0 ? true : false
     }
     
