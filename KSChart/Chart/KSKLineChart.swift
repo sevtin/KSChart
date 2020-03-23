@@ -231,12 +231,10 @@ class KSKLineChartView: UIView {
 
     /// 用于图表的图层
     var drawLayer: KSShapeLayer          = KSShapeLayer()
+    
+    /// 格子图层
+    var gridLayer: KSShapeLayer          = KSShapeLayer()
 
-    /// 点线图层
-    var chartModelLayer: KSShapeLayer    = KSShapeLayer()
-
-    /// 图表数据信息显示层，显示每个分区的数值内容
-    var chartInfoLayer: KSShapeLayer     = KSShapeLayer()
     /// 技术指标名称:算法
     var chartTais: [String: KSIndexAlgorithm]!
     
