@@ -822,8 +822,8 @@
 			isa = PBXGroup;
 			children = (
 				E61E92102338F00F00184885 /* KSZeroChartView.swift */,
-				E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */,
 				E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */,
+				E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */,
 				E6AB6E4C238BEA5900C9BCF3 /* KSChartModel.swift */,
 				E6AB6E4E238BEA5900C9BCF3 /* KSDepthChartView.swift */,
 				E6AB6E4F238BEA5900C9BCF3 /* KSDynamicItem.swift */,

@@ -18,7 +18,7 @@ enum KSSectionValueType {
 
 /// K线的区域
 class KSSection: NSObject {
-    /// MARK: - 成员变量
+
     var upColor: UIColor              = UIColor.green//升的颜色
     var downColor: UIColor            = UIColor.red//跌的颜色
     var titleColor: UIColor           = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//文字颜色

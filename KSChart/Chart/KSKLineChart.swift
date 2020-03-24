@@ -123,48 +123,41 @@ enum KSSelectedPosition {
 }
 
 struct KSChartPref {
-    /// MARK: - 常量
     let kMinRange                            = 16//最小缩放范围
     let kMaxRange                            = 128//最大缩放范围
     let kPerInterval                         = 4//缩放的每段间隔
     let kYAxisLabelWidth: CGFloat            = 46//默认文字宽度
     let kXAxisHegiht: CGFloat                = 16//默认X坐标的高度
-
     var minCandleCount: Int                  = 30//最小蜡烛图数量
     var fixedWidth: CGFloat                  = 10//小于最小蜡烛图数量，蜡烛的宽度
     var fixedGrid: Int                       = 2//最小格子数
-
     var xAxisPerInterval: Int                = 4//x轴的间断个数
     var yAxisLabelWidth: CGFloat             = 0//Y轴的宽度
-
     var selectedPosition: KSSelectedPosition = .onClosePrice//选中显示y值的位置
-
     var selectedIndex: Int                   = -1//选择单个点的索引
     var scrollToPosition: KSScrollPosition   = .none//图表刷新后开始显示位置
     var selectedPoint: CGPoint               = CGPoint.zero
-
     var lineWidth: CGFloat                   = 0.5
     var plotCount: Int                       = 0//所有蜡烛图的个数
     var rangeFrom: Int                       = 0//可见区域的开始索引位
     var rangeTo: Int                         = 0//可见区域的结束索引位
     var range: Int                           = 60//显示在可见区域的个数
-
-    //减速开始x
-    var decelerationStartX: CGFloat          = 0
-
+    var decelerationStartX: CGFloat          = 0//减速开始x
     var isCrosshair: Bool                    = false//是否显示准星
+    var isChangedRange: Bool                 = true//区域是否发生了改变
 }
 
 class KSKLineChartView: UIView {
-    var pref: KSChartPref                = KSChartPref()//偏好设置
-    open weak var delegate: KSKLineChartDelegate? //代理
+    lazy var pref: KSChartPref           = KSChartPref()//偏好设置
+    lazy var datas: [KSChartItem]        = [KSChartItem]()//数据源
+
+    weak var delegate: KSKLineChartDelegate? //代理
     /// MARK: - 成员变量
     var upColor: UIColor                 = UIColor.green//升的颜色
     var downColor: UIColor               = UIColor.red//跌的颜色
     var borderColor: UIColor             = UIColor.gray
     var labelSize                        = CGSize(width: 40, height: 16)
-    var datas: [KSChartItem]             = [KSChartItem]()//数据源
-   
+
     //动力学引擎
     lazy var animator: UIDynamicAnimator = UIDynamicAnimator(referenceView: self)
     //动力的作用点
@@ -173,9 +166,9 @@ class KSKLineChartView: UIView {
     weak var decelerationBehavior: UIDynamicItemBehavior?
 
     /// 用于图表的图层
-    var drawLayer: KSShapeLayer          = KSShapeLayer()
+    lazy var drawLayer: KSShapeLayer     = KSShapeLayer()
     /// 格子图层
-    var gridLayer: KSShapeLayer          = KSShapeLayer()
+    lazy var gridLayer: KSShapeLayer     = KSShapeLayer()
 
     var verticalLineView: UIView?
     var horizontalLineView: UIView?
@@ -220,17 +213,18 @@ class KSKLineChartView: UIView {
             //self.selectedBGColor     = self.style.selectedBGColor
             //self.selectedTextColor   = self.style.selectedTextColor
             //self.isInnerYAxis        = self.style.isInnerYAxis
-            self.enableTap           = self.style.enableTap
             //self.enablePinch         = self.style.enablePinch
             //self.enablePan           = self.style.enablePan
-            self.pref.isCrosshair    = self.style.isCrosshair
-            self.showSelection       = self.style.showSelection
             //self.showXAxisOnSection  = self.style.showXAxisOnSection
             //self.isShowAll           = self.style.isShowAll
             //self.showXAxisLabel      = self.style.showXAxisLabel
             //self.borderWidth         = self.style.borderWidth
-
-            self.pref.minCandleCount           = self.pref.range/2
+            
+            self.enableTap           = self.style.enableTap
+            self.pref.isCrosshair    = self.style.isCrosshair
+            self.showSelection       = self.style.showSelection
+            self.pref.minCandleCount = self.pref.range/2
+            
             for section in self.style.sections {
                 for serie in section.series {
                     for model in serie.chartModels {
@@ -243,27 +237,27 @@ class KSKLineChartView: UIView {
         }
     }
     /*
-    var labelFont = UIFont.systemFont(ofSize: 10)
-    var lineColor: UIColor = UIColor(white: 0.2, alpha: 1)//线条颜色
-    var textColor: UIColor = UIColor(white: 0.8, alpha: 1)//文字颜色
-    var padding: UIEdgeInsets = UIEdgeInsets.zero//内边距
-    var showYAxisLabel = KSYAxisShowPosition.right//显示y的位置，默认右边
-    var isInnerYAxis: Bool = false// 是否把y坐标内嵌到图表中
-    var sections = [KSSection]()//分区样式Demo中N个样式，分别是主图/附图1/附图2
+    var labelFont                                                                   = UIFont.systemFont(ofSize: 10)
+    var lineColor: UIColor                                                          = UIColor(white: 0.2, alpha: 1)//线条颜色
+    var textColor: UIColor                                                          = UIColor(white: 0.8, alpha: 1)//文字颜色
+    var padding: UIEdgeInsets                                                       = UIEdgeInsets.zero//内边距
+    var showYAxisLabel                                                              = KSYAxisShowPosition.right//显示y的位置，默认右边
+    var isInnerYAxis: Bool                                                          = false// 是否把y坐标内嵌到图表中
+    var sections                                                                    = [KSSection]()//分区样式Demo中N个样式，分别是主图/附图1/附图2
     //是否可缩放
-    var enablePinch: Bool = true
+    var enablePinch: Bool                                                           = true
     //是否可滑动
-    var enablePan: Bool = true
+    var enablePan: Bool                                                             = true
     //把X坐标内容显示到哪个索引分区上，默认为-1，表示最后一个，如果用户设置溢出的数值，也以最后一个
-    var showXAxisOnSection: Int = -1
+    var showXAxisOnSection: Int                                                     = -1
     //是否显示X轴标签
-    var showXAxisLabel: Bool = true
+    var showXAxisLabel: Bool                                                        = true
     //是否显示所有内容
-    var isShowAll: Bool = false
+    var isShowAll: Bool                                                             = false
     //显示边线上左下有
     var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
-    var selectedBGColor: UIColor = UIColor(white: 0.4, alpha: 1)//选中点的显示的框背景颜色
-    var selectedTextColor: UIColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//选中点的显示的文字颜色
+    var selectedBGColor: UIColor                                                    = UIColor(white: 0.4, alpha: 1)//选中点的显示的框背景颜色
+    var selectedTextColor: UIColor                                                  = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//选中点的显示的文字颜色
     //滚动释放后用于反弹回来
     weak var springBehavior: UIAttachmentBehavior?
     // 技术指标名称:算法
@@ -335,6 +329,8 @@ class KSKLineChartView: UIView {
         //长按时间为0.5秒
         longPress.minimumPressDuration                     = 0.5
         self.addGestureRecognizer(longPress)
+        
+        self.animator.delegate                             = self
     }
 
     private func initViewState() {
@@ -357,14 +353,6 @@ class KSKLineChartView: UIView {
         self.selectedXAxisLabel?.isHidden        = true
         self.sightView?.isHidden                 = true
     }
-    
-    /*
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        //布局完成重绘
-        self.drawLayerView()
-    }
-    */
     
     public func scrollPositionEnd() -> Bool {
         if self.pref.rangeTo == 0 || self.pref.plotCount < self.pref.range {
@@ -1556,11 +1544,8 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         case .began:
             self.animator.removeAllBehaviors()
         case .changed:
-            
             //计算移动距离的绝对值，距离满足超过线条宽度就进行图表平移刷新
             let distance = abs(translation.x)
-            //print("translation.x = \(translation.x)")
-            //print("distance = \(distance)")
             if distance > plotWidth {
                 let isRight = translation.x > 0 ? true : false
                 let interval = lroundf(abs(Float(distance / plotWidth)))
@@ -1570,40 +1555,33 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
             }
             
         case .ended, .cancelled:
-            
             //重置减速开始
-            self.pref.decelerationStartX         = 0
+            self.pref.decelerationStartX    = 0
             //添加减速行为
             self.dynamicItem.center         = self.bounds.origin
             let decelerationBehavior        = UIDynamicItemBehavior(items: [self.dynamicItem])
             decelerationBehavior.addLinearVelocity(velocity, for: self.dynamicItem)
             decelerationBehavior.resistance = 2.0
             decelerationBehavior.action = {[weak self]() -> Void in
-                //print("self.dynamicItem.x = \(self?.dynamicItem.center.x ?? 0)")
-                
                 //到边界不执行移动
                 if self?.pref.rangeFrom == 0 || self?.pref.rangeTo == self?.pref.plotCount{
                     return
                 }
-                
-                let itemX = self?.dynamicItem.center.x ?? 0
-                let startX = self?.pref.decelerationStartX ?? 0
+                let itemX    = self?.dynamicItem.center.x ?? 0
+                let startX   = self?.pref.decelerationStartX ?? 0
                 //计算移动距离的绝对值，距离满足超过线条宽度就进行图表平移刷新
                 let distance = abs(itemX - startX)
-                //print("distance = \(distance)")
                 if distance > plotWidth {
-                    let isRight              = itemX > 0 ? true : false
-                    let interval             = lroundf(abs(Float(distance / plotWidth)))
+                    let isRight                   = itemX > 0 ? true : false
+                    let interval                  = lroundf(abs(Float(distance / plotWidth)))
                     self?.moveChart(by: interval, direction: isRight)
                     //重新计算起始位
                     self?.pref.decelerationStartX = itemX
                 }
             }
-            
             //添加动力行为
             self.animator.addBehavior(decelerationBehavior)
             self.decelerationBehavior = decelerationBehavior
-
         default:
             break
         }
@@ -1611,8 +1589,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     
     /// 点击事件处理
     @objc func doTapAction(_ sender: UITapGestureRecognizer) {
-        
-        guard self.enableTap else {
+        if self.enableTap == false {
             return
         }
         
@@ -1627,11 +1604,38 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
             }
             else{
                 //显示点击选中的内容
-                self.setSelectedIndexByPoint(point)
+                //self.setSelectedIndexByPoint(point)
             }
         }
+        /*
+        if sender.state == .ended {
+            self.showSelection = false
+        }
         
+        switch sender.state {
+        case .possible:
+            print("possible")
+            break
+        case .began:
+            print("began")
+            break
+        case .changed:
+            print("changed")
+            break
+        case .ended:
+            print("ended")
+            break
+        case .cancelled:
+            print("cancelled")
+            break
+        case .failed:
+            print("failed")
+            break
+        default:
+            print("Other")
+        }
         self.delegate?.kLineChartTapAction?(chart: self)
+        */
     }
     
     /// 双指手势缩放图表
@@ -1668,10 +1672,17 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         let distance = abs(self.pref.range - newRange)
         //放大缩小的距离为偶数
         if distance % 2 == 0 && distance > 0 {
-            //print("scale = \(scale)")
             let enlarge = scale > 1 ? true : false
             self.zoomChart(by: distance / 2, enlarge: enlarge)
             sender.scale = 1 //恢复比例
+        }
+        switch sender.state {
+        case .began:
+            self.pref.isChangedRange = true
+        case .ended:
+            self.pref.isChangedRange = false
+        default:
+            print("---- Error  ----")
         }
     }
     
@@ -1695,5 +1706,15 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                 self.setSelectedIndexByPoint(point)
             }
         }
+    }
+}
+
+extension KSKLineChartView: UIDynamicAnimatorDelegate {
+    func dynamicAnimatorWillResume(_ animator: UIDynamicAnimator) {
+        self.pref.isChangedRange = true
+    }
+
+    func dynamicAnimatorDidPause(_ animator: UIDynamicAnimator) {
+        self.pref.isChangedRange = false
     }
 }

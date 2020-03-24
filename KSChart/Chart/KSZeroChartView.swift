@@ -27,17 +27,6 @@ class KSZeroChartView: KSKLineChartView {
         self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
     }
 
-    /// 平移拖动操作
-    ///
-    /// - Parameter sender: 手势
-    override func doPanAction(_ sender: UIPanGestureRecognizer) {
-        //防止数量较少时,显示异常
-        if self.pref.plotCount < self.pref.minCandleCount {
-            return
-        }
-        super.doPanAction(sender)
-    }
-    
     /// 处理长按操作
     ///
     /// - Parameter sender:
@@ -57,17 +46,7 @@ class KSZeroChartView: KSKLineChartView {
         }
         self.delegate?.kLineChartTapAction?(chart: self)
     }
-    
-    /// 双指手势缩放图表
-    ///
-    /// - Parameter sender: 手势
-    @objc override func doPinchAction(_ sender: UIPinchGestureRecognizer) {
-        if self.pref.plotCount < self.pref.minCandleCount {
-            return
-        }
-        super.doPinchAction(sender)
-    }
-    
+
     /// 绘制图表分区上的系列点
     ///
     /// - Parameter serie:
@@ -234,25 +213,22 @@ class KSZeroChartView: KSKLineChartView {
             
             //闭包，建立每个分区，分区几个回调几次
             self.buildSections {(section, index) in
-                
+
                 //获取各section的小数保留位数
                 let decimal     = self.delegate?.kLineChart?(chart: self, decimalAt: index) ?? 2
                 section.decimal = decimal
-                
+
                 //初始Y轴的数据
                 self.initYAxis(section)
-                
+
                 //绘制每个区域
                 self.drawSection(section)//[绘制每个区域顶部区域]
-                
-                xAxisToDraw = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
-
-                //绘制图表的点线
-                self.drawChart(section)//[--- 绘制每个区域主视图(绘制K线/均价曲线/成交量/指数指标) ---]
-
+                xAxisToDraw     = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
+               //绘制图表的点线
+               self.drawChart(section)//[--- 绘制每个区域主视图(绘制K线/均价曲线/成交量/指数指标) ---]
                 //把标题添加到主绘图层上
                 self.drawLayer.addSublayer(section.titleLayer)//[绘制最顶部价格/指标值等数据]
-                
+
                 //绘制顶部指标
                 if self.showSelection == false {
                     if self.datas.count > 0 {
