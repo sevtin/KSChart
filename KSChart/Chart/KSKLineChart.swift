@@ -144,7 +144,7 @@ struct KSChartPref {
     var range: Int                           = 60//显示在可见区域的个数
     var decelerationStartX: CGFloat          = 0//减速开始x
     var isCrosshair: Bool                    = false//是否显示准星
-    var isChangedRange: Bool                 = true//区域是否发生了改变
+
 }
 
 class KSKLineChartView: UIView {
@@ -329,8 +329,6 @@ class KSKLineChartView: UIView {
         //长按时间为0.5秒
         longPress.minimumPressDuration                     = 0.5
         self.addGestureRecognizer(longPress)
-        
-        self.animator.delegate                             = self
     }
 
     private func initViewState() {
@@ -1657,14 +1655,6 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
             self.zoomChart(by: distance / 2, enlarge: enlarge)
             sender.scale = 1 //恢复比例
         }
-        switch sender.state {
-        case .began:
-            self.pref.isChangedRange = true
-        case .ended:
-            self.pref.isChangedRange = false
-        default:
-            print("---- Error  ----")
-        }
     }
     
     /// 处理长按操作
@@ -1687,15 +1677,5 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                 self.setSelectedIndexByPoint(point)
             }
         }
-    }
-}
-
-extension KSKLineChartView: UIDynamicAnimatorDelegate {
-    func dynamicAnimatorWillResume(_ animator: UIDynamicAnimator) {
-        self.pref.isChangedRange = true
-    }
-
-    func dynamicAnimatorDidPause(_ animator: UIDynamicAnimator) {
-        self.pref.isChangedRange = false
     }
 }

@@ -203,7 +203,6 @@ class KSZeroChartView: KSKLineChartView {
 
     /// 通过CALayer方式画图表
     override func drawLayerView() {
-        
         //先清空图层
         self.removeLayerView()
         //初始化数据
