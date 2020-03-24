@@ -41,4 +41,4 @@ class KSKChartView: KSBaseView {
 }
 ```
 ## Next Version
-进一步优化CUP占用率（预计2019年4月底发布）
+进一步优化CUP占用率（预计2020年4月底发布）
