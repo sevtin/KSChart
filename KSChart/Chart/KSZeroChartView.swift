@@ -26,7 +26,7 @@ class KSZeroChartView: KSKLineChartView {
         //回调给代理委托方法
         self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
     }
-
+    
     /// 处理长按操作
     ///
     /// - Parameter sender:
@@ -46,27 +46,11 @@ class KSZeroChartView: KSKLineChartView {
         }
         self.delegate?.kLineChartTapAction?(chart: self)
     }
-
-    /// 绘制图表分区上的系列点
-    ///
-    /// - Parameter serie:
-    /// - Returns:
-    override func drawSerie(_ serie: KSSeries) -> KSShapeLayer {
-        if !serie.hidden {
-            //循环画出每个模型的线
-            for model in serie.chartModels {
-                let serieLayer = model.drawSerie(self.pref.rangeFrom, endIndex: self.pref.rangeTo)
-                serie.seriesLayer.addSublayer(serieLayer)
-            }
-        }
-        return serie.seriesLayer
-    }
     
     /// 显示选中的数据点的时间和价格
     ///
     /// - Parameter point:
     override func setSelectedIndexByPoint(_ point: CGPoint) {
-        
         if self.enableTap == false {
             return
         }
