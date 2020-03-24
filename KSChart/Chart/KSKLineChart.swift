@@ -1009,7 +1009,6 @@ extension KSKLineChartView {
         self.drawLayer.addSublayer(sectionLayer)
 
         let borderPath         = UIBezierPath()
-
         //画底部边线
         if self.style.borderWidth.bottom > 0 {
             borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.size.height + section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: self.style.borderWidth.bottom)))
@@ -1196,7 +1195,6 @@ extension KSKLineChartView {
             yAxisLabel.contentsScale   = UIScreen.main.scale
 
             self.drawLayer.addSublayer(yAxisLabel)
-            //NSString(string: strValue).draw(in: yLabelRect, withAttributes: fontAttributes)
         }
     }
     
@@ -1323,10 +1321,8 @@ extension KSKLineChartView {
         guard let section = self.style.sections[safe: index], section.valueType == .assistant else {
             return
         }
-        
         section.hidden = hidden
     }
-    
     
     /// 缩放图表
     ///
@@ -1431,17 +1427,6 @@ extension KSKLineChartView {
         self.pref.range = self.pref.rangeTo - self.pref.rangeFrom
     }
     
-    /*
-    /// 生成截图
-    var image: UIImage {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
-        self.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return capturedImage!
-    }
-    */
-    
     /// 手动设置分区头部文本显示内容
     ///
     /// - Parameters:
@@ -1451,7 +1436,6 @@ extension KSKLineChartView {
         guard let section = self.style.sections[safe: section] else {
             return
         }
-        
         //设置标题
         section.setHeader(titles: titles)
     }
@@ -1466,7 +1450,6 @@ extension KSKLineChartView {
             return
         }
         section.series.append(series)
-        
         self.drawLayerView()
     }
     
@@ -1479,9 +1462,7 @@ extension KSKLineChartView {
         guard let section = self.style.sections[safe: section] else {
             return
         }
-        
         section.removeSeries(key: key)
-        
         self.drawLayerView()
     }
 }
@@ -1698,7 +1679,7 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         let point = sender.location(in: self)
         let (_, section) = self.getSectionByTouchPoint(point)
         if section != nil {
-            if section?.valueType == .assistant {//测试
+            if section?.valueType == .assistant {
                 return
             }
             if !section!.paging {
