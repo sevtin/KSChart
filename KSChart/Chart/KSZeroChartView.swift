@@ -10,7 +10,7 @@ import UIKit
 
 class KSZeroChartView: KSKLineChartView {
 
-    /// 设置选中的数据点,并回调
+    /// 设置选中的数据点,并回调 10%
     ///
     /// - Parameter index: 选中位置
     override func setSelectedByIndex(_ index: Int) {
@@ -31,14 +31,11 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter sender:
     override func doLongPressAction(_ sender: UILongPressGestureRecognizer) {
-        
         super.doLongPressAction(sender)
-        
-        self.buildSections {(section, index) in
+        for section in self.style.sections {
             //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
             section.drawCustomTitle(self.pref.selectedIndex)
         }
-        
         switch sender.state {
         case .ended:
             self.hideCross()
@@ -51,6 +48,7 @@ class KSZeroChartView: KSKLineChartView {
     ///
     /// - Parameter point:
     override func setSelectedIndexByPoint(_ point: CGPoint) {
+        
         if self.enableTap == false {
             return
         }
@@ -164,6 +162,7 @@ class KSZeroChartView: KSKLineChartView {
                 if self.pref.isCrosshair {
                     self.sightView?.center     = CGPoint(x: hx, y: vy)
                 }
+                
                 self.bringSubviewToFront(self.verticalLineView!)
                 self.bringSubviewToFront(self.horizontalLineView!)
                 self.bringSubviewToFront(self.selectedXAxisLabel!)

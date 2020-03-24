@@ -180,7 +180,7 @@ extension KSSection {
     ///
     /// - Parameter title: 标题内容
     func drawTitleForHeader(title: NSAttributedString) {
-
+        
         if self.showTitle == false {
             return
         }

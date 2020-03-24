@@ -79,14 +79,20 @@ class KSChartValueView: KSBaseView {
         }
     }
     
+    let openTitle = String.ks_localizde("ks_app_global_text_open") + ": "
+    let closeTitle = String.ks_localizde("ks_app_global_text_close") + ": "
+    let highTitle = String.ks_localizde("ks_app_global_text_maxhigh") + ": "
+    let lowTitle = String.ks_localizde("ks_app_global_text_maxlow") + ": "
+    let changeTitle = String.ks_localizde("ks_app_global_text_chg") + ": "
+    
+    
     func update(value: KSChartItem) {
         self.showKit()
-        
-        value.setOpenValue(textLabel: openLabel,extra: "\(String.ks_localizde("ks_app_global_text_open")): ")
-        value.setCloseValue(textLabel: closeLabel,extra: "\(String.ks_localizde("ks_app_global_text_close")): ")
-        value.setHighValue(textLabel: highLabel,extra: "\(String.ks_localizde("ks_app_global_text_maxhigh")): ")
-        value.setLowValue(textLabel: lowLabel,extra: "\(String.ks_localizde("ks_app_global_text_maxlow")): ")
-        value.setChangePercentValue(textLabel: chgLabel, extra: "\(String.ks_localizde("ks_app_global_text_chg")): ")
+        value.setOpenValue(textLabel: openLabel,extra: openTitle)
+        value.setCloseValue(textLabel: closeLabel,extra: closeTitle)
+        value.setHighValue(textLabel: highLabel,extra: highTitle)
+        value.setLowValue(textLabel: lowLabel,extra: lowTitle)
+        value.setChangePercentValue(textLabel: chgLabel, extra: changeTitle)
         dateLabel.text = Date.ks_formatTimeStamp(timeStamp: value.time, format: dateFormart)
     }
 }

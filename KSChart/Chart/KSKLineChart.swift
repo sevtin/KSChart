@@ -1571,7 +1571,6 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         if self.enableTap == false {
             return
         }
-        
         let point = sender.location(in: self)
         let tuple = self.getSectionByTouchPoint(point)
         if let section = tuple.1 {

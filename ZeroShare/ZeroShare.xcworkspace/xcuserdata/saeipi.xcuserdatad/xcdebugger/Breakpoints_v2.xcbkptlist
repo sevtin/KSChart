@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "936E12B9-4BA9-4F77-85FA-11945CC11500"
+            uuid = "D78BFA77-5C50-401A-9272-035D4269FB7A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../KSChart/Chart/KSKLineChart.swift"
+            filePath = "../KSChart/Chart/KSZeroChartView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "673"
-            endingLineNumber = "673"
-            landmarkName = "drawLayerView()"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "setSelectedIndexByPoint(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
