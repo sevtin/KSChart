@@ -21,7 +21,6 @@ class KSZeroChartView: KSKLineChartView {
         guard index >= self.pref.rangeFrom && index < self.pref.rangeTo else {
             return
         }
-        self.pref.selectedIndex = index
         let item                = self.datas[index]
         //回调给代理委托方法
         self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
@@ -32,18 +31,23 @@ class KSZeroChartView: KSKLineChartView {
     /// - Parameter sender:
     override func doLongPressAction(_ sender: UILongPressGestureRecognizer) {
         super.doLongPressAction(sender)
-        for section in self.style.sections {
-            //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
-            section.drawCustomTitle(self.pref.selectedIndex)
-        }
+
         switch sender.state {
         case .ended:
             self.hideCross()
         default: break
         }
-        self.delegate?.kLineChartTapAction?(chart: self)
+        
+        if self.pref.isLongPressMoveX {
+            for section in self.style.sections {
+                //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
+                section.drawCustomTitle(self.pref.selectedIndex)
+            }
+            self.delegate?.kLineChartTapAction?(chart: self)
+        }
     }
     
+    /*
     /// 显示选中的数据点的时间和价格
     ///
     /// - Parameter point:
@@ -156,7 +160,7 @@ class KSZeroChartView: KSKLineChartView {
                 self.selectedXAxisLabel?.frame = CGRect(x: x, y: showXAxisSection.frame.maxY, width: size.width  + 6, height: self.labelSize.height)
                 
                 //给用户进行最后的自定义
-                self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
+                //self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
                 
                 self.showSelection = true
                 if self.pref.isCrosshair {
@@ -177,7 +181,7 @@ class KSZeroChartView: KSKLineChartView {
                 break
             }
         }
-    }
+    }*/
     
     private func hideCross() {
         self.showSelection = false

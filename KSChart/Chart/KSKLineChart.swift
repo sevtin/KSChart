@@ -94,7 +94,7 @@ enum KSSelectedPosition {
     ///   - chart: 图表
     ///   - yAxis: 可给用户自定义的y轴显示标签
     ///   - viewOfXAxis: 可给用户自定义的x轴显示标签
-    @objc optional func kLineChart(chart: KSKLineChartView, viewOfYAxis yAxis: UILabel, viewOfXAxis: UILabel)
+    //@objc optional func kLineChart(chart: KSKLineChartView, viewOfYAxis yAxis: UILabel, viewOfXAxis: UILabel)
     
     /// 自定义section的头部View显示内容
     ///
@@ -144,7 +144,7 @@ struct KSChartPref {
     var range: Int                           = 60//显示在可见区域的个数
     var decelerationStartX: CGFloat          = 0//减速开始x
     var isCrosshair: Bool                    = false//是否显示准星
-
+    var isLongPressMoveX: Bool               = true//长按时X轴是否移动触点
 }
 
 class KSKLineChartView: UIView {
@@ -487,14 +487,42 @@ class KSKLineChartView: UIView {
         if section == nil {
             return
         }
-        
+
         let visiableSections = self.style.sections.filter { !$0.hidden }
         guard let lastSection = visiableSections.last else {
             return
         }
         
-        let showXAxisSection                     = self.getSecionWhichShowXAxis()
+        //每个点的宽度
+        let plotWidth    = latticeWidth(section: section!)// (section!.frame.size.width - section!.padding.left - section!.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
+        var ixs: CGFloat = 0
+        var ixe: CGFloat = 0
+        var isNext: Bool = false
 
+        for i in self.pref.rangeFrom...self.pref.rangeTo - 1 {
+            //每个点的宽度 * index + 内视图左边偏移 + 自身左边偏移
+            ixs = plotWidth * CGFloat(i - self.pref.rangeFrom) + section!.padding.left + self.style.padding.left
+            ixe = plotWidth * CGFloat(i - self.pref.rangeFrom + 1) + section!.padding.left + self.style.padding.left
+            
+            //点在区间内
+            if ixs <= point.x && point.x < ixe {
+                if self.pref.selectedIndex == i {
+                    self.pref.isLongPressMoveX = false
+                    return
+                }
+                isNext                     = true
+                self.pref.isLongPressMoveX = true
+                self.pref.selectedIndex    = i
+                break
+            }
+        }
+        if isNext == false {
+            return
+        }
+        
+        self.pref.selectedPoint                  = point
+        let showXAxisSection                     = self.getSecionWhichShowXAxis()
+        /*
         //重置文字颜色和字体
         self.selectedYAxisLabel?.font            = self.style.labelFont
         self.selectedYAxisLabel?.backgroundColor = self.style.selectedBGColor
@@ -502,115 +530,95 @@ class KSKLineChartView: UIView {
         self.selectedXAxisLabel?.font            = self.style.labelFont
         self.selectedXAxisLabel?.backgroundColor = self.style.selectedBGColor
         self.selectedXAxisLabel?.textColor       = self.style.selectedTextColor
-
+        */
         let yaxis                                = section!.yAxis
         let format                               = "%.".appendingFormat("%df", yaxis.decimal)
-
-        self.pref.selectedPoint                  = point
-
-        //每个点的宽度
-        let plotWidth                            = latticeWidth(section: section!)// (section!.frame.size.width - section!.padding.left - section!.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
-
-        var yVal: CGFloat                        = 0//获取y轴坐标的实际值
         
-        for i in self.pref.rangeFrom...self.pref.rangeTo - 1 {
-            //每个点的宽度 * index + 内视图左边偏移 + 自身左边偏移
-            let ixs = plotWidth * CGFloat(i - self.pref.rangeFrom) + section!.padding.left + self.style.padding.left
-            let ixe = plotWidth * CGFloat(i - self.pref.rangeFrom + 1) + section!.padding.left + self.style.padding.left
+        var yVal: CGFloat                        = 0//获取y轴坐标的实际值
+        let currentIndex: Int                    = self.pref.selectedIndex
 
-            //点在区间内
-            if ixs <= point.x && point.x < ixe {
-                self.pref.selectedIndex             = i
-                let item                       = self.datas[i]
-                var hx                         = section!.frame.origin.x + section!.padding.left
-                hx                             = hx + plotWidth * CGFloat(i - self.pref.rangeFrom) + plotWidth / 2
-                let hy                         = self.style.padding.top
-                let hheight                    = lastSection.frame.maxY
-                //显示辅助线
-                self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: self.pref.lineWidth, height: hheight - hy)
-                //self.horizontalLineView?.isHidden = false
+        let item                                 = self.datas[currentIndex]
+        var hx                                   = section!.frame.origin.x + section!.padding.left
+        hx                                       = hx + plotWidth * CGFloat(currentIndex - self.pref.rangeFrom) + plotWidth / 2
+        let hy                                   = self.style.padding.top
+        let hheight                              = lastSection.frame.maxY
+        //显示辅助线
+        self.horizontalLineView?.frame           = CGRect(x: hx, y: hy, width: self.pref.lineWidth, height: hheight - hy)
+        //self.horizontalLineView?.isHidden = false
 
-                let vx                         = section!.frame.origin.x + section!.padding.left
-                var vy: CGFloat                = 0
-                
-                //处理水平线y的值
-                switch self.pref.selectedPosition {
-                case .free:
-                    vy = point.y
-                    yVal = section!.getRawValue(point.y) //获取y轴坐标的实际值
-                case .onClosePrice:
-                    if let series = section?.getSeries(key: KSSeriesKey.candle), !series.hidden {
-                        yVal = item.closePrice          //获取收盘价作为实际值
-                    }
-                    else if let series = section?.getSeries(key: KSSeriesKey.timeline), !series.hidden {
-                        yVal = item.closePrice          //获取收盘价作为实际值
-                    }
-                    else if let series = section?.getSeries(key: KSSeriesKey.volume), !series.hidden {
-                        yVal = item.vol                 //获取交易量作为实际值
-                    }
-                    
-                    vy = section!.getLocalY(yVal)
-                    
-                }
-                let hwidth = section!.frame.size.width - section!.padding.left - section!.padding.right
-                //显示辅助线
-                self.verticalLineView?.frame = CGRect(x: vx, y: vy - self.pref.lineWidth / 2, width: hwidth, height: self.pref.lineWidth)
-                //self.verticalLineView?.isHidden = false
-                
-                //显示y轴辅助内容
-                //控制y轴的label在左还是右显示
-                var yAxisStartX: CGFloat = 0
-                //self.selectedYAxisLabel?.isHidden = false
-                //self.selectedXAxisLabel?.isHidden = false
-                switch self.style.showYAxisLabel {
-                case .left:
-                    yAxisStartX = section!.frame.origin.x
-                case .right:
-                    yAxisStartX = section!.frame.maxX - self.pref.yAxisLabelWidth
-                case .none:
-                    self.selectedYAxisLabel?.isHidden = true
-                }
-                self.selectedYAxisLabel?.text  = String(format: format, yVal)//显示实际值
-                self.selectedYAxisLabel?.frame = CGRect(x: yAxisStartX, y: vy - self.labelSize.height / 2, width: self.pref.yAxisLabelWidth, height: self.labelSize.height)
-                let time                       = Date.ks_getTimeByStamp(item.time, format: "yyyy-MM-dd HH:mm")//显示实际值
-                let size                       = time.ks_sizeWithConstrained(self.style.labelFont)
-                self.selectedXAxisLabel?.text  = time
+        let vx                                   = section!.frame.origin.x + section!.padding.left
+        var vy: CGFloat                          = 0
 
-                //判断x是否超过左右边界
-                let labelWidth = size.width  + 6
-                var x = hx - (labelWidth) / 2
-                
-                if x < section!.frame.origin.x {
-                    x = section!.frame.origin.x
-                } else if x + labelWidth > section!.frame.origin.x + section!.frame.size.width {
-                    x = section!.frame.origin.x + section!.frame.size.width - labelWidth
-                }
-                
-                self.selectedXAxisLabel?.frame = CGRect(x: x, y: showXAxisSection.frame.maxY, width: size.width  + 6, height: self.labelSize.height)
-                
-                if self.pref.isCrosshair {
-                    self.sightView?.center     = CGPoint(x: hx, y: vy)
-                }
-                
-                //给用户进行最后的自定义
-                self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
-                
-                self.showSelection = true
-                
-                self.bringSubviewToFront(self.verticalLineView!)
-                self.bringSubviewToFront(self.horizontalLineView!)
-                self.bringSubviewToFront(self.selectedXAxisLabel!)
-                self.bringSubviewToFront(self.selectedYAxisLabel!)
-                if self.pref.isCrosshair {
-                    self.bringSubviewToFront(self.sightView!)
-                }
-                
-                //设置选中点
-                self.setSelectedByIndex(i)
-                
-                break
+        //处理水平线y的值
+        switch self.pref.selectedPosition {
+        case .free:
+            vy = point.y
+            yVal = section!.getRawValue(point.y) //获取y轴坐标的实际值
+        case .onClosePrice:
+            if let series = section?.getSeries(key: KSSeriesKey.candle), !series.hidden {
+                yVal = item.closePrice          //获取收盘价作为实际值
             }
+            else if let series = section?.getSeries(key: KSSeriesKey.timeline), !series.hidden {
+                yVal = item.closePrice          //获取收盘价作为实际值
+            }
+            else if let series = section?.getSeries(key: KSSeriesKey.volume), !series.hidden {
+                yVal = item.vol                 //获取交易量作为实际值
+            }
+            
+            vy = section!.getLocalY(yVal)
         }
+        
+        let hwidth = section!.frame.size.width - section!.padding.left - section!.padding.right
+        //显示辅助线
+        self.verticalLineView?.frame = CGRect(x: vx, y: vy - self.pref.lineWidth / 2, width: hwidth, height: self.pref.lineWidth)
+
+        //控制y轴的label在左还是右显示
+        var yAxisStartX: CGFloat = 0
+        switch self.style.showYAxisLabel {
+        case .left:
+            yAxisStartX = section!.frame.origin.x
+        case .right:
+            yAxisStartX = section!.frame.maxX - self.pref.yAxisLabelWidth
+        case .none:
+            self.selectedYAxisLabel?.isHidden = true
+        }
+        self.selectedYAxisLabel?.text  = String(format: format, yVal)//显示实际值
+        self.selectedYAxisLabel?.frame = CGRect(x: yAxisStartX, y: vy - self.labelSize.height / 2, width: self.pref.yAxisLabelWidth, height: self.labelSize.height)
+        let time                       = Date.ks_getTimeByStamp(item.time, format: "yyyy-MM-dd HH:mm")//显示实际值
+        let size                       = time.ks_sizeWithConstrained(self.style.labelFont)
+        self.selectedXAxisLabel?.text  = time
+        
+        //判断x是否超过左右边界
+        let labelWidth = size.width  + 6
+        var x = hx - (labelWidth) / 2
+        
+        if x < section!.frame.origin.x {
+            x = section!.frame.origin.x
+        } else if x + labelWidth > section!.frame.origin.x + section!.frame.size.width {
+            x = section!.frame.origin.x + section!.frame.size.width - labelWidth
+        }
+        
+        self.selectedXAxisLabel?.frame = CGRect(x: x, y: showXAxisSection.frame.maxY, width: size.width  + 6, height: self.labelSize.height)
+        
+        if self.pref.isCrosshair {
+            self.sightView?.center     = CGPoint(x: hx, y: vy)
+        }
+        
+        //给用户进行最后的自定义
+        //self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
+        
+        self.showSelection = true
+        
+        self.bringSubviewToFront(self.verticalLineView!)
+        self.bringSubviewToFront(self.horizontalLineView!)
+        self.bringSubviewToFront(self.selectedXAxisLabel!)
+        self.bringSubviewToFront(self.selectedYAxisLabel!)
+        if self.pref.isCrosshair {
+            self.bringSubviewToFront(self.sightView!)
+        }
+        
+        //设置选中点
+        self.setSelectedByIndex(currentIndex)
     }
     
     /// 设置选中的数据点,并回调
@@ -626,8 +634,7 @@ class KSKLineChartView: UIView {
             return
         }
         
-        self.pref.selectedIndex = index
-        let item           = self.datas[index]
+        let item                = self.datas[index]
 
         //显示分区的header标题
         for (_, section) in self.style.sections.enumerated() {
