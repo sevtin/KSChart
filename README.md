@@ -3,11 +3,11 @@
 
 ![candle](https://github.com/saeipi/KSChart/blob/master/Resources/candle.jpg)
 
-![Cross](https://github.com/saeipi/KSChart/blob/master/Resources/Cross.png)
+![Cross](https://github.com/saeipi/KSChart/blob/master/Resources/cross.jpg)
 
 ### 以下为模拟器数据，真机示例内存占用为12M（500多条K线数据），机型不同CPU占用差异会比较大，老设备在滑动时帧数会有所下降
-![cpu](https://github.com/saeipi/KSChart/blob/master/Resources/cpu.jpeg)
-![memory](https://github.com/saeipi/KSChart/blob/master/Resources/memory.jpeg)
+![cpu](https://github.com/saeipi/KSChart/blob/master/Resources/cpu.jpg)
+![memory](https://github.com/saeipi/KSChart/blob/master/Resources/memory.jpg)
 
 反馈/技术交流群:902071358
 
