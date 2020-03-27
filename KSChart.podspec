@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "KSChart"
-  spec.version      = "1.1.0"
+  spec.version      = "1.3.5"
   spec.summary      = "KChart."
 
   # This description is used to generate tags and improve search results.
@@ -81,7 +81,7 @@ swift 版k线
   #
 
   spec.source       = { :git => "https://github.com/saeipi/KSChart.git", :tag => "#{spec.version}" }
-  spec.swift_version = '5.0'
+  spec.swift_version = '5.1'
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -93,7 +93,7 @@ swift 版k线
   #
 
   spec.source_files  = "KSChart", "KSChart/**/*"
-  spec.exclude_files = "ZeroShare"
+  spec.exclude_files = "ZeroShare", "Resources"
 
   # spec.public_header_files = "Classes/**/*.h"
 
