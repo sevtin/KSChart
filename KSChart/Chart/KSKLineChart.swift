@@ -950,12 +950,18 @@ extension KSKLineChartView {
             
             //需要画x轴上的辅助线
             if showXAxisReference {
-                referencePath.move(to: CGPoint(x: xPox + textSize.width / 2, y: section.frame.minY))
-                referencePath.addLine(to: CGPoint(x: xPox + textSize.width / 2, y: section.frame.maxY))
+                var xPoint: CGFloat = 0
+                if k == 0 {
+                    xPoint = perPlotWidth / 2
+                }
+                else{
+                    xPoint = xPox + textSize.width / 2
+                }
+                referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY))
+                referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY))
                 referenceLayer.path = referencePath.cgPath
                 xAxis.addSublayer(referenceLayer)
             }
-
             k      = k + xTickInterval
             startX = perPlotWidth * CGFloat(k)
         }
