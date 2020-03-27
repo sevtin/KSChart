@@ -1593,6 +1593,8 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                 //self.setSelectedIndexByPoint(point)
             }
         }
+        self.delegate?.kLineChartTapAction?(chart: self)
+        
         /*
         if sender.state == .ended {
             self.showSelection = false
@@ -1620,7 +1622,6 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         default:
             print("Other")
         }
-        self.delegate?.kLineChartTapAction?(chart: self)
         */
     }
     
