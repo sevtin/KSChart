@@ -584,7 +584,8 @@ class KSKLineChartView: UIView {
         }
         self.selectedYAxisLabel?.text  = String(format: format, yVal)//显示实际值
         self.selectedYAxisLabel?.frame = CGRect(x: yAxisStartX, y: vy - self.labelSize.height / 2, width: self.pref.yAxisLabelWidth, height: self.labelSize.height)
-        let time                       = Date.ks_getTimeByStamp(item.time, format: "yyyy-MM-dd HH:mm")//显示实际值
+        let dateFormat                 = self.delegate?.kLineChart?(chart: self, labelOnXAxisForIndex: currentIndex) ?? "MM-dd HH:mm"
+        let time                       = Date.ks_getTimeByStamp(item.time, format: dateFormat)//显示时间
         let size                       = time.ks_sizeWithConstrained(self.style.labelFont)
         self.selectedXAxisLabel?.text  = time
         
