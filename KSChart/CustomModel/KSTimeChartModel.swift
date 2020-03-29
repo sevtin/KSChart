@@ -97,14 +97,14 @@ class KSTimeChartModel: KSChartModel {
     }
     
     lazy var breathLightLayer: KSShapeLayer = {
-    let circleLayer                         = KSShapeLayer()
-    let circlepath                          = UIBezierPath.init(arcCenter: CGPoint.init(x: 1, y: 1),
-                                                                radius: 2,
-                                                                startAngle: 0,
-                                                                endAngle: CGFloat(Double.pi * 2.0),
-                                                                clockwise: false)
-    circleLayer.path                        = circlepath.cgPath
-    circleLayer.fillColor                   = self.upStyle.color.cgColor
+        let circleLayer                         = KSShapeLayer()
+        let circlepath                          = UIBezierPath.init(arcCenter: CGPoint.init(x: 1, y: 1),
+                                                                    radius: 2,
+                                                                    startAngle: 0,
+                                                                    endAngle: CGFloat(Double.pi * 2.0),
+                                                                    clockwise: false)
+        circleLayer.path                        = circlepath.cgPath
+        circleLayer.fillColor                   = self.upStyle.color.cgColor
         circleLayer.add(self.getbreathLightAnimate(2), forKey: nil)
         return circleLayer
     }()
