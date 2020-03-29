@@ -106,7 +106,7 @@
 		E6AB6E6E238BEA5900C9BCF3 /* KSKLineChartStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E52238BEA5900C9BCF3 /* KSKLineChartStyle.swift */; };
 		E6AB6E6F238BEA5900C9BCF3 /* KSSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E53238BEA5900C9BCF3 /* KSSection.swift */; };
 		E6AB6E70238BEA5900C9BCF3 /* KSSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E54238BEA5900C9BCF3 /* KSSeries.swift */; };
-		E6AB6E71238BEA5900C9BCF3 /* KSShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E55238BEA5900C9BCF3 /* KSShapeLayer.swift */; };
+		E6AB6E71238BEA5900C9BCF3 /* KSLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E55238BEA5900C9BCF3 /* KSLayer.swift */; };
 		E6AB6E72238BEA5900C9BCF3 /* KSBollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E57238BEA5900C9BCF3 /* KSBollModel.swift */; };
 		E6AB6E73238BEA5900C9BCF3 /* KSTimeChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E58238BEA5900C9BCF3 /* KSTimeChartModel.swift */; };
 		E6AB6E74238BEA5900C9BCF3 /* KSChartModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5B238BEA5900C9BCF3 /* KSChartModel+Extensions.swift */; };
@@ -231,7 +231,7 @@
 		E6AB6E52238BEA5900C9BCF3 /* KSKLineChartStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSKLineChartStyle.swift; sourceTree = "<group>"; };
 		E6AB6E53238BEA5900C9BCF3 /* KSSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSection.swift; sourceTree = "<group>"; };
 		E6AB6E54238BEA5900C9BCF3 /* KSSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSeries.swift; sourceTree = "<group>"; };
-		E6AB6E55238BEA5900C9BCF3 /* KSShapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSShapeLayer.swift; sourceTree = "<group>"; };
+		E6AB6E55238BEA5900C9BCF3 /* KSLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSLayer.swift; sourceTree = "<group>"; };
 		E6AB6E57238BEA5900C9BCF3 /* KSBollModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSBollModel.swift; sourceTree = "<group>"; };
 		E6AB6E58238BEA5900C9BCF3 /* KSTimeChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSTimeChartModel.swift; sourceTree = "<group>"; };
 		E6AB6E5B238BEA5900C9BCF3 /* KSChartModel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSChartModel+Extensions.swift"; sourceTree = "<group>"; };
@@ -832,7 +832,7 @@
 				E6AB6E52238BEA5900C9BCF3 /* KSKLineChartStyle.swift */,
 				E6AB6E53238BEA5900C9BCF3 /* KSSection.swift */,
 				E6AB6E54238BEA5900C9BCF3 /* KSSeries.swift */,
-				E6AB6E55238BEA5900C9BCF3 /* KSShapeLayer.swift */,
+				E6AB6E55238BEA5900C9BCF3 /* KSLayer.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -1116,7 +1116,7 @@
 				E61E91C22338EE7C00184885 /* AppDelegate.swift in Sources */,
 				E61E92D42338F05500184885 /* KSKChartView.swift in Sources */,
 				E6AB6E77238BEA5900C9BCF3 /* KSSection+Extensions.swift in Sources */,
-				E6AB6E71238BEA5900C9BCF3 /* KSShapeLayer.swift in Sources */,
+				E6AB6E71238BEA5900C9BCF3 /* KSLayer.swift in Sources */,
 				E61E92BC2338F05500184885 /* KSOrderBookController.swift in Sources */,
 				E6AB6E79238BEA5900C9BCF3 /* CGFloat+KSExtensions.swift in Sources */,
 				E61E926E2338F00F00184885 /* KSConstValue.swift in Sources */,

@@ -86,7 +86,7 @@ class KSTimeChartModel: KSChartModel {
                                           height: self.section.frame.size.height)
         
         if endIndex == self.datas.count {
-            breathLightLayer.frame.origin = CGPoint.init(x: curvelinePath.currentPoint.x-1.5, y: curvelinePath.currentPoint.y-1.5)
+            breathLightLayer.frame.origin = CGPoint.init(x: curvelinePath.currentPoint.x-2, y: curvelinePath.currentPoint.y-2)
             //frame = CGRect.init(x: curvelinePath.currentPoint.x-1.5, y: curvelinePath.currentPoint.y-1.5, width: 3, height: 3)
             serieLayer.addSublayer(breathLightLayer)
         }
@@ -96,24 +96,24 @@ class KSTimeChartModel: KSChartModel {
         return serieLayer
     }
     
-    lazy var breathLightLayer: KSLayer = {
-        let breathLightLayer             = KSLayer()
-        breathLightLayer.backgroundColor = self.upStyle.color.cgColor//UIColor.kschart.color(rgba: "#0095e1").cgColor
-        breathLightLayer.cornerRadius    = 1.5
-        let layer                        = KSLayer()
-        layer.frame                      = CGRect(x: 0, y: 0, width: 3, height: 3)
-        layer.backgroundColor            = self.upStyle.color.cgColor//UIColor.kschart.color(rgba: "#0095e1").cgColor
-        layer.cornerRadius               = 1.5
-        layer.add(self.getbreathLightAnimate(2), forKey: nil)
-        breathLightLayer.addSublayer(layer)
-        return breathLightLayer
+    lazy var breathLightLayer: KSShapeLayer = {
+    let circleLayer                         = KSShapeLayer()
+    let circlepath                          = UIBezierPath.init(arcCenter: CGPoint.init(x: 1, y: 1),
+                                                                radius: 2,
+                                                                startAngle: 0,
+                                                                endAngle: CGFloat(Double.pi * 2.0),
+                                                                clockwise: false)
+    circleLayer.path                        = circlepath.cgPath
+    circleLayer.fillColor                   = self.upStyle.color.cgColor
+        circleLayer.add(self.getbreathLightAnimate(2), forKey: nil)
+        return circleLayer
     }()
     
     /// 获取呼吸灯动画
     private func getbreathLightAnimate(_ time:Double) -> CAAnimationGroup {
         let scaleAnimation                     = CABasicAnimation(keyPath: "transform.scale")
         scaleAnimation.fromValue               = 1
-        scaleAnimation.toValue                 = 3.5
+        scaleAnimation.toValue                 = 2
         scaleAnimation.autoreverses            = false
         scaleAnimation.isRemovedOnCompletion   = true
         scaleAnimation.repeatCount             = MAXFLOAT
