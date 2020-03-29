@@ -662,8 +662,8 @@ class KSKLineChartView: UIView {
     private func hideCross() {
         if self.showSelection {
             self.showSelection = false
+            self.delegate?.kLineChart?(chart: self, displayCross: false)
         }
-        self.delegate?.kLineChart?(chart: self, displayCross: false)
     }
 }
 
