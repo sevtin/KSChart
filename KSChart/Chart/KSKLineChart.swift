@@ -658,6 +658,13 @@ class KSKLineChartView: UIView {
         //回调
         self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
     }
+    
+    private func hideCross() {
+        if self.showSelection {
+            self.showSelection = false
+        }
+        self.delegate?.kLineChart?(chart: self, displayCross: false)
+    }
 }
 
 // MARK: - 绘图相关方法
@@ -1675,6 +1682,11 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     ///
     /// - Parameter sender:
     @objc func doLongPressAction(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            self.hideCross()
+        default: break
+        }
         
         if self.pref.rangeFrom >= self.pref.rangeTo {
             return
@@ -1692,4 +1704,5 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
             }
         }
     }
+    
 }

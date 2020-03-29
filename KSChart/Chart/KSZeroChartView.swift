@@ -32,12 +32,6 @@ class KSZeroChartView: KSKLineChartView {
     override func doLongPressAction(_ sender: UILongPressGestureRecognizer) {
         super.doLongPressAction(sender)
 
-        switch sender.state {
-        case .ended:
-            self.hideCross()
-        default: break
-        }
-        
         if self.pref.isLongPressMoveX {
             for section in self.style.sections {
                 //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
@@ -183,11 +177,6 @@ class KSZeroChartView: KSKLineChartView {
         }
     }*/
     
-    private func hideCross() {
-        self.showSelection = false
-        self.delegate?.kLineChart?(chart: self, displayCross: false)
-    }
-
     /// 通过CALayer方式画图表
     override func drawLayerView() {
         //先清空图层
