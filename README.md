@@ -1,4 +1,4 @@
-# KSChart
+# KSChart 效果图
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/time.jpg" alt="分时图" width="600" height="464" align="middle"/>
 
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/candle.jpg" alt="蜡烛图" width="600" height="464" align="middle"/>
