@@ -1,20 +1,18 @@
 # KSChart
-![time](https://github.com/saeipi/KSChart/blob/master/Resources/time.jpg)
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/time.jpg" alt="分时图" width="600" height="464" align="left"/>
 
-![candle](https://github.com/saeipi/KSChart/blob/master/Resources/candle.jpg)
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/candle.jpg" alt="蜡烛图" width="600" height="464" align="left"/>
 
-![Cross](https://github.com/saeipi/KSChart/blob/master/Resources/cross.jpg)
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/cross.jpg" alt="选中单个蜡烛图" width="600" height="464" align="left"/>
 
 ### 以下为模拟器数据，真机示例内存占用为12M（500多条K线数据），机型不同CPU占用差异会比较大，老设备在滑动时帧数会有所下降
-![cpu](https://github.com/saeipi/KSChart/blob/master/Resources/cpu.jpg)
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/cpu.jpg" alt="cpu占用率" width="800" height="341" align="left"/>
 
-![memory](https://github.com/saeipi/KSChart/blob/master/Resources/memory.jpg)
-
-反馈/技术交流群:902071358
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/memory.jpg" alt="memory占用率" width="800" height="449" align="left"/>
 
 ### 如果觉得好用就打个赏呗
-![Alipay](https://github.com/saeipi/KSChart/blob/master/Resources/Alipay.jpg)
-![WeChatPay](https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg)
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/Alipay.jpg" alt="Alipay" width="200" height="251" align="left"/>
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg" alt="WeChatPay" width="200" height="275" align="left"/>
 
 ## 开发环境
 - Xcode 11.0+
@@ -43,3 +41,5 @@ class KSKChartView: KSBaseView {
 ```
 ## Next Version
 进一步优化CUP占用率（预计2020年4月底发布）
+
+反馈/技术交流群:902071358
