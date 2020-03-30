@@ -12,7 +12,7 @@
 
 ### 如果觉得好用就打个赏呗
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/Alipay.jpg" alt="Alipay" width="200" height="251" align="left"/>
-<img src="https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg" alt="WeChatPay" width="200" height="275" align="left"/>
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg" alt="WeChatPay" width="200" height="275" align="middle"/>
 
 ## 开发环境
 - Xcode 11.0+
