@@ -5,7 +5,7 @@
 
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/cross.jpg" alt="选中单个蜡烛图" width="600" height="464" align="middle"/>
 
-### 以下为模拟器数据，真机示例内存占用为12.8M（其中KSChart占用5M左右），机型不同CPU占用差异会比较大，老设备在滑动时帧数会有所下降
+### 真机示例内存占用为12.8M（其中KSChart占用5M左右），机型不同CPU占用差异会比较大，老设备在滑动时帧数会有所下降
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/cpu.jpg" alt="cpu占用率" width="800" height="341" align="middle"/>
 
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/memory.jpg" alt="memory占用率" width="800" height="459" align="middle"/>
