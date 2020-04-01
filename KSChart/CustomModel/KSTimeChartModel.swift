@@ -54,11 +54,11 @@ class KSTimeChartModel: KSChartModel {
             if i == startIndex {
                 startX = axisX - offsetX
                 startY = iyc - offsetY
-                curvelinePath.move(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
+                curvelinePath.move(to: CGPoint(x: startX, y: startY))
             }
             else if i == endIndex - 1 {
                 endX = axisX - offsetX
-                curvelinePath.addLine(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
+                curvelinePath.addLine(to: CGPoint(x: endX, y: iyc - offsetY))
             }
             else{
                 curvelinePath.addLine(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
