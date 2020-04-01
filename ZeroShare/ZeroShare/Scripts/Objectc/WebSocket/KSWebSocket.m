@@ -209,7 +209,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  */
 - (void)sendHeartbeatMessage {
     [self.webSocket sendPing:nil];
-    NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
+    //NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
     //NSMutableDictionary *message = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"heartbeatKey",@"heartbeatValue", nil];
     //[self sendMessage:message];
 }
@@ -260,7 +260,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  @param message   Received message. Either a `String` or `NSData`.
  */
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
+    //NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
     KSWeakSelf;
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([weakSelf.delegate respondsToSelector:@selector(socket:didReceivedMessage:)]) {
@@ -276,7 +276,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  @param string    Received text in a form of UTF-8 `String`.
  */
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithString:(NSString *)string {
-    NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
+    //NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
 }
 
 /**
@@ -286,7 +286,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  @param data      Received data in a form of `NSData`.
  */
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithData:(NSData *)data {
-     NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
+     //NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
 }
 
 #pragma mark Status & Connection
@@ -298,7 +298,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  @param webSocket An instance of `SRWebSocket` that was open.
  */
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-    NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
+    //NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
     _configure.status = KSWebSocketStatusConnected;
     [self defaultValues];
     [self startHeartbeat];
@@ -319,7 +319,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  @param error     An instance of `NSError`.
  */
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
-    NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
+    //NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
     _configure.status = KSWebSocketStatusConnectFail;
     
     [self close];
@@ -345,7 +345,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  @param wasClean  Boolean value indicating whether a socket was closed in a clean state.
  */
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(nullable NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
+    //NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
     _configure.status = KSWebSocketStatusConnectFail;
     
     [self close];
@@ -368,7 +368,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  @param pongData  Payload that was received or `nil` if there was no payload.
  */
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(nullable NSData *)pongData {
-     NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
+     //NSLog(@"%s:%@",__FUNCTION__,[NSThread currentThread]);
 }
 
 -(KSWebSocketConfigure *)configure {

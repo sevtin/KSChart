@@ -12,7 +12,7 @@ class KSTimeChartModel: KSChartModel {
     /// 曲线类型
     var graphType: KSGraphType = .normal
     /// 渐变颜色
-    var gradientColors: [CGColor]?
+    var fillColor: CGColor?
     /// 阴影偏移
     var shadowOffset: CGSize   = CGSize.init(width: 0, height: 2)
     /// 不透明度
@@ -20,35 +20,29 @@ class KSTimeChartModel: KSChartModel {
     
     ///绘制渐变曲线
     override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
-        let serieLayer               = KSShapeLayer()
-        let timelineLayer            = KSShapeLayer()
-        let curvelineLayer           = KSShapeLayer()
-        curvelineLayer.fillColor     = UIColor.clear.cgColor
-        curvelineLayer.strokeColor   = self.upStyle.color.cgColor
-        curvelineLayer.lineWidth     = self.lineWidth
-        curvelineLayer.shadowColor   = self.upStyle.color.cgColor
-        curvelineLayer.shadowOffset  = self.shadowOffset
-        curvelineLayer.shadowOpacity = self.shadowOpacity;
-        //curvelineLayer.lineCap     = .round
-        //curvelineLayer.lineJoin    = .round
-        
-        let timelinePath             = UIBezierPath()
-        timelinePath.lineWidth       = self.lineWidth
-        
-        let curvelinePath            = UIBezierPath()
-        curvelinePath.lineWidth      = self.lineWidth
-        
-        let gradientLayer            = CAGradientLayer()
-        gradientLayer.colors         = gradientColors
-        
+        let serieLayer            = KSShapeLayer()
+        let timelineLayer         = KSShapeLayer()
+        timelineLayer.fillColor   = UIColor.clear.cgColor
+        timelineLayer.strokeColor = self.upStyle.color.cgColor
+
+        let fillLayer             = KSShapeLayer()
+        fillLayer.fillColor       = self.fillColor
+        fillLayer.strokeColor     = UIColor.clear.cgColor
+
+        let curvelinePath         = UIBezierPath()
+        curvelinePath.lineWidth   = self.lineWidth
+
         //每个点的间隔宽度  BOLL宽度 =（宽度 - 左边间隔 - 右边间隔）/（结束点 - 开始点）
-        let plotWidth                = self.latticeWidth(startIndex, endIndex: endIndex)//(self.section.frame.size.width - self.section.padding.left - self.section.padding.right) / CGFloat(endIndex - startIndex)
-        var plotPadding              = plotWidth * self.plotPaddingExt
-        plotPadding                  = plotPadding < 0.25 ? 0.25 : plotPadding
-        let sectionHeight            = self.section.frame.size.height + self.section.padding.top + self.section.padding.bottom
-        let offsetX                  = self.section.frame.origin.x
-        let offsetY                  = self.section.frame.origin.y
-        
+        let plotWidth             = self.latticeWidth(startIndex, endIndex: endIndex)//(self.section.frame.size.width - self.section.padding.left - self.section.padding.right) / CGFloat(endIndex - startIndex)
+        var plotPadding           = plotWidth * self.plotPaddingExt
+        plotPadding               = plotPadding < 0.25 ? 0.25 : plotPadding
+        let sectionHeight         = self.section.frame.size.height
+        let offsetX               = self.section.frame.origin.x
+        let offsetY               = self.section.frame.origin.y
+        var startX: CGFloat       = 0
+        var startY: CGFloat       = 0
+        var endX: CGFloat         = 0
+
         //循环起始到终结
         for i in stride(from: startIndex, to: endIndex, by: 1) {
             let closePrice = datas[i].closePrice
@@ -58,40 +52,33 @@ class KSTimeChartModel: KSChartModel {
             let axisX      = ix + plotWidth / 2
             
             if i == startIndex {
-                timelinePath.move(to: CGPoint(x: axisX - offsetX, y: sectionHeight))
-                timelinePath.addLine(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
-                
-                curvelinePath.move(to: CGPoint(x: axisX, y: iyc))
+                startX = axisX - offsetX
+                startY = iyc - offsetY
+                curvelinePath.move(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
             }
             else if i == endIndex - 1 {
-                timelinePath.addLine(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
-                timelinePath.addLine(to: CGPoint(x: axisX - offsetX, y: sectionHeight))
-                
-                curvelinePath.addLine(to: CGPoint(x: axisX, y: iyc))
+                endX = axisX - offsetX
+                curvelinePath.addLine(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
             }
             else{
-                timelinePath.addLine(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
-                
-                curvelinePath.addLine(to: CGPoint(x: axisX, y: iyc))
+                curvelinePath.addLine(to: CGPoint(x: axisX - offsetX, y: iyc - offsetY))
             }
         }
-        curvelineLayer.path = curvelinePath.cgPath
         
-        timelineLayer.path  = timelinePath.cgPath
-        gradientLayer.mask  = timelineLayer
-        
-        gradientLayer.frame = CGRect.init(x: self.section.frame.origin.x,
-                                          y: self.section.frame.origin.y,
-                                          width: self.section.frame.size.width - self.section.padding.right,
-                                          height: self.section.frame.size.height)
-        
+        timelineLayer.path = curvelinePath.cgPath
         if endIndex == self.datas.count {
             breathLightLayer.frame.origin = CGPoint.init(x: curvelinePath.currentPoint.x-2, y: curvelinePath.currentPoint.y-2)
             //frame = CGRect.init(x: curvelinePath.currentPoint.x-1.5, y: curvelinePath.currentPoint.y-1.5, width: 3, height: 3)
             serieLayer.addSublayer(breathLightLayer)
         }
-        serieLayer.addSublayer(curvelineLayer)
-        serieLayer.addSublayer(gradientLayer)
+        
+        curvelinePath.addLine(to: CGPoint(x: endX, y: sectionHeight))
+        curvelinePath.addLine(to: CGPoint(x: startX, y: sectionHeight))
+        curvelinePath.addLine(to: CGPoint(x: startX, y: startY))
+        fillLayer.path = curvelinePath.cgPath
+        
+        serieLayer.addSublayer(fillLayer)
+        serieLayer.addSublayer(timelineLayer)
         
         return serieLayer
     }

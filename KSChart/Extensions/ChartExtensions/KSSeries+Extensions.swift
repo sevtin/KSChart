@@ -58,7 +58,7 @@ extension KSSeries {
         let series                  = KSSeries()
         series.key                  = KSSeriesKey.timeline
         let timeline                = KSTimeChartModel.geTimeChart(color, title: NSLocalizedString("Price", comment: ""), key: "\(KSSeriesKey.timeline)_\(KSSeriesKey.timeline)")
-        timeline.gradientColors     = [color.withAlphaComponent(0.2).cgColor,color.withAlphaComponent(0.1).cgColor,color.withAlphaComponent(0.05).cgColor]
+        timeline.fillColor          = color.withAlphaComponent(0.1).cgColor
         timeline.graphType          = graphType
         timeline.section            = section
         timeline.useTitleColor      = false
