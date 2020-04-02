@@ -52,7 +52,7 @@ extension UIColor {
     }
 
     //返回随机颜色
-    class var randomColor: UIColor {
+    class var ks_randomColor: UIColor {
         get
         {
             let red = CGFloat(arc4random() % 256) / 255.0

@@ -27,8 +27,8 @@ extension UIButton {
         titleLabel?.font = font
         setTitleColor(normalColor, for: UIControl.State.normal)
         setTitleColor(highlightedColor, for: UIControl.State.highlighted)
-        setBackgroundImage(UIImage.color(bgNormalColor), for: UIControl.State.normal)
-        setBackgroundImage(UIImage.color(bgHighlightedColor), for: UIControl.State.highlighted)
+        setBackgroundImage(UIImage.ks_color(bgNormalColor), for: UIControl.State.normal)
+        setBackgroundImage(UIImage.ks_color(bgHighlightedColor), for: UIControl.State.highlighted)
     }
     
     convenience init(title: String, font: UIFont, normalColor: UIColor?, selectedColor: UIColor?) {

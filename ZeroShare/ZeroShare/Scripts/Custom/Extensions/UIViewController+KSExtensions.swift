@@ -9,14 +9,14 @@
 import UIKit
 
 extension UIViewController {
-    func navigationHeight() -> CGFloat {
+    func ks_navigationHeight() -> CGFloat {
         if let _height = self.navigationController?.navigationBar.frame.size.height {
             return UIApplication.shared.statusBarFrame.height + _height
         }
         return 64
     }
     
-    func tabBarHeight() -> CGFloat {
+    func ks_tabBarHeight() -> CGFloat {
         if let _height = self.tabBarController?.tabBar.frame.size.height {
             return _height
         }

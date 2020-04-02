@@ -19,7 +19,7 @@ class KSSpeedy: NSObject {
     ///   - rightOffset: 右边边偏移,例如-10
     ///   - height: 线条高度
     ///   - isTop: 是否是顶部线
-    class func addHorizontalLine(toView: UIView, color: UIColor, leftOffset: CGFloat, rightOffset: CGFloat, height: CGFloat, isTop: Bool, verticalOffset: CGFloat = 0) -> UIView {
+    class func ks_addHorizontalLine(toView: UIView, color: UIColor, leftOffset: CGFloat, rightOffset: CGFloat, height: CGFloat, isTop: Bool, verticalOffset: CGFloat = 0) -> UIView {
         let underline             = UIView.init(color: color)
         toView.addSubview(underline)
         underline.snp.makeConstraints { (make) in

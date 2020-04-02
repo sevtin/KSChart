@@ -118,7 +118,7 @@ class KSDashboardController: KSBaseViewController {
         followBtn.ks_addTarget(self, action: #selector(onFollowClick))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: followBtn!)
         
-        self.segmentedPager.frame              = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.navigationHeight())
+        self.segmentedPager.frame              = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.ks_navigationHeight())
         self.view.addSubview(self.segmentedPager)
         defaultTai()
         

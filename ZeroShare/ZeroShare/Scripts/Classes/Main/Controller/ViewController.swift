@@ -96,10 +96,10 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     func createChildViews() {
         tableView        = self.createTableView(target: self, separatorStyle: UITableViewCell.SeparatorStyle.none)
         tableView?.snp.makeConstraints({ (make) in
-            make.top.equalToSuperview().offset(self.navigationHeight())
+            make.top.equalToSuperview().offset(self.ks_navigationHeight())
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-self.tabBarHeight())
+            make.bottom.equalToSuperview().offset(-self.ks_tabBarHeight())
         })
     }
     //======================================================================

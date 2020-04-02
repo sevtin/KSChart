@@ -35,6 +35,7 @@ class KSFileMgr: NSObject {
             return error.localizedDescription;
         }
     }
+    
     static func readJsonData(fileName:String,type:String) ->JSON {
         //读取本地的文件
         let path        = Bundle.main.path(forResource: fileName, ofType: type);

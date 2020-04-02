@@ -27,7 +27,7 @@ extension String {
         return attributeString
     }
     
-    func dictionary() -> [String: Any]? {
+    func ks_dictionary() -> [String: Any]? {
         let data    = self.data(using: String.Encoding.utf8)
         if let dict = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String : Any] {
             return dict

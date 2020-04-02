@@ -55,7 +55,7 @@ class KSMenuBarView: KSBaseView {
         infoBtn.frame            = CGRect.init(x: self.frame.width - infoBtn.textWidth - offset, y: BY, width: infoBtn.textWidth + offset, height: BH)
         lineView.frame           = CGRect.init(x: orderbookBtn.center.x - ((orderbookBtn.textWidth + 20) / 2), y: orderbookBtn.frame.maxY, width: (orderbookBtn.textWidth + 20), height: 2)
         
-        _ = KSSpeedy.addHorizontalLine(toView: self, color: KS_Const_Color_Ctrl_Background, leftOffset: 0, rightOffset: 0, height: 8, isTop: true)
+        _ = KSSpeedy.ks_addHorizontalLine(toView: self, color: KS_Const_Color_Ctrl_Background, leftOffset: 0, rightOffset: 0, height: 8, isTop: true)
     }
     
     @objc func onOrderbookClick(button: KSPageButton) {

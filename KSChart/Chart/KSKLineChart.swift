@@ -83,19 +83,6 @@ enum KSSelectedPosition {
     /// - Returns: 返回自定义的高度
     @objc optional func heightForXAxisInKLineChart(chart: KSKLineChartView) -> CGFloat
     
-    /// 初始化时的显示范围长度
-    ///
-    /// - Parameter chart: 图表
-    /// @objc optional func initRangeInKLineChart(chart: KSKLineChartView) -> Int
-    
-    /// 自定义选择点时出现的标签样式
-    ///
-    /// - Parameters:
-    ///   - chart: 图表
-    ///   - yAxis: 可给用户自定义的y轴显示标签
-    ///   - viewOfXAxis: 可给用户自定义的x轴显示标签
-    //@objc optional func kLineChart(chart: KSKLineChartView, viewOfYAxis yAxis: UILabel, viewOfXAxis: UILabel)
-    
     /// 自定义section的头部View显示内容
     ///
     /// - Parameters:
