@@ -43,6 +43,7 @@ class KSKChartView: KSBaseView {
 1、格子绘制代码重构
 2、y轴数值区间代码重构
 3、进一步优化CUP占用率
+4、支持CocoaPods安装
 （预计2020年4月底发布）
 
 反馈/技术交流群:902071358
