@@ -846,13 +846,13 @@ extension KSKLineChartView {
             //y轴的标签显示方位
             switch self.style.showYAxisLabel {
             case .left:         //左边显示
-                section.padding.left = self.style.isInnerYAxis ? section.padding.left : self.pref.yAxisLabelWidth
+                section.padding.left  = self.style.isInnerYAxis ? section.padding.left : self.pref.yAxisLabelWidth
                 section.padding.right = 0
             case .right:        //右边显示
-                section.padding.left = 0
+                section.padding.left  = 0
                 section.padding.right = self.style.isInnerYAxis ? section.padding.right : self.pref.yAxisLabelWidth
             case .none:         //都不显示
-                section.padding.left = 0
+                section.padding.left  = 0
                 section.padding.right = 0
             }
             
@@ -1695,6 +1695,19 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
 }
 /// 绘制重构
 extension KSKLineChartView {
+    
+    func removeGridLayer() {
+        _ = self.gridLayer.sublayers?.map { $0.removeFromSuperlayer() }
+        self.gridLayer.sublayers?.removeAll()
+    }
+    
+    func drawGrids() {
+        self.removeGridLayer()
+        self.buildSections {(section, index) in
+            drawSectionGrid(section)
+        }
+    }
+    
     /// 绘制分区格子
     func drawSectionGrid(_ section: KSSection) {
         let leftX               = section.frame.origin.x
@@ -1720,6 +1733,7 @@ extension KSKLineChartView {
         let linePath            = UIBezierPath()
         let padding             = (section.frame.height - section.padding.top) / CGFloat(section.ratios)
         
+        section.rowPoints.removeAll()
         for i in 0..<section.yAxis.tickInterval {
             var lineY:CGFloat = padding * CGFloat(i) + topY
             if i == 0 {
@@ -1732,7 +1746,7 @@ extension KSKLineChartView {
                 linePath.addLine(to: CGPoint.init(x: lineX, y: lineY + padding))
             }
             else{
-                lineY = lineY - 16
+                lineY = lineY - section.titleHeight
             }
             section.rowPoints.append(CGPoint.init(x: rightX, y: lineY))
         }
@@ -1747,8 +1761,10 @@ extension KSKLineChartView {
     }
     
     func drawRowValue(_ section: KSSection) {
-        let interval           = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval)
-        var labelText: CGFloat = 0
+        let interval              = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval)
+        var labelText: CGFloat    = 0
+        //设置y轴标签的宽度
+        self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
         for i in 0..<section.rowPoints.count {
             if i == 0 {
                 labelText = section.yAxis.max
@@ -1761,7 +1777,7 @@ extension KSKLineChartView {
             }
             let point                  = section.rowPoints[i]
             let yAxisLabel             = KSTextLayer()
-            yAxisLabel.frame           = CGRect.init(x: point.x - 60, y: point.y, width: 60, height: 20)
+            yAxisLabel.frame           = CGRect.init(x: point.x - self.pref.yAxisLabelWidth, y: point.y, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
             yAxisLabel.string          = labelText.ks_toString(maximum: section.decimal)
             yAxisLabel.fontSize        = self.style.labelFont.pointSize
             yAxisLabel.foregroundColor = self.style.textColor.cgColor

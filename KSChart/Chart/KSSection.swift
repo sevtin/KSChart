@@ -22,6 +22,7 @@ class KSSection: NSObject {
     var upColor: UIColor              = UIColor.green//升的颜色
     var downColor: UIColor            = UIColor.red//跌的颜色
     var titleColor: UIColor           = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//文字颜色
+    var titleHeight:CGFloat           = 16
     var labelFont                     = UIFont.systemFont(ofSize: 10)
     var valueType: KSSectionValueType = KSSectionValueType.master
     var key                           = ""
