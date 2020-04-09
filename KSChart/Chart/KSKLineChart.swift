@@ -1693,3 +1693,82 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
     }
     
 }
+/// 绘制重构
+extension KSKLineChartView {
+    /// 绘制分区格子
+    func drawSectionGrid(_ section: KSSection) {
+        let leftX               = section.frame.origin.x
+        let rightX              = section.frame.maxX
+        let topY                = section.frame.origin.y + section.padding.top
+        let bottomY             = section.frame.maxY
+
+        let borderPath          = UIBezierPath()
+        borderPath.move(to: CGPoint.init(x: leftX, y: topY))
+        borderPath.addLine(to: CGPoint.init(x: rightX, y: topY))
+        borderPath.addLine(to: CGPoint.init(x: rightX, y: bottomY))
+        borderPath.addLine(to: CGPoint.init(x: leftX, y: bottomY))
+        borderPath.addLine(to: CGPoint.init(x: leftX, y: topY))
+
+        //添加到图层
+        let borderLayer         = KSShapeLayer()
+        borderLayer.lineWidth   = self.pref.lineWidth
+        borderLayer.path        = borderPath.cgPath// 从贝塞尔曲线获取到形状
+        borderLayer.strokeColor = self.style.lineColor.cgColor
+        borderLayer.fillColor   = UIColor.clear.cgColor// 闭环填充的颜色
+        self.gridLayer.addSublayer(borderLayer)
+
+        let linePath            = UIBezierPath()
+        let padding             = (section.frame.height - section.padding.top) / CGFloat(section.ratios)
+        
+        for i in 0..<section.yAxis.tickInterval {
+            var lineY:CGFloat = padding * CGFloat(i) + topY
+            if i == 0 {
+                linePath.move(to: CGPoint.init(x: leftX, y: lineY))
+            }
+            let isLeft = (i % 2 != 0)
+            let lineX = isLeft ? leftX : rightX
+            linePath.addLine(to: CGPoint.init(x: lineX, y: lineY))
+            if i != section.yAxis.tickInterval - 1 {
+                linePath.addLine(to: CGPoint.init(x: lineX, y: lineY + padding))
+            }
+            else{
+                lineY = lineY - 16
+            }
+            section.rowPoints.append(CGPoint.init(x: rightX, y: lineY))
+        }
+        
+        //添加到图层
+        let lineLayer         = KSShapeLayer()
+        lineLayer.lineWidth   = self.pref.lineWidth
+        lineLayer.path        = linePath.cgPath// 从贝塞尔曲线获取到形状
+        lineLayer.strokeColor = self.style.lineColor.cgColor
+        lineLayer.fillColor   = UIColor.clear.cgColor// 闭环填充的颜色
+        self.gridLayer.addSublayer(lineLayer)
+    }
+    
+    func drawRowValue(_ section: KSSection) {
+        let interval           = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval)
+        var labelText: CGFloat = 0
+        for i in 0..<section.rowPoints.count {
+            if i == 0 {
+                labelText = section.yAxis.max
+            }
+            else if i == section.rowPoints.count - 1 {
+                labelText = section.yAxis.min
+            }
+            else {
+                labelText = (section.yAxis.max - interval * CGFloat(i))
+            }
+            let point                  = section.rowPoints[i]
+            let yAxisLabel             = KSTextLayer()
+            yAxisLabel.frame           = CGRect.init(x: point.x - 60, y: point.y, width: 60, height: 20)
+            yAxisLabel.string          = labelText.ks_toString(maximum: section.decimal)
+            yAxisLabel.fontSize        = self.style.labelFont.pointSize
+            yAxisLabel.foregroundColor = self.style.textColor.cgColor
+            yAxisLabel.backgroundColor = UIColor.clear.cgColor
+            yAxisLabel.alignmentMode   = .right
+            yAxisLabel.contentsScale   = UIScreen.main.scale
+            self.drawLayer.addSublayer(yAxisLabel)
+        }
+    }
+}

@@ -46,6 +46,7 @@ class KSSection: NSObject {
     var sectionLayer: KSShapeLayer    = KSShapeLayer()//分区的绘图层
     var titleView: UIView? //用户自定义的View
     var tai: String                   = ""//当前技术指标
+    lazy var rowPoints: [CGPoint]     = [CGPoint]()
 
     /// 初始化分区
     ///
