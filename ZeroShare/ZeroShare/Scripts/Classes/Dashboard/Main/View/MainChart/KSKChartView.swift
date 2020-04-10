@@ -69,30 +69,6 @@ extension KSKChartView: KSKLineChartDelegate {
     }
     
     /**
-     获取图表Y轴的显示的内容(右侧Y轴)
-     
-     - parameter chart:
-     - parameter value:     计算得出的y值
-     
-     - returns:
-     */
-    func kLineChart(chart: KSKLineChartView, labelOnYAxisForValue value: CGFloat, atIndex index: Int, section: KSSection) -> String {
-        /*
-        var strValue = ""
-        if section.key == "volumn" {
-            if value / 1000 > 1 {
-                strValue = (value / 1000).ks_toString(maximum: section.decimal) + "K"
-            } else {
-                strValue = value.ks_toString(maximum: section.decimal)
-            }
-        } else {
-            strValue = value.ks_toString(maximum: section.decimal)
-        }
-        */
-        return ""
-    }
-    
-    /**
      获取图表X轴的显示的内容(KDJ/MACD底部时间)
      
      - parameter chart:
@@ -114,10 +90,6 @@ extension KSKChartView: KSKLineChartDelegate {
         return configure.decimal
     }
 
-    func widthForYAxisLabelInKLineChart(chart: KSKLineChartView) -> CGFloat {
-        return 0
-    }
-    
     func kLineChart(chart: KSKLineChartView, didSelectAt index: Int, item: KSChartItem) {
         if self.klineData.count > 1 && index > 0{
             let yesterItem   = self.klineData[index - 1]

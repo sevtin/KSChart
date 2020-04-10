@@ -13,8 +13,6 @@ class KSZeroChartView: KSKLineChartView {
     /*
     override func defaultConfigure() {
         super.defaultConfigure()
-        self.layer.addSublayer(self.gridLayer)
-        self.gridLayer.zPosition = -1
         self.drawGridLayer()
     }*/
     
@@ -220,8 +218,8 @@ class KSZeroChartView: KSKLineChartView {
                     }
                 }
                 section.drawCustomTitle(self.pref.selectedIndex)
-                //绘制数值
-                //self.drawRowValue(section)
+                //绘制Y轴数值
+                //self.drawYAxisTitle(section)
             }
             
             let showXAxisSection = self.getSecionWhichShowXAxis()

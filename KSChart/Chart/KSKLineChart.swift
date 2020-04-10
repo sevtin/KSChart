@@ -40,7 +40,7 @@ enum KSSelectedPosition {
     ///   - value: 计算得出的y值
     ///   - index:
     ///   - section:
-    func kLineChart(chart: KSKLineChartView, labelOnYAxisForValue value: CGFloat, atIndex index: Int, section: KSSection) -> String
+    @objc optional func kLineChart(chart: KSKLineChartView, labelOnYAxisForValue value: CGFloat, atIndex index: Int, section: KSSection) -> String
     
     /// 获取图表X轴的显示的内容
     ///
@@ -297,6 +297,7 @@ class KSKLineChartView: UIView {
         self.addSubview(self.sightView!)
 
         //绘画图层
+        self.layer.addSublayer(self.gridLayer)
         self.layer.addSublayer(self.drawLayer)
 
         //添加手势操作
@@ -1156,8 +1157,7 @@ extension KSKLineChartView {
             if showYAxisLabel {
                 
                 //获取调用者回调的label字符串值
-                let strValue = self.delegate?.kLineChart(chart: self, labelOnYAxisForValue: yVal, atIndex: i, section: section) ?? ""
-                
+                let strValue = self.delegate?.kLineChart?(chart: self, labelOnYAxisForValue: yVal, atIndex: i, section: section)  ?? ""
                 let yLabelRect = CGRect(x: startX,
                                         y: startY,
                                         width: self.pref.yAxisLabelWidth,
@@ -1708,11 +1708,27 @@ extension KSKLineChartView {
     
     /// 绘制分区格子
     func drawSectionGrid(_ section: KSSection) {
-        let leftX                 = section.frame.origin.x
-        let rightX                = section.frame.maxX
+        var leftX                 = section.frame.origin.x
+        var rightX                = section.frame.maxX
         let topY                  = section.frame.origin.y + section.padding.top
         let bottomY               = section.frame.maxY - section.padding.bottom
 
+        var titleX: CGFloat       = 0
+        var alignmentMode         = CATextLayerAlignmentMode.left
+        
+        switch self.style.showYAxisLabel {
+        case .left:
+            titleX        = leftX
+            leftX         = self.style.isInnerYAxis ? leftX : self.pref.yAxisLabelWidth
+            alignmentMode = self.style.isInnerYAxis ? .left : .right
+        case .right:
+            titleX        = self.style.isInnerYAxis ? (rightX - self.pref.yAxisLabelWidth) : rightX
+            rightX        = self.style.isInnerYAxis ? rightX : (rightX - self.pref.yAxisLabelWidth)
+            alignmentMode = self.style.isInnerYAxis ? .right : .left
+        case .none:
+            titleX = rightX - self.pref.yAxisLabelWidth
+        }
+        
         let borderPath            = UIBezierPath()
         borderPath.move(to: CGPoint.init(x: leftX, y: topY))
         borderPath.addLine(to: CGPoint.init(x: rightX, y: topY))
@@ -1731,20 +1747,6 @@ extension KSKLineChartView {
         let linePath              = UIBezierPath()
         let padding               = (section.frame.height - section.padding.top - section.padding.bottom) / CGFloat(section.yAxis.tickInterval-1)
 
-        var titleX: CGFloat       = 0
-        var alignmentMode         = CATextLayerAlignmentMode.left
-        
-        switch self.style.showYAxisLabel {
-        case .left:
-            titleX = leftX
-            alignmentMode = self.style.isInnerYAxis ? .left : .right
-        case .right:
-            titleX = rightX - self.pref.yAxisLabelWidth
-            alignmentMode = self.style.isInnerYAxis ? .right : .left
-        case .none:
-            titleX = rightX - self.pref.yAxisLabelWidth
-        }
-        
         section.yAxisTitles.removeAll()
         for i in 0..<section.yAxis.tickInterval {
             var lineY:CGFloat = padding * CGFloat(i) + topY
@@ -1782,7 +1784,7 @@ extension KSKLineChartView {
         self.gridLayer.addSublayer(lineLayer)
     }
     
-    func drawRowValue(_ section: KSSection) {
+    func drawYAxisTitle(_ section: KSSection) {
         let interval              = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval)
         var labelText: CGFloat    = 0
         
