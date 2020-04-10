@@ -1699,7 +1699,7 @@ extension KSKLineChartView {
         self.gridLayer.sublayers?.removeAll()
     }
     
-    func drawGrids() {
+    func drawGridLayer() {
         self.removeGridLayer()
         self.buildSections {(section, index) in
             drawSectionGrid(section)

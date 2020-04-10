@@ -15,7 +15,7 @@ class KSZeroChartView: KSKLineChartView {
         super.defaultConfigure()
         self.layer.addSublayer(self.gridLayer)
         self.gridLayer.zPosition = -1
-        self.drawGrids()
+        self.drawGridLayer()
     }*/
     
     /// 设置选中的数据点,并回调 10%
