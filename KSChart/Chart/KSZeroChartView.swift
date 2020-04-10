@@ -17,6 +17,7 @@ class KSZeroChartView: KSKLineChartView {
         self.gridLayer.zPosition = -1
         self.drawGrids()
     }*/
+    
     /// 设置选中的数据点,并回调 10%
     ///
     /// - Parameter index: 选中位置
@@ -205,7 +206,7 @@ class KSZeroChartView: KSKLineChartView {
                 self.initYAxis(section)
 
                 //绘制每个区域
-                self.drawSection(section)//[绘制每个区域顶部区域]
+                self.drawSection(section)//[绘制边框]
                 xAxisToDraw     = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
                 //绘制图表的点线
                 self.drawChart(section)//[--- 绘制每个区域主视图(绘制K线/均价曲线/成交量/指数指标) ---]

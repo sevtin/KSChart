@@ -692,7 +692,7 @@ extension KSKLineChartView {
                 self.initYAxis(section)
 
                 //绘制每个区域
-                self.drawSection(section)//[绘制每个区域顶部区域]
+                self.drawSection(section)//[绘制边框]
 
                 //绘制X轴坐标系，先绘制辅助线，记录标签位置
                 xAxisToDraw     = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
@@ -880,13 +880,8 @@ extension KSKLineChartView {
 
         var xAxisToDraw              = [(CGRect, String)]()
         let xAxis                    = KSShapeLayer()
-
         var startX: CGFloat          = section.frame.origin.x + section.padding.left
         let endX: CGFloat            = section.frame.origin.x + section.frame.size.width - section.padding.right
-        //let secWidth: CGFloat        = section.frame.size.width
-        //let secPaddingLeft: CGFloat  = section.padding.left
-        //let secPaddingRight: CGFloat = section.padding.right
-
         //x轴分平均分N个间断，显示N+1个x轴坐标，按照图表的值个数，计算每个间断的个数
         let dataRange                = self.pref.rangeTo - self.pref.rangeFrom
         var xTickInterval: Int       = dataRange / self.pref.xAxisPerInterval
@@ -1713,12 +1708,12 @@ extension KSKLineChartView {
     
     /// 绘制分区格子
     func drawSectionGrid(_ section: KSSection) {
-        let leftX               = section.frame.origin.x
-        let rightX              = section.frame.maxX
-        let topY                = section.frame.origin.y + section.padding.top
-        let bottomY             = section.frame.maxY - section.padding.bottom
+        let leftX                 = section.frame.origin.x
+        let rightX                = section.frame.maxX
+        let topY                  = section.frame.origin.y + section.padding.top
+        let bottomY               = section.frame.maxY - section.padding.bottom
 
-        let borderPath          = UIBezierPath()
+        let borderPath            = UIBezierPath()
         borderPath.move(to: CGPoint.init(x: leftX, y: topY))
         borderPath.addLine(to: CGPoint.init(x: rightX, y: topY))
         borderPath.addLine(to: CGPoint.init(x: rightX, y: bottomY))
@@ -1726,25 +1721,26 @@ extension KSKLineChartView {
         borderPath.addLine(to: CGPoint.init(x: leftX, y: topY))
 
         //添加到图层
-        let borderLayer         = KSShapeLayer()
-        borderLayer.lineWidth   = self.pref.lineWidth
-        borderLayer.path        = borderPath.cgPath// 从贝塞尔曲线获取到形状
-        borderLayer.strokeColor = self.style.lineColor.cgColor
-        borderLayer.fillColor   = KS_Chart_Color_Clear_CgColor// 闭环填充的颜色
+        let borderLayer           = KSShapeLayer()
+        borderLayer.lineWidth     = self.pref.lineWidth
+        borderLayer.path          = borderPath.cgPath// 从贝塞尔曲线获取到形状
+        borderLayer.strokeColor   = self.style.lineColor.cgColor
+        borderLayer.fillColor     = KS_Chart_Color_Clear_CgColor// 闭环填充的颜色
         self.gridLayer.addSublayer(borderLayer)
 
-        let linePath            = UIBezierPath()
-        let padding             = (section.frame.height - section.padding.top - section.padding.bottom) / CGFloat(section.yAxis.tickInterval-1)
+        let linePath              = UIBezierPath()
+        let padding               = (section.frame.height - section.padding.top - section.padding.bottom) / CGFloat(section.yAxis.tickInterval-1)
+
+        var titleX: CGFloat       = 0
+        var alignmentMode         = CATextLayerAlignmentMode.left
         
-        //设置y轴标签的宽度
-        self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
-        self.pref.yAxisLabelWidth = 60
-        var titleX: CGFloat     = 0
         switch self.style.showYAxisLabel {
         case .left:
             titleX = leftX
+            alignmentMode = self.style.isInnerYAxis ? .left : .right
         case .right:
             titleX = rightX - self.pref.yAxisLabelWidth
+            alignmentMode = self.style.isInnerYAxis ? .right : .left
         case .none:
             titleX = rightX - self.pref.yAxisLabelWidth
         }
@@ -1772,7 +1768,7 @@ extension KSKLineChartView {
             yAxisLabel.foregroundColor = self.style.textColor.cgColor
             yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
             yAxisLabel.contentsScale   = KS_Chart_ContentsScale
-            yAxisLabel.alignmentMode   = (self.style.showYAxisLabel == KSYAxisShowPosition.left) ? .left : .right
+            yAxisLabel.alignmentMode   = alignmentMode
             self.gridLayer.addSublayer(yAxisLabel)
             section.yAxisTitles.append(yAxisLabel)
         }
