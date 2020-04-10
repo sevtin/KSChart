@@ -123,7 +123,7 @@ extension KSChartConfigure {
         priceSection.key                    = "master"
         priceSection.hidden                 = false
         priceSection.ratios                 = 3
-        //priceSection.yAxis.tickInterval     = 5
+        priceSection.yAxis.tickInterval     = 4
         priceSection.xAxis.referenceStyle   = .solid(color: KS_Const_Color_Chart_Line)
         priceSection.padding                = UIEdgeInsets(top: 36, left: 0, bottom: 16, right: 0)
         priceSection.tai                    = KSSeriesKey.ma
@@ -136,7 +136,7 @@ extension KSChartConfigure {
         assistSection1.hidden               = false//视图是否显示false:显示true:影藏
         assistSection1.ratios               = 1
         assistSection1.paging               = false
-        //assistSection1.yAxis.tickInterval   = 5
+        assistSection1.yAxis.tickInterval   = 2
         assistSection1.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
         assistSection1.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 2, right: 0)
         assistSection1.tai                  = KSSeriesKey.volume
@@ -149,7 +149,7 @@ extension KSChartConfigure {
         assistSection2.hidden               = false//视图是否显示false:显示true:影藏
         assistSection2.ratios               = 1
         assistSection2.paging               = true
-        //assistSection2.yAxis.tickInterval   = 5
+        assistSection2.yAxis.tickInterval   = 2
         assistSection2.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
         assistSection2.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 2, right: 0)
         assistSection2.tai                  = KSSeriesKey.volume

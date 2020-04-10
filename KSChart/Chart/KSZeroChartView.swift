@@ -10,6 +10,13 @@ import UIKit
 
 class KSZeroChartView: KSKLineChartView {
 
+    /*
+    override func defaultConfigure() {
+        super.defaultConfigure()
+        self.layer.addSublayer(self.gridLayer)
+        self.gridLayer.zPosition = -1
+        self.drawGrids()
+    }*/
     /// 设置选中的数据点,并回调 10%
     ///
     /// - Parameter index: 选中位置
@@ -212,6 +219,8 @@ class KSZeroChartView: KSKLineChartView {
                     }
                 }
                 section.drawCustomTitle(self.pref.selectedIndex)
+                //绘制数值
+                //self.drawRowValue(section)
             }
             
             let showXAxisSection = self.getSecionWhichShowXAxis()

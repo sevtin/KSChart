@@ -145,4 +145,8 @@ extension KSKChartView: KSKLineChartDelegate {
         self.delegate?.kchartViewTouch?(chart: self)
     }
     
+    func kLineChart(chart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String {
+        return titleValue.ks_toText(section.decimal)
+    }
+    
 }

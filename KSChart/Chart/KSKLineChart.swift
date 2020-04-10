@@ -77,6 +77,9 @@ enum KSSelectedPosition {
     ///   - item: 数据对象
     @objc optional func kLineChart(chart: KSKLineChartView, didSelectAt index: Int, item: KSChartItem)
     
+    //行标题
+    @objc optional func kLineChart(chart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String
+
     /// X轴的布局高度
     ///
     /// - Parameter chart: 图表
@@ -220,7 +223,7 @@ class KSKLineChartView: UIView {
                     }
                 }
             }
-            initViewState()
+            defaultConfigure()
         }
     }
     /*
@@ -318,7 +321,7 @@ class KSKLineChartView: UIView {
         self.addGestureRecognizer(longPress)
     }
 
-    private func initViewState() {
+    func defaultConfigure() {
         self.backgroundColor                     = self.style.backgroundColor
         self.verticalLineView?.backgroundColor   = self.style.crosshairColor
         self.horizontalLineView?.backgroundColor = self.style.crosshairColor
@@ -1713,7 +1716,7 @@ extension KSKLineChartView {
         let leftX               = section.frame.origin.x
         let rightX              = section.frame.maxX
         let topY                = section.frame.origin.y + section.padding.top
-        let bottomY             = section.frame.maxY
+        let bottomY             = section.frame.maxY - section.padding.bottom
 
         let borderPath          = UIBezierPath()
         borderPath.move(to: CGPoint.init(x: leftX, y: topY))
@@ -1731,7 +1734,7 @@ extension KSKLineChartView {
         self.gridLayer.addSublayer(borderLayer)
 
         let linePath            = UIBezierPath()
-        let padding             = (section.frame.height - section.padding.top) / CGFloat(section.yAxis.tickInterval-1)
+        let padding             = (section.frame.height - section.padding.top - section.padding.bottom) / CGFloat(section.yAxis.tickInterval-1)
         
         //设置y轴标签的宽度
         self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
@@ -1759,7 +1762,7 @@ extension KSKLineChartView {
                 linePath.addLine(to: CGPoint.init(x: lineX, y: lineY + padding))
             }
             else{
-                lineY = lineY - section.titleHeight
+                lineY = lineY - section.titleHeight + 4
             }
 
             let yAxisLabel             = KSTextLayer()
@@ -1798,7 +1801,7 @@ extension KSKLineChartView {
                 labelText = (section.yAxis.max - interval * CGFloat(i))
             }
             let yAxisLabel    = section.yAxisTitles[i]
-            yAxisLabel.string = labelText.ks_toText(section.decimal)
+            yAxisLabel.string = self.delegate?.kLineChart?(chart: self, rowTitleInSection: section, titleValue: labelText)
         }
     }
 }
