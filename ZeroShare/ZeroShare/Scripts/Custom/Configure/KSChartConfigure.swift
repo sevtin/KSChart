@@ -10,7 +10,7 @@ import UIKit
 
 class KSChartConfigure: NSObject {
     var dateFormat:String = "yyyy-MM-dd"
-    var decimal:Int       = 8
+    var decimal:Int       = 2
 }
 
 // MARK: - 自定义样式
@@ -99,7 +99,7 @@ extension KSChartConfigure {
         style.backgroundColor         = KS_Const_Color_Clear//UIColor(hex: styleParams.backgroundColor)//视图背景颜色
         style.crosshairColor          = UIColor(hex: 0x666F80)//十字线颜色
         style.isInnerYAxis            = styleParams.isInnerYAxis
-        style.showYAxisLabel          = KSYAxisShowPosition.none//显示y的位置，默认右边
+        style.showYAxisLabel          = KSYAxisShowPosition.right//显示y的位置，默认右边
         style.padding                 = UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 0)
         style.chartTais               = [KSSeriesKey.candle: .none,
                                          KSSeriesKey.timeline: .timeline,
@@ -125,7 +125,7 @@ extension KSChartConfigure {
         priceSection.ratios                 = 3
         priceSection.yAxis.tickInterval     = 4
         priceSection.xAxis.referenceStyle   = .solid(color: KS_Const_Color_Chart_Line)
-        priceSection.padding                = UIEdgeInsets(top: 36, left: 0, bottom: 16, right: 0)
+        priceSection.padding                = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         priceSection.tai                    = KSSeriesKey.ma
 
         /// 副图1
@@ -138,7 +138,7 @@ extension KSChartConfigure {
         assistSection1.paging               = false
         assistSection1.yAxis.tickInterval   = 2
         assistSection1.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
-        assistSection1.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 2, right: 0)
+        assistSection1.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         assistSection1.tai                  = KSSeriesKey.volume
 
         /// 副图2
@@ -151,7 +151,7 @@ extension KSChartConfigure {
         assistSection2.paging               = true
         assistSection2.yAxis.tickInterval   = 2
         assistSection2.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
-        assistSection2.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 2, right: 0)
+        assistSection2.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         assistSection2.tai                  = KSSeriesKey.volume
 
         //====================== 配置分区样式 ======================
@@ -174,7 +174,7 @@ extension KSChartConfigure {
             showGuide: true,
             ultimateValueStyle: .arrow(UIColor(white: 0.8, alpha: 1)))
         priceSeries.showTitle = true
-        priceSeries.chartModels.first?.ultimateValueStyle = .tag(UIColor(white: 0.8, alpha: 1))
+        priceSeries.chartModels.first?.ultimateValueStyle = .arrow(UIColor(white: 0.8, alpha: 1))
         
         priceSection.series.append(timelineSeries)
         priceSection.series.append(priceSeries)

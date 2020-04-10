@@ -777,11 +777,10 @@ extension KSChartModel {
         //根据样式类型绘制
         switch self.ultimateValueStyle {
         case let .arrow(color)://箭头风格
-            
             let arrowPath          = UIBezierPath()
             let arrowLayer         = CAShapeLayer()
-            
             guideValueTextColor    = color
+            
             //画小箭头
             arrowPath.move(to: CGPoint(x: point.x, y: point.y + arrowLineWidth * isUp))
             arrowPath.addLine(to: CGPoint(x: point.x + arrowLineWidth * isLeft, y: point.y + arrowLineWidth * isUp))

@@ -10,11 +10,11 @@ import UIKit
 
 class KSZeroChartView: KSKLineChartView {
 
-    /*
+    
     override func defaultConfigure() {
         super.defaultConfigure()
         self.drawGridLayer()
-    }*/
+    }
     
     /// 设置选中的数据点,并回调 10%
     ///
@@ -204,7 +204,7 @@ class KSZeroChartView: KSKLineChartView {
                 self.initYAxis(section)
 
                 //绘制每个区域
-                self.drawSection(section)//[绘制边框]
+                //self.drawSection(section)//[绘制边框]
                 xAxisToDraw     = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
                 //绘制图表的点线
                 self.drawChart(section)//[--- 绘制每个区域主视图(绘制K线/均价曲线/成交量/指数指标) ---]
@@ -219,7 +219,7 @@ class KSZeroChartView: KSKLineChartView {
                 }
                 section.drawCustomTitle(self.pref.selectedIndex)
                 //绘制Y轴数值
-                //self.drawYAxisTitle(section)
+                self.drawYAxisTitle(section)
             }
             
             let showXAxisSection = self.getSecionWhichShowXAxis()

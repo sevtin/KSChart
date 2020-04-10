@@ -363,9 +363,8 @@ class KSKLineChartView: UIView {
         guard let myDatas = self.delegate?.dataSource(chart: self) else {
             return
         }
-        
+        self.datas          = myDatas
         self.pref.plotCount = self.datas.count
-        self.datas     = myDatas
         var index: Int = 0
         if isAll == false {
             index = self.datas.count - 1
@@ -950,8 +949,8 @@ extension KSKLineChartView {
                 else{
                     xPoint = xPox + textSize.width / 2
                 }
-                referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY))
-                referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY))
+                referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY + section.padding.top))
+                referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY - section.padding.bottom))
                 referenceLayer.path = referencePath.cgPath
                 xAxis.addSublayer(referenceLayer)
             }
@@ -1722,7 +1721,7 @@ extension KSKLineChartView {
             leftX         = self.style.isInnerYAxis ? leftX : self.pref.yAxisLabelWidth
             alignmentMode = self.style.isInnerYAxis ? .left : .right
         case .right:
-            titleX        = self.style.isInnerYAxis ? (rightX - self.pref.yAxisLabelWidth) : rightX
+            titleX        = rightX - self.pref.yAxisLabelWidth
             rightX        = self.style.isInnerYAxis ? rightX : (rightX - self.pref.yAxisLabelWidth)
             alignmentMode = self.style.isInnerYAxis ? .right : .left
         case .none:
