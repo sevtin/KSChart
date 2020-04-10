@@ -217,6 +217,10 @@ class KSZeroChartView: KSKLineChartView {
             let showXAxisSection = self.getSecionWhichShowXAxis()
             //显示在分区下面绘制X轴坐标[底部时间]
             self.drawXAxisLabel(showXAxisSection, xAxisToDraw: xAxisToDraw)
+            //重新显示点击选中的坐标
+            if self.showSelection {
+                self.setSelectedIndexByPoint(self.pref.selectedPoint)
+            }
         }
     }
 }

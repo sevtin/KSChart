@@ -25,5 +25,10 @@ extension CGFloat {
         twoDecimalPlacesFormatter.minimumIntegerDigits = minimumInteger
         return twoDecimalPlacesFormatter.string(from: valueDecimalNumber)!
     }
+    
+    func ks_toText(_ decimal: Int = 2) -> String {
+        let formart = "%.\(decimal)f"
+        return String(format: formart, self)
+    }
 }
-
+     

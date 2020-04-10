@@ -1764,6 +1764,7 @@ extension KSKLineChartView {
 
             let yAxisLabel             = KSTextLayer()
             yAxisLabel.frame           = CGRect.init(x: titleX, y: lineY, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
+            //yAxisLabel.font          = "Helvetica Neue" as CFTypeRef
             yAxisLabel.fontSize        = self.style.labelFont.pointSize
             yAxisLabel.foregroundColor = self.style.textColor.cgColor
             yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
@@ -1797,7 +1798,7 @@ extension KSKLineChartView {
                 labelText = (section.yAxis.max - interval * CGFloat(i))
             }
             let yAxisLabel    = section.yAxisTitles[i]
-            yAxisLabel.string = labelText.ks_toString(maximum: section.decimal)
+            yAxisLabel.string = labelText.ks_toText(section.decimal)
         }
     }
 }

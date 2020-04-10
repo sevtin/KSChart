@@ -138,7 +138,7 @@ extension KSChartConfigure {
         assistSection1.paging               = false
         //assistSection1.yAxis.tickInterval   = 5
         assistSection1.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
-        assistSection1.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 4, right: 0)
+        assistSection1.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 2, right: 0)
         assistSection1.tai                  = KSSeriesKey.volume
 
         /// 副图2
@@ -151,7 +151,7 @@ extension KSChartConfigure {
         assistSection2.paging               = true
         //assistSection2.yAxis.tickInterval   = 5
         assistSection2.xAxis.referenceStyle = .solid(color: KS_Const_Color_Chart_Line)
-        assistSection2.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 4, right: 0)
+        assistSection2.padding              = UIEdgeInsets(top: 16, left: 0, bottom: 2, right: 0)
         assistSection2.tai                  = KSSeriesKey.volume
 
         //====================== 配置分区样式 ======================
