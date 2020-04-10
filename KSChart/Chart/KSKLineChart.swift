@@ -1731,9 +1731,9 @@ extension KSKLineChartView {
         self.gridLayer.addSublayer(borderLayer)
 
         let linePath            = UIBezierPath()
-        let padding             = (section.frame.height - section.padding.top) / CGFloat(section.ratios)
+        let padding             = (section.frame.height - section.padding.top) / CGFloat(section.yAxis.tickInterval-1)
         
-        section.rowPoints.removeAll()
+        section.yAxisTitles.removeAll()
         for i in 0..<section.yAxis.tickInterval {
             var lineY:CGFloat = padding * CGFloat(i) + topY
             if i == 0 {
@@ -1748,7 +1748,16 @@ extension KSKLineChartView {
             else{
                 lineY = lineY - section.titleHeight
             }
-            section.rowPoints.append(CGPoint.init(x: rightX, y: lineY))
+
+            let yAxisLabel             = KSTextLayer()
+            yAxisLabel.frame           = CGRect.init(x: rightX - self.pref.yAxisLabelWidth, y: lineY, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
+            yAxisLabel.fontSize        = self.style.labelFont.pointSize
+            yAxisLabel.foregroundColor = self.style.textColor.cgColor
+            yAxisLabel.backgroundColor = UIColor.clear.cgColor
+            yAxisLabel.alignmentMode   = .right
+            yAxisLabel.contentsScale   = UIScreen.main.scale
+            self.gridLayer.addSublayer(yAxisLabel)
+            section.yAxisTitles.append(yAxisLabel)
         }
         
         //添加到图层
@@ -1765,26 +1774,18 @@ extension KSKLineChartView {
         var labelText: CGFloat    = 0
         //设置y轴标签的宽度
         self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
-        for i in 0..<section.rowPoints.count {
+        for i in 0..<section.yAxisTitles.count {
             if i == 0 {
                 labelText = section.yAxis.max
             }
-            else if i == section.rowPoints.count - 1 {
+            else if i == section.yAxisTitles.count - 1 {
                 labelText = section.yAxis.min
             }
             else {
                 labelText = (section.yAxis.max - interval * CGFloat(i))
             }
-            let point                  = section.rowPoints[i]
-            let yAxisLabel             = KSTextLayer()
-            yAxisLabel.frame           = CGRect.init(x: point.x - self.pref.yAxisLabelWidth, y: point.y, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
-            yAxisLabel.string          = labelText.ks_toString(maximum: section.decimal)
-            yAxisLabel.fontSize        = self.style.labelFont.pointSize
-            yAxisLabel.foregroundColor = self.style.textColor.cgColor
-            yAxisLabel.backgroundColor = UIColor.clear.cgColor
-            yAxisLabel.alignmentMode   = .right
-            yAxisLabel.contentsScale   = UIScreen.main.scale
-            self.drawLayer.addSublayer(yAxisLabel)
+            let yAxisLabel    = section.yAxisTitles[i]
+            yAxisLabel.string = labelText.ks_toString(maximum: section.decimal)
         }
     }
 }
