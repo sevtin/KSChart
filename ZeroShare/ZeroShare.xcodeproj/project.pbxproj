@@ -96,6 +96,7 @@
 		E622D1BD2339E06300D233E0 /* KSBinanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1BC2339E06300D233E0 /* KSBinanceController.swift */; };
 		E622D1BF2339F3C000D233E0 /* KSSeriesParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1BE2339F3C000D233E0 /* KSSeriesParam.swift */; };
 		E622D1C4233A224500D233E0 /* KSMyShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1C3233A224500D233E0 /* KSMyShareController.swift */; };
+		E627AA5D24404961007A3EEA /* KSLetValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E627AA5C24404961007A3EEA /* KSLetValue.swift */; };
 		E6AB6E66238BEA5900C9BCF3 /* KSAxisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */; };
 		E6AB6E67238BEA5900C9BCF3 /* KSCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */; };
 		E6AB6E68238BEA5900C9BCF3 /* KSChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4C238BEA5900C9BCF3 /* KSChartModel.swift */; };
@@ -221,6 +222,7 @@
 		E622D1BC2339E06300D233E0 /* KSBinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSBinanceController.swift; sourceTree = "<group>"; };
 		E622D1BE2339F3C000D233E0 /* KSSeriesParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSeriesParam.swift; sourceTree = "<group>"; };
 		E622D1C3233A224500D233E0 /* KSMyShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSMyShareController.swift; sourceTree = "<group>"; };
+		E627AA5C24404961007A3EEA /* KSLetValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSLetValue.swift; sourceTree = "<group>"; };
 		E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSAxisModel.swift; sourceTree = "<group>"; };
 		E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSCalculator.swift; sourceTree = "<group>"; };
 		E6AB6E4C238BEA5900C9BCF3 /* KSChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSChartModel.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 				E6AB6E53238BEA5900C9BCF3 /* KSSection.swift */,
 				E6AB6E54238BEA5900C9BCF3 /* KSSeries.swift */,
 				E6AB6E55238BEA5900C9BCF3 /* KSLayer.swift */,
+				E627AA5C24404961007A3EEA /* KSLetValue.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -1052,6 +1055,7 @@
 				E61E92BB2338F05500184885 /* KSOrderBookCell.swift in Sources */,
 				E6AB6E78238BEA5900C9BCF3 /* KSSeries+Extensions.swift in Sources */,
 				E6AB6E6B238BEA5900C9BCF3 /* KSDynamicItem.swift in Sources */,
+				E627AA5D24404961007A3EEA /* KSLetValue.swift in Sources */,
 				E622D1BB2339DDA700D233E0 /* KSChartStyles.swift in Sources */,
 				E61E92BF2338F05500184885 /* KSListMenuView.swift in Sources */,
 				E61E92692338F00F00184885 /* UIViewController+KSExtensions.swift in Sources */,

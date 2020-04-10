@@ -164,7 +164,7 @@ class KSChartModel {
     var upStyle: (color: UIColor, isSolid: Bool)   = (.green, true)
     //跌的颜色
     var downStyle: (color: UIColor, isSolid: Bool) = (.red, true)
-    var titleColor                                 = UIColor.white//标题文本的颜色
+    var titleColor                                 = KS_Chart_Color_White//标题文本的颜色
     var datas: [KSChartItem]                       = [KSChartItem]()//数据值
     var decimal: Int                               = 2//小数位的长度
     var showMaxVal: Bool                           = false//是否显示最大值
@@ -235,7 +235,7 @@ class KSLineModel: KSChartModel {
         let serieLayer         = CAShapeLayer()
         let modelLayer         = CAShapeLayer()
         modelLayer.strokeColor = self.upStyle.color.cgColor
-        modelLayer.fillColor   = UIColor.clear.cgColor
+        modelLayer.fillColor   = KS_Chart_Color_Clear_CgColor
         modelLayer.lineWidth   = self.lineWidth
         modelLayer.lineCap     = .round
         modelLayer.lineJoin    = .bevel
@@ -423,7 +423,7 @@ class KSCandleModel: KSChartModel {
                 if isSolid {
                     candleLayer.lineWidth = self.lineWidth
                 } else {
-                    candleLayer.fillColor = UIColor.clear.cgColor
+                    candleLayer.fillColor = KS_Chart_Color_Clear_CgColor
                     candleLayer.lineWidth = self.lineWidth
                 }
                 
@@ -527,7 +527,7 @@ class KSColumnModel: KSChartModel {
             if isSolid {
                 columnLayer.lineWidth = self.lineWidth//不设置为0会受到抗锯齿处理导致变大
             } else {
-                columnLayer.fillColor = UIColor.clear.cgColor
+                columnLayer.fillColor = KS_Chart_Color_Clear_CgColor
                 columnLayer.lineWidth = self.lineWidth
             }
             modelLayer.addSublayer(columnLayer)
@@ -634,7 +634,7 @@ class KSRoundModel: KSChartModel {
         let serieLayer         = CAShapeLayer()
         let modelLayer         = CAShapeLayer()
         modelLayer.strokeColor = self.upStyle.color.cgColor
-        modelLayer.fillColor   = UIColor.clear.cgColor
+        modelLayer.fillColor   = KS_Chart_Color_Clear_CgColor
         modelLayer.lineWidth   = self.lineWidth
         modelLayer.lineCap     = .round
         modelLayer.lineJoin    = .bevel
@@ -748,7 +748,7 @@ extension KSChartModel {
         var isLeft: CGFloat              = -1
         var tagStartY: CGFloat           = 0
         var isShowValue: Bool            = true//是否显示值，圆形样式可以不显示值，只显示圆形
-        var guideValueTextColor: UIColor = UIColor.white//显示最大最小的文字颜色
+        var guideValueTextColor: UIColor = KS_Chart_Color_White//显示最大最小的文字颜色
         //判断绘画完整时是否超过界限
         var maxPriceStartX               = point.x + arrowLineWidth * 2
         var maxPriceStartY: CGFloat      = 0
@@ -865,8 +865,8 @@ extension KSChartModel {
             valueText.string          = value
             valueText.fontSize        = section.labelFont.pointSize
             valueText.foregroundColor = guideValueTextColor.cgColor
-            valueText.backgroundColor = UIColor.clear.cgColor
-            valueText.contentsScale   = UIScreen.main.scale
+            valueText.backgroundColor = KS_Chart_Color_Clear_CgColor
+            valueText.contentsScale   = KS_Chart_ContentsScale
 
             guideValueLayer.addSublayer(valueText)
         }

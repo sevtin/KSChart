@@ -29,7 +29,7 @@ class KSKLineChartStyle {
     /// 支持的指标
     var chartTais: [String: KSIndexAlgorithm]!
     /// 背景颜色
-    var backgroundColor: UIColor               = UIColor.white
+    var backgroundColor: UIColor               = KS_Chart_Color_White
 
     /// 显示边线上左下有
     var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.5, 0.5, 0.5, 0.5)
@@ -44,7 +44,7 @@ class KSKLineChartStyle {
     var lineColor: UIColor         = UIColor.clear
     
     //十字线颜色
-    var crosshairColor: UIColor    = UIColor.white
+    var crosshairColor: UIColor    = KS_Chart_Color_White
 
     //文字颜色
     var textColor: UIColor         = UIColor.clear

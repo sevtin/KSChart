@@ -22,12 +22,12 @@ class KSTimeChartModel: KSChartModel {
     override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
         let serieLayer            = KSShapeLayer()
         let timelineLayer         = KSShapeLayer()
-        timelineLayer.fillColor   = UIColor.clear.cgColor
+        timelineLayer.fillColor   = KS_Chart_Color_Clear_CgColor
         timelineLayer.strokeColor = self.upStyle.color.cgColor
 
         let fillLayer             = KSShapeLayer()
         fillLayer.fillColor       = self.fillColor
-        fillLayer.strokeColor     = UIColor.clear.cgColor
+        fillLayer.strokeColor     = KS_Chart_Color_Clear_CgColor
 
         let curvelinePath         = UIBezierPath()
         curvelinePath.lineWidth   = self.lineWidth

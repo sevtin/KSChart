@@ -994,8 +994,8 @@ extension KSKLineChartView {
             xLabelText.alignmentMode   = CATextLayerAlignmentMode.center
             xLabelText.fontSize        = self.style.labelFont.pointSize
             xLabelText.foregroundColor = self.style.textColor.cgColor
-            xLabelText.backgroundColor = UIColor.clear.cgColor
-            xLabelText.contentsScale   = UIScreen.main.scale
+            xLabelText.backgroundColor = KS_Chart_Color_Clear_CgColor
+            xLabelText.contentsScale   = KS_Chart_ContentsScale
 
             xAxis.addSublayer(xLabelText)
         }
@@ -1196,9 +1196,9 @@ extension KSKLineChartView {
             yAxisLabel.string          = strValue
             yAxisLabel.fontSize        = self.style.labelFont.pointSize
             yAxisLabel.foregroundColor = self.style.textColor.cgColor
-            yAxisLabel.backgroundColor = UIColor.clear.cgColor
+            yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
             yAxisLabel.alignmentMode   = alignmentMode
-            yAxisLabel.contentsScale   = UIScreen.main.scale
+            yAxisLabel.contentsScale   = KS_Chart_ContentsScale
 
             self.drawLayer.addSublayer(yAxisLabel)
         }
@@ -1727,11 +1727,24 @@ extension KSKLineChartView {
         borderLayer.lineWidth   = self.pref.lineWidth
         borderLayer.path        = borderPath.cgPath// 从贝塞尔曲线获取到形状
         borderLayer.strokeColor = self.style.lineColor.cgColor
-        borderLayer.fillColor   = UIColor.clear.cgColor// 闭环填充的颜色
+        borderLayer.fillColor   = KS_Chart_Color_Clear_CgColor// 闭环填充的颜色
         self.gridLayer.addSublayer(borderLayer)
 
         let linePath            = UIBezierPath()
         let padding             = (section.frame.height - section.padding.top) / CGFloat(section.yAxis.tickInterval-1)
+        
+        //设置y轴标签的宽度
+        self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
+        self.pref.yAxisLabelWidth = 60
+        var titleX: CGFloat     = 0
+        switch self.style.showYAxisLabel {
+        case .left:
+            titleX = leftX
+        case .right:
+            titleX = rightX - self.pref.yAxisLabelWidth
+        case .none:
+            titleX = rightX - self.pref.yAxisLabelWidth
+        }
         
         section.yAxisTitles.removeAll()
         for i in 0..<section.yAxis.tickInterval {
@@ -1750,12 +1763,12 @@ extension KSKLineChartView {
             }
 
             let yAxisLabel             = KSTextLayer()
-            yAxisLabel.frame           = CGRect.init(x: rightX - self.pref.yAxisLabelWidth, y: lineY, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
+            yAxisLabel.frame           = CGRect.init(x: titleX, y: lineY, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
             yAxisLabel.fontSize        = self.style.labelFont.pointSize
             yAxisLabel.foregroundColor = self.style.textColor.cgColor
-            yAxisLabel.backgroundColor = UIColor.clear.cgColor
-            yAxisLabel.alignmentMode   = .right
-            yAxisLabel.contentsScale   = UIScreen.main.scale
+            yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
+            yAxisLabel.contentsScale   = KS_Chart_ContentsScale
+            yAxisLabel.alignmentMode   = (self.style.showYAxisLabel == KSYAxisShowPosition.left) ? .left : .right
             self.gridLayer.addSublayer(yAxisLabel)
             section.yAxisTitles.append(yAxisLabel)
         }
@@ -1765,15 +1778,14 @@ extension KSKLineChartView {
         lineLayer.lineWidth   = self.pref.lineWidth
         lineLayer.path        = linePath.cgPath// 从贝塞尔曲线获取到形状
         lineLayer.strokeColor = self.style.lineColor.cgColor
-        lineLayer.fillColor   = UIColor.clear.cgColor// 闭环填充的颜色
+        lineLayer.fillColor   = KS_Chart_Color_Clear_CgColor// 闭环填充的颜色
         self.gridLayer.addSublayer(lineLayer)
     }
     
     func drawRowValue(_ section: KSSection) {
         let interval              = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval)
         var labelText: CGFloat    = 0
-        //设置y轴标签的宽度
-        self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
+        
         for i in 0..<section.yAxisTitles.count {
             if i == 0 {
                 labelText = section.yAxis.max

@@ -789,9 +789,9 @@ extension KSDepthChartView {
             yAxisLabel.string = strValue
             yAxisLabel.fontSize = self.labelFont.pointSize
             yAxisLabel.foregroundColor =  self.textColor.cgColor
-            yAxisLabel.backgroundColor = UIColor.clear.cgColor
+            yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
             yAxisLabel.alignmentMode = alignmentMode
-            yAxisLabel.contentsScale = UIScreen.main.scale
+            yAxisLabel.contentsScale = KS_Chart_ContentsScale
             
             self.drawLayer.addSublayer(yAxisLabel)
         }
@@ -916,8 +916,8 @@ extension KSDepthChartView {
             xLabelText.alignmentMode = alignment
             xLabelText.fontSize = self.labelFont.pointSize
             xLabelText.foregroundColor =  self.textColor.cgColor
-            xLabelText.backgroundColor = UIColor.clear.cgColor
-            xLabelText.contentsScale = UIScreen.main.scale
+            xLabelText.backgroundColor = KS_Chart_Color_Clear_CgColor
+            xLabelText.contentsScale = KS_Chart_ContentsScale
             
             xAxis.addSublayer(xLabelText)
         }
@@ -951,7 +951,7 @@ extension KSDepthChartView {
                 self.selectedTagGraphslayer!.backgroundColor = self.askColor.fill.cgColor
             }
             self.selectedTagGraphslayer!.cornerRadius = radius
-            self.selectedTagGraphslayer!.borderColor = UIColor.white.cgColor
+            self.selectedTagGraphslayer!.borderColor = KS_Chart_Color_White.cgColor
             self.selectedTagGraphslayer!.borderWidth = 1
         }
         self.drawLayer.addSublayer(self.selectedTagGraphslayer!)
@@ -1030,9 +1030,9 @@ extension KSDepthChartView {
             typelayer.frame = textRect
             typelayer.alignmentMode = CATextLayerAlignmentMode.left
             typelayer.fontSize = UIFont.systemFont(ofSize: 10).pointSize
-            typelayer.foregroundColor =  UIColor.white.cgColor
-            typelayer.backgroundColor = UIColor.clear.cgColor
-            typelayer.contentsScale = UIScreen.main.scale
+            typelayer.foregroundColor =  KS_Chart_Color_White.cgColor
+            typelayer.backgroundColor = KS_Chart_Color_Clear_CgColor
+            typelayer.contentsScale = KS_Chart_ContentsScale
             
             // 价格
             let pricelayer = KSTextLayer()
@@ -1041,9 +1041,9 @@ extension KSDepthChartView {
             pricelayer.frame = textRect
             pricelayer.alignmentMode = CATextLayerAlignmentMode.left
             pricelayer.fontSize = UIFont.systemFont(ofSize: 10).pointSize
-            pricelayer.foregroundColor =  UIColor.white.cgColor
-            pricelayer.backgroundColor = UIColor.clear.cgColor
-            pricelayer.contentsScale = UIScreen.main.scale
+            pricelayer.foregroundColor =  KS_Chart_Color_White.cgColor
+            pricelayer.backgroundColor = KS_Chart_Color_Clear_CgColor
+            pricelayer.contentsScale = KS_Chart_ContentsScale
             
             // 量
             let vollayer = KSTextLayer()
@@ -1060,9 +1060,9 @@ extension KSDepthChartView {
             vollayer.frame = textRect
             vollayer.alignmentMode = CATextLayerAlignmentMode.left
             vollayer.fontSize = UIFont.systemFont(ofSize: 10).pointSize
-            vollayer.foregroundColor =  UIColor.white.cgColor
-            vollayer.backgroundColor = UIColor.clear.cgColor
-            vollayer.contentsScale = UIScreen.main.scale
+            vollayer.foregroundColor =  KS_Chart_Color_White.cgColor
+            vollayer.backgroundColor = KS_Chart_Color_Clear_CgColor
+            vollayer.contentsScale = KS_Chart_ContentsScale
             
             _ = self.selectedItemInfoLayer!.sublayers?.map { $0.removeFromSuperlayer() }
             self.selectedItemInfoLayer!.addSublayer(typelayer)
@@ -1254,7 +1254,7 @@ extension KSDepthChartView {
         
         lineLayer.path        = linePath.cgPath
         lineLayer.strokeColor = strokeColor.cgColor
-        lineLayer.fillColor   = UIColor.clear.cgColor
+        lineLayer.fillColor   = KS_Chart_Color_Clear_CgColor
         lineLayer.lineWidth   = lineWidth
         lineLayer.lineCap     = .round
         lineLayer.lineJoin    = .bevel
@@ -1266,7 +1266,7 @@ extension KSDepthChartView {
         linePath.addLine(to: CGPoint(x: startX, y: self.bounds.maxY - self.padding.bottom))
         fillLayer.path        = linePath.cgPath
         fillLayer.fillColor   = fillColor.cgColor
-        fillLayer.strokeColor = UIColor.clear.cgColor
+        fillLayer.strokeColor = KS_Chart_Color_Clear_CgColor
         fillLayer.zPosition   -= 1// 将图层置于下一级，让底部的标记线显示出来
         depthChart.addSublayer(fillLayer)
 
@@ -1295,7 +1295,7 @@ extension KSDepthChartView {
     
     /// 生成截图
     var image: UIImage {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, KS_Chart_ContentsScale)
         self.layer.render(in: UIGraphicsGetCurrentContext()!)
         let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

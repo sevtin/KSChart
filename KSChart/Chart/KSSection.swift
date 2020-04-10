@@ -211,8 +211,8 @@ extension KSSection {
         titleText.string          = title
         titleText.fontSize        = self.labelFont.pointSize
         //titleText.foregroundColor =  self.titleColor.cgColor
-        titleText.backgroundColor = UIColor.clear.cgColor
-        titleText.contentsScale   = UIScreen.main.scale
+        titleText.backgroundColor = KS_Chart_Color_Clear_CgColor
+        titleText.contentsScale   = KS_Chart_ContentsScale
         titleText.isWrapped       = true
 
         self.titleLayer.addSublayer(titleText)

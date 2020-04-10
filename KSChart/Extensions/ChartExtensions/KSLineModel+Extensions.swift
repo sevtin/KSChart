@@ -14,7 +14,7 @@ extension KSLineModel {
         let serieLayer               = KSShapeLayer()
         let timelineLayer            = KSShapeLayer()
         let curvelineLayer           = KSShapeLayer()
-        curvelineLayer.fillColor     = UIColor.clear.cgColor
+        curvelineLayer.fillColor     = KS_Chart_Color_Clear_CgColor
         curvelineLayer.strokeColor   = self.upStyle.color.cgColor
         curvelineLayer.lineWidth     = self.lineWidth
         curvelineLayer.shadowColor   = self.upStyle.color.cgColor
