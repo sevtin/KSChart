@@ -90,5 +90,5 @@ class KSKLineChartStyle {
     var askColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.white, .white, 1)
 
     /// 买单居右
-    var bidChartOnDirection:KSDepthChartOnDirection = .right
+    var bidChartOnDirection: KSDepthChartOnDirection = .right
 }

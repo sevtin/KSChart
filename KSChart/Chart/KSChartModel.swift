@@ -780,7 +780,7 @@ extension KSChartModel {
             let arrowPath          = UIBezierPath()
             let arrowLayer         = CAShapeLayer()
             guideValueTextColor    = color
-            
+
             //画小箭头
             arrowPath.move(to: CGPoint(x: point.x, y: point.y + arrowLineWidth * isUp))
             arrowPath.addLine(to: CGPoint(x: point.x + arrowLineWidth * isLeft, y: point.y + arrowLineWidth * isUp))

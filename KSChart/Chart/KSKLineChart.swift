@@ -116,7 +116,7 @@ struct KSChartPref {
     let kMinRange                            = 16//最小缩放范围
     let kMaxRange                            = 128//最大缩放范围
     let kPerInterval                         = 4//缩放的每段间隔
-    let kYAxisLabelWidth: CGFloat            = 46//默认文字宽度
+    let kYAxisLabelWidth: CGFloat            = 40//默认文字宽度
     let kXAxisHegiht: CGFloat                = 16//默认X坐标的高度
     var minCandleCount: Int                  = 30//最小蜡烛图数量
     var fixedWidth: CGFloat                  = 10//小于最小蜡烛图数量，蜡烛的宽度
