@@ -422,6 +422,10 @@ extension KSBinanceController: KSViewDelegate {
     func ksviewCallback(view: UIView, data: Any?, identifier: String?) {
         ///k线切换
         if identifier == "KSTimePickerView" {
+            //平安银行
+            self.headerChartView.resetDrawChart(isAll: true)
+            return
+            //币安
             if let _data = data as? KSChartMenuInfo {
                 self.unSubscriptionKline(symbol: configure.symbol, kline: _data.identifier)
                 subscriptionKline()

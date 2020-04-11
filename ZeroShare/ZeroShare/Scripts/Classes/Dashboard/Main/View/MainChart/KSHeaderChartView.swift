@@ -128,12 +128,13 @@ class KSHeaderChartView: KSBaseView {
     }
     
     func updateDate(timeId:Int) {
+        /*
         if timeId >= 11 {
             self.chartView.configure.dateFormat = "yyyy-MM-dd"
         }
         else{
             self.chartView.configure.dateFormat = "MM-dd HH:mm"
-        }
+        }*/
     }
 }
 
