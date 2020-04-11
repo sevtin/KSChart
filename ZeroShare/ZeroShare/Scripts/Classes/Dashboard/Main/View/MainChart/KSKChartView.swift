@@ -106,6 +106,7 @@ extension KSKChartView: KSKLineChartDelegate {
             }
              */
         }
+        //CPU 10%左右的消耗
         self.delegate?.kchartView?(chart: self, didSelectAt: index, item: item)
     }
     
