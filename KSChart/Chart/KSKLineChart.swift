@@ -1784,7 +1784,7 @@ extension KSKLineChartView {
     }
     
     func drawYAxisTitle(_ section: KSSection) {
-        let interval              = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval)
+        let interval              = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval - 1)
         var labelText: CGFloat    = 0
         
         for i in 0..<section.yAxisTitles.count {
