@@ -829,7 +829,9 @@ extension KSKLineChartView {
             }
         }
         
-        var offsetY: CGFloat = self.style.padding.top
+        var offsetY: CGFloat       = self.style.padding.top
+        //设置y轴标签的宽度
+        self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
         //计算每个区域的高度，并绘制
         for (index, section) in self.style.sections.enumerated() {
 
@@ -847,21 +849,18 @@ extension KSKLineChartView {
                 heightOfSection = height * CGFloat(section.ratios) / CGFloat(total)
             }
             
-            //设置y轴标签的宽度
-            self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
-            
-            //y轴的标签显示方位
-            switch self.style.showYAxisLabel {
-            case .left:         //左边显示
-                section.padding.left  = self.style.isInnerYAxis ? section.padding.left : self.pref.yAxisLabelWidth
-                section.padding.right = 0
-            case .right:        //右边显示
-                section.padding.left  = 0
-                section.padding.right = self.style.isInnerYAxis ? section.padding.right : self.pref.yAxisLabelWidth
-            case .none:         //都不显示
-                section.padding.left  = 0
-                section.padding.right = 0
-            }
+//            //y轴的标签显示方位
+//            switch self.style.showYAxisLabel {
+//            case .left:         //左边显示
+//                section.padding.left  = self.style.isInnerYAxis ? section.padding.left : self.pref.yAxisLabelWidth
+//                section.padding.right = 0
+//            case .right:        //右边显示
+//                section.padding.left  = 0
+//                section.padding.right = self.style.isInnerYAxis ? section.padding.right : self.pref.yAxisLabelWidth
+//            case .none:         //都不显示
+//                section.padding.left  = 0
+//                section.padding.right = 0
+//            }
             
             //计算每个section的坐标
             section.frame = CGRect(x: 0 + self.style.padding.left, y: offsetY, width: WidthOfSection, height: heightOfSection)
@@ -1711,11 +1710,11 @@ extension KSKLineChartView {
     
     /// 绘制分区格子
     func drawSectionGrid(_ section: KSSection) {
-        var leftX                 = section.frame.origin.x
-        var rightX                = section.frame.maxX
+        var leftX                 = section.frame.origin.x + section.padding.left
+        var rightX                = section.frame.maxX - section.padding.right
         let topY                  = section.frame.origin.y + section.padding.top
         let bottomY               = section.frame.maxY - section.padding.bottom
-
+        
         var titleX: CGFloat       = 0
         var alignmentMode         = CATextLayerAlignmentMode.left
         

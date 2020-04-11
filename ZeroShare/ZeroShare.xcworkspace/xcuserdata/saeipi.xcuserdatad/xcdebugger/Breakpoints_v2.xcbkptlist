@@ -7,64 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "256175EA-9B4E-4DD1-997C-FD1DA0A09502"
+            uuid = "4C4E5CE7-9988-4C3D-87AF-876F6634B46F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Custom/Configure/KSChartConfigure.swift"
+            filePath = "../KSChart/Chart/KSKLineChart.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "loadConfigure()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9A93E2F4-1E1B-4FAF-BBE5-E760BB55F934"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/View/MainChart/KSChartIndexView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "update(summary:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C854C6E1-E9C8-488E-9E02-1BADCE6B1888"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/View/MainChart/KSHeaderChartView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "update(summary:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "ED0AF330-9F28-42CC-A322-8A91C2182F15"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/View/MainChart/KSHeaderChartView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "kchartView(chart:didSelectAt:item:)"
+            startingLineNumber = "1718"
+            endingLineNumber = "1718"
+            landmarkName = "drawSectionGrid(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
