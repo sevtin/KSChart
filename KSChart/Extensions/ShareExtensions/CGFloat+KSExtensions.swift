@@ -34,10 +34,11 @@ extension CGFloat {
     ///千位计数
     func ks_thousand(_ decimal: Int = 2) -> String {
         if self >= 1000000.0 {
-            return String.init(format: "%.\(decimal)fM", self/1000000.0)
+            return String.init(format: "%.2fM", self/1000000.0)
         }
         else if self >= 1000.0 {
-            return String.init(format: "%.\(decimal)fK", self/1000.0)
+            //"%.\(decimal)fK"
+            return String.init(format: "%.2fK", self/1000.0)
         }
         else {
             return ks_toText(decimal)

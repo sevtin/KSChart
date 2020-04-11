@@ -145,7 +145,7 @@ class KSDepthChartItem: NSObject {
 class KSDepthChartView: UIView {
     
     /// MARK: - 常量
-    let kYAxisLabelWidth: CGFloat                    = 40//默认宽度
+    let kYAxisLabelWidth: CGFloat                    = 46//默认宽度
     let kXAxisHegiht: CGFloat                        = 16//默认X坐标的高度
 
     /// MARK: - 成员变量

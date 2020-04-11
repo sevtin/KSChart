@@ -38,15 +38,15 @@ class KSBinanceController: KSBaseViewController {
         super.viewDidLoad()
         initializeCtrl()
         
-        readLocalFile()
-        /*
+        //readLocalFile()
+        
         //币安代码
         let server       = "wss://stream.binance.com:9443/ws/\(self.configure.symbol.lowercased())@kline_1m"
         socket           = KSWebSocket.init()
         //socket?.configureServer(KSSingleton.shared.server.socketServer, isAutoConnect: true)
         socket?.configureServer(server, isAutoConnect: true)
         socket?.delegate = self
-        socket?.startConnect()*/
+        socket?.startConnect()
         
     }
     
@@ -422,9 +422,9 @@ extension KSBinanceController: KSViewDelegate {
     func ksviewCallback(view: UIView, data: Any?, identifier: String?) {
         ///k线切换
         if identifier == "KSTimePickerView" {
-            //平安银行
-            self.headerChartView.resetDrawChart(isAll: true)
-            return
+            //本地数据
+            //self.headerChartView.resetDrawChart(isAll: true)
+            //return
             //币安
             if let _data = data as? KSChartMenuInfo {
                 self.unSubscriptionKline(symbol: configure.symbol, kline: _data.identifier)

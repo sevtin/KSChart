@@ -118,8 +118,7 @@ extension KSKChartView: KSKLineChartDelegate {
     }
     
     func kLineChart(chart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String {
-        //return titleValue.ks_toText(section.decimal)
-        return titleValue.ks_thousand(2)
+        return titleValue.ks_thousand(section.decimal)
     }
     
 }
