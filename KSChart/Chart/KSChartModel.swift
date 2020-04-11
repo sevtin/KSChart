@@ -296,7 +296,7 @@ class KSLineModel: KSChartModel {
         modelLayer.path = linePath.cgPath
         
         serieLayer.addSublayer(modelLayer)
-        
+        /*//【弃用】
         //显示最大最小值
         if self.showMaxVal && maxValue != 0 {
             let highPrice = maxValue.ks_toString(maximum: section.decimal)
@@ -311,7 +311,7 @@ class KSLineModel: KSChartModel {
             //绘制最小值
             let minLayer = self.drawGuideValue(value: lowPrice, section: section, point: minPoint!, trend: KSChartItemTrend.down)
             serieLayer.addSublayer(minLayer)
-        }
+        }*/
         return serieLayer
     }
 }
@@ -446,7 +446,7 @@ class KSCandleModel: KSChartModel {
         }
         
         serieLayer.addSublayer(modelLayer)
-        
+        /*//【弃用】
         //绘制最大值
         if self.showMaxVal && maxValue != 0 {
             let highPrice = maxValue.ks_toString(maximum: section.decimal)
@@ -459,7 +459,7 @@ class KSCandleModel: KSChartModel {
             let lowPrice = minValue.ks_toString(maximum: section.decimal)
             let minLayer = self.drawGuideValue(value: lowPrice, section: section, point: minPoint!, trend: KSChartItemTrend.down)
             serieLayer.addSublayer(minLayer)
-        }
+        }*/
         
         return serieLayer
     }
@@ -706,7 +706,7 @@ class KSRoundModel: KSChartModel {
         }
         
         serieLayer.addSublayer(modelLayer)
-        
+        /*//【弃用】
         //显示最大最小值
         if self.showMaxVal && maxValue != 0 {
             let highPrice = maxValue.ks_toString(maximum: section.decimal)
@@ -721,7 +721,7 @@ class KSRoundModel: KSChartModel {
             let minLayer = self.drawGuideValue(value: lowPrice, section: section, point: minPoint!, trend: KSChartItemTrend.down)
             
             serieLayer.addSublayer(minLayer)
-        }
+        }*/
         
         return serieLayer
     }
@@ -730,7 +730,7 @@ class KSRoundModel: KSChartModel {
 // MARK: - 扩展公共方法
 extension KSChartModel {
     
-    /// 绘画最大值
+    /// 绘画最大/小值【弃用】
     ///
     /// - Parameters:
     ///   - value:

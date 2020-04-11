@@ -341,6 +341,8 @@ class KSKLineChartView: UIView {
         self.selectedYAxisLabel?.isHidden        = true
         self.selectedXAxisLabel?.isHidden        = true
         self.sightView?.isHidden                 = true
+        //绘制格子视图
+        self.drawGridLayer()
     }
     
     public func scrollPositionEnd() -> Bool {
@@ -691,18 +693,18 @@ extension KSKLineChartView {
                 //初始Y轴的数据
                 self.initYAxis(section)
 
-                //绘制每个区域
-                self.drawSection(section)//[绘制边框]
+                //绘制每个区域【废弃】
+                //self.drawSection(section)//[绘制边框]
 
                 //绘制X轴坐标系，先绘制辅助线，记录标签位置
                 xAxisToDraw     = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
 
-                //绘制Y轴坐标系，但最后的y轴标签放到绘制完线段才做
-                let yAxisToDraw = self.drawYAxis(section)
+                //绘制Y轴坐标系，但最后的y轴标签放到绘制完线段才做【废弃】
+                //let yAxisToDraw = self.drawYAxis(section)
                 //绘制图表的点线
                 self.drawChart(section)//[--- 绘制每个区域主视图(绘制K线/均价曲线/成交量/指数指标) ---]
-                //绘制Y轴坐标上的标签
-                self.drawYAxisLabel(yAxisToDraw)//[绘制最右侧价格/成交量/指标值等数据]
+                //绘制Y轴坐标上的标签【废弃】
+                //self.drawYAxisLabel(yAxisToDraw)//[绘制最右侧价格/成交量/指标值等数据]
 
                 //把标题添加到主绘图层上
                 self.drawLayer.addSublayer(section.titleLayer)//[绘制最顶部价格/指标值等数据]
@@ -727,6 +729,8 @@ extension KSKLineChartView {
                         section.drawTitle(self.pref.selectedIndex)
                     }
                 }
+                //绘制Y轴数值
+                self.updateYAxisTitle(section)
             }
             
             let showXAxisSection = self.getSecionWhichShowXAxis()
@@ -1724,8 +1728,7 @@ extension KSKLineChartView {
             titleX        = rightX - self.pref.yAxisLabelWidth
             rightX        = self.style.isInnerYAxis ? rightX : (rightX - self.pref.yAxisLabelWidth)
             alignmentMode = self.style.isInnerYAxis ? .right : .left
-        case .none:
-            titleX = rightX - self.pref.yAxisLabelWidth
+        case .none: break
         }
         
         let borderPath            = UIBezierPath()
@@ -1749,6 +1752,14 @@ extension KSKLineChartView {
         section.yAxisTitles.removeAll()
         for i in 0..<section.yAxis.tickInterval {
             var lineY:CGFloat = padding * CGFloat(i) + topY
+            if i == section.yAxis.tickInterval - 1 {
+                lineY = lineY - section.titleHeight
+            }
+            else if i != 0 {
+                linePath.move(to: CGPoint.init(x: leftX, y: lineY))
+                linePath.addLine(to: CGPoint.init(x: rightX, y: lineY))
+            }
+            /*
             if i == 0 {
                 linePath.move(to: CGPoint.init(x: leftX, y: lineY))
             }
@@ -1761,16 +1772,10 @@ extension KSKLineChartView {
             else{
                 lineY = lineY - section.titleHeight
             }
-
-            let yAxisLabel             = KSTextLayer()
-            yAxisLabel.frame           = CGRect.init(x: titleX, y: lineY, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
-            yAxisLabel.fontSize        = self.style.labelFont.pointSize
-            yAxisLabel.foregroundColor = self.style.textColor.cgColor
-            yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
-            yAxisLabel.contentsScale   = KS_Chart_ContentsScale
-            yAxisLabel.alignmentMode   = alignmentMode
-            self.gridLayer.addSublayer(yAxisLabel)
-            section.yAxisTitles.append(yAxisLabel)
+            */
+            if self.style.showYAxisLabel != .none {
+                self.drawYAxisTitle(section, labelX: titleX, labelY: lineY, alignmentMode: alignmentMode)
+            }
         }
         
         //添加到图层
@@ -1782,7 +1787,23 @@ extension KSKLineChartView {
         self.gridLayer.addSublayer(lineLayer)
     }
     
-    func drawYAxisTitle(_ section: KSSection) {
+    func drawYAxisTitle(_ section: KSSection, labelX: CGFloat, labelY: CGFloat, alignmentMode: CATextLayerAlignmentMode) {
+        let yAxisLabel             = KSTextLayer()
+        yAxisLabel.frame           = CGRect.init(x: labelX, y: labelY, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
+        yAxisLabel.fontSize        = self.style.labelFont.pointSize
+        yAxisLabel.foregroundColor = self.style.textColor.cgColor
+        yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
+        yAxisLabel.contentsScale   = KS_Chart_ContentsScale
+        yAxisLabel.alignmentMode   = alignmentMode
+        self.gridLayer.addSublayer(yAxisLabel)
+        section.yAxisTitles.append(yAxisLabel)
+    }
+    
+    func updateYAxisTitle(_ section: KSSection) {
+        if self.style.showYAxisLabel == .none {
+            return
+        }
+        
         let interval              = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval - 1)
         var labelText: CGFloat    = 0
         

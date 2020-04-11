@@ -12,7 +12,7 @@ class KSStyleParam: NSObject, Codable {
     
     var theme: String           = ""//风格名，Dark，Light
 
-    var showYAxisLabel          = "right"
+    var showYAxisLabel          = "left"
 
     var candleColors            = "Green/Red"
 
@@ -40,8 +40,8 @@ class KSStyleParam: NSObject, Codable {
         let style               = KSStyleParam()
         style.theme             = "Light"//风格名，Dark，Light
         style.candleColors      = "Green/Red"
-        style.showYAxisLabel    = "right"
-        style.isInnerYAxis      = false
+        style.showYAxisLabel    = "left"
+        style.isInnerYAxis      = true
         style.backgroundColor   = 0xFFFFFF
         style.textColor         = 0x9AA2B3
         style.selectedTextColor = 0xFFFFFF
@@ -53,7 +53,6 @@ class KSStyleParam: NSObject, Codable {
             0xB620E0,
             0x32C5FF,
         ]
-        style.isInnerYAxis      = false
         return style
     }
 }
