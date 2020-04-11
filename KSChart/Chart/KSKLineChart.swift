@@ -1759,12 +1759,11 @@ extension KSKLineChartView {
                 linePath.addLine(to: CGPoint.init(x: lineX, y: lineY + padding))
             }
             else{
-                lineY = lineY - section.titleHeight + 4
+                lineY = lineY - section.titleHeight
             }
 
             let yAxisLabel             = KSTextLayer()
             yAxisLabel.frame           = CGRect.init(x: titleX, y: lineY, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
-            //yAxisLabel.font          = "Helvetica Neue" as CFTypeRef
             yAxisLabel.fontSize        = self.style.labelFont.pointSize
             yAxisLabel.foregroundColor = self.style.textColor.cgColor
             yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
