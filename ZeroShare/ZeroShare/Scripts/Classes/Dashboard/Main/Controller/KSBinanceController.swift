@@ -111,6 +111,7 @@ class KSBinanceController: KSBaseViewController {
     //======================================================================
     /// 创建子控件
     private func createChildViews() {
+        /*
         titleView                              = KSButton.init(textColor: KS_Const_Color_White,
                                                                textFont: KS_Const_Font_Bold_18,
                                                                alignment: NSTextAlignment.center,
@@ -127,7 +128,7 @@ class KSBinanceController: KSBaseViewController {
         followBtn                              = UIButton.init(normalImage: "ic_desborad_follow_normal", selectedImage: "ic_desborad_follow_select")
         followBtn.ks_addTarget(self, action: #selector(onFollowClick))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: followBtn!)
-        
+        */
         self.segmentedPager.frame              = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.ks_navigationHeight())
         self.view.addSubview(self.segmentedPager)
         defaultTai()
@@ -204,7 +205,7 @@ class KSBinanceController: KSBaseViewController {
     }
     
     private func updateTitleView() {
-        titleView?.update(text: configure.ask_currency.uppercased() + "/" + configure.bid_currency.uppercased(), isCenter: true)
+        //titleView?.update(text: configure.ask_currency.uppercased() + "/" + configure.bid_currency.uppercased(), isCenter: true)
     }
     
     private func hideIndexMenu() {

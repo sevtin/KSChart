@@ -13,7 +13,7 @@ class KSBaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.init(red: 249/255.0, green: 249/255.0, blue: 249/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor.init(red: 249 / 255.0, green: 249 / 255.0, blue: 249 / 255.0, alpha: 1.0)
         self.title = NSStringFromClass(type(of: self))
     }
     
