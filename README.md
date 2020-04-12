@@ -41,13 +41,13 @@ class KSKChartView: KSBaseView {
 ```
 
 ## CocoaPods安装
-
+```
 platform :ios, '10.0'
 use_frameworks!
 
 target 'MyApp' do
     pod 'KSChart', '~> 5.1.4'
 end
-
+```
 
 反馈/技术交流群:902071358
