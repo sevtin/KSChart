@@ -292,9 +292,7 @@ class KSLineModel: KSChartModel {
                 minPoint = point
             }
         }
-        
         modelLayer.path = linePath.cgPath
-        
         serieLayer.addSublayer(modelLayer)
         /*//【弃用】
         //显示最大最小值

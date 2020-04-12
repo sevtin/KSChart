@@ -159,6 +159,8 @@ class KSKLineChartView: UIView {
     lazy var drawLayer: KSShapeLayer     = KSShapeLayer()
     /// 格子图层
     lazy var gridLayer: KSShapeLayer     = KSShapeLayer()
+    
+    lazy var barLabels: [KSTextLayer]    = [KSTextLayer]()
 
     var verticalLineView: UIView?
     var horizontalLineView: UIView?
@@ -511,7 +513,7 @@ class KSKLineChartView: UIView {
         if isNext == false {
             return
         }
-        
+
         self.pref.selectedPoint                  = point
         let showXAxisSection                     = self.getSecionWhichShowXAxis()
         /*
@@ -706,8 +708,8 @@ extension KSKLineChartView {
                 //绘制Y轴坐标上的标签【废弃】
                 //self.drawYAxisLabel(yAxisToDraw)//[绘制最右侧价格/成交量/指标值等数据]
 
-                //把标题添加到主绘图层上
-                self.drawLayer.addSublayer(section.titleLayer)//[绘制最顶部价格/指标值等数据]
+                //把标题添加到主绘图层上【废弃】
+                //self.drawLayer.addSublayer(section.titleLayer)//[绘制最顶部价格/指标值等数据]
 
                 //是否采用用户自定义
                 if let titleView = self.delegate?.kLineChart?(chart: self, viewForHeaderInSection: index) {
@@ -848,24 +850,26 @@ extension KSKLineChartView {
             } else {
                 heightOfSection = height * CGFloat(section.ratios) / CGFloat(total)
             }
-            
-//            //y轴的标签显示方位
-//            switch self.style.showYAxisLabel {
-//            case .left:         //左边显示
-//                section.padding.left  = self.style.isInnerYAxis ? section.padding.left : self.pref.yAxisLabelWidth
-//                section.padding.right = 0
-//            case .right:        //右边显示
-//                section.padding.left  = 0
-//                section.padding.right = self.style.isInnerYAxis ? section.padding.right : self.pref.yAxisLabelWidth
-//            case .none:         //都不显示
-//                section.padding.left  = 0
-//                section.padding.right = 0
-//            }
+            /*
+            //y轴的标签显示方位
+            switch self.style.showYAxisLabel {
+            case .left:         //左边显示
+                section.padding.left  = self.style.isInnerYAxis ? section.padding.left : self.pref.yAxisLabelWidth
+                section.padding.right = 0
+            case .right:        //右边显示
+                section.padding.left  = 0
+                section.padding.right = self.style.isInnerYAxis ? section.padding.right : self.pref.yAxisLabelWidth
+            case .none:         //都不显示
+                section.padding.left  = 0
+                section.padding.right = 0
+            }*/
             
             //计算每个section的坐标
-            section.frame = CGRect(x: 0 + self.style.padding.left, y: offsetY, width: WidthOfSection, height: heightOfSection)
+            if section.frame.origin.y != offsetY || section.frame.height != heightOfSection {
+                section.frame = CGRect(x: 0 + self.style.padding.left, y: offsetY, width: WidthOfSection, height: heightOfSection)
+            }
             offsetY       = offsetY + section.frame.height
-
+            
             //如果这个分区设置为显示X轴，下一个分区的Y起始位要加上X轴高度
             if self.style.showXAxisOnSection == index {
                 offsetY = offsetY + xAxisHeight
@@ -979,28 +983,42 @@ extension KSKLineChartView {
         guard xAxisToDraw.count > 0 else {
             return
         }
-        
-        let xAxis = KSShapeLayer()
-        
+
         let startY = section.frame.maxY //需要显示x坐标标签名字的分区，再最下方显示
-        //绘制x坐标标签，x的位置通过画辅助线时计算得出
-        for (var barLabelRect, xLabel) in xAxisToDraw {
-
-            barLabelRect.origin.y      = startY
-
-            //绘制文本
-            let xLabelText             = KSTextLayer()
-            xLabelText.frame           = barLabelRect
-            xLabelText.string          = xLabel
-            xLabelText.alignmentMode   = CATextLayerAlignmentMode.center
-            xLabelText.fontSize        = self.style.labelFont.pointSize
-            xLabelText.foregroundColor = self.style.textColor.cgColor
-            xLabelText.backgroundColor = KS_Chart_Color_Clear_CgColor
-            xLabelText.contentsScale   = KS_Chart_ContentsScale
-
-            xAxis.addSublayer(xLabelText)
+        if xAxisToDraw.count > barLabels.count {
+            let xAxis = KSShapeLayer()
+            for _ in barLabels.count..<xAxisToDraw.count {
+                let xLabelText             = KSTextLayer()
+                xLabelText.alignmentMode   = CATextLayerAlignmentMode.center
+                xLabelText.fontSize        = self.style.labelFont.pointSize
+                xLabelText.foregroundColor = self.style.textColor.cgColor
+                xLabelText.backgroundColor = KS_Chart_Color_Clear_CgColor
+                xLabelText.contentsScale   = KS_Chart_ContentsScale
+                barLabels.append(xLabelText)
+                xAxis.addSublayer(xLabelText)
+            }
+            self.gridLayer.addSublayer(xAxis)
         }
-        self.drawLayer.addSublayer(xAxis)
+        for i in 0..<xAxisToDraw.count {
+            var barLabelRect      = xAxisToDraw[i].0
+            barLabelRect.origin.y = startY
+            let xLabelText        = self.barLabels[i]
+            if xLabelText.frame.origin.x != barLabelRect.origin.x {
+                xLabelText.frame  = barLabelRect
+            }
+            xLabelText.string     = xAxisToDraw[i].1
+            if xLabelText.isHidden {
+                xLabelText.isHidden = false
+            }
+        }
+        if xAxisToDraw.count < self.barLabels.count {
+            for i in xAxisToDraw.count..<self.barLabels.count{
+                let xLabelText = self.barLabels[i]
+                if xLabelText.isHidden == false {
+                    xLabelText.isHidden = true
+                }
+            }
+        }
     }
     
     /// 绘制分区
@@ -1701,10 +1719,18 @@ extension KSKLineChartView {
         self.gridLayer.sublayers?.removeAll()
     }
     
+    func resetGridData() {
+        self.barLabels.removeAll()
+    }
+    
     func drawGridLayer() {
         self.removeGridLayer()
+        self.resetGridData()
+        
         self.buildSections {(section, index) in
             drawSectionGrid(section)
+            //把标题添加到图层上
+            self.gridLayer.addSublayer(section.titleLayer)//[绘制最顶部价格/指标值等数据]
         }
     }
     

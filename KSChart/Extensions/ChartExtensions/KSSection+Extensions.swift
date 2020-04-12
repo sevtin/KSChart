@@ -73,31 +73,12 @@ extension KSSection {
             switch model {
             case is KSCandleModel:
                 if model.key != KSSeriesKey.candle {
-                    continue//不限蜡烛柱
+                    continue
                 }
-                /*
-                //振幅
-                var amplitude: CGFloat = 0
-                if item.openPrice > 0 {
-                    amplitude = (item.closePrice - item.openPrice) / item.openPrice * 100
-                }
-                
-                title += NSLocalizedString("O", comment: "") + ": " +
-                    item.openPrice.ks_toString(maximum: self.decimal) + "  "   //开始
-                title += NSLocalizedString("H", comment: "") + ": " +
-                    item.highPrice.ks_toString(maximum: self.decimal) + "  "   //最高
-                title += NSLocalizedString("L", comment: "") + ": " +
-                    item.lowPrice.ks_toString(maximum: self.decimal) + "  "    //最低
-                title += NSLocalizedString("C", comment: "") + ": " +
-                    item.closePrice.ks_toString(maximum: self.decimal) + "  "  //收市
-                title += NSLocalizedString("R", comment: "") + ": " +
-                    amplitude.ks_toString(maximum: self.decimal) + "%   "      //振幅
-                */
             case is KSColumnModel:
                 if model.key != KSSeriesKey.volume {
-                    continue //不是量线
+                    continue
                 }
-                //title += model.title + ": " + item.vol.ks_toString(maximum: self.decimal) + "  "
                 title += model.title + ": " + item.volume.ks_volume()
             case is KSBollModel: break
             case is KSTimeChartModel: break
@@ -108,7 +89,6 @@ extension KSSection {
                     title += model.title + ": --  "
                 }
             }
-            
             if model.useTitleColor { //是否用标题颜色
                 textColor = model.titleColor
             } else {

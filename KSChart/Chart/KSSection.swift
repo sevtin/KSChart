@@ -43,11 +43,20 @@ class KSSection: NSObject {
     var xAxis: KSXAxis                  = KSXAxis()//X轴参数
     var backgroundColor: UIColor        = UIColor.black
     var index: Int                      = 0//分组
-    var titleLayer: KSShapeLayer        = KSShapeLayer()//显示顶部标题内容的层
-    var sectionLayer: KSShapeLayer      = KSShapeLayer()//分区的绘图层
     var titleView: UIView? //用户自定义的View
     var tai: String                     = ""//当前技术指标
+    var sectionLayer: KSShapeLayer      = KSShapeLayer()//分区的绘图层
     lazy var yAxisTitles: [KSTextLayer] = [KSTextLayer]()//y轴行标题
+    lazy var titleLayer: KSShapeLayer   = KSShapeLayer()//显示顶部标题内容的层
+    lazy var textLayer : KSTextLayer = {
+        let textLayer = KSTextLayer()
+        textLayer.fontSize        = self.labelFont.pointSize
+        textLayer.backgroundColor = KS_Chart_Color_Clear_CgColor
+        textLayer.contentsScale   = KS_Chart_ContentsScale
+        textLayer.isWrapped       = true
+        self.titleLayer.addSublayer(textLayer)
+        return textLayer
+    }()
 
     /// 初始化分区
     ///
@@ -69,8 +78,8 @@ extension KSSection {
         _ = self.sectionLayer.sublayers?.map { $0.removeFromSuperlayer() }
         self.sectionLayer.sublayers?.removeAll()
         
-        _ = self.titleLayer.sublayers?.map { $0.removeFromSuperlayer() }
-        self.titleLayer.sublayers?.removeAll()
+        //_ = self.titleLayer.sublayers?.map { $0.removeFromSuperlayer() }
+        //self.titleLayer.sublayers?.removeAll()
     }
     
     /// 建立Y轴左边对象，由起始位到结束位
@@ -186,10 +195,6 @@ extension KSSection {
         if self.showTitle == false {
             return
         }
-        
-        _ = self.titleLayer.sublayers?.map { $0.removeFromSuperlayer() }
-        self.titleLayer.sublayers?.removeAll()
-
         var yPos: CGFloat           = 0
         var containerWidth: CGFloat = 0
         let textSize                = title.string.ks_sizeWithConstrained(self.labelFont, constraintRect: CGSize(width: self.frame.width, height: CGFloat.greatestFiniteMagnitude))
@@ -203,19 +208,13 @@ extension KSSection {
         }
 
         let startX                = self.frame.origin.x + self.padding.left + 2
-
         let point                 = CGPoint(x: startX, y: yPos)
-
-        let titleText             = KSTextLayer()
-        titleText.frame           = CGRect(origin: point, size: CGSize(width: containerWidth, height: textSize.height + 20))
-        titleText.string          = title
-        titleText.fontSize        = self.labelFont.pointSize
-        //titleText.foregroundColor =  self.titleColor.cgColor
-        titleText.backgroundColor = KS_Chart_Color_Clear_CgColor
-        titleText.contentsScale   = KS_Chart_ContentsScale
-        titleText.isWrapped       = true
-
-        self.titleLayer.addSublayer(titleText)
+        DispatchQueue.main.async {
+            if self.textLayer.frame.origin.x != point.x || self.textLayer.frame.height != textSize.height + 20 {
+                self.textLayer.frame  = CGRect(origin: point, size: CGSize(width: containerWidth, height: textSize.height + 20))
+            }
+            self.textLayer.string     = title
+        }
     }
     
     //切换到下一个系列显示
@@ -441,7 +440,6 @@ extension KSSection {
     /// - Parameters:
     ///   - titles: 文本内容及颜色元组
     func setHeader(titles: [(title: String, color: UIColor)])  {
-        
         var start = 0
         let titleString = NSMutableAttributedString()
         for (title, color) in titles {

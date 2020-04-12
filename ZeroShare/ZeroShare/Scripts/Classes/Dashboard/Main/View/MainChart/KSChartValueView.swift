@@ -88,6 +88,7 @@ class KSChartValueView: KSBaseView {
     
     func update(value: KSChartItem) {
         self.showKit()
+        
         value.setOpenValue(textLabel: openLabel,extra: openTitle)
         value.setCloseValue(textLabel: closeLabel,extra: closeTitle)
         value.setHighValue(textLabel: highLabel,extra: highTitle)
