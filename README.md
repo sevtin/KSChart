@@ -23,8 +23,8 @@
 ```swift
 class KSKChartView: KSBaseView {
     
-    var klineData = [KSChartItem]()
-    var configure: KSChartConfigure = KSChartConfigure.init()
+    lazy var klineData = [KSChartItem]()
+    lazy var configure: KSChartConfigure = KSChartConfigure.init()
     
     weak var delegate: KSKChartViewDelegate?
     
