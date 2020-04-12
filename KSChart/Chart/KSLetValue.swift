@@ -17,4 +17,4 @@ let KS_Chart_Color_Clear_CgColor: CGColor = UIColor.clear.cgColor
 
 // MARK: - 数值
 let KS_Chart_ContentsScale: CGFloat       = UIScreen.main.scale
-
+let KS_Chart_CGRect_Zero: CGRect          = CGRect.zero

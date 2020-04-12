@@ -14,8 +14,8 @@
             filePath = "../KSChart/Chart/KSKLineChart.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1017"
-            endingLineNumber = "1017"
+            startingLineNumber = "967"
+            endingLineNumber = "967"
             landmarkName = "drawXAxisLabel(_:xAxisToDraw:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "../KSChart/Chart/KSKLineChart.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1011"
-            endingLineNumber = "1011"
+            startingLineNumber = "961"
+            endingLineNumber = "961"
             landmarkName = "drawXAxisLabel(_:xAxisToDraw:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "../KSChart/Chart/KSKLineChart.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1708"
-            endingLineNumber = "1708"
+            startingLineNumber = "1658"
+            endingLineNumber = "1658"
             landmarkName = "doLongPressAction(_:)"
             landmarkType = "7">
          </BreakpointContent>

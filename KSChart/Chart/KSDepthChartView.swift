@@ -455,15 +455,6 @@ class KSDepthChartView: UIView {
          当前y值的实际坐标 = 分区高度 + 分区y坐标 - paddingBottom - 当前y值的实际的相对y轴有值的区间的高度
          */
         let baseY = self.bounds.maxY - self.padding.bottom - (self.bounds.size.height - self.padding.top - self.padding.bottom) * (val - min) / (max - min)
-        //        NSLog("self.bounds.size.height - self.padding.top - self.padding.bottom = \(self.bounds.size.height - self.padding.top - self.padding.bottom)")
-        //        NSLog("fra.size.height = \(self.bounds.size.height)");
-        //        NSLog("self.bounds.maxY = \(self.bounds.maxY)");
-        //        NSLog("(self.padding.bottom) = \(self.padding.bottom)");
-        //        NSLog("(val - min) = \((val - min))");
-        //        NSLog("max - min = \(max - min)");
-        //        NSLog("max = \(max)");
-        //        NSLog("min = \(min)");
-        //        NSLog("baseY = \(baseY)");
         return baseY
     }
     

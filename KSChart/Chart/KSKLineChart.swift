@@ -113,9 +113,9 @@ enum KSSelectedPosition {
 }
 
 struct KSChartPref {
-    let kMinRange                            = 16//最小缩放范围
-    let kMaxRange                            = 128//最大缩放范围
-    let kPerInterval                         = 4//缩放的每段间隔
+    let kMinRange:Int                        = 16//最小缩放范围
+    let kMaxRange:Int                        = 128//最大缩放范围
+    let kPerInterval:Int                     = 4//缩放的每段间隔
     let kYAxisLabelWidth: CGFloat            = 70//默认文字宽度
     let kXAxisHegiht: CGFloat                = 16//默认X坐标的高度
     var minCandleCount: Int                  = 30//最小蜡烛图数量
@@ -176,7 +176,7 @@ class KSKLineChartView: UIView {
     }
     
     /// 是否显示选中的内容
-    var showSelection: Bool = true {
+    var showSelection: Bool = false {
         didSet {
             self.selectedXAxisLabel?.isHidden = !self.showSelection
             self.selectedYAxisLabel?.isHidden = !self.showSelection
@@ -191,27 +191,9 @@ class KSKLineChartView: UIView {
         }
     }
     
-    var style: KSKLineChartStyle! {           //显示样式
+    var style: KSKLineChartStyle! {
         didSet {
             assert(self.style.chartTais != nil, "chartTais 不能为nil")
-            //重新配置样式
-            //self.sections            = self.style.sections
-            //self.chartTais           = self.style.chartTais
-            //self.padding             = self.style.padding
-            //self.lineColor           = self.style.lineColor
-            //self.textColor           = self.style.textColor
-            //self.labelFont           = self.style.labelFont
-            //self.showYAxisLabel      = self.style.showYAxisLabel
-            //self.selectedBGColor     = self.style.selectedBGColor
-            //self.selectedTextColor   = self.style.selectedTextColor
-            //self.isInnerYAxis        = self.style.isInnerYAxis
-            //self.enablePinch         = self.style.enablePinch
-            //self.enablePan           = self.style.enablePan
-            //self.showXAxisOnSection  = self.style.showXAxisOnSection
-            //self.isShowAll           = self.style.isShowAll
-            //self.showXAxisLabel      = self.style.showXAxisLabel
-            //self.borderWidth         = self.style.borderWidth
-            
             self.enableTap           = self.style.enableTap
             self.pref.isCrosshair    = self.style.isCrosshair
             self.showSelection       = self.style.showSelection
@@ -228,34 +210,7 @@ class KSKLineChartView: UIView {
             defaultConfigure()
         }
     }
-    /*
-    var labelFont                                                                   = UIFont.systemFont(ofSize: 10)
-    var lineColor: UIColor                                                          = UIColor(white: 0.2, alpha: 1)//线条颜色
-    var textColor: UIColor                                                          = UIColor(white: 0.8, alpha: 1)//文字颜色
-    var padding: UIEdgeInsets                                                       = UIEdgeInsets.zero//内边距
-    var showYAxisLabel                                                              = KSYAxisShowPosition.right//显示y的位置，默认右边
-    var isInnerYAxis: Bool                                                          = false// 是否把y坐标内嵌到图表中
-    var sections                                                                    = [KSSection]()//分区样式Demo中N个样式，分别是主图/附图1/附图2
-    //是否可缩放
-    var enablePinch: Bool                                                           = true
-    //是否可滑动
-    var enablePan: Bool                                                             = true
-    //把X坐标内容显示到哪个索引分区上，默认为-1，表示最后一个，如果用户设置溢出的数值，也以最后一个
-    var showXAxisOnSection: Int                                                     = -1
-    //是否显示X轴标签
-    var showXAxisLabel: Bool                                                        = true
-    //是否显示所有内容
-    var isShowAll: Bool                                                             = false
-    //显示边线上左下有
-    var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
-    var selectedBGColor: UIColor                                                    = UIColor(white: 0.4, alpha: 1)//选中点的显示的框背景颜色
-    var selectedTextColor: UIColor                                                  = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)//选中点的显示的文字颜色
-    //滚动释放后用于反弹回来
-    weak var springBehavior: UIAttachmentBehavior?
-    // 技术指标名称:算法
-    var chartTais: [String: KSIndexAlgorithm]!
-    */
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initializeKit()
@@ -343,8 +298,11 @@ class KSKLineChartView: UIView {
         self.selectedYAxisLabel?.isHidden        = true
         self.selectedXAxisLabel?.isHidden        = true
         self.sightView?.isHidden                 = true
+        
         //绘制格子视图
         self.drawGridLayer()
+        
+        self.crossToFront()
     }
     
     public func scrollPositionEnd() -> Bool {
@@ -516,15 +474,7 @@ class KSKLineChartView: UIView {
 
         self.pref.selectedPoint                  = point
         let showXAxisSection                     = self.getSecionWhichShowXAxis()
-        /*
-        //重置文字颜色和字体
-        self.selectedYAxisLabel?.font            = self.style.labelFont
-        self.selectedYAxisLabel?.backgroundColor = self.style.selectedBGColor
-        self.selectedYAxisLabel?.textColor       = self.style.selectedTextColor
-        self.selectedXAxisLabel?.font            = self.style.labelFont
-        self.selectedXAxisLabel?.backgroundColor = self.style.selectedBGColor
-        self.selectedXAxisLabel?.textColor       = self.style.selectedTextColor
-        */
+
         let yaxis                                = section!.yAxis
         let format                               = "%.".appendingFormat("%df", yaxis.decimal)
         
@@ -599,11 +549,16 @@ class KSKLineChartView: UIView {
             self.sightView?.center     = CGPoint(x: hx, y: vy)
         }
         
-        //给用户进行最后的自定义
-        //self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
-        
+        if self.showSelection == false {
+            crossToFront()
+        }
         self.showSelection = true
         
+        //设置选中点
+        self.setSelectedByIndex(currentIndex)
+    }
+    
+    func crossToFront() {
         self.bringSubviewToFront(self.verticalLineView!)
         self.bringSubviewToFront(self.horizontalLineView!)
         self.bringSubviewToFront(self.selectedXAxisLabel!)
@@ -611,9 +566,6 @@ class KSKLineChartView: UIView {
         if self.pref.isCrosshair {
             self.bringSubviewToFront(self.sightView!)
         }
-        
-        //设置选中点
-        self.setSelectedByIndex(currentIndex)
     }
     
     /// 设置选中的数据点,并回调
