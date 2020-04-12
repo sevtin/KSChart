@@ -39,7 +39,7 @@ public enum KSGraphType: Int {
 
 /// 数据元素
 open class KSChartItem: NSObject {
-    @objc var time: Int                = 0
+    @objc open var time: Int           = 0
     open var openPrice: CGFloat        = 0
     open var closePrice: CGFloat       = 0
     open var lowPrice: CGFloat         = 0
@@ -67,17 +67,17 @@ open class KSChartItem: NSObject {
     open var isUp:Bool               = false
     open var yesterPrice: CGFloat    = 1
     
-    @objc var low: String = "" {
+    @objc open var low: String = "" {
         didSet {
             lowPrice = low.ks_floatValue()
         }
     }
-    @objc var high:String = "" {
+    @objc open var high:String = "" {
         didSet {
             highPrice = high.ks_floatValue()
         }
     }
-    @objc var volume:String = "" {
+    @objc open var volume:String = "" {
         didSet {
             vol = volume.ks_floatValue()
         }
@@ -89,12 +89,12 @@ open class KSChartItem: NSObject {
         }
     }
     
-    @objc var open:String = "" {
+    @objc open var open:String = "" {
         didSet {
             openPrice = open.ks_floatValue()
         }
     }
-    @objc var close:String = "" {
+    @objc open var close:String = "" {
         didSet {
             closePrice    = close.ks_floatValue()
             isUp          = closePrice > openPrice

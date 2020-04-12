@@ -10,13 +10,13 @@ import UIKit
 
 extension String {
     
-    static func ks_localizde(_ text: String) -> String {
+    public static func ks_localizde(_ text: String) -> String {
         return NSLocalizedString(text, comment: "")
         //return KSLanguageHelper.localizable(key: text)
         //return String.localizde(text)
     }
     
-    static func ks_attribute(frontText: String?, frontFont: UIFont, frontColor: UIColor, behindText: String?, behindFont: UIFont, behindColor: UIColor) -> NSMutableAttributedString? {
+    public static func ks_attribute(frontText: String?, frontFont: UIFont, frontColor: UIColor, behindText: String?, behindFont: UIFont, behindColor: UIColor) -> NSMutableAttributedString? {
         let text            = "\(frontText ?? "")\(behindText ?? "")"
         let attributeString = NSMutableAttributedString(string: text)
         attributeString.addAttribute(.foregroundColor, value: frontColor, range: NSRange(location: 0, length: frontText?.count ?? 0))
@@ -27,7 +27,7 @@ extension String {
         return attributeString
     }
     
-    func ks_dictionary() -> [String: Any]? {
+    public func ks_dictionary() -> [String: Any]? {
         let data    = self.data(using: String.Encoding.utf8)
         if let dict = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String : Any] {
             return dict
@@ -35,7 +35,7 @@ extension String {
         return nil
     }
     
-    static func ks_changeSpace(text: String, space: CGFloat, font: UIFont, color: UIColor?) -> NSMutableAttributedString {
+    public static func ks_changeSpace(text: String, space: CGFloat, font: UIFont, color: UIColor?) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString.init(string: text)
         attributedString.addAttributes([NSAttributedString.Key.kern: space], range: NSRange(location: 0, length: text.count))
         attributedString.addAttributes([NSAttributedString.Key.font: font], range: NSRange(location: 0, length: text.count))
@@ -45,7 +45,7 @@ extension String {
         return attributedString
     }
     
-    static func ks_attributed(text: String, color: UIColor?) -> NSMutableAttributedString {
+    public static func ks_attributed(text: String, color: UIColor?) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString.init(string: text)
         if color != nil  {
             attributedString.addAttributes([NSAttributedString.Key.foregroundColor: color!], range: NSRange(location: 0, length: text.count))
@@ -53,7 +53,7 @@ extension String {
         return attributedString
     }
     
-    func ks_floatValue() -> CGFloat {
+    public func ks_floatValue() -> CGFloat {
         return CGFloat((Double(self) ?? 0))
     }
     
@@ -63,7 +63,7 @@ extension String {
     ///   - font: 字体大小
     ///   - constraintRect: 大小范围
     /// - Returns: 宽高
-    func ks_sizeWithConstrained(_ font: UIFont,
+    public func ks_sizeWithConstrained(_ font: UIFont,
                                 constraintRect: CGSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)) -> CGSize {
         let boundingBox = self.boundingRect(
             with: constraintRect,
@@ -74,12 +74,12 @@ extension String {
     }
     
     /// 字符串长度
-    var ks_length: Int {
+    public var ks_length: Int {
         return self.count;
     }
     
     ///成交量
-    func ks_volume() -> String {
+    public func ks_volume() -> String {
         let vol = Double(self) ?? 0
         if vol >= 1000000.0 {
             return String.init(format: "%.2fM", vol/1000000.0)

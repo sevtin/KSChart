@@ -112,7 +112,7 @@ enum KSSelectedPosition {
     @objc optional func kLineChartTapAction(chart: KSKLineChartView)
 }
 
-struct KSChartPref {
+public struct KSChartPref {
     let kMinRange:Int                        = 16//最小缩放范围
     let kMaxRange:Int                        = 128//最大缩放范围
     let kPerInterval:Int                     = 4//缩放的每段间隔
@@ -124,7 +124,7 @@ struct KSChartPref {
     var xAxisPerInterval: Int                = 4//x轴的间断个数
     var yAxisLabelWidth: CGFloat             = 0//Y轴的宽度
     var selectedPosition: KSSelectedPosition = .onClosePrice//选中显示y值的位置
-    var selectedIndex: Int                   = -1//选择单个点的索引
+    public var selectedIndex: Int            = -1//选择单个点的索引
     var scrollToPosition: KSScrollPosition   = .none//图表刷新后开始显示位置
     var selectedPoint: CGPoint               = CGPoint.zero
     var lineWidth: CGFloat                   = 0.5
@@ -140,7 +140,7 @@ struct KSChartPref {
 open class KSKLineChartView: UIView {
     public weak var delegate: KSKLineChartDelegate? //代理
     
-    lazy var pref: KSChartPref           = KSChartPref()//偏好设置
+    public lazy var pref: KSChartPref    = KSChartPref()//偏好设置
     lazy var datas: [KSChartItem]        = [KSChartItem]()//数据源
     
     /// MARK: - 成员变量
@@ -192,7 +192,7 @@ open class KSKLineChartView: UIView {
         }
     }
     
-    var style: KSKLineChartStyle! {
+    public var style: KSKLineChartStyle! {
         didSet {
             assert(self.style.chartTais != nil, "chartTais 不能为nil")
             self.enableTap           = self.style.enableTap
@@ -212,7 +212,7 @@ open class KSKLineChartView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         self.initializeKit()
     }
@@ -346,7 +346,7 @@ open class KSKLineChartView: UIView {
     ///   - isAll: 是否刷新全部数据
     ///   - isDraw: 是否绘制
     ///   - isChangeTai: 是否修改了技术指标
-    func refreshChart(isAll: Bool = true, isDraw: Bool = true, isChangeTai: Bool = false) {
+    public func refreshChart(isAll: Bool = true, isDraw: Bool = true, isChangeTai: Bool = false) {
         self.calculatorTai(isAll: isAll)
         if isDraw {
             self.pref.scrollToPosition = self.scrollPositionEnd() ? .end : .none
@@ -362,7 +362,7 @@ open class KSKLineChartView: UIView {
     }
     
     /// 通过key隐藏或显示线系列
-    func updateSerie(hidden: Bool, key: String, isMasterCandle: Bool, index: Int = 0) {
+    public func updateSerie(hidden: Bool, key: String, isMasterCandle: Bool, index: Int = 0) {
         if index >= self.style.sections.count {
             return
         }

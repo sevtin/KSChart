@@ -17,7 +17,7 @@ extension CGFloat {
     ///   - maximum: 设置最大小数点后的位数
     ///   - minimumInteger: 设置数值的整数部分允许的最小位数
     /// - Returns:
-    func ks_toString(_ minimum: Int = 2, maximum: Int = 6, minimumInteger: Int = 1) -> String {
+    public func ks_toString(_ minimum: Int = 2, maximum: Int = 6, minimumInteger: Int = 1) -> String {
         let valueDecimalNumber = NSDecimalNumber(value: Double(self) as Double)
         let twoDecimalPlacesFormatter = NumberFormatter()
         twoDecimalPlacesFormatter.maximumFractionDigits = maximum
@@ -26,13 +26,13 @@ extension CGFloat {
         return twoDecimalPlacesFormatter.string(from: valueDecimalNumber)!
     }
     
-    func ks_toText(_ decimal: Int = 2) -> String {
+    public func ks_toText(_ decimal: Int = 2) -> String {
         let formart = "%.\(decimal)f"
         return String(format: formart, self)
     }
     
     ///千位计数
-    func ks_thousand(_ decimal: Int = 2) -> String {
+    public func ks_thousand(_ decimal: Int = 2) -> String {
         if self >= 1000000.0 {
             return String.init(format: "%.2fM", self/1000000.0)
         }
