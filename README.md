@@ -46,7 +46,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'MyApp' do
-    pod 'KSChart', '~> 5.1.4'
+    pod 'KSChart', '~> 5.1.6'
 end
 ```
 
