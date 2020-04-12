@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         //PerformanceMonitor.shared().start()
         //Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection10.bundle")?.load()
-        Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
+        //Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
         #endif
         return true
     }
