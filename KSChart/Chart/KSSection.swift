@@ -20,7 +20,7 @@ public enum KSSectionValueType {
 public class KSSection: NSObject {
     public var upColor: UIColor              = KS_Chart_Color_White//升的颜色
     public var downColor: UIColor            = KS_Chart_Color_White//跌的颜色
-    public var titleColor: UIColor           = KS_Chart_Color_LightText//文字颜色
+    public var titleColor: UIColor           = KS_Chart_Color_LightGray//文字颜色
     public var titleHeight:CGFloat           = 12
     public var labelFont                     = KS_Chart_Font_Normal_10
     public var valueType: KSSectionValueType = KSSectionValueType.master
