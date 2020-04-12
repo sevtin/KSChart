@@ -8,8 +8,8 @@
 
 import UIKit
 
-class KSZeroChartView: KSKLineChartView {
-
+open class KSZeroChartView: KSKLineChartView {
+    
     /// 设置选中的数据点,并回调
     ///
     /// - Parameter index: 选中位置
@@ -29,13 +29,13 @@ class KSZeroChartView: KSKLineChartView {
     /// 处理长按操作
     override func doLongPressAction(_ sender: UILongPressGestureRecognizer) {
         super.doLongPressAction(sender)
-
+        
         if self.pref.isLongPressMoveX {
             DispatchQueue.global().async {
-              for section in self.style.sections {
-                  //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
-                  section.drawCustomTitle(self.pref.selectedIndex)
-              }
+                for section in self.style.sections {
+                    //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
+                    section.drawCustomTitle(self.pref.selectedIndex)
+                }
             }
             self.delegate?.kLineChartTapAction?(chart: self)
         }

@@ -24,14 +24,14 @@ class KSTimeChartModel: KSChartModel {
         let timelineLayer         = KSShapeLayer()
         timelineLayer.fillColor   = KS_Chart_Color_Clear_CgColor
         timelineLayer.strokeColor = self.upStyle.color.cgColor
-
+        
         let fillLayer             = KSShapeLayer()
         fillLayer.fillColor       = self.fillColor
         fillLayer.strokeColor     = KS_Chart_Color_Clear_CgColor
-
+        
         let curvelinePath         = UIBezierPath()
         curvelinePath.lineWidth   = self.lineWidth
-
+        
         //每个点的间隔宽度  BOLL宽度 =（宽度 - 左边间隔 - 右边间隔）/（结束点 - 开始点）
         let plotWidth             = self.latticeWidth(startIndex, endIndex: endIndex)//(self.section.frame.size.width - self.section.padding.left - self.section.padding.right) / CGFloat(endIndex - startIndex)
         var plotPadding           = plotWidth * self.plotPaddingExt
@@ -42,7 +42,7 @@ class KSTimeChartModel: KSChartModel {
         var startX: CGFloat       = 0
         var startY: CGFloat       = 0
         var endX: CGFloat         = 0
-
+        
         //循环起始到终结
         for i in stride(from: startIndex, to: endIndex, by: 1) {
             let closePrice = datas[i].closePrice

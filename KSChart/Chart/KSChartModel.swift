@@ -12,7 +12,7 @@ import UIKit
 /// - up: 升
 /// - down: 跌
 /// - equal: 相等
-enum KSChartItemTrend {
+public enum KSChartItemTrend {
     case up
     case down
     case equal
@@ -23,7 +23,7 @@ enum KSChartItemTrend {
 /// - up: 升
 /// - down: 跌
 /// - equal: 相等
-enum KSChartOpenType {
+public enum KSChartOpenType {
     case up
     case down
     case equal
@@ -33,21 +33,21 @@ enum KSChartOpenType {
 ///
 /// - normal: 普通
 /// - timeChart: 渐变分时图
-enum KSGraphType: Int {
+public enum KSGraphType: Int {
     case normal,timeChart
 }
 
 /// 数据元素
-class KSChartItem: NSObject {
-    @objc var time: Int           = 0
-    var openPrice: CGFloat        = 0
-    var closePrice: CGFloat       = 0
-    var lowPrice: CGFloat         = 0
-    var highPrice: CGFloat        = 0
-    var vol: CGFloat              = 0
-    var value: CGFloat?
-    var extVal: [String: CGFloat] = [String: CGFloat]()//扩展值，用来记录各种技术指标
-    var trend: KSChartItemTrend {
+open class KSChartItem: NSObject {
+    @objc var time: Int                = 0
+    open var openPrice: CGFloat        = 0
+    open var closePrice: CGFloat       = 0
+    open var lowPrice: CGFloat         = 0
+    open var highPrice: CGFloat        = 0
+    open var vol: CGFloat              = 0
+    open var value: CGFloat?
+    open var extVal: [String: CGFloat] = [String: CGFloat]()//扩展值，用来记录各种技术指标
+    open var trend: KSChartItemTrend {
         //收盘价 = 开盘价
         if closePrice == openPrice {
             return .equal
@@ -64,8 +64,8 @@ class KSChartItem: NSObject {
     }
     
     /// 以下为扩展属性
-    var isUp:Bool               = false
-    var yesterPrice: CGFloat    = 1
+    open var isUp:Bool               = false
+    open var yesterPrice: CGFloat    = 1
     
     @objc var low: String = "" {
         didSet {
@@ -83,7 +83,7 @@ class KSChartItem: NSObject {
         }
     }
     
-    var volumeDisplay: String {
+    open var volumeDisplay: String {
         get {
             return volume.ks_volume()
         }
@@ -100,12 +100,12 @@ class KSChartItem: NSObject {
             isUp          = closePrice > openPrice
         }
     }
-    var priceChange: String {
+    open var priceChange: String {
         get {
             return String.init(format: "%.2f", ((closePrice - yesterPrice)/yesterPrice))
         }
     }
-    var changePercent: String {
+    open var changePercent: String {
         get {
             return String.init(format: "%.2f%%", ((closePrice - yesterPrice)/yesterPrice*100))
         }
@@ -115,7 +115,7 @@ class KSChartItem: NSObject {
     //单个指标[MARK: - RSI 计算单个指标]
     var up_avg: CGFloat     = 0
     var dn_avg: CGFloat     = 0
-
+    
     //多个指标:[MARK: - RSI 计算全部指标]
     var up_avg_6: CGFloat   = 0
     var up_avg_12: CGFloat  = 0
@@ -126,13 +126,13 @@ class KSChartItem: NSObject {
     var rsi6: CGFloat       = 0
     var rsi12: CGFloat      = 0
     var rsi24: CGFloat      = 0
-
+    
     ///技术指标属性---BOLL
     //var ma20: CGFloat     = 0
     var boll_ma: CGFloat    = 0
     var boll_up: CGFloat    = 0
     var boll_low: CGFloat   = 0
-
+    
     ///技术指标属性---MACD
     var dif: CGFloat        = 0.0
     var ema_small: CGFloat  = 0.0
@@ -140,52 +140,52 @@ class KSChartItem: NSObject {
     var ema_middle: CGFloat = 0.0//单独计算EMA
     var dea: CGFloat        = 0.0
     var macd: CGFloat       = 0.0
-
+    
     ///技术指标属性---KDJ
     var k: CGFloat          = 0.0
     var d: CGFloat          = 0.0
     var j: CGFloat          = 0.0
     var rsv: CGFloat        = 0.0
-
+    
     ///技术指标属性---MA
     var ma_small: CGFloat   = 0.0
     var ma_middle: CGFloat  = 0.0
     var ma_big: CGFloat     = 0.0
-
+    
     ///技术指标属性---AVG
     var avg_price: CGFloat = 0.0
 }
 
 /// 定义图表数据模型
-class KSChartModel {
+public class KSChartModel {
     
     /// MARK: - 成员变量
     //升的颜色
-    var upStyle: (color: UIColor, isSolid: Bool)   = (.green, true)
+    public var upStyle: (color: UIColor, isSolid: Bool)   = (.green, true)
     //跌的颜色
-    var downStyle: (color: UIColor, isSolid: Bool) = (.red, true)
-    var titleColor                                 = KS_Chart_Color_White//标题文本的颜色
-    var datas: [KSChartItem]                       = [KSChartItem]()//数据值
-    var decimal: Int                               = 2//小数位的长度
-    var showMaxVal: Bool                           = false//是否显示最大值
-    var showMinVal: Bool                           = false//是否显示最小值
-    var title: String                              = ""//标题
-    var useTitleColor                              = true
-    var key: String                                = ""//key的名字
-    var ultimateValueStyle: KSUltimateValueStyle   = .none// 最大最小值显示样式
-    var lineWidth: CGFloat                         = 0.6//线段宽度
-    var plotPaddingExt: CGFloat                    = 0.165//点与点之间间断所占点宽的比例
-    var minCandleCount: Int                        = 30//最小蜡烛图数量
-    var fixedWidth: CGFloat                        = 10//小于最小蜡烛图数量，蜡烛的宽度
-    weak var section: KSSection!
+    public var downStyle: (color: UIColor, isSolid: Bool) = (.red, true)
+    public var titleColor                                 = KS_Chart_Color_White//标题文本的颜色
+    public var datas: [KSChartItem]                       = [KSChartItem]()//数据值
+    public var decimal: Int                               = 2//小数位的长度
+    public var showMaxVal: Bool                           = false//是否显示最大值
+    public var showMinVal: Bool                           = false//是否显示最小值
+    public var title: String                              = ""//标题
+    public var useTitleColor                              = true
+    public var key: String                                = ""//key的名字
+    public var ultimateValueStyle: KSUltimateValueStyle   = .none// 最大最小值显示样式
+    public var lineWidth: CGFloat                         = 0.6//线段宽度
+    public var plotPaddingExt: CGFloat                    = 0.165//点与点之间间断所占点宽的比例
+    public var minCandleCount: Int                        = 30//最小蜡烛图数量
+    public var fixedWidth: CGFloat                        = 10//小于最小蜡烛图数量，蜡烛的宽度
+    public weak var section: KSSection!
     
-    convenience init(upStyle: (color: UIColor, isSolid: Bool),
-                     downStyle: (color: UIColor, isSolid: Bool),
-                     title: String = "",
-                     titleColor: UIColor,
-                     datas: [KSChartItem] = [KSChartItem](),
-                     decimal: Int = 2,
-                     plotPaddingExt: CGFloat = 0.165) {
+    public convenience init(upStyle: (color: UIColor, isSolid: Bool),
+                            downStyle: (color: UIColor, isSolid: Bool),
+                            title: String = "",
+                            titleColor: UIColor,
+                            datas: [KSChartItem] = [KSChartItem](),
+                            decimal: Int = 2,
+                            plotPaddingExt: CGFloat = 0.165) {
         
         self.init()
         self.upStyle        = upStyle
@@ -210,7 +210,7 @@ class KSChartModel {
 }
 
 /// 线点样式模型
-class KSLineModel: KSChartModel {
+public class KSLineModel: KSChartModel {
     
     /// 曲线类型
     var graphType: KSGraphType = .normal
@@ -220,7 +220,7 @@ class KSLineModel: KSChartModel {
     var shadowOffset: CGSize   = CGSize.init(width: 0, height: 2)
     /// 不透明度
     var shadowOpacity: Float = 0.5;
-
+    
     /// 画点线（均线/MACD/KDJ/RSI）
     ///
     /// - Parameters:
@@ -239,18 +239,18 @@ class KSLineModel: KSChartModel {
         modelLayer.lineWidth   = self.lineWidth
         modelLayer.lineCap     = .round
         modelLayer.lineJoin    = .bevel
-
+        
         //每个点的宽度
         let plotWidth          = self.latticeWidth(startIndex, endIndex: endIndex)//(self.section.frame.size.width - self.section.padding.left - self.section.padding.right) / CGFloat(endIndex - startIndex)
-
+        
         //使用bezierPath画线段
         let linePath           = UIBezierPath()
-
+        
         var maxValue: CGFloat  = 0//最大值的项
         var maxPoint: CGPoint?//最大值所在坐标
         var minValue: CGFloat  = CGFloat.greatestFiniteMagnitude//最小值的项
         var minPoint: CGPoint?//最小值所在坐标
-
+        
         var isStartDraw        = false//是否开始绘制
         
         //循环起始到终结
@@ -315,7 +315,7 @@ class KSLineModel: KSChartModel {
 }
 
 /// 蜡烛样式模型
-class KSCandleModel: KSChartModel {
+public class KSCandleModel: KSChartModel {
     //是否绘制阴影
     var drawShadow = true
     
@@ -329,12 +329,12 @@ class KSCandleModel: KSChartModel {
         
         let serieLayer        = CAShapeLayer()
         let modelLayer        = CAShapeLayer()
-
+        
         //每个点的间隔宽度  蜡烛宽度 =（宽度 - 左边间隔 - 右边间隔）/（结束点 - 开始点）
         let plotWidth         = self.latticeWidth(startIndex, endIndex: endIndex)//(self.section.frame.size.width - self.section.padding.left - self.section.padding.right) / CGFloat(endIndex - startIndex)
         var plotPadding       = plotWidth * self.plotPaddingExt
         plotPadding           = plotPadding < 0.25 ? 0.25 : plotPadding
-
+        
         var maxValue: CGFloat = 0//最大值的项
         var maxPoint: CGPoint?//最大值所在坐标
         var minValue: CGFloat = CGFloat.greatestFiniteMagnitude//最小值的项
@@ -356,13 +356,13 @@ class KSCandleModel: KSChartModel {
             let shadowLayer      = CAShapeLayer()
             let shadowPath       = UIBezierPath()
             shadowPath.lineWidth = 0
-
+            
             let item             = datas[i]
             //开始X: 视图X + 左边间距 + ((i - 开始index) * 蜡烛的宽)
             let ix               = self.section.frame.origin.x + self.section.padding.left + CGFloat(i - startIndex) * plotWidth
             //结束X
             let iNx              = self.section.frame.origin.x + self.section.padding.left + CGFloat(i + 1 - startIndex) * plotWidth
-
+            
             //把具体的数值转为坐标系的y值
             let iyo              = self.section.getLocalY(item.openPrice)//开盘
             let iyc              = self.section.getLocalY(item.closePrice)//收盘
@@ -428,7 +428,7 @@ class KSCandleModel: KSChartModel {
                 candleLayer.path = candlePath!.cgPath
                 modelLayer.addSublayer(candleLayer)
             }
-
+            
             //记录最大值信息
             if item.highPrice > maxValue {
                 maxValue = item.highPrice
@@ -465,7 +465,7 @@ class KSCandleModel: KSChartModel {
 }
 
 /// 交易量样式模型
-class KSColumnModel: KSChartModel {
+public class KSColumnModel: KSChartModel {
     
     /// 绘制成交量
     ///
@@ -477,14 +477,14 @@ class KSColumnModel: KSChartModel {
         
         let serieLayer  = CAShapeLayer()
         let modelLayer  = CAShapeLayer()
-
+        
         //每个点的间隔宽度
         let plotWidth   = self.latticeWidth(startIndex, endIndex: endIndex)//(self.section.frame.size.width - self.section.padding.left - self.section.padding.right) / CGFloat(endIndex - startIndex)
         var plotPadding = plotWidth * self.plotPaddingExt
         plotPadding     = plotPadding < 0.25 ? 0.25 : plotPadding
-
+        
         let iybase      = self.section.getLocalY(section.yAxis.baseValue)
-
+        
         //循环起始到终结
         for i in stride(from: startIndex, to: endIndex, by: 1) {
             
@@ -497,14 +497,14 @@ class KSColumnModel: KSChartModel {
             
             var isSolid     = true
             let columnLayer = CAShapeLayer()
-
+            
             let item        = datas[i]
             //开始X
             let ix          = self.section.frame.origin.x + self.section.padding.left + CGFloat(i - startIndex) * plotWidth
-
+            
             //把具体的数值转为坐标系的y值
             let iyv         = self.section.getLocalY(item.vol)
-
+            
             //收盘价比开盘低，则显示跌的颜色
             switch item.trend {
             case .up, .equal:
@@ -521,7 +521,7 @@ class KSColumnModel: KSChartModel {
             //画交易量的矩形
             let columnPath   = UIBezierPath(rect: CGRect(x: ix + plotPadding, y: iyv, width: plotWidth - 2 * plotPadding, height: iybase - iyv))
             columnLayer.path = columnPath.cgPath
-
+            
             if isSolid {
                 columnLayer.lineWidth = self.lineWidth//不设置为0会受到抗锯齿处理导致变大
             } else {
@@ -536,7 +536,7 @@ class KSColumnModel: KSChartModel {
 }
 
 /// MACD模型
-class KSBarModel: KSChartModel {
+public class KSBarModel: KSChartModel {
     
     /// 绘制MACD指标附图
     ///
@@ -548,14 +548,14 @@ class KSBarModel: KSChartModel {
         
         let serieLayer  = CAShapeLayer()
         let modelLayer  = CAShapeLayer()
-
+        
         //每个点的间隔宽度
         let plotWidth   = self.latticeWidth(startIndex, endIndex: endIndex)//(self.section.frame.size.width - self.section.padding.left - self.section.padding.right) / CGFloat(endIndex - startIndex)
         var plotPadding = plotWidth * self.plotPaddingExt
         plotPadding     = plotPadding < 0.25 ? 0.25 : plotPadding
-
+        
         let iybase      = self.section.getLocalY(section.yAxis.baseValue)
-
+        
         //let context = UIGraphicsGetCurrentContext()
         //context?.setShouldAntialias(false)
         //context?.setLineWidth(1)
@@ -574,13 +574,13 @@ class KSBarModel: KSChartModel {
             }
             
             let barLayer = CAShapeLayer()
-
+            
             //开始X
             let ix       = self.section.frame.origin.x + self.section.padding.left + CGFloat(i - startIndex) * plotWidth
-
+            
             //把具体的数值转为坐标系的y值
             let iyv      = self.section.getLocalY(value!)
-
+            
             //如果值是正数
             if value! > 0 {
                 //收盘价比开盘高，则显示涨的颜色
@@ -619,7 +619,7 @@ class KSBarModel: KSChartModel {
 }
 
 /// 圆点样式模型
-class KSRoundModel: KSChartModel {
+public class KSRoundModel: KSChartModel {
     
     /// SAR指标
     ///
@@ -628,7 +628,7 @@ class KSRoundModel: KSChartModel {
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
     override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
-
+        
         let serieLayer         = CAShapeLayer()
         let modelLayer         = CAShapeLayer()
         modelLayer.strokeColor = self.upStyle.color.cgColor
@@ -636,12 +636,12 @@ class KSRoundModel: KSChartModel {
         modelLayer.lineWidth   = self.lineWidth
         modelLayer.lineCap     = .round
         modelLayer.lineJoin    = .bevel
-
+        
         //每个点的间隔宽度
         let plotWidth          = self.latticeWidth(startIndex, endIndex: endIndex)//(self.section.frame.size.width - self.section.padding.left - self.section.padding.right) / CGFloat(endIndex - startIndex)
         var plotPadding        = plotWidth * self.plotPaddingExt
         plotPadding            = plotPadding < 0.25 ? 0.25 : plotPadding
-
+        
         var maxValue: CGFloat  = 0//最大值的项
         var maxPoint: CGPoint?//最大值所在坐标
         var minValue: CGFloat  = CGFloat.greatestFiniteMagnitude//最小值的项
@@ -656,22 +656,22 @@ class KSRoundModel: KSChartModel {
             }
             
             let item             = datas[i]
-
+            
             //开始X
             let ix               = self.section.frame.origin.x + self.section.padding.left + CGFloat(i - startIndex) * plotWidth
-
+            
             //把具体的数值转为坐标系的y值
             let iys              = self.section.getLocalY(value)
-
+            
             let roundLayer       = CAShapeLayer()
-
+            
             let roundPoint       = CGPoint(x: ix + plotPadding, y: iys)
             let roundSize        = CGSize(width: plotWidth - 2 * plotPadding, height: plotWidth - 2 * plotPadding)
             let roundPath        = UIBezierPath(ovalIn: CGRect(origin: roundPoint, size: roundSize))
-
+            
             roundLayer.lineWidth = self.lineWidth
             roundLayer.path      = roundPath.cgPath
-
+            
             //收盘价大于指导价
             var fillColor: (color: UIColor, isSolid: Bool)
             if item.closePrice > value {
@@ -739,7 +739,7 @@ extension KSChartModel {
     func drawGuideValue(value: String, section: KSSection, point: CGPoint, trend: KSChartItemTrend) -> CAShapeLayer {
         
         let guideValueLayer              = CAShapeLayer()
-
+        
         let fontSize                     = value.ks_sizeWithConstrained(section.labelFont)
         let arrowLineWidth: CGFloat      = 4
         var isUp: CGFloat                = -1
@@ -757,7 +757,7 @@ extension KSChartModel {
         } else {
             isLeft = 1
         }
-
+        
         var fillColor: UIColor = self.upStyle.color
         switch trend {
         case .up:
@@ -778,7 +778,7 @@ extension KSChartModel {
             let arrowPath          = UIBezierPath()
             let arrowLayer         = CAShapeLayer()
             guideValueTextColor    = color
-
+            
             //画小箭头
             arrowPath.move(to: CGPoint(x: point.x, y: point.y + arrowLineWidth * isUp))
             arrowPath.addLine(to: CGPoint(x: point.x + arrowLineWidth * isLeft, y: point.y + arrowLineWidth * isUp))
@@ -797,9 +797,9 @@ extension KSChartModel {
             
             let tagLayer         = CAShapeLayer()
             let arrowLayer       = CAShapeLayer()
-
+            
             guideValueTextColor  = color
-
+            
             let arrowPath        = UIBezierPath()
             arrowPath.move(to: CGPoint(x: point.x, y: point.y + arrowLineWidth * isUp))
             arrowPath.addLine(to: CGPoint(x: point.x + arrowLineWidth * isLeft * 2, y: point.y + arrowLineWidth * isUp))
@@ -808,26 +808,26 @@ extension KSChartModel {
             arrowLayer.path      = arrowPath.cgPath
             arrowLayer.fillColor = fillColor.cgColor
             guideValueLayer.addSublayer(arrowLayer)
-
+            
             let tagPath          = UIBezierPath(
                 roundedRect: CGRect(x: maxPriceStartX - arrowLineWidth, y: tagStartY, width: fontSize.width + arrowLineWidth * 2, height: fontSize.height + arrowLineWidth), cornerRadius: arrowLineWidth * 2)
-
+            
             tagLayer.path        = tagPath.cgPath
             tagLayer.fillColor   = fillColor.cgColor
             guideValueLayer.addSublayer(tagLayer)
             break
         case let .circle(color, show)://空心圆风格
-
+            
             let circleLayer          = CAShapeLayer()
-
+            
             guideValueTextColor      = color
             isShowValue              = show
-
+            
             let circleWidth: CGFloat = 6
             let circlePoint          = CGPoint(x: point.x - circleWidth / 2, y: point.y - circleWidth / 2)
             let circleSize           = CGSize(width: circleWidth, height: circleWidth)
             let circlePath           = UIBezierPath(ovalIn: CGRect(origin: circlePoint, size: circleSize))
-
+            
             circleLayer.lineWidth    = self.lineWidth
             circleLayer.path         = circlePath.cgPath
             circleLayer.fillColor    = self.section.backgroundColor.cgColor
@@ -835,18 +835,18 @@ extension KSChartModel {
             guideValueLayer.addSublayer(circleLayer)
             break
             /*
-        case let .line(color)://线风格
-            let linePath          = UIBezierPath()
-            let lineLayer         = CAShapeLayer()
-            guideValueTextColor   = color
-
-            let lineY             = point.y + arrowLineWidth * isUp * 2//point.y + arrowLineWidth * isUp - isUp * 4
-            linePath.move(to: CGPoint(x: point.x + 2 * isLeft, y: lineY))
-            linePath.addLine(to: CGPoint(x: point.x + arrowLineWidth * 3.5 * isLeft, y:lineY))
-
-            lineLayer.path        = linePath.cgPath
-            lineLayer.strokeColor = color.cgColor
-            guideValueLayer.addSublayer(lineLayer)*/
+             case let .line(color)://线风格
+             let linePath          = UIBezierPath()
+             let lineLayer         = CAShapeLayer()
+             guideValueTextColor   = color
+             
+             let lineY             = point.y + arrowLineWidth * isUp * 2//point.y + arrowLineWidth * isUp - isUp * 4
+             linePath.move(to: CGPoint(x: point.x + 2 * isLeft, y: lineY))
+             linePath.addLine(to: CGPoint(x: point.x + arrowLineWidth * 3.5 * isLeft, y:lineY))
+             
+             lineLayer.path        = linePath.cgPath
+             lineLayer.strokeColor = color.cgColor
+             guideValueLayer.addSublayer(lineLayer)*/
         default:
             isShowValue = false
             break
@@ -864,7 +864,7 @@ extension KSChartModel {
             valueText.foregroundColor = guideValueTextColor.cgColor
             valueText.backgroundColor = KS_Chart_Color_Clear_CgColor
             valueText.contentsScale   = KS_Chart_ContentsScale
-
+            
             guideValueLayer.addSublayer(valueText)
         }
         return guideValueLayer
@@ -875,7 +875,7 @@ extension KSChartModel {
 extension KSChartModel {
     
     //生成一个点线样式
-    class func getLine(_ color: UIColor, title: String, key: String) -> KSLineModel {
+    public class func getLine(_ color: UIColor, title: String, key: String) -> KSLineModel {
         let model   = KSLineModel(upStyle: (color, true), downStyle: (color, true), titleColor: color)
         model.title = title
         model.key   = key
@@ -883,45 +883,45 @@ extension KSChartModel {
     }
     
     //生成一个蜡烛样式
-    class func getCandle(upStyle: (color: UIColor, isSolid: Bool),
-                         downStyle: (color: UIColor, isSolid: Bool),
-                         titleColor: UIColor,
-                         key: String = KSSeriesKey.candle) -> KSCandleModel {
+    public class func getCandle(upStyle: (color: UIColor, isSolid: Bool),
+                                downStyle: (color: UIColor, isSolid: Bool),
+                                titleColor: UIColor,
+                                key: String = KSSeriesKey.candle) -> KSCandleModel {
         let model = KSCandleModel(upStyle: upStyle, downStyle: downStyle, titleColor: titleColor)
         model.key = key
         return model
     }
     
     //生成一个交易量样式
-    class func getVolume(upStyle: (color: UIColor, isSolid: Bool),
-                         downStyle: (color: UIColor, isSolid: Bool),
-                         key: String = KSSeriesKey.volume) -> KSColumnModel {
+    public class func getVolume(upStyle: (color: UIColor, isSolid: Bool),
+                                downStyle: (color: UIColor, isSolid: Bool),
+                                key: String = KSSeriesKey.volume) -> KSColumnModel {
         let model   = KSColumnModel(upStyle: upStyle, downStyle: downStyle,
-                                  titleColor: UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1))
+                                    titleColor: UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1))
         model.title = NSLocalizedString("Vol", comment: "")
         model.key   = key
         return model
     }
     
     //生成一个柱状样式
-    class func getBar(upStyle: (color: UIColor, isSolid: Bool),
-                      downStyle: (color: UIColor, isSolid: Bool),
-                      titleColor: UIColor, title: String, key: String) -> KSBarModel {
+    public class func getBar(upStyle: (color: UIColor, isSolid: Bool),
+                             downStyle: (color: UIColor, isSolid: Bool),
+                             titleColor: UIColor, title: String, key: String) -> KSBarModel {
         let model   = KSBarModel(upStyle: upStyle, downStyle: downStyle,
-                               titleColor: titleColor)
+                                 titleColor: titleColor)
         model.title = title
         model.key   = key
         return model
     }
     
     //生成一个圆点样式
-    class func getRound(upStyle: (color: UIColor, isSolid: Bool),
-                        downStyle: (color: UIColor, isSolid: Bool),
-                        titleColor: UIColor, title: String,
-                        plotPaddingExt: CGFloat,
-                        key: String) -> KSRoundModel {
+    public class func getRound(upStyle: (color: UIColor, isSolid: Bool),
+                               downStyle: (color: UIColor, isSolid: Bool),
+                               titleColor: UIColor, title: String,
+                               plotPaddingExt: CGFloat,
+                               key: String) -> KSRoundModel {
         let model   = KSRoundModel(upStyle: upStyle, downStyle: downStyle,
-                                 titleColor: titleColor, plotPaddingExt: plotPaddingExt)
+                                   titleColor: titleColor, plotPaddingExt: plotPaddingExt)
         model.title = title
         model.key   = key
         return model

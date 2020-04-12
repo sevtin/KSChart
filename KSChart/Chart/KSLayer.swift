@@ -7,23 +7,23 @@
 
 import UIKit
 
-class KSShapeLayer: CAShapeLayer {
+public class KSShapeLayer: CAShapeLayer {
     
     // 关闭 CAShapeLayer 的隐式动画，避免滑动时候或者十字线出现时有残影的现象(实际上是因为 Layer 的 position 属性变化而产生的隐式动画)
-    override func action(forKey event: String) -> CAAction? {
+    override public func action(forKey event: String) -> CAAction? {
         return nil
     }
 }
 
-class KSTextLayer: CATextLayer {
+public class KSTextLayer: CATextLayer {
     
     // 关闭 CAShapeLayer 的隐式动画，避免滑动时候或者十字线出现时有残影的现象(实际上是因为 Layer 的 position 属性变化而产生的隐式动画)
-    override func action(forKey event: String) -> CAAction? {
+    override public func action(forKey event: String) -> CAAction? {
         return nil
     }
 }
 
-class KSLayer: CALayer {
+public class KSLayer: CALayer {
     /*
     deinit {
         print("------ KSLayer deinit ------")

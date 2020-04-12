@@ -11,7 +11,7 @@ import UIKit
 ///
 /// - bid: 买方深度
 /// - ask: 卖方深度
-enum KSDepthChartItemType {
+public enum KSDepthChartItemType {
     case bid
     case ask
 }
@@ -20,13 +20,13 @@ enum KSDepthChartItemType {
 ///
 /// - left: 左边
 /// - right: 右边
-enum KSDepthChartOnDirection {
+public enum KSDepthChartOnDirection {
     case left
     case right
 }
 
 /// 深度数据元素
-class KSDepthChartItem: NSObject {
+public class KSDepthChartItem: NSObject {
     var value: CGFloat = 0                              //数值
     var amount: CGFloat = 0                             //数量
     var depthAmount: CGFloat = 0                        //计算得到的深度
@@ -147,7 +147,7 @@ class KSDepthChartView: UIView {
     /// MARK: - 常量
     let kYAxisLabelWidth: CGFloat                    = 46//默认宽度
     let kXAxisHegiht: CGFloat                        = 16//默认X坐标的高度
-
+    
     /// MARK: - 成员变量
     var bidColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.green, .green, 1)
     var askColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.red, .red, 1)
@@ -155,54 +155,54 @@ class KSDepthChartView: UIView {
     var lineColor: UIColor                           = UIColor(white: 0.2, alpha: 1)//线条颜色
     var textColor: UIColor                           = UIColor(white: 0.8, alpha: 1)//文字颜色
     var xAxisPerInterval: Int                        = 4//x轴的间断个数
-
-    var yAxis: KSYAxis                               = KSYAxis()//Y轴参数
-    var xAxis: KSXAxis                               = KSXAxis()//X轴参数
+    
+    public var yAxis: KSYAxis                        = KSYAxis()//Y轴参数
+    public var xAxis: KSXAxis                        = KSXAxis()//X轴参数
     var yAxisLabelWidth: CGFloat                     = 0//Y轴的宽度
-
+    
     /// 价格小数位
     private var decimal: Int                         = 2
-
+    
     /// 量小数位
     private var numDecimal: Int                      = 4
-
+    
     /// 内边距
     var padding: UIEdgeInsets                        = UIEdgeInsets.zero
-
+    
     /// 显示y的位置，默认右边
     var showYAxisLabel                               = KSYAxisShowPosition.right
-
+    
     /// 是否把y坐标内嵌到图表仲
     var isInnerYAxis: Bool                           = false
-
+    
     /// 买单在右边
     var bidChartOnDirection: KSDepthChartOnDirection = .right
-
+    
     /// 是否显示X轴标签
     var showXAxisLabel: Bool                         = true
-
+    
     /// 代理
     open weak var delegate: KSDepthChartDelegate?
-
+    
     //是否可点选
     var enableTap: Bool                              = true
-
+    
     /// 显示边线上左下有
     var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
     
     var lineWidth: CGFloat     = 0.5
-
+    
     /// 档位个数
     var plotCount: Int         = 0
-
+    
     var labelSize              = CGSize(width: 40, height: 16)
-
+    
     /// 点击选中的点
     var selectedPoint: CGPoint = CGPoint.zero
-
+    
     /// 点击选中的标记图形
     var selectedTagGraphslayer:KSShapeLayer?
-
+    
     /// 点击选中的数据点view
     var selectedItemInfoLayer:KSShapeLayer?
     
@@ -280,7 +280,7 @@ class KSDepthChartView: UIView {
         //布局完成重绘
         self.drawLayerView()
     }
-
+    
     /// 初始化数据
     fileprivate func resetData() {
         self.bidItems.removeAll()
@@ -288,7 +288,7 @@ class KSDepthChartView: UIView {
         self.plotCount  = self.delegate?.numberOfPointsInDepthChart(chart: self) ?? 0
         self.decimal    = self.delegate?.depthChartOfDecimal(chart: self) ?? 4
         self.numDecimal = self.delegate?.depthChartOfVolDecimal(chart: self) ?? 4
-
+        
         if plotCount > 0 {
             //获取代理上的数据源
             for i in 0...self.plotCount - 1 {
@@ -547,9 +547,9 @@ extension KSDepthChartView {
         backgroundLayer.path      = backgroundPath.cgPath
         backgroundLayer.fillColor = self.backgroundColor?.cgColor
         self.drawLayer.addSublayer(backgroundLayer)
-
+        
         self.yAxisLabelWidth      = self.delegate?.widthForYAxisLabelInDepthChart?(in: self) ?? self.kYAxisLabelWidth
-
+        
         //y轴的标签显示方位
         switch self.showYAxisLabel {
         case .left:         //左边显示
@@ -614,7 +614,7 @@ extension KSDepthChartView {
         self.yAxis.max     = 0
         //self.yAxis.min = CGFloat.greatestFiniteMagnitude
         self.yAxis.min     = 0
-
+        
         //计算最小最大值
         for item in datas {
             
@@ -651,11 +651,11 @@ extension KSDepthChartView {
         
         var yAxisToDraw              = [(CGRect, String)]()
         var valueToDraw              = Set<CGFloat>()
-
+        
         var startX: CGFloat          = 0, startY: CGFloat = 0, extrude: CGFloat = 0
         var showYAxisLabel: Bool     = true
         var showYAxisReference: Bool = true
-
+        
         //分区中各个y轴虚线和y轴的label
         //控制y轴的label在左还是右显示
         switch self.showYAxisLabel {
@@ -1085,12 +1085,12 @@ extension KSDepthChartView {
             //print("self.askItems.startIndex = \(self.askItems.startIndex)")
             let asksValue        = self.askItems[self.askItems.endIndex - 1].value.ks_toString()
             xAxisToDraw.append((asksRect, asksValue))
-
+            
             //绘制卖方深度图层
             //self.askItems        = self.askItems.reversed()//取消反转[20190809]
             if let askChartLayer = self.drawDepthChart(items: self.askItems, startIndex: startIndex, strokeColor: self.askColor.stroke, fillColor: self.askColor.fill, lineWidth: self.askColor.lineWidth) {
                 self.drawLayer.addSublayer(askChartLayer)
-            startIndex           = self.askItems.count
+                startIndex           = self.askItems.count
             }
             
             //中间价格坐标/值
@@ -1126,36 +1126,36 @@ extension KSDepthChartView {
             let bidsY    = self.bounds.origin.y + self.bounds.size.height
             let bidsRect = CGRect(x: bidsX, y: bidsY, width: 60, height: 18)
             xAxisToDraw.append((bidsRect, self.bidItems[self.bidItems.startIndex].value.ks_toString()))
-
+            
             //绘制买方深度图层
             if let bidChartLayer = self.drawDepthChart(items: self.bidItems, startIndex: startIndex, strokeColor: self.bidColor.stroke, fillColor: self.bidColor.fill, lineWidth: self.bidColor.lineWidth) {
                 self.drawLayer.addSublayer(bidChartLayer)
                 startIndex = self.bidItems.count
             }
-
+            
             //中间价格坐标/值
             let buy1X     = self.bounds.origin.x + self.padding.left + CGFloat(startIndex) * plotWidth - 60 - 8
             let buy1Y     = bidsY
             let buy1Rect  = CGRect(x: buy1X, y: buy1Y, width: 60, height: 18)
             xAxisToDraw.append((buy1Rect, self.bidItems[self.bidItems.endIndex - 1].value.ks_toString()))
-
+            
             let sell1X    = self.bounds.origin.x + self.padding.left + CGFloat(startIndex) * plotWidth + 8
             let sell1Y    = bidsY
             let sell1Rect = CGRect(x: sell1X, y: sell1Y, width: 60, height: 18)
             xAxisToDraw.append((sell1Rect, self.askItems[self.askItems.startIndex].value.ks_toString()))
-
+            
             //绘制卖方深度图层
             if let askChartLayer = self.drawDepthChart(items: self.askItems, startIndex: startIndex, strokeColor: self.askColor.stroke, fillColor: self.askColor.fill, lineWidth: self.askColor.lineWidth) {
                 self.drawLayer.addSublayer(askChartLayer)
                 startIndex += self.askItems.count
             }
-
+            
             //卖单价格坐标/值
             let asksX    = self.bounds.origin.x + self.padding.left + CGFloat(startIndex) * plotWidth - 60
             let asksY    = bidsY
             let asksRect = CGRect(x: asksX, y: asksY, width: 60, height: 18)
             xAxisToDraw.append((asksRect, self.askItems[self.askItems.endIndex - 1].value.ks_toString()))
-
+            
             return xAxisToDraw
         }
         //        //绘制买方深度图层
@@ -1250,9 +1250,9 @@ extension KSDepthChartView {
         lineLayer.lineCap     = .round
         lineLayer.lineJoin    = .bevel
         depthChart.addSublayer(lineLayer)
-
+        
         // 【二】绘制填充区域
-
+        
         linePath.addLine(to: CGPoint(x: endX, y: self.bounds.maxY - self.padding.bottom))
         linePath.addLine(to: CGPoint(x: startX, y: self.bounds.maxY - self.padding.bottom))
         fillLayer.path        = linePath.cgPath
@@ -1260,7 +1260,7 @@ extension KSDepthChartView {
         fillLayer.strokeColor = KS_Chart_Color_Clear_CgColor
         fillLayer.zPosition   -= 1// 将图层置于下一级，让底部的标记线显示出来
         depthChart.addSublayer(fillLayer)
-
+        
         return depthChart
     }
 }

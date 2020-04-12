@@ -11,7 +11,7 @@ import UIKit
 extension KSSeries {
     
     /// BOLL样式
-    class func getBollPrice(upStyle: (color: UIColor, isSolid: Bool),
+    open class func getBollPrice(upStyle: (color: UIColor, isSolid: Bool),
                                    downStyle: (color: UIColor, isSolid: Bool),
                                    titleColor: UIColor,
                                    lineColors: [UIColor],
@@ -44,7 +44,7 @@ extension KSSeries {
     }
     
     ///返回一个WR样式
-    class func getWR(_ wrc: UIColor, num: Int, section: KSSection) -> KSSeries {
+    open class func getWR(_ wrc: UIColor, num: Int, section: KSSection) -> KSSeries {
         let series         = KSSeries()
         series.key         = KSSeriesKey.wr
         let wr             = KSLineModel.getLine(wrc, title: KSSeriesKey.wr, key: "\(KSSeriesKey.wr)_\(num)_WR")
@@ -54,7 +54,7 @@ extension KSSeries {
     }
     
     ///分时图
-    class func getTimeChart(color: UIColor, section: KSSection, showGuide: Bool = false, ultimateValueStyle: KSUltimateValueStyle = .none, graphType: KSGraphType = .normal, lineWidth: CGFloat = 1) -> KSSeries {
+    open class func getTimeChart(color: UIColor, section: KSSection, showGuide: Bool = false, ultimateValueStyle: KSUltimateValueStyle = .none, graphType: KSGraphType = .normal, lineWidth: CGFloat = 1) -> KSSeries {
         let series                  = KSSeries()
         series.key                  = KSSeriesKey.timeline
         let timeline                = KSTimeChartModel.geTimeChart(color, title: NSLocalizedString("Price", comment: ""), key: "\(KSSeriesKey.timeline)_\(KSSeriesKey.timeline)")
