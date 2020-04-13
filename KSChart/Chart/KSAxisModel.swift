@@ -29,12 +29,11 @@ public enum KSAxisReferenceStyle {
 
 /// Y轴数据模型
 public struct KSYAxis {
-    
+    public var tickInterval: Int = 4//间断显示个数
     var max: CGFloat             = 0//Y轴的最大值
     var min: CGFloat             = 0//Y轴的最小值
     var ext: CGFloat             = 0//上下边界溢出值的比例
     var baseValue: CGFloat       = 0//固定的基值
-    public var tickInterval: Int = 4//间断显示个数
     var pos: Int                 = 0
     var decimal: Int             = 2//约束小数位
     var isUsed                   = false

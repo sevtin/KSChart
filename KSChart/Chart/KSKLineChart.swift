@@ -33,26 +33,12 @@ enum KSSelectedPosition {
     /// - Parameter chart: 视图
     @objc func dataSource(chart: KSKLineChartView) -> [KSChartItem]
     
-    /// 获取图表Y轴的显示的内容
-    ///
-    /// - Parameters:
-    ///   - chart:
-    ///   - value: 计算得出的y值
-    ///   - index:
-    ///   - section:
-    @objc optional func kLineChart(chart: KSKLineChartView, labelOnYAxisForValue value: CGFloat, atIndex index: Int, section: KSSection) -> String
-    
     /// 获取图表X轴的显示的内容
     ///
     /// - Parameters:
     ///   - chart:
     ///   - index:
     @objc optional func kLineChart(chart: KSKLineChartView, labelOnXAxisForIndex index: Int) -> String
-    
-    /// 完成绘画图表
-    ///
-    /// - Parameter chart:
-    @objc optional func didFinishKLineChartRefresh(chart: KSKLineChartView)
     
     /// 配置各个分区小数位保留数
     ///
@@ -86,22 +72,6 @@ enum KSSelectedPosition {
     /// - Returns: 返回自定义的高度
     @objc optional func heightForXAxisInKLineChart(chart: KSKLineChartView) -> CGFloat
     
-    /// 自定义section的头部View显示内容
-    ///
-    /// - Parameters:
-    ///   - chart: 图表
-    ///   - section: 分区的索引位
-    /// - Returns: 自定义的View
-    @objc optional func kLineChart(chart: KSKLineChartView, viewForHeaderInSection section: Int) -> UIView?
-    
-    /// 自定义section的头部View显示内容
-    ///
-    /// - Parameters:
-    ///   - chart: 图表
-    ///   - section: 分区的索引位
-    /// - Returns: 自定义的View
-    @objc optional func kLineChart(chart: KSKLineChartView, titleForHeaderInSection section: KSSection, index: Int, item: KSChartItem) -> NSAttributedString?
-    
     /// 切换分区用分页方式展示的线组
     @objc optional func kLineChart(chart: KSKLineChartView, didFlipPageSeries section: KSSection, series: KSSeries, seriesIndex: Int)
     
@@ -124,7 +94,7 @@ public struct KSChartPref {
     var xAxisPerInterval: Int                = 4//x轴的间断个数
     var yAxisLabelWidth: CGFloat             = 0//Y轴的宽度
     var selectedPosition: KSSelectedPosition = .onClosePrice//选中显示y值的位置
-    public var selectedIndex: Int            = -1//选择单个点的索引
+    var selectedIndex: Int                   = -1//选择单个点的索引
     var scrollToPosition: KSScrollPosition   = .none//图表刷新后开始显示位置
     var selectedPoint: CGPoint               = CGPoint.zero
     var lineWidth: CGFloat                   = 0.5
@@ -143,7 +113,6 @@ open class KSKLineChartView: UIView {
     public lazy var pref: KSChartPref    = KSChartPref()//偏好设置
     lazy var datas: [KSChartItem]        = [KSChartItem]()//数据源
     
-    /// MARK: - 成员变量
     var upColor: UIColor                 = KS_Chart_Color_White//升的颜色
     var downColor: UIColor               = KS_Chart_Color_White//跌的颜色
     var borderColor: UIColor             = KS_Chart_Color_White
@@ -304,6 +273,10 @@ open class KSKLineChartView: UIView {
         self.drawGridLayer()
         
         self.crossToFront()
+    }
+    
+    public func resetChartData() {
+        self.pref.selectedIndex = -1
     }
     
     public func scrollPositionEnd() -> Bool {
@@ -576,34 +549,25 @@ open class KSKLineChartView: UIView {
         if index >= self.datas.count {
             return
         }
-        
         //如果不在区间内return
         guard index >= self.pref.rangeFrom && index < self.pref.rangeTo else {
             return
         }
-        
-        let item                = self.datas[index]
-        
-        //显示分区的header标题
-        for (_, section) in self.style.sections.enumerated() {
-            if section.hidden {
-                continue
+        let item = self.datas[index]
+        //是否移动了一格
+        if self.pref.isLongPressMoveX {
+            DispatchQueue.global().async {
+                for section in self.style.sections {
+                    if section.hidden {
+                        continue
+                    }
+                    //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
+                    section.drawTitle(self.pref.selectedIndex)
+                }
             }
-            
-            if let titleString = self.delegate?.kLineChart?(chart: self,
-                                                            titleForHeaderInSection: section,
-                                                            index: index,
-                                                            item: self.datas[index]) {
-                //显示用户自定义的title
-                section.drawTitleForHeader(title: titleString)
-            } else {
-                //显示默认
-                section.drawTitle(index)
-            }
+            //回调
+            self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
         }
-        
-        //回调
-        self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
     }
     
     private func hideCross() {
@@ -637,66 +601,34 @@ extension KSKLineChartView {
         if self.initChart() {
             /// 待绘制的x坐标标签
             var xAxisToDraw = [(CGRect, String)]()
-            
-            //闭包，建立每个分区，分区几个回调几次
-            self.buildSections {(section, index) in
-                
+            for index in 0..<self.style.sections.count {
+                let section     = self.style.sections[index]
                 //获取各section的小数保留位数
                 let decimal     = self.delegate?.kLineChart?(chart: self, decimalAt: index) ?? 2
                 section.decimal = decimal
-                
                 //初始Y轴的数据
                 self.initYAxis(section)
-                
-                //绘制每个区域【废弃】
-                //self.drawSection(section)//[绘制边框]
-                
-                //绘制X轴坐标系，先绘制辅助线，记录标签位置
+                //绘制每个区域
                 xAxisToDraw     = self.drawXAxis(section)//[绘制辅助线返回底部时间Rect]
-                
-                //绘制Y轴坐标系，但最后的y轴标签放到绘制完线段才做【废弃】
-                //let yAxisToDraw = self.drawYAxis(section)
                 //绘制图表的点线
                 self.drawChart(section)//[--- 绘制每个区域主视图(绘制K线/均价曲线/成交量/指数指标) ---]
-                //绘制Y轴坐标上的标签【废弃】
-                //self.drawYAxisLabel(yAxisToDraw)//[绘制最右侧价格/成交量/指标值等数据]
-                
-                //把标题添加到主绘图层上【废弃】
-                //self.drawLayer.addSublayer(section.titleLayer)//[绘制最顶部价格/指标值等数据]
-                
-                //是否采用用户自定义
-                if let titleView = self.delegate?.kLineChart?(chart: self, viewForHeaderInSection: index) {
-                    
-                    //显示用户自定义的View，显示内容交由委托者
-                    section.showTitle = false
-                    section.addCustomView(titleView, inView: self)
-                    
-                } else {
-                    
-                    if let titleString = self.delegate?.kLineChart?(chart: self,
-                                                                    titleForHeaderInSection: section,
-                                                                    index: self.pref.selectedIndex,
-                                                                    item: self.datas[self.pref.selectedIndex]) {
-                        //显示用户自定义的section title
-                        section.drawTitleForHeader(title: titleString)
-                    } else {
-                        //显示范围最后一个点的内容
-                        section.drawTitle(self.pref.selectedIndex)
+                //绘制顶部指标
+                if self.showSelection == false {
+                    if self.datas.count > 0 {
+                        self.pref.selectedIndex = self.datas.count - 1
                     }
                 }
-                //绘制Y轴数值
+                section.drawTitle(self.pref.selectedIndex)
+                //更新Y轴数值
                 self.updateYAxisTitle(section)
             }
-            
             let showXAxisSection = self.getSecionWhichShowXAxis()
-            //显示在分区下面绘制X轴坐标
+            //显示在分区下面绘制X轴坐标[底部时间]
             self.drawXAxisLabel(showXAxisSection, xAxisToDraw: xAxisToDraw)
-            
             //重新显示点击选中的坐标
             if self.showSelection {
                 self.setSelectedIndexByPoint(self.pref.selectedPoint)
             }
-            self.delegate?.didFinishKLineChartRefresh?(chart: self)
         }
     }
     
@@ -717,13 +649,6 @@ extension KSKLineChartView {
         if pref.selectedIndex == -1 {
             self.pref.selectedIndex = self.pref.rangeTo - 1
         }
-        /*
-         let backgroundLayer       = KSShapeLayer()
-         let backgroundPath        = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: self.bounds.size.width,height: self.bounds.size.height), cornerRadius: 0)
-         backgroundLayer.path      = backgroundPath.cgPath
-         backgroundLayer.fillColor = self.backgroundColor?.cgColor
-         self.drawLayer.addSublayer(backgroundLayer)
-         */
         return self.datas.count > 0 ? true : false
     }
     
@@ -973,48 +898,7 @@ extension KSKLineChartView {
             }
         }
     }
-    
-    /// 绘制分区
-    ///
-    /// - Parameter section:
-    func drawSection(_ section: KSSection) {
-        
-        //画分区的背景
-        let sectionPath        = UIBezierPath(rect: section.frame)
-        let sectionLayer       = KSShapeLayer()
-        sectionLayer.fillColor = section.backgroundColor.cgColor
-        sectionLayer.path      = sectionPath.cgPath
-        self.drawLayer.addSublayer(sectionLayer)
-        
-        let borderPath         = UIBezierPath()
-        //画底部边线
-        if self.style.borderWidth.bottom > 0 {
-            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.size.height + section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: self.style.borderWidth.bottom)))
-        }
-        
-        //画顶部边线
-        if self.style.borderWidth.top > 0 {
-            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: self.style.borderWidth.top)))
-        }
-        
-        //画左边线
-        if self.style.borderWidth.left > 0 {
-            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.origin.y, width: self.style.borderWidth.left, height: section.frame.size.height)))
-        }
-        
-        //画右边线
-        if self.style.borderWidth.right > 0 {
-            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.frame.size.width - section.padding.right, y: section.frame.origin.y, width: self.style.borderWidth.left, height: section.frame.size.height)))
-        }
-        
-        //添加到图层
-        let borderLayer       = KSShapeLayer()
-        borderLayer.lineWidth = self.pref.lineWidth
-        borderLayer.path      = borderPath.cgPath// 从贝塞尔曲线获取到形状
-        borderLayer.fillColor = self.style.lineColor.cgColor// 闭环填充的颜色
-        self.drawLayer.addSublayer(borderLayer)
-    }
-    
+
     /// 初始化分区上各个线的Y轴
     ///
     /// - Parameter section: 
@@ -1024,157 +908,7 @@ extension KSKLineChartView {
             section.buildYAxis(startIndex: self.pref.rangeFrom, endIndex: self.pref.rangeTo, datas: self.datas)
         }
     }
-    
-    /// 绘制Y轴左边
-    ///
-    /// - Parameter section: 分区
-    /// - Returns:
-    func drawYAxis(_ section: KSSection) -> [(CGRect, String)] {
-        
-        var yAxisToDraw              = [(CGRect, String)]()
-        var valueToDraw              = Set<CGFloat>()
-        
-        var startX: CGFloat          = 0, startY: CGFloat = 0, extrude: CGFloat = 0
-        var showYAxisLabel: Bool     = true
-        var showYAxisReference: Bool = true
-        
-        //分区中各个y轴虚线和y轴的label
-        //控制y轴的label在左还是右显示
-        switch self.style.showYAxisLabel {
-        case .left:
-            startX  = section.frame.origin.x - 3 * (self.style.isInnerYAxis ? -1 : 1)
-            extrude = section.frame.origin.x + section.padding.left - 2
-        case .right:
-            startX  = section.frame.maxX - self.pref.yAxisLabelWidth + 3 * (self.style.isInnerYAxis ? -1 : 1)
-            extrude = section.frame.origin.x + section.padding.left + section.frame.size.width - section.padding.right
-        case .none:
-            showYAxisLabel = false
-        }
-        
-        let yaxis = section.yAxis
-        
-        //保持Y轴标签个数偶数显示
-        //        if (yaxis.tickInterval % 2 == 1) {
-        //            yaxis.tickInterval += 1
-        //        }
-        
-        //计算y轴的标签及虚线分几段
-        let step = (yaxis.max - yaxis.min) / CGFloat(yaxis.tickInterval)
-        
-        //从base值绘制Y轴标签到最大值
-        var i = 0
-        var yVal = yaxis.baseValue + CGFloat(i) * step
-        while yVal <= yaxis.max && i <= yaxis.tickInterval {
-            valueToDraw.insert(yVal)
-            //递增下一个
-            i =  i + 1
-            yVal = yaxis.baseValue + CGFloat(i) * step
-        }
-        
-        i = 0
-        yVal = yaxis.baseValue - CGFloat(i) * step
-        while yVal >= yaxis.min && i <= yaxis.tickInterval {
-            
-            valueToDraw.insert(yVal)
-            
-            //递增下一个
-            i =  i + 1
-            yVal = yaxis.baseValue - CGFloat(i) * step
-        }
-        
-        for (i, yVal) in valueToDraw.enumerated() {
-            
-            //画虚线和Y标签值
-            let iy = section.getLocalY(yVal)
-            
-            if self.style.isInnerYAxis {
-                //y轴标签向内显示，为了不挡住辅助线，所以把y轴的数值位置向上移一些
-                startY = iy - 14
-            } else {
-                startY = iy - 7
-            }
-            
-            let referencePath = UIBezierPath()
-            let referenceLayer = KSShapeLayer()
-            referenceLayer.lineWidth = self.pref.lineWidth
-            
-            //处理辅助线样式
-            switch section.yAxis.referenceStyle {
-            case let .dash(color: dashColor, pattern: pattern):
-                referenceLayer.strokeColor = dashColor.cgColor
-                referenceLayer.lineDashPattern = pattern
-                showYAxisReference = true
-            case let .solid(color: solidColor):
-                referenceLayer.strokeColor = solidColor.cgColor
-                showYAxisReference = true
-            default:
-                showYAxisReference = false
-                startY = iy - 7
-            }
-            
-            if showYAxisReference {
-                
-                //突出的线段，y轴向外显示才划突出线段
-                if !self.style.isInnerYAxis {
-                    referencePath.move(to: CGPoint(x: extrude, y: iy))
-                    referencePath.addLine(to: CGPoint(x: extrude + 2, y: iy))
-                }
-                
-                referencePath.move(to: CGPoint(x: section.frame.origin.x + section.padding.left, y: iy))
-                referencePath.addLine(to: CGPoint(x: section.frame.origin.x + section.frame.size.width - section.padding.right, y: iy))
-                
-                referenceLayer.path = referencePath.cgPath
-                self.drawLayer.addSublayer(referenceLayer)
-            }
-            
-            if showYAxisLabel {
-                
-                //获取调用者回调的label字符串值
-                let strValue = self.delegate?.kLineChart?(chart: self, labelOnYAxisForValue: yVal, atIndex: i, section: section)  ?? ""
-                let yLabelRect = CGRect(x: startX,
-                                        y: startY,
-                                        width: self.pref.yAxisLabelWidth,
-                                        height: 12
-                )
-                
-                yAxisToDraw.append((yLabelRect, strValue))
-            }
-        }
-        return yAxisToDraw
-    }
-    
-    /// 绘制y轴坐标上的标签
-    ///
-    /// - Parameter yAxisToDraw:
-    func drawYAxisLabel(_ yAxisToDraw: [(CGRect, String)]) {
-        
-        var alignmentMode = CATextLayerAlignmentMode.left
-        //分区中各个y轴虚线和y轴的label
-        //控制y轴的label在左还是右显示
-        switch self.style.showYAxisLabel {
-        case .left:
-            alignmentMode = self.style.isInnerYAxis ? CATextLayerAlignmentMode.left : CATextLayerAlignmentMode.right
-        case .right:
-            alignmentMode = self.style.isInnerYAxis ? CATextLayerAlignmentMode.right : CATextLayerAlignmentMode.left
-        case .none:
-            alignmentMode = CATextLayerAlignmentMode.left
-        }
-        
-        for (yLabelRect, strValue) in yAxisToDraw {
-            
-            let yAxisLabel             = KSTextLayer()
-            yAxisLabel.frame           = yLabelRect
-            yAxisLabel.string          = strValue
-            yAxisLabel.fontSize        = self.style.labelFont.pointSize
-            yAxisLabel.foregroundColor = self.style.textColor.cgColor
-            yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
-            yAxisLabel.alignmentMode   = alignmentMode
-            yAxisLabel.contentsScale   = KS_Chart_ContentsScale
-            
-            self.drawLayer.addSublayer(yAxisLabel)
-        }
-    }
-    
+
     /// 绘制图表上的点线
     ///
     /// - Parameter section:
@@ -1266,7 +1000,6 @@ extension KSKLineChartView {
                     } else {
                         serie.hidden = hidden
                     }
-                    
                     break
                 }
             }
@@ -1566,10 +1299,9 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         }
         self.delegate?.kLineChartTapAction?(chart: self)
         
-        
-         if sender.state == .ended {
-         self.showSelection = false
-         }
+        if sender.state == .ended {
+            self.showSelection = false
+        }
         /*
         switch sender.state {
         case .possible:
@@ -1593,7 +1325,6 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
         default:
             print("Other")
         }*/
-        
     }
     
     /// 双指手势缩放图表

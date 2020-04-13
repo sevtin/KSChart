@@ -29,7 +29,6 @@
 		E61E92442338F00F00184885 /* KSBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E91F72338F00F00184885 /* KSBaseView.swift */; };
 		E61E92452338F00F00184885 /* KSTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E91F82338F00F00184885 /* KSTableView.swift */; };
 		E61E92522338F00F00184885 /* KSChartConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92072338F00F00184885 /* KSChartConfigure.swift */; };
-		E61E92582338F00F00184885 /* KSZeroChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92102338F00F00184885 /* KSZeroChartView.swift */; };
 		E61E925A2338F00F00184885 /* KSChartItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92142338F00F00184885 /* KSChartItem+Extensions.swift */; };
 		E61E92612338F00F00184885 /* KSBaseViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E921C2338F00F00184885 /* KSBaseViewController+Extensions.swift */; };
 		E61E92622338F00F00184885 /* NSDecimalNumber+KSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E921D2338F00F00184885 /* NSDecimalNumber+KSExtensions.swift */; };
@@ -113,7 +112,6 @@
 		E6AB6E73238BEA5900C9BCF3 /* KSTimeChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E58238BEA5900C9BCF3 /* KSTimeChartModel.swift */; };
 		E6AB6E74238BEA5900C9BCF3 /* KSChartModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5B238BEA5900C9BCF3 /* KSChartModel+Extensions.swift */; };
 		E6AB6E76238BEA5900C9BCF3 /* KSLineModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5D238BEA5900C9BCF3 /* KSLineModel+Extensions.swift */; };
-		E6AB6E77238BEA5900C9BCF3 /* KSSection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5E238BEA5900C9BCF3 /* KSSection+Extensions.swift */; };
 		E6AB6E78238BEA5900C9BCF3 /* KSSeries+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E5F238BEA5900C9BCF3 /* KSSeries+Extensions.swift */; };
 		E6AB6E79238BEA5900C9BCF3 /* CGFloat+KSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E61238BEA5900C9BCF3 /* CGFloat+KSExtensions.swift */; };
 		E6AB6E7A238BEA5900C9BCF3 /* Date+KSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E62238BEA5900C9BCF3 /* Date+KSExtensions.swift */; };
@@ -156,7 +154,6 @@
 		E61E91F72338F00F00184885 /* KSBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSBaseView.swift; sourceTree = "<group>"; };
 		E61E91F82338F00F00184885 /* KSTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSTableView.swift; sourceTree = "<group>"; };
 		E61E92072338F00F00184885 /* KSChartConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSChartConfigure.swift; sourceTree = "<group>"; };
-		E61E92102338F00F00184885 /* KSZeroChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSZeroChartView.swift; sourceTree = "<group>"; };
 		E61E92142338F00F00184885 /* KSChartItem+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSChartItem+Extensions.swift"; sourceTree = "<group>"; };
 		E61E921C2338F00F00184885 /* KSBaseViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSBaseViewController+Extensions.swift"; sourceTree = "<group>"; };
 		E61E921D2338F00F00184885 /* NSDecimalNumber+KSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+KSExtensions.swift"; sourceTree = "<group>"; };
@@ -240,7 +237,6 @@
 		E6AB6E58238BEA5900C9BCF3 /* KSTimeChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSTimeChartModel.swift; sourceTree = "<group>"; };
 		E6AB6E5B238BEA5900C9BCF3 /* KSChartModel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSChartModel+Extensions.swift"; sourceTree = "<group>"; };
 		E6AB6E5D238BEA5900C9BCF3 /* KSLineModel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSLineModel+Extensions.swift"; sourceTree = "<group>"; };
-		E6AB6E5E238BEA5900C9BCF3 /* KSSection+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSSection+Extensions.swift"; sourceTree = "<group>"; };
 		E6AB6E5F238BEA5900C9BCF3 /* KSSeries+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSSeries+Extensions.swift"; sourceTree = "<group>"; };
 		E6AB6E61238BEA5900C9BCF3 /* CGFloat+KSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+KSExtensions.swift"; sourceTree = "<group>"; };
 		E6AB6E62238BEA5900C9BCF3 /* Date+KSExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+KSExtensions.swift"; sourceTree = "<group>"; };
@@ -826,7 +822,6 @@
 		E6AB6E49238BEA5900C9BCF3 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				E61E92102338F00F00184885 /* KSZeroChartView.swift */,
 				E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */,
 				E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */,
 				E6AB6E4C238BEA5900C9BCF3 /* KSChartModel.swift */,
@@ -866,7 +861,6 @@
 			children = (
 				E6AB6E5B238BEA5900C9BCF3 /* KSChartModel+Extensions.swift */,
 				E6AB6E5D238BEA5900C9BCF3 /* KSLineModel+Extensions.swift */,
-				E6AB6E5E238BEA5900C9BCF3 /* KSSection+Extensions.swift */,
 				E6AB6E5F238BEA5900C9BCF3 /* KSSeries+Extensions.swift */,
 			);
 			path = ChartExtensions;
@@ -1082,7 +1076,6 @@
 				E61E92412338F00F00184885 /* KSBaseTableViewCell.swift in Sources */,
 				E6AB6E76238BEA5900C9BCF3 /* KSLineModel+Extensions.swift in Sources */,
 				E61E92C22338F05500184885 /* KSLanguageHelper.swift in Sources */,
-				E61E92582338F00F00184885 /* KSZeroChartView.swift in Sources */,
 				E61E92D52338F05500184885 /* KSMenuBarView.swift in Sources */,
 				E61E925A2338F00F00184885 /* KSChartItem+Extensions.swift in Sources */,
 				E61E92D62338F05500184885 /* KSPriceIndexView.swift in Sources */,
@@ -1123,7 +1116,6 @@
 				E61E92BA2338F05500184885 /* KSTradeDetail.swift in Sources */,
 				E61E91C22338EE7C00184885 /* AppDelegate.swift in Sources */,
 				E61E92D42338F05500184885 /* KSKChartView.swift in Sources */,
-				E6AB6E77238BEA5900C9BCF3 /* KSSection+Extensions.swift in Sources */,
 				E6AB6E71238BEA5900C9BCF3 /* KSLayer.swift in Sources */,
 				E61E92BC2338F05500184885 /* KSOrderBookController.swift in Sources */,
 				E6AB6E79238BEA5900C9BCF3 /* CGFloat+KSExtensions.swift in Sources */,

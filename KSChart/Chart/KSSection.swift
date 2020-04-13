@@ -44,8 +44,7 @@ public class KSSection: NSObject {
     var frame: CGRect                        = KS_Chart_Rect_Zero
     var index: Int                           = 0//分组
     
-    var titleView: UIView? //用户自定义的View
-    var sectionLayer: KSShapeLayer           = KSShapeLayer()//分区的绘图层
+    lazy var sectionLayer: KSShapeLayer      = KSShapeLayer()//分区的绘图层
     lazy var yAxisTitles: [KSTextLayer]      = [KSTextLayer]()//y轴行标题
     lazy var titleLayer: KSShapeLayer        = KSShapeLayer()//显示顶部标题内容的层
     
@@ -78,9 +77,6 @@ extension KSSection {
     func removeLayerView() {
         _ = self.sectionLayer.sublayers?.map { $0.removeFromSuperlayer() }
         self.sectionLayer.sublayers?.removeAll()
-        
-        //_ = self.titleLayer.sublayers?.map { $0.removeFromSuperlayer() }
-        //self.titleLayer.sublayers?.removeAll()
     }
     
     /// 建立Y轴左边对象，由起始位到结束位
@@ -399,43 +395,6 @@ extension KSSection {
         }
     }
     
-    
-    /// 添加用户自定义的View层到主页面
-    ///
-    /// - Parameter view: 用户自定义view
-    func addCustomView(_ view: UIView, inView mainView: UIView) {
-        
-        if self.titleView !== view {
-            
-            //移除以前的view
-            self.titleView?.removeFromSuperview()
-            self.titleView              = nil
-
-            var yPos: CGFloat           = 0
-            var containerWidth: CGFloat = 0
-            if titleShowOutSide {
-                yPos           = self.frame.origin.y - self.padding.top
-                containerWidth = self.frame.width
-            } else {
-                yPos           = self.frame.origin.y
-                containerWidth = self.frame.width - self.padding.left - self.padding.right
-            }
-            
-            let startX       = self.frame.origin.x + self.padding.left
-            containerWidth   = self.frame.width - self.padding.left - self.padding.right
-
-            var frame        = view.frame
-            frame.origin.x   = startX
-            frame.origin.y   = yPos
-            frame.size.width = containerWidth
-            view.frame       = frame
-
-            self.titleView   = view
-            mainView.addSubview(view)
-        }
-        mainView.bringSubviewToFront(self.titleView!)
-    }
-    
     /// 设置分区头部文本显示内容
     ///
     /// - Parameters:
@@ -469,26 +428,20 @@ extension KSSection {
     ///   - series: 线
     /// - Returns: 标题属性
     func getTitleAttributesByIndex(_ chartSelectedIndex: Int, series: KSSeries) -> [(title: String, color: UIColor)]? {
-        
         if series.hidden {
             return nil
         }
-        
         guard series.showTitle else {
             return nil
         }
-        
         if chartSelectedIndex == -1 {
             return nil//没有数据返回
         }
-        
         var titleAttr = [(title: String, color: UIColor)]()
-        
         if !series.title.isEmpty {
             let seriesTitle = series.title + "  "
             titleAttr.append((title: seriesTitle, color: self.titleColor))
         }
-        
         for model in series.chartModels {
             var title = ""
             var textColor: UIColor
@@ -496,31 +449,13 @@ extension KSSection {
             switch model {
             case is KSCandleModel:
                 if model.key != KSSeriesKey.candle {
-                    continue//不限蜡烛柱
+                    continue
                 }
-                
-                //振幅
-                var amplitude: CGFloat = 0
-                if item.openPrice > 0 {
-                    amplitude = (item.closePrice - item.openPrice) / item.openPrice * 100
-                }
-                
-                title += NSLocalizedString("O", comment: "") + ": " +
-                    item.openPrice.ks_toString(maximum: self.decimal) + "  "   //开始
-                title += NSLocalizedString("H", comment: "") + ": " +
-                    item.highPrice.ks_toString(maximum: self.decimal) + "  "   //最高
-                title += NSLocalizedString("L", comment: "") + ": " +
-                    item.lowPrice.ks_toString(maximum: self.decimal) + "  "    //最低
-                title += NSLocalizedString("C", comment: "") + ": " +
-                    item.closePrice.ks_toString(maximum: self.decimal) + "  "  //收市
-                title += NSLocalizedString("R", comment: "") + ": " +
-                    amplitude.ks_toString(maximum: self.decimal) + "%   "      //振幅
-                
             case is KSColumnModel:
                 if model.key != KSSeriesKey.volume {
-                    continue  //不是量线
+                    continue
                 }
-                title += model.title + ": " + item.vol.ks_toString(maximum: self.decimal) + "  "
+                title += model.title + ": " + item.volume.ks_volume()
             case is KSBollModel: break
             case is KSTimeChartModel: break
             default:
@@ -530,8 +465,7 @@ extension KSSection {
                     title += model.title + ": --  "
                 }
             }
-            
-            if model.useTitleColor {    //是否用标题颜色
+            if model.useTitleColor { //是否用标题颜色
                 textColor = model.titleColor
             } else {
                 switch item.trend {

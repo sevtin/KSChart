@@ -19,8 +19,8 @@ class KSKChartView: KSBaseView {
     
     weak var delegate: KSKChartViewDelegate?
     
-    lazy var chartView: KSZeroChartView = {
-        let chartView         = KSZeroChartView(frame: self.bounds)
+    lazy var chartView: KSKLineChartView = {
+        let chartView         = KSKLineChartView(frame: self.bounds)
         let style             = configure.loadConfigure()
         chartView.style       = style
         chartView.delegate    = self
@@ -35,7 +35,7 @@ class KSKChartView: KSBaseView {
     }
     
     func resetChart(datas: [KSChartItem]) {
-        chartView.pref.selectedIndex = -1
+        chartView.resetChartData()
         klineData                    = datas
     }
 }

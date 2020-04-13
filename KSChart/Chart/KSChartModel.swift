@@ -851,7 +851,6 @@ extension KSChartModel {
             isShowValue = false
             break
         }
-        
         if isShowValue {
             //计算画文字的位置
             let point                 = CGPoint(x: maxPriceStartX, y: maxPriceStartY)
@@ -938,5 +937,4 @@ extension KSChartModel {
         item.value = value
         return item
     }
-    
 }
