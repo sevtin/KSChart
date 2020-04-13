@@ -54,6 +54,7 @@ class KSKChartView: KSBaseView {
 ```
 1、优化API
 2、精简代码
+3、升级至Swift5.2
 ```
 
 反馈/技术交流群:902071358
