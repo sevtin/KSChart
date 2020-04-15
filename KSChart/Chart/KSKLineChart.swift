@@ -128,9 +128,9 @@ open class KSKLineChartView: UIView {
     /// 用于图表的图层
     lazy var drawLayer: KSShapeLayer     = KSShapeLayer()
     /// 格子图层
-    lazy var gridLayer: KSShapeLayer     = KSShapeLayer()
-    
-    lazy var barLabels: [KSTextLayer]    = [KSTextLayer]()
+    lazy var gridLayer: KSGridLayer      = KSGridLayer()
+    /// 顶部图层
+    lazy var topLayer: KSTopLayer        = KSTopLayer()
     
     var verticalLineView: UIView?
     var horizontalLineView: UIView?
@@ -226,6 +226,7 @@ open class KSKLineChartView: UIView {
         //绘画图层
         self.layer.addSublayer(self.gridLayer)
         self.layer.addSublayer(self.drawLayer)
+        self.layer.addSublayer(self.topLayer)
         
         //添加手势操作
         let pan                                            = UIPanGestureRecognizer(target: self, action: #selector(doPanAction(_:)))
@@ -269,8 +270,8 @@ open class KSKLineChartView: UIView {
         self.selectedXAxisLabel?.isHidden        = true
         self.sightView?.isHidden                 = true
         
-        //绘制格子视图
-        self.drawGridLayer()
+        //绘制层级Layer
+        self.drawLevelLayer()
         
         self.crossToFront()
     }
@@ -624,7 +625,7 @@ extension KSKLineChartView {
             }
             let showXAxisSection = self.getSecionWhichShowXAxis()
             //显示在分区下面绘制X轴坐标[底部时间]
-            self.drawXAxisLabel(showXAxisSection, xAxisToDraw: xAxisToDraw)
+            self.topLayer.drawXAxisLabel(showXAxisSection, xAxisToDraw: xAxisToDraw, style: self.style)
             //重新显示点击选中的坐标
             if self.showSelection {
                 self.setSelectedIndexByPoint(self.pref.selectedPoint)
@@ -846,59 +847,6 @@ extension KSKLineChartView {
         return xAxisToDraw
     }
     
-    
-    /// 绘制X坐标标签
-    ///
-    /// - Parameters:
-    ///   - section: 哪个分区绘制
-    ///   - xAxisToDraw: 待绘制的内容
-    func drawXAxisLabel(_ section: KSSection, xAxisToDraw: [(CGRect, String)]) {
-        
-        guard self.style.showXAxisLabel else {
-            return
-        }
-        
-        guard xAxisToDraw.count > 0 else {
-            return
-        }
-        
-        let startY = section.frame.maxY //需要显示x坐标标签名字的分区，再最下方显示
-        if xAxisToDraw.count > barLabels.count {
-            let xAxis = KSShapeLayer()
-            for _ in barLabels.count..<xAxisToDraw.count {
-                let xLabelText             = KSTextLayer()
-                xLabelText.alignmentMode   = CATextLayerAlignmentMode.center
-                xLabelText.fontSize        = self.style.labelFont.pointSize
-                xLabelText.foregroundColor = self.style.textColor.cgColor
-                xLabelText.backgroundColor = KS_Chart_Color_Clear_CgColor
-                xLabelText.contentsScale   = KS_Chart_ContentsScale
-                barLabels.append(xLabelText)
-                xAxis.addSublayer(xLabelText)
-            }
-            self.gridLayer.addSublayer(xAxis)
-        }
-        for i in 0..<xAxisToDraw.count {
-            var barLabelRect      = xAxisToDraw[i].0
-            barLabelRect.origin.y = startY
-            let xLabelText        = self.barLabels[i]
-            if xLabelText.frame.origin.x != barLabelRect.origin.x {
-                xLabelText.frame  = barLabelRect
-            }
-            xLabelText.string     = xAxisToDraw[i].1
-            if xLabelText.isHidden {
-                xLabelText.isHidden = false
-            }
-        }
-        if xAxisToDraw.count < self.barLabels.count {
-            for i in xAxisToDraw.count..<self.barLabels.count{
-                let xLabelText = self.barLabels[i]
-                if xLabelText.isHidden == false {
-                    xLabelText.isHidden = true
-                }
-            }
-        }
-    }
-
     /// 初始化分区上各个线的Y轴
     ///
     /// - Parameter section: 
@@ -1403,126 +1351,30 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
 /// 绘制重构
 extension KSKLineChartView {
     
-    func removeGridLayer() {
-        _ = self.gridLayer.sublayers?.map { $0.removeFromSuperlayer() }
-        self.gridLayer.sublayers?.removeAll()
-    }
-    
-    func resetGridData() {
-        self.barLabels.removeAll()
-    }
-    
-    func drawGridLayer() {
-        self.removeGridLayer()
-        self.resetGridData()
+    func drawLevelLayer() {
+        self.drawLayer.removeSubLayer()
+        self.topLayer.removeSubLayer()
         
+        self.topLayer.resetLayerData()
+        
+        drawLevelContent()
+    }
+    
+    func drawLevelContent() {
         self.buildSections {(section, index) in
-            drawSectionGrid(section)
-            //把标题添加到图层上
+            self.gridLayer.drawSectionGrid(section, style: self.style, pref: self.pref, topLayer: self.topLayer)
             self.gridLayer.addSublayer(section.titleLayer)//[绘制最顶部价格/指标值等数据]
         }
     }
-    
-    /// 绘制分区格子
-    func drawSectionGrid(_ section: KSSection) {
-        var leftX                 = section.frame.origin.x + section.padding.left
-        var rightX                = section.frame.maxX - section.padding.right
-        let topY                  = section.frame.origin.y + section.padding.top
-        let bottomY               = section.frame.maxY - section.padding.bottom
-        
-        var titleX: CGFloat       = 0
-        var alignmentMode         = CATextLayerAlignmentMode.left
-        
-        switch self.style.showYAxisLabel {
-        case .left:
-            titleX        = leftX
-            leftX         = self.style.isInnerYAxis ? leftX : self.pref.yAxisLabelWidth
-            alignmentMode = self.style.isInnerYAxis ? .left : .right
-        case .right:
-            titleX        = rightX - self.pref.yAxisLabelWidth
-            rightX        = self.style.isInnerYAxis ? rightX : (rightX - self.pref.yAxisLabelWidth)
-            alignmentMode = self.style.isInnerYAxis ? .right : .left
-        case .none: break
-        }
-        
-        let borderPath            = UIBezierPath()
-        borderPath.move(to: CGPoint.init(x: leftX, y: topY))
-        borderPath.addLine(to: CGPoint.init(x: rightX, y: topY))
-        borderPath.addLine(to: CGPoint.init(x: rightX, y: bottomY))
-        borderPath.addLine(to: CGPoint.init(x: leftX, y: bottomY))
-        borderPath.addLine(to: CGPoint.init(x: leftX, y: topY))
-        
-        //添加到图层
-        let borderLayer           = KSShapeLayer()
-        borderLayer.lineWidth     = self.pref.lineWidth
-        borderLayer.path          = borderPath.cgPath// 从贝塞尔曲线获取到形状
-        borderLayer.strokeColor   = self.style.lineColor.cgColor
-        borderLayer.fillColor     = KS_Chart_Color_Clear_CgColor// 闭环填充的颜色
-        self.gridLayer.addSublayer(borderLayer)
-        
-        let linePath              = UIBezierPath()
-        let padding               = (section.frame.height - section.padding.top - section.padding.bottom) / CGFloat(section.yAxis.tickInterval-1)
-        
-        section.yAxisTitles.removeAll()
-        for i in 0..<section.yAxis.tickInterval {
-            var lineY:CGFloat = padding * CGFloat(i) + topY
-            if i == section.yAxis.tickInterval - 1 {
-                lineY = lineY - section.titleHeight
-            }
-            else if i != 0 {
-                linePath.move(to: CGPoint.init(x: leftX, y: lineY))
-                linePath.addLine(to: CGPoint.init(x: rightX, y: lineY))
-            }
-            /*
-            if i == 0 {
-                linePath.move(to: CGPoint.init(x: leftX, y: lineY))
-            }
-            let isLeft = (i % 2 != 0)
-            let lineX = isLeft ? leftX : rightX
-            linePath.addLine(to: CGPoint.init(x: lineX, y: lineY))
-            if i != section.yAxis.tickInterval - 1 {
-                linePath.addLine(to: CGPoint.init(x: lineX, y: lineY + padding))
-            }
-            else{
-                lineY = lineY - section.titleHeight
-            }*/
-             
-            if self.style.showYAxisLabel != .none {
-                self.drawYAxisTitle(section, labelX: titleX, labelY: lineY, alignmentMode: alignmentMode)
-            }
-        }
-        
-        //添加到图层
-        let lineLayer         = KSShapeLayer()
-        lineLayer.lineWidth   = self.pref.lineWidth
-        lineLayer.path        = linePath.cgPath// 从贝塞尔曲线获取到形状
-        lineLayer.strokeColor = self.style.lineColor.cgColor
-        lineLayer.fillColor   = KS_Chart_Color_Clear_CgColor// 闭环填充的颜色
-        self.gridLayer.addSublayer(lineLayer)
-    }
-    
-    func drawYAxisTitle(_ section: KSSection, labelX: CGFloat, labelY: CGFloat, alignmentMode: CATextLayerAlignmentMode) {
-        let yAxisLabel             = KSTextLayer()
-        yAxisLabel.frame           = CGRect.init(x: labelX, y: labelY, width: self.pref.yAxisLabelWidth, height: section.titleHeight)
-        let fontRef                = CGFont.init("Helvetica Neue" as CFString)
-        yAxisLabel.font            = fontRef  
-        yAxisLabel.fontSize        = self.style.labelFont.pointSize
-        yAxisLabel.foregroundColor = self.style.textColor.cgColor
-        yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
-        yAxisLabel.contentsScale   = KS_Chart_ContentsScale
-        yAxisLabel.alignmentMode   = alignmentMode
-        self.gridLayer.addSublayer(yAxisLabel)
-        section.yAxisTitles.append(yAxisLabel)
-    }
-    
+
     func updateYAxisTitle(_ section: KSSection) {
         if self.style.showYAxisLabel == .none {
             return
         }
         
-        let interval              = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval - 1)
-        var labelText: CGFloat    = 0
-        
+        let interval           = (section.yAxis.max - section.yAxis.min)/CGFloat(section.yAxis.tickInterval - 1)
+        var labelText: CGFloat = 0
+
         for i in 0..<section.yAxisTitles.count {
             if i == 0 {
                 labelText = section.yAxis.max
