@@ -32,7 +32,7 @@ class KSHeaderChartView: KSBaseView {
         
         updateDate(timeId: timeConfigure.selectdInfo.ID)
         
-        menuBarView             = KSMenuBarView.init(frame: CGRect.init(x: 0, y: 390, width: self.ks_screenWidth(), height: 44))
+        menuBarView             = KSMenuBarView.init(frame: CGRect.init(x: 0, y: 490, width: self.ks_screenWidth(), height: 44))
         self.addSubview(menuBarView)
     }
     //1、顶部数据
@@ -53,7 +53,7 @@ class KSHeaderChartView: KSBaseView {
     }()
     //4、k线图
     lazy var chartView: KSKChartView = {
-        let chartView      = KSKChartView.init(frame: CGRect.init(x: 0, y: 114, width: self.frame.width, height: 278))
+        let chartView      = KSKChartView.init(frame: CGRect.init(x: 0, y: 114, width: self.frame.width, height: 378))
         chartView.delegate = self
         return chartView
     }()

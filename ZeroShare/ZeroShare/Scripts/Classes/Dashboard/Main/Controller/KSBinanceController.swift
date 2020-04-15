@@ -356,7 +356,7 @@ class KSBinanceController: KSBaseViewController {
         let configure          = KSDashboardConfigure.init()
         configure.newConfigure = KSDashboardConfigure.init()
         configure.kline        = KSSingleton.shared.indexConfigure.chartType
-        configure.headerHeight = 390
+        configure.headerHeight = 490
         return configure
     }()
     

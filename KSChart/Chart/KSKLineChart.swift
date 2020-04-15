@@ -1253,7 +1253,12 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
             let decelerationBehavior        = UIDynamicItemBehavior(items: [self.dynamicItem])
             decelerationBehavior.addLinearVelocity(velocity, for: self.dynamicItem)
             decelerationBehavior.resistance = 2.0
+            var counter: Int                = 0
             decelerationBehavior.action = {[weak self]() -> Void in
+                counter += 1
+                if counter % 2 != 0 {
+                    return
+                }
                 //到边界不执行移动
                 if self?.pref.rangeFrom == 0 || self?.pref.rangeTo == self?.pref.plotCount{
                     return

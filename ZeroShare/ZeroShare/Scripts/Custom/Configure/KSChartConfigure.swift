@@ -99,7 +99,7 @@ extension KSChartConfigure {
         style.backgroundColor         = KS_Const_Color_Clear//UIColor(hex: styleParams.backgroundColor)//视图背景颜色
         style.crosshairColor          = UIColor(hex: 0x666F80)//十字线颜色
         style.isInnerYAxis            = styleParams.isInnerYAxis
-        style.showYAxisLabel          = KSYAxisShowPosition.none//显示y的位置，默认右边
+        style.showYAxisLabel          = KSYAxisShowPosition.left//显示y的位置，默认右边
         style.padding                 = UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 0)
         style.chartTais               = [KSSeriesKey.candle: .none,
                                          KSSeriesKey.timeline: .timeline,
@@ -123,7 +123,7 @@ extension KSChartConfigure {
         priceSection.key                    = "master"
         priceSection.hidden                 = false
         priceSection.ratios                 = 3
-        priceSection.yAxis.tickInterval     = 4
+        priceSection.yAxis.tickInterval     = 5
         priceSection.xAxis.referenceStyle   = .solid(color: KS_Const_Color_Chart_Line)
         priceSection.padding                = UIEdgeInsets(top: 16, left: 1, bottom: 0, right: 1)
         priceSection.tai                    = KSSeriesKey.ma
