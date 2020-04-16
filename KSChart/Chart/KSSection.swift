@@ -195,7 +195,7 @@ extension KSSection {
         var yPos: CGFloat           = 0
         var containerWidth: CGFloat = 0
         let textSize                = title.string.ks_sizeWithConstrained(self.labelFont, constraintRect: CGSize(width: self.frame.width, height: CGFloat.greatestFiniteMagnitude))
-
+        
         if titleShowOutSide {
             yPos           = self.frame.origin.y - textSize.height - 4
             containerWidth = self.frame.width
@@ -203,15 +203,14 @@ extension KSSection {
             yPos           = self.frame.origin.y + 2
             containerWidth = self.frame.width - self.padding.left - self.padding.right
         }
-
+        
         let startX                = self.frame.origin.x + self.padding.left + 2
         let point                 = CGPoint(x: startX, y: yPos)
-        DispatchQueue.main.async {
-            if self.textLayer.frame.origin.x != point.x || self.textLayer.frame.height != textSize.height + 20 {
-                self.textLayer.frame  = CGRect(origin: point, size: CGSize(width: containerWidth, height: textSize.height + 20))
-            }
-            self.textLayer.string     = title
+        
+        if self.textLayer.frame.origin.x != point.x || self.textLayer.frame.height != textSize.height + 20 {
+            self.textLayer.frame  = CGRect(origin: point, size: CGSize(width: containerWidth, height: textSize.height + 20))
         }
+        self.textLayer.string     = title
     }
     
     //切换到下一个系列显示

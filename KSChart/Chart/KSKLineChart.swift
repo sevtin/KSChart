@@ -479,14 +479,12 @@ open class KSKLineChartView: UIView {
         let item = self.datas[index]
         //是否移动了一格
         if self.pref.isLongPressMoveX {
-            DispatchQueue.global().async {
-                for section in self.style.sections {
-                    if section.hidden {
-                        continue
-                    }
-                    //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
-                    section.drawTitle(self.pref.selectedIndex)
+            for section in self.style.sections {
+                if section.hidden {
+                    continue
                 }
+                //绘制顶部技术指标,例如:BOOL:0.0251 UB:0.0252 LB:0.0250
+                section.drawTitle(self.pref.selectedIndex)
             }
             //回调
             self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
