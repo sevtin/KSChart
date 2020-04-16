@@ -86,7 +86,7 @@ public struct KSChartPref {
     let kMinRange:Int                        = 16//最小缩放范围
     let kMaxRange:Int                        = 128//最大缩放范围
     let kPerInterval:Int                     = 4//缩放的每段间隔
-    let kYAxisLabelWidth: CGFloat            = 70//默认文字宽度
+    let kYAxisLabelWidth: CGFloat            = 60//默认文字宽度
     let kXAxisHegiht: CGFloat                = 16//默认X坐标的高度
     var minCandleCount: Int                  = 30//最小蜡烛图数量
     var fixedWidth: CGFloat                  = 10//小于最小蜡烛图数量，蜡烛的宽度
@@ -103,7 +103,6 @@ public struct KSChartPref {
     var rangeTo: Int                         = 0//可见区域的结束索引位
     var range: Int                           = 60//显示在可见区域的个数
     var decelerationStartX: CGFloat          = 0//减速开始x
-    var isCrosshair: Bool                    = false//是否显示准星
     var isLongPressMoveX: Bool               = true//长按时X轴是否移动触点
 }
 
@@ -132,12 +131,6 @@ open class KSKLineChartView: UIView {
     /// 顶部图层
     lazy var topLayer: KSTopLayer        = KSTopLayer()
     
-    var verticalLineView: UIView?
-    var horizontalLineView: UIView?
-    var selectedXAxisLabel: UILabel?
-    var selectedYAxisLabel: UILabel?
-    var sightView: UIView?//点击出现的准星
-    
     //是否可点选
     var enableTap: Bool = true {
         didSet {
@@ -148,16 +141,7 @@ open class KSKLineChartView: UIView {
     /// 是否显示选中的内容
     var showSelection: Bool = false {
         didSet {
-            self.selectedXAxisLabel?.isHidden = !self.showSelection
-            self.selectedYAxisLabel?.isHidden = !self.showSelection
-            self.verticalLineView?.isHidden   = !self.showSelection
-            self.horizontalLineView?.isHidden = !self.showSelection
-            if pref.isCrosshair {
-                self.sightView?.isHidden      = !self.showSelection
-            }
-            else{
-                self.sightView?.isHidden      = true
-            }
+            self.topLayer.updateCross(isShow: self.showSelection)
         }
     }
     
@@ -165,7 +149,6 @@ open class KSKLineChartView: UIView {
         didSet {
             assert(self.style.chartTais != nil, "chartTais 不能为nil")
             self.enableTap           = self.style.enableTap
-            self.pref.isCrosshair    = self.style.isCrosshair
             self.showSelection       = self.style.showSelection
             self.pref.minCandleCount = self.pref.range/2
             
@@ -199,30 +182,6 @@ open class KSKLineChartView: UIView {
         //开启多点触控
         self.isMultipleTouchEnabled                        = true
         
-        //初始化点击选择的辅助线显示
-        self.verticalLineView                              = UIView(frame: CGRect(x: 0, y: 0, width: self.pref.lineWidth, height: 0))
-        self.addSubview(self.verticalLineView!)
-        
-        self.horizontalLineView                            = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: self.pref.lineWidth))
-        self.addSubview(self.horizontalLineView!)
-        
-        //用户点击图表显示当前y轴的实际值
-        self.selectedYAxisLabel                            = UILabel(frame: CGRect.zero)
-        self.selectedYAxisLabel?.minimumScaleFactor        = 0.5
-        self.selectedYAxisLabel?.lineBreakMode             = .byClipping
-        self.selectedYAxisLabel?.adjustsFontSizeToFitWidth = true
-        self.selectedYAxisLabel?.textAlignment             = NSTextAlignment.center
-        self.addSubview(self.selectedYAxisLabel!)
-        
-        //用户点击图表显示当前x轴的实际值
-        self.selectedXAxisLabel                            = UILabel(frame: CGRect.zero)
-        self.selectedXAxisLabel?.textAlignment             = NSTextAlignment.center
-        self.addSubview(self.selectedXAxisLabel!)
-        
-        self.sightView                                     = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 6))
-        self.sightView?.layer.cornerRadius                 = 3
-        self.addSubview(self.sightView!)
-        
         //绘画图层
         self.layer.addSublayer(self.gridLayer)
         self.layer.addSublayer(self.drawLayer)
@@ -252,28 +211,10 @@ open class KSKLineChartView: UIView {
     
     func defaultConfigure() {
         self.backgroundColor                     = self.style.backgroundColor
-        self.verticalLineView?.backgroundColor   = self.style.crosshairColor
-        self.horizontalLineView?.backgroundColor = self.style.crosshairColor
-        self.sightView?.backgroundColor          = self.style.crosshairColor
-        
-        self.selectedYAxisLabel?.font            = self.style.labelFont
-        self.selectedYAxisLabel?.backgroundColor = self.style.selectedBGColor
-        self.selectedYAxisLabel?.textColor       = self.style.selectedTextColor
-        
-        self.selectedXAxisLabel?.font            = self.style.labelFont
-        self.selectedXAxisLabel?.backgroundColor = self.style.selectedBGColor
-        self.selectedXAxisLabel?.textColor       = self.style.selectedTextColor
-        
-        self.verticalLineView?.isHidden          = true
-        self.horizontalLineView?.isHidden        = true
-        self.selectedYAxisLabel?.isHidden        = true
-        self.selectedXAxisLabel?.isHidden        = true
-        self.sightView?.isHidden                 = true
-        
+
         //绘制层级Layer
         self.drawLevelLayer()
         
-        self.crossToFront()
     }
     
     public func resetChartData() {
@@ -462,9 +403,8 @@ open class KSKLineChartView: UIView {
         let hy                                   = self.style.padding.top
         let hheight                              = lastSection.frame.maxY
         //显示辅助线
-        self.horizontalLineView?.frame           = CGRect(x: hx, y: hy, width: self.pref.lineWidth, height: hheight - hy)
-        //self.horizontalLineView?.isHidden = false
-        
+        self.topLayer.updateHorizontalLine(rect: CGRect(x: hx, y: hy, width: self.pref.lineWidth, height: hheight - hy))
+
         let vx                                   = section!.frame.origin.x + section!.padding.left
         var vy: CGFloat                          = 0
         
@@ -489,7 +429,7 @@ open class KSKLineChartView: UIView {
         
         let hwidth = section!.frame.size.width - section!.padding.left - section!.padding.right
         //显示辅助线
-        self.verticalLineView?.frame = CGRect(x: vx, y: vy - self.pref.lineWidth / 2, width: hwidth, height: self.pref.lineWidth)
+        self.topLayer.updateVerticalLine(rect: CGRect(x: vx, y: vy - self.pref.lineWidth / 2, width: hwidth, height: self.pref.lineWidth))
         
         //控制y轴的label在左还是右显示
         var yAxisStartX: CGFloat = 0
@@ -498,16 +438,15 @@ open class KSKLineChartView: UIView {
             yAxisStartX = section!.frame.origin.x
         case .right:
             yAxisStartX = section!.frame.maxX - self.pref.yAxisLabelWidth
-        case .none:
-            self.selectedYAxisLabel?.isHidden = true
+        case .none:break
         }
-        self.selectedYAxisLabel?.text  = String(format: format, yVal)//显示实际值
-        self.selectedYAxisLabel?.frame = CGRect(x: yAxisStartX, y: vy - self.labelHeight / 2, width: self.pref.yAxisLabelWidth, height: self.labelHeight)
+        self.topLayer.updateYAxisLabel(rect: CGRect(x: yAxisStartX, y: vy - self.labelHeight / 2, width: self.pref.yAxisLabelWidth, height: self.labelHeight),
+        text: String(format: format, yVal))
+        
         let dateFormat                 = self.delegate?.kLineChart?(chart: self, labelOnXAxisForIndex: currentIndex) ?? "MM-dd HH:mm"
         let time                       = Date.ks_getTimeByStamp(item.time, format: dateFormat)//显示时间
         let size                       = time.ks_sizeWithConstrained(self.style.labelFont)
-        self.selectedXAxisLabel?.text  = time
-        
+
         //判断x是否超过左右边界
         let labelWidth = size.width  + 6
         var x = hx - (labelWidth) / 2
@@ -518,29 +457,12 @@ open class KSKLineChartView: UIView {
             x = section!.frame.origin.x + section!.frame.size.width - labelWidth
         }
         
-        self.selectedXAxisLabel?.frame = CGRect(x: x, y: showXAxisSection.frame.maxY, width: size.width  + 6, height: self.labelHeight)
-        
-        if self.pref.isCrosshair {
-            self.sightView?.center     = CGPoint(x: hx, y: vy)
-        }
-        
-        if self.showSelection == false {
-            crossToFront()
-        }
+        self.topLayer.updateXAxisLabel(rect: CGRect(x: x, y: showXAxisSection.frame.maxY, width: size.width  + 6, height: self.labelHeight),
+        text: time)
         self.showSelection = true
         
         //设置选中点
         self.setSelectedByIndex(currentIndex)
-    }
-    
-    func crossToFront() {
-        self.bringSubviewToFront(self.verticalLineView!)
-        self.bringSubviewToFront(self.horizontalLineView!)
-        self.bringSubviewToFront(self.selectedXAxisLabel!)
-        self.bringSubviewToFront(self.selectedYAxisLabel!)
-        if self.pref.isCrosshair {
-            self.bringSubviewToFront(self.sightView!)
-        }
     }
     
     /// 设置选中的数据点,并回调
@@ -1354,10 +1276,11 @@ extension KSKLineChartView {
     func drawLevelLayer() {
         self.drawLayer.removeSubLayer()
         self.topLayer.removeSubLayer()
+        self.topLayer.initLayer(style: self.style)
         
         self.topLayer.resetLayerData()
         
-        drawLevelContent()
+        self.drawLevelContent()
     }
     
     func drawLevelContent() {

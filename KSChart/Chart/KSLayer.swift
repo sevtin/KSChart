@@ -28,6 +28,35 @@ public class KSTextLayer: CATextLayer {
     }
 }
 
+class KSVCTextLayer : CATextLayer {
+    override public func action(forKey event: String) -> CAAction? {
+        return nil
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    override init(layer: Any) {
+        super.init(layer: layer)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(layer: aDecoder)
+    }
+    
+    override func draw(in ctx: CGContext) {
+        let height   = self.bounds.size.height
+        let fontSize = self.fontSize
+        let yDiff    = (height-fontSize)/2 - fontSize/10
+
+        ctx.saveGState()
+        ctx.translateBy(x: 0.0, y: yDiff)
+        super.draw(in: ctx)
+        ctx.restoreGState()
+    }
+}
+
 public class KSLayer: CALayer {
     /*
     deinit {
@@ -38,9 +67,73 @@ public class KSLayer: CALayer {
 
 public class KSTopLayer: KSShapeLayer {
     lazy var barLabels: [KSTextLayer] = [KSTextLayer]()
+    var isDisplayCross: Bool          = false
+    
+    var horizontalLineView: KSShapeLayer?
+    var verticalLineView: KSShapeLayer?
+    var selectedXAxisLabel: KSVCTextLayer?
+    var selectedYAxisLabel: KSVCTextLayer?
+    
+    func initLayer(style: KSKLineChartStyle) {
+
+        horizontalLineView                  = KSShapeLayer()
+        horizontalLineView!.backgroundColor = KS_Chart_Color_Gray_CgColor
+        self.addSublayer(horizontalLineView!)
+
+        verticalLineView                    = KSShapeLayer()
+        verticalLineView!.backgroundColor   = KS_Chart_Color_Gray_CgColor
+        self.addSublayer(verticalLineView!)
+
+        selectedXAxisLabel                  = self.createTextLayer(style: style)
+        self.addSublayer(selectedXAxisLabel!)
+        selectedYAxisLabel                  = self.createTextLayer(style: style)
+        self.addSublayer(selectedYAxisLabel!)
+    }
+    
+    func createTextLayer(style: KSKLineChartStyle) -> KSVCTextLayer {
+        let textLayer              = KSVCTextLayer()
+        textLayer.fontSize        = style.labelFont.pointSize
+        textLayer.foregroundColor = style.selectedTextColor.cgColor
+        textLayer.backgroundColor = style.selectedBGColor.cgColor
+        textLayer.contentsScale   = KS_Chart_ContentsScale
+        textLayer.alignmentMode   = .center
+        textLayer.isWrapped       = true
+        textLayer.zPosition       = 1
+        return textLayer
+    }
+    
+    func updateXAxisLabel(rect: CGRect, text: String) {
+        self.selectedXAxisLabel?.frame  = rect
+        self.selectedXAxisLabel?.string = text
+    }
+    
+    func updateYAxisLabel(rect: CGRect, text: String) {
+        self.selectedYAxisLabel?.frame  = rect
+        self.selectedYAxisLabel?.string = text
+    }
+    
+    func updateVerticalLine(rect: CGRect) {
+        self.verticalLineView?.frame = rect
+    }
+    
+    func updateHorizontalLine(rect: CGRect) {
+        self.horizontalLineView?.frame = rect
+    }
     
     func resetLayerData() {
         self.barLabels.removeAll()
+    }
+    
+    func updateCross(isShow: Bool) {
+        if isDisplayCross == isShow {
+            return
+        }
+        self.isDisplayCross = isShow
+        
+        self.selectedXAxisLabel?.isHidden = !isShow
+        self.selectedYAxisLabel?.isHidden = !isShow
+        self.verticalLineView?.isHidden   = !isShow
+        self.horizontalLineView?.isHidden = !isShow
     }
     
     func drawYAxisTitle(_ section: KSSection, labelX: CGFloat, labelY: CGFloat, alignmentMode: CATextLayerAlignmentMode,style:KSKLineChartStyle,pref: KSChartPref) {
@@ -53,6 +146,7 @@ public class KSTopLayer: KSShapeLayer {
         yAxisLabel.backgroundColor = KS_Chart_Color_Clear_CgColor
         yAxisLabel.contentsScale   = KS_Chart_ContentsScale
         yAxisLabel.alignmentMode   = alignmentMode
+        yAxisLabel.zPosition       = -1
         self.addSublayer(yAxisLabel)
         section.yAxisTitles.append(yAxisLabel)
     }
@@ -82,6 +176,7 @@ public class KSTopLayer: KSShapeLayer {
                 xLabelText.foregroundColor = style.textColor.cgColor
                 xLabelText.backgroundColor = KS_Chart_Color_Clear_CgColor
                 xLabelText.contentsScale   = KS_Chart_ContentsScale
+                xLabelText.zPosition       = -1
                 barLabels.append(xLabelText)
                 xAxis.addSublayer(xLabelText)
             }
