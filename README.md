@@ -20,7 +20,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'MyApp' do
-    pod 'KSChart', '~> 5.1.7'
+    pod 'KSChart', '~> 5.1.8'
 end
 ```
 
@@ -34,8 +34,8 @@ class KSKChartView: KSBaseView {
     
     weak var delegate: KSKChartViewDelegate?
     
-    lazy var chartView: KSZeroChartView = {
-        let chartView         = KSZeroChartView(frame: self.bounds)
+    lazy var chartView: KSKLineChartView = {
+        let chartView         = KSKLineChartView(frame: self.bounds)
         let style             = configure.loadConfigure()
         chartView.style       = style
         chartView.delegate    = self
@@ -50,10 +50,21 @@ class KSKChartView: KSBaseView {
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/Alipay.jpg" alt="Alipay" width="200" height="251" align="left"/>
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg" alt="WeChatPay" width="200" height="275" align="middle"/>
 
+### 版本更新说明
+```
+5.1.8 稳定版
+1、进一步优化CPU和内存占用率，CPU使用率降低20%以上；
+2、精简代码KSKLineChartView代码；
+3、分层管理k线视图的绘制内容；
+4、重构边框与Y轴数值绘制代码；
+5、修复已知bug。
+```
+
 ### 下个版本
 ```
 1、优化API
 2、精简代码
+
 ```
 
 反馈/技术交流群:902071358

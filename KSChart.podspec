@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "KSChart"
-  spec.version      = "5.1.7"
+  spec.version      = "5.1.8"
   spec.summary      = "KSChart"
 
   # This description is used to generate tags and improve search results.
