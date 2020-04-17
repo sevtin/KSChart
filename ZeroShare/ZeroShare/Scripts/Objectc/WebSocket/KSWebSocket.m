@@ -26,7 +26,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
 @end
 
 @implementation KSWebSocket
-
+/*
 + (instancetype)shareInstance {
     static KSWebSocket *instance = nil;
     static dispatch_once_t onceToken;
@@ -36,6 +36,16 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
     return instance;
 }
 
++ (void)initWithDelegate:(id)delegate serverUrl:(NSString *)serverUrl isAutoConnect:(BOOL)isAutoConnect {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        KSWebSocket *socket = [KSWebSocket shareInstance];
+        socket.delegate      = delegate;
+        [socket configureServer:serverUrl isAutoConnect:isAutoConnect];
+        [socket startConnect];
+    });
+}
+*/
 - (id)init {
     self = [super init];
     if (self) {
@@ -51,16 +61,6 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
     _configure.resetCount    = 0;
     _configure.reconnectTime = 0;
     _configure.isReachable   = YES;//方便测试
-}
-
-+ (void)initWithDelegate:(id)delegate serverUrl:(NSString *)serverUrl isAutoConnect:(BOOL)isAutoConnect {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        KSWebSocket *socket = [KSWebSocket shareInstance];
-        socket.delegate      = delegate;
-        [socket configureServer:serverUrl isAutoConnect:isAutoConnect];
-        [socket startConnect];
-    });
 }
 
 - (void)updateStatusForisOpen:(BOOL)isOpen {
@@ -196,12 +196,16 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  */
 -(void)startHeartbeat {
     KSWeakSelf;
-    dispatch_async(dispatch_queue_create(0, 0), ^{
-        NSRunLoop *runLoop      = [NSRunLoop currentRunLoop];
-        NSTimer *timer          = [NSTimer scheduledTimerWithTimeInterval:self.configure.heartbeatTime target:weakSelf selector:@selector(sendHeartbeatMessage) userInfo:nil repeats:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSTimer *timer          = [NSTimer scheduledTimerWithTimeInterval:self.configure.heartbeatTime target:self selector:@selector(sendHeartbeatMessage) userInfo:nil repeats:YES];
         weakSelf.heartbeatTimer = timer;
-        [runLoop run];
     });
+    /*
+    NSTimer *timer     = [NSTimer scheduledTimerWithTimeInterval:self.configure.heartbeatTime target:self selector:@selector(sendHeartbeatMessage) userInfo:nil repeats:YES];
+    _heartbeatTimer    = timer;
+     NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    [runLoop run];*/
 }
 
 /**

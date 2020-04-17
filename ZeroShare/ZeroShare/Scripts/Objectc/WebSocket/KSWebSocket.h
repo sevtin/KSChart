@@ -60,11 +60,6 @@
  */
 @property (nonatomic, copy  ) NSString                 *identifier;
 
-+ (instancetype)shareInstance;
-/**
- 单例socket初始化
- */
-+ (void)initWithDelegate:(id)delegate serverUrl:(NSString *)serverUrl isAutoConnect:(BOOL)isAutoConnect;
 - (void)configureServer:(NSString *)url isAutoConnect:(BOOL)isAutoConnect;
 - (void)addNotificationListener;
 - (void)removeNotification;
