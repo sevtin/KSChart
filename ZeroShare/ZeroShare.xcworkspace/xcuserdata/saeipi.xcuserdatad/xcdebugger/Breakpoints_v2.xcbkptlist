@@ -14,8 +14,8 @@
             filePath = "ZeroShare/Scripts/Objectc/WebSocket/KSWebSocket.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "-sendHeartbeatMessage"
             landmarkType = "7">
          </BreakpointContent>
@@ -71,32 +71,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C6672EF3-08DA-453C-871A-ED7EF65489F0"
+            uuid = "2B663346-EB4B-47F9-A8E2-3F984ED1A5E6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/Controller/KSBinanceController.swift"
+            filePath = "ZeroShare/Scripts/Objectc/WebSocket/KSWebSocket.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
-            landmarkName = "socket(_:didReceivedMessage:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CDA84A8D-D80F-44EB-9027-7B4EE1979253"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/Controller/KSBinanceController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "414"
-            endingLineNumber = "414"
-            landmarkName = "socketDidOpen(_:)"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "-removeHeartbeatTimer"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

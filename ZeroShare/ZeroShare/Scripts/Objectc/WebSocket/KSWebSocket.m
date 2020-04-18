@@ -17,11 +17,11 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
 /**
  WebSocket
  */
-@property (nonatomic,strong ) SRWebSocket           *webSocket;
+@property (nonatomic,strong) SRWebSocket       *webSocket;
 /**
- 心跳计时器
+ GCD定时器
  */
-@property (nonatomic,weak   ) NSTimer               *heartbeatTimer;
+@property (nonatomic,strong) dispatch_source_t heartbeatTimer;
 
 @end
 
@@ -175,7 +175,7 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  */
 - (void)removeHeartbeatTimer {
     if (_heartbeatTimer) {
-        [_heartbeatTimer invalidate];
+        dispatch_source_cancel(_heartbeatTimer);
         _heartbeatTimer = nil;
     }
 }
@@ -196,16 +196,14 @@ static NSString *KS_Notification_NetworkChange       = @"KS_Notification_Network
  */
 -(void)startHeartbeat {
     KSWeakSelf;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSTimer *timer          = [NSTimer scheduledTimerWithTimeInterval:self.configure.heartbeatTime target:self selector:@selector(sendHeartbeatMessage) userInfo:nil repeats:YES];
-        weakSelf.heartbeatTimer = timer;
+    dispatch_queue_t queue   = dispatch_queue_create("KSChart.com.saeipi",DISPATCH_QUEUE_SERIAL);
+    _heartbeatTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_heartbeatTimer, dispatch_walltime(NULL, 0), _configure.heartbeatTime * NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_heartbeatTimer, ^{
+        [weakSelf sendHeartbeatMessage];
     });
-    /*
-    NSTimer *timer     = [NSTimer scheduledTimerWithTimeInterval:self.configure.heartbeatTime target:self selector:@selector(sendHeartbeatMessage) userInfo:nil repeats:YES];
-    _heartbeatTimer    = timer;
-     NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
-    [runLoop run];*/
+    // 开启定时器
+    dispatch_resume(_heartbeatTimer);
 }
 
 /**
