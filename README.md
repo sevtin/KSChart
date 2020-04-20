@@ -10,9 +10,7 @@ k线图/kline/kchart，已经集成MA/EMA/MACD/KDJ/BOLL/RSI等指标，新增指
 ### 500多条K线数据，真机示例内存占用为12.8M（其中KSChart占用4M左右），机型不同CPU占用差异会比较大，老设备在滑动时帧数会有所下降
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/cpu.jpg" alt="cpu占用率" width="800" height="341" align="middle"/>
 
-<img src="https://github.com/saeipi/KSChart/blob/master/Resources/memory.jpg" alt="memory占用率" width="800" height="459" align="right"/>
-
-
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/memory.jpg" alt="memory占用率" width="800" height="459" align="left"/>
 
 ## 开发环境
 - Xcode 11.0+
