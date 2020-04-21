@@ -24,6 +24,7 @@ class KSTimeChartModel: KSChartModel {
         let timelineLayer         = KSShapeLayer()
         timelineLayer.fillColor   = KS_Chart_Color_Clear_CgColor
         timelineLayer.strokeColor = self.upStyle.color.cgColor
+        timelineLayer.lineJoin    = .round
         
         let fillLayer             = KSShapeLayer()
         fillLayer.fillColor       = self.fillColor
