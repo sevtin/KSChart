@@ -7,80 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5896A3D6-1987-434D-9B0C-4F9F24A8E982"
+            uuid = "1C7CE11F-4338-4E9F-A9F1-8CE5EE8B8153"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Objectc/WebSocket/KSWebSocket.m"
+            filePath = "ZeroShare/Scripts/Custom/Configure/KSSeriesParam.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "-sendHeartbeatMessage"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
+            landmarkName = "appendCustomIn(masterSection:assistSections:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7E6DFE59-805F-4BBA-A07B-F7BF9F76024F"
+            uuid = "05BBA004-EBAE-4376-B723-5B06EE05C85F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/Controller/KSBinanceController.swift"
+            filePath = "../KSChart/Extensions/ChartExtensions/KSSeries+Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
-            landmarkName = "requestBinanceKlines(isReset:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "96176469-E229-4591-B5DC-A5216AF545CA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Classes/Dashboard/Main/Controller/KSBinanceController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "requestBinanceKlines(isReset:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3E008B01-757D-4C34-908B-4854F298AC3F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Classes/Dashboard/Custom/Tools/Network/ASNetManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "request(url:method:parameters:success:failure:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2B663346-EB4B-47F9-A8E2-3F984ED1A5E6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZeroShare/Scripts/Objectc/WebSocket/KSWebSocket.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "-removeHeartbeatTimer"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "getWR(_:num:section:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -47,7 +47,7 @@ extension KSSeries {
     open class func getWR(_ wrc: UIColor, num: Int, section: KSSection) -> KSSeries {
         let series         = KSSeries()
         series.key         = KSSeriesKey.wr
-        let wr             = KSLineModel.getLine(wrc, title: KSSeriesKey.wr, key: "\(KSSeriesKey.wr)_\(num)_WR")
+        let wr             = KSLineModel.getLine(wrc, title: KSSeriesKey.wr, key: "\(KSSeriesKey.wr)_\(num)")
         wr.section         = section
         series.chartModels = [wr]
         return series

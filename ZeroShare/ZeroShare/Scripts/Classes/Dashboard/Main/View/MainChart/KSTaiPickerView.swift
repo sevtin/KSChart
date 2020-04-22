@@ -274,7 +274,12 @@ class KSTaiMenuGroup: NSObject {
         gt_info4.textAlignment = .left
         gt_info4.identifier  = KSSeriesKey.boll
         
-        group2.datas         += [gt_info1, gt_info2, gt_info3, gt_info4]
+        let gt_info5         = KSChartMenuInfo.init()
+        gt_info5.displayText = "WR"
+        gt_info5.textAlignment = .left
+        gt_info5.identifier  = KSSeriesKey.wr
+        
+        group2.datas         += [gt_info1, gt_info2, gt_info3, gt_info4, gt_info5]
         group2.kitHeight     = ceil(CGFloat(group2.datas.count) / 4.0) * 40
         
         let masterTai = KSSingleton.shared.indexConfigure.masterTai

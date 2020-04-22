@@ -78,13 +78,22 @@ extension KSChartConfigure {
                 ],
                                     order: 7,
                                     hidden: false)
+            
+            let wr = KSSeriesParam(seriesKey: KSSeriesKey.wr,
+                                   name: KSSeriesKey.wr,
+                                   params: [
+                                    KSSeriesParamControl(value: 14, note: "威廉指标", min: 2, max: 120, step: 1)
+                ],
+                                   order: 8,
+                                   hidden: false)
             return [
                 ma,
                 ema,
                 boll,
                 kdj,
                 macd,
-                rsi
+                rsi,
+                wr
             ]
         }
         
@@ -110,7 +119,9 @@ extension KSChartConfigure {
                                          KSSeriesKey.macd: .macd(12, 26, 9),
                                          KSSeriesKey.boll: .boll(20, 2),
                                          KSSeriesKey.rsi: .rsi(6, 12, 24),
-                                         KSSeriesKey.avg: .avg(5)]
+                                         KSSeriesKey.avg: .avg(5),
+                                         KSSeriesKey.wr: .wr(14)
+        ]
         
         //====================== 配置分区样式 ======================
         /// 主图

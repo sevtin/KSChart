@@ -18,6 +18,7 @@ public enum KSIndexAlgorithm {
     case boll(Int, Int) //布林线
     case rsi(Int, Int, Int) //RSI指标公式
     case avg(Int) //自定义均线
+    case wr(Int) //WR指标公式
 }
 
 class KSCalculator: NSObject {
@@ -42,6 +43,8 @@ class KSCalculator: NSObject {
             return ks_calculateRSI(index: index, avgSmall: CGFloat(avgSmall), avgMiddle: CGFloat(avgMiddle), avgBig: CGFloat(avgBig), datas: datas)
         case let .avg(num):
             return ks_calculateAvgPrice(index: index, num: num, datas: datas)
+        case let .wr(num):
+            return ks_calculateWR(index: index, num: num, datas: datas)
         }
     }
 }
@@ -480,5 +483,53 @@ extension KSCalculator {
             tempModel.ema_middle = (2.0 / CGFloat(emaMiddle + 1)) * (tempModel.closePrice - lastModel.ema_middle) + lastModel.ema_middle
             tempModel.ema_big    = (2.0 / CGFloat(emaBig + 1)) * (tempModel.closePrice - lastModel.ema_big) + lastModel.ema_big
         }
+    }
+}
+
+extension KSCalculator {
+    
+    /// WR指标
+    ///
+    /// - Parameters:
+    ///   - index:需要计算的下标
+    ///   - num:计算周期
+    ///   - datas:需要处理的数据
+    /// - Returns:
+    private class func ks_calculateWR(index: Int, num: Int, datas: [KSChartItem]) -> [KSChartItem] {
+        for i in index..<datas.count {
+            var wrLow: CGFloat  = CGFloat(MAXFLOAT)
+            var wrHigh: CGFloat = 0
+            let data            = datas[i]
+            if i < (num - 1) {
+                for j in 0...i {
+                    let wrModel = datas[j]
+                    wrLow       = wrLow < wrModel.openPrice ? wrLow : wrModel.openPrice
+                    wrLow       = wrLow < wrModel.closePrice ? wrLow : wrModel.closePrice
+                    wrLow       = wrLow < wrModel.highPrice ? wrLow : wrModel.highPrice
+                    wrLow       = wrLow < wrModel.lowPrice ? wrLow : wrModel.lowPrice
+                    
+                    wrHigh      = wrHigh > wrModel.openPrice ? wrHigh : wrModel.openPrice
+                    wrHigh      = wrHigh > wrModel.closePrice ? wrHigh : wrModel.closePrice
+                    wrHigh      = wrHigh > wrModel.highPrice ? wrHigh : wrModel.highPrice
+                    wrHigh      = wrHigh > wrModel.lowPrice ? wrHigh : wrModel.lowPrice
+                }
+            }
+            else{
+                for j in (i - num + 1)...i {
+                    let wrModel = datas[j]
+                    wrLow       = wrLow < wrModel.openPrice ? wrLow : wrModel.openPrice
+                    wrLow       = wrLow < wrModel.closePrice ? wrLow : wrModel.closePrice
+                    wrLow       = wrLow < wrModel.highPrice ? wrLow : wrModel.highPrice
+                    wrLow       = wrLow < wrModel.lowPrice ? wrLow : wrModel.lowPrice
+                    
+                    wrHigh      = wrHigh > wrModel.openPrice ? wrHigh : wrModel.openPrice
+                    wrHigh      = wrHigh > wrModel.closePrice ? wrHigh : wrModel.closePrice
+                    wrHigh      = wrHigh > wrModel.highPrice ? wrHigh : wrModel.highPrice
+                    wrHigh      = wrHigh > wrModel.lowPrice ? wrHigh : wrModel.lowPrice
+                }
+            }
+            data.extVal["WR_\(num)"] = (wrHigh - data.closePrice) * 100 / (wrHigh - wrLow)
+        }
+        return datas
     }
 }
