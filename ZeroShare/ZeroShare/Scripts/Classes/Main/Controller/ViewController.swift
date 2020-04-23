@@ -12,7 +12,7 @@ import UIKit
 // MARK: - 1、常量/静态变量
 //======================================================================
 
-class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: KSBaseViewController {
 
     //======================================================================
     // MARK: - 2、属性
@@ -52,27 +52,11 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
         
     }
     //======================================================================
-    // MARK: - 7、系统代理方法
+    // MARK: - 7、系统代理方法 Extension
     //======================================================================
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.datas.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = KSLineChartCell.initialize(tableView: tableView)
-        cell.textLabel?.text = self.datas[indexPath.row]
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        enterBinanceController()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64
-    }
+
     //======================================================================
-    // MARK: - 8、自定义代理方法
+    // MARK: - 8、自定义代理方法 Extension
     //======================================================================
     
     //======================================================================
@@ -114,9 +98,30 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     lazy var datas : [String] = {
         return ["Binance"]
     }()
+    
     //======================================================================
     // MARK: - 15、TEST
     //======================================================================
 
 }
 
+// MARK: - UITableViewDataSource, UITableViewDelegate
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.datas.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = KSLineChartCell.initialize(tableView: tableView)
+        cell.textLabel?.text = self.datas[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        enterBinanceController()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
+    }
+}
