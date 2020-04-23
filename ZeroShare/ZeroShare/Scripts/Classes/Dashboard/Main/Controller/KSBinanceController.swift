@@ -26,7 +26,7 @@ class KSBinanceController: KSBaseViewController {
     private var socket: KSWebSocket?
     private var msgMgr: KSSocketMsgMgr = KSSocketMsgMgr.init()
     private var isBar: Bool            = false
-    
+    private var isLocal: Bool          = true//是否读取本地数据
     // MARK: - 2.2、UIKit
     private var titleView: KSButton?
     private var followBtn: UIButton!
@@ -38,16 +38,18 @@ class KSBinanceController: KSBaseViewController {
         super.viewDidLoad()
         initializeCtrl()
         
-        //readLocalFile()
-        
-        //币安代码
-        let server       = "wss://stream.binance.com:9443/ws/\(self.configure.symbol.lowercased())@kline_1m"
-        socket           = KSWebSocket.init()
-        //socket?.configureServer(KSSingleton.shared.server.socketServer, isAutoConnect: true)
-        socket?.configureServer(server, isAutoConnect: true)
-        socket?.delegate = self
-        socket?.startConnect()
-        
+        if self.isLocal {
+            readLocalFile()
+        }
+        else{
+            //币安代码
+            let server       = "wss://stream.binance.com:9443/ws/\(self.configure.symbol.lowercased())@kline_1m"
+            socket           = KSWebSocket.init()
+            //socket?.configureServer(KSSingleton.shared.server.socketServer, isAutoConnect: true)
+            socket?.configureServer(server, isAutoConnect: true)
+            socket?.delegate = self
+            socket?.startConnect()
+        }
     }
     
     deinit {
@@ -423,13 +425,15 @@ extension KSBinanceController: KSViewDelegate {
     func ksviewCallback(view: UIView, data: Any?, identifier: String?) {
         ///k线切换
         if identifier == "KSTimePickerView" {
-            //本地数据
-            //self.headerChartView.resetDrawChart(isAll: true)
-            //return
-            //币安
-            if let _data = data as? KSChartMenuInfo {
-                self.unSubscriptionKline(symbol: configure.symbol, kline: _data.identifier)
-                subscriptionKline()
+            if self.isLocal {
+                self.headerChartView.resetDrawChart(isAll: true)
+            }
+            else{
+                //币安
+                if let _data = data as? KSChartMenuInfo {
+                    self.unSubscriptionKline(symbol: configure.symbol, kline: _data.identifier)
+                    subscriptionKline()
+                }
             }
         }
         else if identifier == "KSMenuBarView" {
