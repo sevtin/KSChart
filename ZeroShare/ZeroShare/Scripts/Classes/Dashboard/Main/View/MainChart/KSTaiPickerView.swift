@@ -113,7 +113,7 @@ class KSTaiPickerCell: KSBaseTableViewCell {
     override func createChildViews() {
         let flowLayout                     = UICollectionViewFlowLayout.init()
         let CW                             = self.ks_screenWidth() - KS_Const_Point32 - KS_Const_Point24
-        let IW                             = CW / 5
+        let IW                             = CW / 5 - 4
         let IH: CGFloat                    = 40
 
         flowLayout.itemSize                = CGSize(width: IW, height: IH)
@@ -130,7 +130,7 @@ class KSTaiPickerCell: KSBaseTableViewCell {
 
         collectionView.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(KS_Const_Point24)
-            make.width.equalTo(CW - IW)
+            make.right.equalToSuperview().offset(-IW)
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
@@ -197,7 +197,7 @@ extension KSTaiPickerCell: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-                guard let _menuGroup = menuGroup else {
+        guard let _menuGroup = menuGroup else {
             return
         }
         for item in _menuGroup.datas {
