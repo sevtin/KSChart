@@ -1,4 +1,4 @@
-k线图/kline/kchart，已经集成MA/EMA/MACD/KDJ/BOLL/RSI/WR等指标，新增指标及其方便。适用于股票/区块链交易所等种类App。Swift5编写，数据处理能力优秀，60FPS稳定运行。示例集成websocket，并接入币安数据（需VPN）。
+k线图/kline/kchart，已经集成MA/EMA/MACD/KDJ/BOLL/RSI/WR/AVG等指标，新增指标及其方便。适用于股票/区块链交易所等种类App。Swift5编写，数据处理能力优秀，60FPS稳定运行。示例集成websocket，并接入币安数据（需VPN）。
 
 # KSChart 效果图
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/time.jpg" alt="分时图" width="600" height="604" align="middle"/>
