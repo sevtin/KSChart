@@ -82,12 +82,12 @@ extension KSCalculator {
 // MARK: - 均价
 extension KSCalculator {
     class func ks_calculateAvgPrice(index: Int, num: Int, datas: [KSChartItem]) -> [KSChartItem] {
-        var index = index
-        if index >= (datas.count - 1) {
-            index = datas.count - 1
+        var _index = index
+        if _index >= (datas.count - 1) {
+            _index = datas.count - 1
         }
         if datas.count >= num {
-            for i in index..<datas.count {
+            for i in _index..<datas.count {
                 let data = datas[i]
                 if i >= (num - 1) {
                     data.avg_price            = self.ks_calculateAveragePrice(count: num, endIndex: i, datas: datas)
