@@ -20,25 +20,25 @@ extension KSChartConfigure {
 
         /// 默认指标
         var seriesParams: [KSSeriesParam] {
-            let ma = KSSeriesParam(seriesKey: KSSeriesKey.ma,
-                                   name: KSSeriesKey.ma,
-                                   params: [
-                                    KSSeriesParamControl(value: 5, note: "周期均线", min: 5, max: 120, step: 1),
-                                    KSSeriesParamControl(value: 10, note: "周期均线", min: 5, max: 120, step: 1),
-                                    KSSeriesParamControl(value: 30, note: "周期均线", min: 5, max: 120, step: 1),
+            let ma   = KSSeriesParam(seriesKey: KSSeriesKey.ma,
+                                     name: KSSeriesKey.ma,
+                                     params: [
+                                        KSSeriesParamControl(value: 5, note: "周期均线", min: 5, max: 120, step: 1),
+                                        KSSeriesParamControl(value: 10, note: "周期均线", min: 5, max: 120, step: 1),
+                                        KSSeriesParamControl(value: 30, note: "周期均线", min: 5, max: 120, step: 1),
                 ],
-                                   order: 0,
-                                   hidden: false)
+                                     order: 0,
+                                     hidden: false)
             
-            let ema = KSSeriesParam(seriesKey: KSSeriesKey.ema,
-                                    name: KSSeriesKey.ema,
-                                    params: [
+            let ema  = KSSeriesParam(seriesKey: KSSeriesKey.ema,
+                                     name: KSSeriesKey.ema,
+                                     params: [
                                         KSSeriesParamControl(value: 7, note: "周期均线", min: 5, max: 120, step: 1),
                                         KSSeriesParamControl(value: 25, note: "周期均线", min: 5, max: 120, step: 1),
                                         KSSeriesParamControl(value: 99, note: "周期均线", min: 5, max: 120, step: 1),
                 ],
-                                    order: 1,
-                                    hidden: false)
+                                     order: 1,
+                                     hidden: false)
             
             let boll = KSSeriesParam(seriesKey: KSSeriesKey.boll,
                                      name: KSSeriesKey.boll,
@@ -49,15 +49,15 @@ extension KSChartConfigure {
                                      order: 2,
                                      hidden: false)
             
-            let kdj = KSSeriesParam(seriesKey: KSSeriesKey.kdj,
-                                    name: KSSeriesKey.kdj,
-                                    params: [
+            let kdj  = KSSeriesParam(seriesKey: KSSeriesKey.kdj,
+                                     name: KSSeriesKey.kdj,
+                                     params: [
                                         KSSeriesParamControl(value: 9, note: "周期", min: 2, max: 90, step: 1),
                                         KSSeriesParamControl(value: 3, note: "周期", min: 2, max: 30, step: 1),
                                         KSSeriesParamControl(value: 3, note: "周期", min: 2, max: 30, step: 1),
                 ],
-                                    order: 5,
-                                    hidden: false)
+                                     order: 5,
+                                     hidden: false)
             
             let macd = KSSeriesParam(seriesKey: KSSeriesKey.macd,
                                      name: KSSeriesKey.macd,
@@ -69,23 +69,30 @@ extension KSChartConfigure {
                                      order: 6,
                                      hidden: false)
             
-            let rsi = KSSeriesParam(seriesKey: KSSeriesKey.rsi,
-                                    name: KSSeriesKey.rsi,
-                                    params: [
+            let rsi  = KSSeriesParam(seriesKey: KSSeriesKey.rsi,
+                                     name: KSSeriesKey.rsi,
+                                     params: [
                                         KSSeriesParamControl(value: 6, note: "相对强弱指数", min: 5, max: 120, step: 1),
                                         KSSeriesParamControl(value: 12, note: "相对强弱指数", min: 5, max: 120, step: 1),
                                         KSSeriesParamControl(value: 24, note: "相对强弱指数", min: 5, max: 120, step: 1),
                 ],
-                                    order: 7,
-                                    hidden: false)
+                                     order: 7,
+                                     hidden: false)
             
-            let wr = KSSeriesParam(seriesKey: KSSeriesKey.wr,
-                                   name: KSSeriesKey.wr,
-                                   params: [
-                                    KSSeriesParamControl(value: 14, note: "威廉指标", min: 2, max: 120, step: 1)
+            let wr   = KSSeriesParam(seriesKey: KSSeriesKey.wr,
+                                     name: KSSeriesKey.wr,
+                                     params: [
+                                        KSSeriesParamControl(value: 14, note: "威廉指标", min: 2, max: 120, step: 1)
                 ],
-                                   order: 8,
-                                   hidden: false)
+                                     order: 8,
+                                     hidden: false)
+            let avg  = KSSeriesParam(seriesKey: KSSeriesKey.avg,
+                                     name: KSSeriesKey.avg,
+                                     params: [
+                                        KSSeriesParamControl(value: 5, note: "平均指标", min: 2, max: 120, step: 1)
+                ],
+                                     order: 8,
+                                     hidden: false)
             return [
                 ma,
                 ema,
@@ -93,7 +100,8 @@ extension KSChartConfigure {
                 kdj,
                 macd,
                 rsi,
-                wr
+                wr,
+                avg
             ]
         }
         

@@ -249,7 +249,13 @@ class KSTaiMenuGroup: NSObject {
         go_info3.displayText = "BOOL"
         go_info3.textAlignment = .left
         go_info3.identifier  = KSSeriesKey.boll
-        group1.datas         += [go_info1, go_info2, go_info3]
+        
+        let go_info4         = KSChartMenuInfo.init()
+        go_info4.displayText = "AVG"
+        go_info4.textAlignment = .left
+        go_info4.identifier  = KSSeriesKey.avg
+        
+        group1.datas         += [go_info1, go_info2, go_info3, go_info4]
         group1.kitHeight     = ceil(CGFloat(group1.datas.count) / 4.0) * 40
 
         let group2           = KSTaiMenuGroup.init()

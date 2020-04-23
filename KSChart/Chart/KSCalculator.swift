@@ -90,7 +90,8 @@ extension KSCalculator {
             for i in index..<datas.count {
                 let data = datas[i]
                 if i >= (num - 1) {
-                    data.avg_price = self.ks_calculateAveragePrice(count: num, endIndex: i, datas: datas)
+                    data.avg_price            = self.ks_calculateAveragePrice(count: num, endIndex: i, datas: datas)
+                    data.extVal["AVG_\(num)"] = data.avg_price
                 }
             }
         }

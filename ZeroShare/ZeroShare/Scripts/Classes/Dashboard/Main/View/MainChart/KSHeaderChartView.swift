@@ -167,7 +167,7 @@ extension KSHeaderChartView: KSKChartViewDelegate, TimePickerViewDelegate, TaiPi
         self.funcsView.timeBtn.isSelected = false
         updateDate(timeId: value.ID)
         //resetDrawChart()
-        self.funcsView.updateTai(isEnabled: KSSingleton.shared.indexConfigure.isChart)
+        //self.funcsView.updateTai(isEnabled: KSSingleton.shared.indexConfigure.isChart)
         self.theDelegate?.ksviewCallback?(view: self, data: value, identifier: "KSTimePickerView")
     }
     
@@ -188,12 +188,14 @@ extension KSHeaderChartView: KSKChartViewDelegate, TimePickerViewDelegate, TaiPi
     
     //更新K线
     func resetDrawChart(groupType: KSSectionValueType = .assistant, isAll: Bool = false) {
+        /*
         self.funcsView.updateTai(isEnabled: KSSingleton.shared.indexConfigure.isChart)
         if KSSingleton.shared.indexConfigure.isChart == false {
             self.chartView.chartView.updateSerie(hidden: false, key: KSSeriesKey.timeline, isMasterCandle: false)
         }else{
             self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.masterSeriesKey, isMasterCandle: KSSingleton.shared.indexConfigure.isChart)
-        }
+        }*/
+        self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.masterSeriesKey, isMasterCandle: KSSingleton.shared.indexConfigure.isChart)
         self.chartView.chartView.updateSerie(hidden: false, key: self.funcsView.assistSeriesKey, isMasterCandle: false, index: 1)
         self.chartView.chartView.refreshChart(isAll: isAll, isDraw: true, isChangeTai: true)
     }
