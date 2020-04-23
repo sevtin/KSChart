@@ -28,6 +28,7 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCtrl()
+        self.getChartCandles()
     }
     
     //======================================================================

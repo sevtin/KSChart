@@ -25,12 +25,12 @@ class KSBaseViewController: UIViewController {
         var candles: [KSChartItem] = [KSChartItem]()
         for array in _array {
             let info        = KSChartItem()
-            info.time       = (array[0] as! NSNumber).intValue
-            info.lowPrice   = CGFloat((array[1] as! NSNumber).floatValue)
-            info.highPrice  = CGFloat((array[2] as! NSNumber).floatValue)
-            info.openPrice  = CGFloat((array[3] as! NSNumber).floatValue)
-            info.closePrice = CGFloat((array[4] as! NSNumber).floatValue)
-            info.vol        = CGFloat((array[5] as! NSNumber).floatValue)
+            info.time       = array[0] as! Int
+            info.lowPrice   = array[1] as! CGFloat
+            info.highPrice  = array[2] as! CGFloat
+            info.openPrice  = array[3] as! CGFloat
+            info.closePrice = array[4] as! CGFloat
+            info.vol        = array[5] as! CGFloat
             candles.append(info)
         }
         return candles
