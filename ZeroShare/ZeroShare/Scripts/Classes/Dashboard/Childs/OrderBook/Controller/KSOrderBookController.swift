@@ -22,7 +22,7 @@ class KSOrderBookController: KSDashboardChildController {
     var configure: KSDashboardChildConfigure!
     // MARK: - 2.2、UIKit
     private var tableView: UITableView!
-    private var headerView: KSDoubleLabelView!
+    private var headerView: KSMultipleLabelView!
 
     //======================================================================
     // MARK: - 3、系统初始化方法/系统生命周期方法
@@ -81,11 +81,11 @@ class KSOrderBookController: KSDashboardChildController {
             }
         })
         
-        headerView                 = KSDoubleLabelView.init(textColor: UIColor.ks_rgba(218, 225, 237),
-                                                            textFont: KS_Const_Font_Normal_12,
-                                                            alignments: [NSTextAlignment.left,NSTextAlignment.center,NSTextAlignment.right],
-                                                            count: 3,
-                                                            padding: KS_Const_Point16)
+        headerView                 = KSMultipleLabelView.init(textColor: UIColor.ks_rgba(218, 225, 237),
+                                                              textFont: KS_Const_Font_Normal_12,
+                                                              alignments: [NSTextAlignment.left,NSTextAlignment.center,NSTextAlignment.right],
+                                                              count: 3,
+                                                              padding: KS_Const_Point16)
         headerView.frame           = CGRect.init(x: 0, y: 0, width: self.ks_screenWidth(), height: KS_Const_Point40)
         updateHeader()
         

@@ -1,5 +1,6 @@
 //
-//  ZeroShare
+//  KSKLineChartStyle.swift
+//  KSChart
 //
 //  Created by saeipi on 2019/6/6.
 //  Copyright © 2019 saeipi. All rights reserved.
@@ -26,46 +27,50 @@ public class KSKLineChartStyle: NSObject {
     
     /// 分区样式配置
     public var sections: [KSSection]    = [KSSection]()
+    
     /// 支持的指标
     public var chartTais: [String: KSIndexAlgorithm]!
+    
     /// 背景颜色
     public var backgroundColor: UIColor = KS_Chart_Color_White
 
     /// 显示边线上左下有
     public var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.5, 0.5, 0.5, 0.5)
 
-    //边距 UIEdgeInsets(top: 32, left: 8, bottom: 4, right: 0)  top<32顶部开盘/最高价等信息显示会有问题！
+    /// 边距 
     public var padding: UIEdgeInsets!
 
-    //字体大小
+    /// 字体大小
     public var labelFont: UIFont!
 
-    //线条颜色
+    /// 线条颜色
     public var lineColor: UIColor         = KS_Chart_Color_White
     
-    //十字线颜色
+    /// 十字线颜色
     public var crosshairColor: UIColor    = KS_Chart_Color_White
 
-    //文字颜色
+    /// 文字颜色
     public var textColor: UIColor         = KS_Chart_Color_White
 
-    //选中点的显示的框背景颜色
+    /// 选中点的显示的框背景颜色
     public var selectedBGColor: UIColor   = KS_Chart_Color_White
 
-    //选中点的显示的文字颜色
+    /// 选中点的显示的文字颜色
     public var selectedTextColor: UIColor = KS_Chart_Color_White
 
-    //显示y的位置，默认右边
+    /// 显示y的位置，默认右边
     public var showYAxisLabel             = KSYAxisShowPosition.right
 
     /// 是否把y坐标内嵌到图表仲
     public var isInnerYAxis: Bool         = false
 
-    //是否可缩放
+    /// 是否可缩放
     public var enablePinch: Bool          = true
-    //是否可滑动
+    
+    /// 是否可滑动
     public var enablePan: Bool            = true
-    //是否可点选
+    
+    /// 是否可点选
     public var enableTap: Bool            = true
 
     /// 是否显示选中的内容
@@ -79,13 +84,4 @@ public class KSKLineChartStyle: NSObject {
 
     /// 是否显示所有内容
     public var isShowAll: Bool            = false
-
-    /// 买方深度图层颜色
-    public var bidColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.white, .white, 1)
-
-    /// 卖方深度图层颜色
-    public var askColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.white, .white, 1)
-
-    /// 买单居右
-    public var bidChartOnDirection: KSDepthChartOnDirection = .right
 }

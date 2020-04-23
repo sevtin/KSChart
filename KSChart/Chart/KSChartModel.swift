@@ -1,5 +1,6 @@
 //
-//  ZeroShare
+//  KSChartModel.swift
+//  KSChart
 //
 //  Created by saeipi on 2019/6/6.
 //  Copyright © 2019 saeipi. All rights reserved.

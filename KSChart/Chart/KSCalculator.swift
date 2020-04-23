@@ -1,6 +1,6 @@
 //
 //  KSCalculator.swift
-//  ZeroShare
+//  KSChart
 //
 //  Created by saeipi on 2019/9/4.
 //  Copyright © 2019 saeipi. All rights reserved.

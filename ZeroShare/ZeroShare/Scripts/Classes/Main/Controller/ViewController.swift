@@ -28,7 +28,6 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCtrl()
-        self.getChartCandles()
     }
     
     //======================================================================
@@ -67,20 +66,6 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         enterBinanceController()
-        return
-        /*
-        switch indexPath.row {
-        case 0:
-            //enterLineChartController()
-        case 1:
-            enterBinanceController()
-        case 2:
-            //enterShareController()
-            break
-        default:
-            break
-        }
-         */
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -114,20 +99,9 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     //======================================================================
     // MARK: - 12、控制器跳转
     //======================================================================
-    
-    func enterLineChartController() {
-        let ctrl = KSDashboardController.init()
-        ctrl.update(market: "eth/btc")
-        self.pushViewController(ctrl: ctrl)
-    }
-    
     func enterBinanceController() {
         let ctrl = KSBinanceController.init()
         ctrl.update(market: "eth/btc")
-        self.pushViewController(ctrl: ctrl)
-    }
-    func enterShareController() {
-        let ctrl = KSMyShareController.init()
         self.pushViewController(ctrl: ctrl)
     }
     //======================================================================
@@ -138,7 +112,6 @@ class ViewController: KSBaseViewController, UITableViewDataSource, UITableViewDe
     // MARK: - 14、懒加载
     //======================================================================
     lazy var datas : [String] = {
-        //let datas = ["MyChart","Binance","Share"]
         return ["Binance"]
     }()
     //======================================================================

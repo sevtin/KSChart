@@ -11,7 +11,7 @@ import UIKit
 let KSMarketTradeCellIdentifier = "KSMarketTradeCellIdentifier"
 
 class KSMarketTradeCell: KSBaseTableViewCell {
-    var labelView: KSDoubleLabelView!
+    var labelView: KSMultipleLabelView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,13 +45,13 @@ class KSMarketTradeCell: KSBaseTableViewCell {
     
     /// 创建子控件
     override func createChildViews() {
-        labelView = KSDoubleLabelView.init(textColor: UIColor.ks_rgba(41, 44, 51),
-                                           textFont: KS_Const_Font_Normal_14,
-                                           alignments: [NSTextAlignment.left,NSTextAlignment.center,NSTextAlignment.right,NSTextAlignment.right],
-                                           count: 4,
-                                           widthScales: [0.23,0.13,0.32,0.32],
-                                           margin: KS_Const_Point16,
-                                           padding: KS_Const_Point04)
+        labelView = KSMultipleLabelView.init(textColor: UIColor.ks_rgba(41, 44, 51),
+                                             textFont: KS_Const_Font_Normal_14,
+                                             alignments: [NSTextAlignment.left,NSTextAlignment.center,NSTextAlignment.right,NSTextAlignment.right],
+                                             count: 4,
+                                             widthScales: [0.23,0.13,0.32,0.32],
+                                             margin: KS_Const_Point16,
+                                             padding: KS_Const_Point04)
         if let _font = KS_Const_Font_HelveticaNeue_14 {
             labelView.update(font: _font)
         }

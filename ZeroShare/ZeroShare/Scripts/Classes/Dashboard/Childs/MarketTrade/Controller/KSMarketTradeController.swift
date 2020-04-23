@@ -23,7 +23,7 @@ class KSMarketTradeController: KSDashboardChildController {
 
     // MARK: - 2.2、UIKit
     var tableView: UITableView!
-    var headerView: KSDoubleLabelView!
+    var headerView: KSMultipleLabelView!
     //======================================================================
     // MARK: - 3、系统初始化方法/系统生命周期方法
     //======================================================================
@@ -81,13 +81,13 @@ class KSMarketTradeController: KSDashboardChildController {
             }
         })
         
-        headerView = KSDoubleLabelView.init(textColor: UIColor.ks_rgba(218, 225, 237),
-                                            textFont: KS_Const_Font_Normal_12,
-                                            alignments: [NSTextAlignment.left, NSTextAlignment.center, NSTextAlignment.right, NSTextAlignment.right],
-                                            count: 4,
-                                            widthScales: [0.23,0.13,0.32,0.32],
-                                            margin: KS_Const_Point16,
-                                            padding: KS_Const_Point04)
+        headerView = KSMultipleLabelView.init(textColor: UIColor.ks_rgba(218, 225, 237),
+                                              textFont: KS_Const_Font_Normal_12,
+                                              alignments: [NSTextAlignment.left, NSTextAlignment.center, NSTextAlignment.right, NSTextAlignment.right],
+                                              count: 4,
+                                              widthScales: [0.23,0.13,0.32,0.32],
+                                              margin: KS_Const_Point16,
+                                              padding: KS_Const_Point04)
         headerView.frame = CGRect.init(x: 0, y: 0, width: self.ks_screenWidth(), height: KS_Const_Point40)
         updateHeader()
         

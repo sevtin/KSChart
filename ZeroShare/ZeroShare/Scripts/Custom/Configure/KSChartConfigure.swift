@@ -101,11 +101,11 @@ extension KSChartConfigure {
         
         let style                     = KSKLineChartStyle()
         style.labelFont               = KS_Const_Font_Normal_10
-        style.lineColor               = KS_Const_Color_Chart_Line//UIColor(hex: styleParams.lineColor)//边框线颜色
+        style.lineColor               = KS_Const_Color_Chart_Line//边框线颜色
         style.textColor               = UIColor(hex: styleParams.textColor)//下边和右边字的颜色
         style.selectedBGColor         = UIColor(hex: 0x666F80)//选中时下边右边字的背景颜色
         style.selectedTextColor       = UIColor(hex: styleParams.selectedTextColor)//选中时下边右边字的颜色
-        style.backgroundColor         = KS_Const_Color_Clear//UIColor(hex: styleParams.backgroundColor)//视图背景颜色
+        style.backgroundColor         = KS_Const_Color_Clear//视图背景颜色
         style.crosshairColor          = UIColor(hex: 0x666F80)//十字线颜色
         style.isInnerYAxis            = styleParams.isInnerYAxis
         style.showYAxisLabel          = KSYAxisShowPosition.left//显示y的位置，默认右边

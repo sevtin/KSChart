@@ -48,7 +48,7 @@
 		E61E92BA2338F05500184885 /* KSTradeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92822338F05500184885 /* KSTradeDetail.swift */; };
 		E61E92BB2338F05500184885 /* KSOrderBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92852338F05500184885 /* KSOrderBookCell.swift */; };
 		E61E92BC2338F05500184885 /* KSOrderBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92872338F05500184885 /* KSOrderBookController.swift */; };
-		E61E92BD2338F05500184885 /* KSDoubleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E928B2338F05500184885 /* KSDoubleLabelView.swift */; };
+		E61E92BD2338F05500184885 /* KSMultipleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E928B2338F05500184885 /* KSMultipleLabelView.swift */; };
 		E61E92BE2338F05500184885 /* KSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E928D2338F05500184885 /* KSButton.swift */; };
 		E61E92BF2338F05500184885 /* KSListMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E928F2338F05500184885 /* KSListMenuView.swift */; };
 		E61E92C02338F05500184885 /* KSPageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92912338F05500184885 /* KSPageButton.swift */; };
@@ -56,7 +56,6 @@
 		E61E92C22338F05500184885 /* KSLanguageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92962338F05500184885 /* KSLanguageHelper.swift */; };
 		E61E92C32338F05500184885 /* ASNetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92982338F05500184885 /* ASNetManager.swift */; };
 		E61E92C42338F05500184885 /* KSSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E929A2338F05500184885 /* KSSingleton.swift */; };
-		E61E92C52338F05500184885 /* KSDashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E929D2338F05500184885 /* KSDashboardController.swift */; };
 		E61E92C72338F05500184885 /* KSDashboardConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92A02338F05500184885 /* KSDashboardConfigure.swift */; };
 		E61E92C82338F05500184885 /* KSIndexConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92A12338F05500184885 /* KSIndexConfigure.swift */; };
 		E61E92C92338F05500184885 /* KSSocketMsgMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61E92A22338F05500184885 /* KSSocketMsgMgr.swift */; };
@@ -94,13 +93,11 @@
 		E622D1BB2339DDA700D233E0 /* KSChartStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1BA2339DDA700D233E0 /* KSChartStyles.swift */; };
 		E622D1BD2339E06300D233E0 /* KSBinanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1BC2339E06300D233E0 /* KSBinanceController.swift */; };
 		E622D1BF2339F3C000D233E0 /* KSSeriesParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1BE2339F3C000D233E0 /* KSSeriesParam.swift */; };
-		E622D1C4233A224500D233E0 /* KSMyShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D1C3233A224500D233E0 /* KSMyShareController.swift */; };
 		E627AA5D24404961007A3EEA /* KSLetValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E627AA5C24404961007A3EEA /* KSLetValue.swift */; };
 		E627AA5F24408DC9007A3EEA /* pingan.txt in Resources */ = {isa = PBXBuildFile; fileRef = E627AA5E24408DC9007A3EEA /* pingan.txt */; };
 		E6AB6E66238BEA5900C9BCF3 /* KSAxisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */; };
 		E6AB6E67238BEA5900C9BCF3 /* KSCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */; };
 		E6AB6E68238BEA5900C9BCF3 /* KSChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4C238BEA5900C9BCF3 /* KSChartModel.swift */; };
-		E6AB6E6A238BEA5900C9BCF3 /* KSDepthChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4E238BEA5900C9BCF3 /* KSDepthChartView.swift */; };
 		E6AB6E6B238BEA5900C9BCF3 /* KSDynamicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E4F238BEA5900C9BCF3 /* KSDynamicItem.swift */; };
 		E6AB6E6C238BEA5900C9BCF3 /* KSExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E50238BEA5900C9BCF3 /* KSExtension.swift */; };
 		E6AB6E6D238BEA5900C9BCF3 /* KSKLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB6E51238BEA5900C9BCF3 /* KSKLineChart.swift */; };
@@ -173,7 +170,7 @@
 		E61E92822338F05500184885 /* KSTradeDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSTradeDetail.swift; sourceTree = "<group>"; };
 		E61E92852338F05500184885 /* KSOrderBookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSOrderBookCell.swift; sourceTree = "<group>"; };
 		E61E92872338F05500184885 /* KSOrderBookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSOrderBookController.swift; sourceTree = "<group>"; };
-		E61E928B2338F05500184885 /* KSDoubleLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSDoubleLabelView.swift; sourceTree = "<group>"; };
+		E61E928B2338F05500184885 /* KSMultipleLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSMultipleLabelView.swift; sourceTree = "<group>"; };
 		E61E928D2338F05500184885 /* KSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSButton.swift; sourceTree = "<group>"; };
 		E61E928F2338F05500184885 /* KSListMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSListMenuView.swift; sourceTree = "<group>"; };
 		E61E92912338F05500184885 /* KSPageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSPageButton.swift; sourceTree = "<group>"; };
@@ -181,7 +178,6 @@
 		E61E92962338F05500184885 /* KSLanguageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSLanguageHelper.swift; sourceTree = "<group>"; };
 		E61E92982338F05500184885 /* ASNetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASNetManager.swift; sourceTree = "<group>"; };
 		E61E929A2338F05500184885 /* KSSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSingleton.swift; sourceTree = "<group>"; };
-		E61E929D2338F05500184885 /* KSDashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSDashboardController.swift; sourceTree = "<group>"; };
 		E61E92A02338F05500184885 /* KSDashboardConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSDashboardConfigure.swift; sourceTree = "<group>"; };
 		E61E92A12338F05500184885 /* KSIndexConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSIndexConfigure.swift; sourceTree = "<group>"; };
 		E61E92A22338F05500184885 /* KSSocketMsgMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSocketMsgMgr.swift; sourceTree = "<group>"; };
@@ -219,13 +215,11 @@
 		E622D1BA2339DDA700D233E0 /* KSChartStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSChartStyles.swift; sourceTree = "<group>"; };
 		E622D1BC2339E06300D233E0 /* KSBinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSBinanceController.swift; sourceTree = "<group>"; };
 		E622D1BE2339F3C000D233E0 /* KSSeriesParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSeriesParam.swift; sourceTree = "<group>"; };
-		E622D1C3233A224500D233E0 /* KSMyShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSMyShareController.swift; sourceTree = "<group>"; };
 		E627AA5C24404961007A3EEA /* KSLetValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSLetValue.swift; sourceTree = "<group>"; };
 		E627AA5E24408DC9007A3EEA /* pingan.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pingan.txt; sourceTree = "<group>"; };
 		E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSAxisModel.swift; sourceTree = "<group>"; };
 		E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSCalculator.swift; sourceTree = "<group>"; };
 		E6AB6E4C238BEA5900C9BCF3 /* KSChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSChartModel.swift; sourceTree = "<group>"; };
-		E6AB6E4E238BEA5900C9BCF3 /* KSDepthChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSDepthChartView.swift; sourceTree = "<group>"; };
 		E6AB6E4F238BEA5900C9BCF3 /* KSDynamicItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSDynamicItem.swift; sourceTree = "<group>"; };
 		E6AB6E50238BEA5900C9BCF3 /* KSExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSExtension.swift; sourceTree = "<group>"; };
 		E6AB6E51238BEA5900C9BCF3 /* KSKLineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSKLineChart.swift; sourceTree = "<group>"; };
@@ -425,6 +419,9 @@
 		E61E92752338F01700184885 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				E61E92892338F05500184885 /* Kit */,
+				E61E92952338F05500184885 /* Localizable */,
+				E61E92992338F05500184885 /* Singleton */,
 				E6697DC0238BE3B300CE9CA3 /* Extensions */,
 				E61E922E2338F00F00184885 /* Const */,
 				E6697D39238BDC5000CE9CA3 /* Configure */,
@@ -440,6 +437,7 @@
 		E61E92762338F01700184885 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E61E92982338F05500184885 /* ASNetManager.swift */,
 				E61E92772338F01700184885 /* KSApi.swift */,
 			);
 			path = Network;
@@ -527,8 +525,6 @@
 		E61E92882338F05500184885 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				E61E92892338F05500184885 /* Kit */,
-				E61E92942338F05500184885 /* Tools */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -548,7 +544,7 @@
 		E61E928A2338F05500184885 /* DoubleLabel */ = {
 			isa = PBXGroup;
 			children = (
-				E61E928B2338F05500184885 /* KSDoubleLabelView.swift */,
+				E61E928B2338F05500184885 /* KSMultipleLabelView.swift */,
 			);
 			path = DoubleLabel;
 			sourceTree = "<group>";
@@ -585,30 +581,12 @@
 			path = TwinsLabel;
 			sourceTree = "<group>";
 		};
-		E61E92942338F05500184885 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				E61E92952338F05500184885 /* Localizable */,
-				E61E92972338F05500184885 /* Network */,
-				E61E92992338F05500184885 /* Singleton */,
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
 		E61E92952338F05500184885 /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
 				E61E92962338F05500184885 /* KSLanguageHelper.swift */,
 			);
 			path = Localizable;
-			sourceTree = "<group>";
-		};
-		E61E92972338F05500184885 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				E61E92982338F05500184885 /* ASNetManager.swift */,
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		E61E92992338F05500184885 /* Singleton */ = {
@@ -633,9 +611,7 @@
 		E61E929C2338F05500184885 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E61E929D2338F05500184885 /* KSDashboardController.swift */,
 				E622D1BC2339E06300D233E0 /* KSBinanceController.swift */,
-				E622D1C3233A224500D233E0 /* KSMyShareController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -825,7 +801,6 @@
 				E6AB6E4B238BEA5900C9BCF3 /* KSCalculator.swift */,
 				E6AB6E4A238BEA5900C9BCF3 /* KSAxisModel.swift */,
 				E6AB6E4C238BEA5900C9BCF3 /* KSChartModel.swift */,
-				E6AB6E4E238BEA5900C9BCF3 /* KSDepthChartView.swift */,
 				E6AB6E4F238BEA5900C9BCF3 /* KSDynamicItem.swift */,
 				E6AB6E50238BEA5900C9BCF3 /* KSExtension.swift */,
 				E6AB6E51238BEA5900C9BCF3 /* KSKLineChart.swift */,
@@ -1049,7 +1024,7 @@
 				E61E92D12338F05500184885 /* KSChartMenuCell.swift in Sources */,
 				E61E92CC2338F05500184885 /* KSChartHorizontalView.swift in Sources */,
 				E61E92682338F00F00184885 /* UIView+KSExtensions.swift in Sources */,
-				E61E92BD2338F05500184885 /* KSDoubleLabelView.swift in Sources */,
+				E61E92BD2338F05500184885 /* KSMultipleLabelView.swift in Sources */,
 				E61E92BB2338F05500184885 /* KSOrderBookCell.swift in Sources */,
 				E6AB6E78238BEA5900C9BCF3 /* KSSeries+Extensions.swift in Sources */,
 				E6AB6E6B238BEA5900C9BCF3 /* KSDynamicItem.swift in Sources */,
@@ -1082,7 +1057,6 @@
 				E61E92702338F00F00184885 /* KSFileMgr.swift in Sources */,
 				E61E91C42338EE7C00184885 /* ViewController.swift in Sources */,
 				E61E92CF2338F05500184885 /* KSChartFuncsView.swift in Sources */,
-				E622D1C4233A224500D233E0 /* KSMyShareController.swift in Sources */,
 				E61E92CE2338F05500184885 /* KSBubbleMenuView.swift in Sources */,
 				E61E92C92338F05500184885 /* KSSocketMsgMgr.swift in Sources */,
 				E61E92402338F00F00184885 /* WindowViewController.swift in Sources */,
@@ -1095,7 +1069,6 @@
 				E61E92CA2338F05500184885 /* KSSummaryInfo.swift in Sources */,
 				E61E92D92338F05500184885 /* KSTransactionBarView.swift in Sources */,
 				E622D1BD2339E06300D233E0 /* KSBinanceController.swift in Sources */,
-				E61E92C52338F05500184885 /* KSDashboardController.swift in Sources */,
 				E61E92DC2338F0A700184885 /* KSImport.swift in Sources */,
 				E61E92522338F00F00184885 /* KSChartConfigure.swift in Sources */,
 				E6AB6E7C238BEA5900C9BCF3 /* String+KSExtensions.swift in Sources */,
@@ -1106,7 +1079,6 @@
 				E6AB6E72238BEA5900C9BCF3 /* KSBollModel.swift in Sources */,
 				E6AB6E6E238BEA5900C9BCF3 /* KSKLineChartStyle.swift in Sources */,
 				E61E92D72338F05500184885 /* KSTaiPickerView.swift in Sources */,
-				E6AB6E6A238BEA5900C9BCF3 /* KSDepthChartView.swift in Sources */,
 				E61E92452338F00F00184885 /* KSTableView.swift in Sources */,
 				E6AB6E6F238BEA5900C9BCF3 /* KSSection.swift in Sources */,
 				E61E92D32338F05500184885 /* KSHeaderChartView.swift in Sources */,

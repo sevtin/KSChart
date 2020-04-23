@@ -1,5 +1,5 @@
 //
-//  KSDoubleLabelView.swift
+//  KSMultipleLabelView.swift
 //  ZeroShare
 //
 //  Created by saeipi on 2019/8/28.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KSDoubleLabelView: UIView {
+class KSMultipleLabelView: UIView {
     
     private var items                  = [UILabel]()
     private var padding: CGFloat       = 0.0
