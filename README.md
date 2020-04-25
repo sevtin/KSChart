@@ -1,22 +1,22 @@
 k线图/kline/kchart，已经集成MA/EMA/MACD/KDJ/BOLL/RSI/WR/AVG等指标，新增指标及其方便。适用于股票/区块链交易所等种类App。Swift5编写，数据处理能力优秀，60FPS稳定运行。示例集成websocket，并接入币安数据（需VPN）。
 
 ## KSChart 效果图
-<img src="https://gitee.com/saeipi/KSChart/blob/master/Resources/time.jpg" alt="分时图" width="600" height="604" align="middle"/>
+<img src="https://gitee.com/saeipi/KSChart/raw/master/Resources/time.jpg" alt="分时图" width="600" height="604" align="middle"/>
 
-<img src="https://gitee.com/saeipi/KSChart/blob/master/Resources/tais.jpg" alt="指标菜单" width="600" height="604" align="middle"/>
+<img src="https://gitee.com/saeipi/KSChart/raw/master/Resources/tais.jpg" alt="指标菜单" width="600" height="604" align="middle"/>
 
-<img src="https://gitee.com/saeipi/KSChart/blob/master/Resources/candle.jpg" alt="蜡烛图" width="600" height="604" align="middle"/>
+<img src="https://gitee.com/saeipi/KSChart/raw/master/Resources/candle.jpg" alt="蜡烛图" width="600" height="604" align="middle"/>
 
-<img src="https://gitee.com/saeipi/KSChart/blob/master/Resources/cross.jpg" alt="选中单个蜡烛图" width="600" height="604" align="middle"/>
+<img src="https://gitee.com/saeipi/KSChart/raw/master/Resources/cross.jpg" alt="选中单个蜡烛图" width="600" height="604" align="middle"/>
 
 ### 500多条K线数据，真机示例内存占用为11.8M（其中KSChart占用3M），机型不同CPU占用差异会比较大，老设备在滑动时帧数会略有下降
-<img src="https://gitee.com/saeipi/KSChart/blob/master/Resources/cpu.jpg" alt="cpu占用率" width="800" height="338.6" align="middle"/>
+<img src="https://gitee.com/saeipi/KSChart/raw/master/Resources/cpu.jpg" alt="cpu占用率" width="800" height="338.6" align="middle"/>
 
-<img src="https://gitee.com/saeipi/KSChart/blob/master/Resources/memory.jpg" alt="memory占用率" width="800" height="458" align="middle"/>
+<img src="https://gitee.com/saeipi/KSChart/raw/master/Resources/memory.jpg" alt="memory占用率" width="800" height="458" align="middle"/>
 
 ### 如果觉得好用就打个赏呗
-<img src="https://gitee.com/saeipi/KSChart/blob/master/Resources/Alipay.jpg" alt="Alipay" width="200" height="251" align="left"/>
-<img src="https://gitee.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg" alt="WeChatPay" width="200" height="275" align="middle"/>
+<img src="https://gitee.com/saeipi/KSChart/raw/master/Resources/Alipay.jpg" alt="Alipay" width="200" height="251" align="left"/>
+<img src="https://gitee.com/saeipi/KSChart/raw/master/Resources/WeChatPay.jpeg" alt="WeChatPay" width="200" height="275" align="middle"/>
 
 ## 开发环境
 - Xcode 11.0+
