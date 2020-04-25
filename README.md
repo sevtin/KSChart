@@ -16,13 +16,13 @@ k线图/kline/kchart，已经集成MA/EMA/MACD/KDJ/BOLL/RSI/WR/AVG等指标，�
 
 ### 如果觉得好用就打个赏呗
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/Alipay.jpg" alt="Alipay" width="200" height="251" align="left"/>
-<img src="https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg" alt="WeChatPay" width="200" height="275" align="left"/>
+<img src="https://github.com/saeipi/KSChart/blob/master/Resources/WeChatPay.jpeg" alt="WeChatPay" width="200" height="275" align="middle"/>
 
-## 开发环境
+# 开发环境
 - Xcode 11.0+
 - Swift 5.1+
 
-## CocoaPods安装
+# CocoaPods安装
 ```
 platform :ios, '10.0'
 use_frameworks!
@@ -32,7 +32,7 @@ target 'MyApp' do
 end
 ```
 
-## 示例
+# 示例
 请参考KSKChartView.swift
 ```swift
 class KSKChartView: KSBaseView {
@@ -54,7 +54,7 @@ class KSKChartView: KSBaseView {
 }
 ```
 
-### 版本更新说明
+# 版本更新说明
 ```
 5.1.8 稳定版
 1、进一步优化CPU和内存占用率，CPU使用率降低20%以上；
@@ -64,7 +64,7 @@ class KSKChartView: KSBaseView {
 5、修复已知bug。
 ```
 
-### 下个版本
+# 下个版本
 ```
 1、优化API
 2、精简代码
