@@ -21,9 +21,8 @@ public enum KSIndexAlgorithm {
     case wr(Int) //WR指标公式
 }
 
-class KSCalculator: NSObject {
-
-    class func ks_calculator(algorithm: KSIndexAlgorithm, index: Int = 0, datas: [KSChartItem]) -> [KSChartItem] {
+struct KSCalculator {
+    static func ks_calculator(algorithm: KSIndexAlgorithm, index: Int = 0, datas: [KSChartItem]) -> [KSChartItem] {
         switch algorithm {
         case .none:
             return datas
@@ -58,7 +57,7 @@ extension KSCalculator {
     ///   - endIndex: 计算平均数结束的下标
     ///   - datas: 需要处理的数据
     /// - Returns:
-    class func ks_calculateAveragePrice(count: Int, endIndex: Int, datas: [KSChartItem]) -> CGFloat {
+    static func ks_calculateAveragePrice(count: Int, endIndex: Int, datas: [KSChartItem]) -> CGFloat {
         var result: CGFloat = 0.0
         
         if endIndex < (count - 1) {
@@ -81,7 +80,7 @@ extension KSCalculator {
 
 // MARK: - 均价
 extension KSCalculator {
-    class func ks_calculateAvgPrice(index: Int, num: Int, datas: [KSChartItem]) -> [KSChartItem] {
+    static func ks_calculateAvgPrice(index: Int, num: Int, datas: [KSChartItem]) -> [KSChartItem] {
         var _index = index
         if _index >= (datas.count - 1) {
             _index = datas.count - 1
@@ -106,7 +105,7 @@ extension KSCalculator {
     /// - Parameters:
     ///   - index: 开始的下标
     ///   - datas:
-    class func ks_calculateRSI(index: Int = 0, avgSmall: CGFloat = 6, avgMiddle: CGFloat = 12, avgBig: CGFloat = 24, datas: [KSChartItem]) -> [KSChartItem] {
+    static func ks_calculateRSI(index: Int = 0, avgSmall: CGFloat = 6, avgMiddle: CGFloat = 12, avgBig: CGFloat = 24, datas: [KSChartItem]) -> [KSChartItem] {
         var index = index
         // MA准备数据方法
         if index >= datas.count - 1 {
@@ -141,7 +140,7 @@ extension KSCalculator {
     /// - Parameters:
     ///   - index: 需要计算的下标
     ///   - datas:
-    class func ks_calculateRS(index: Int, avgSmall: CGFloat = 6, avgMiddle: CGFloat = 12, avgBig: CGFloat = 24, datas: [KSChartItem]) {
+    static func ks_calculateRS(index: Int, avgSmall: CGFloat = 6, avgMiddle: CGFloat = 12, avgBig: CGFloat = 24, datas: [KSChartItem]) {
         
         let tempModel   = datas[index]
         let lastModel   = datas[index - 1]
@@ -180,7 +179,7 @@ extension KSCalculator {
     ///   - index: 开始计算的下标
     ///   - datas: 需要处理的数据
     /// - Returns: 处理后的数据
-    class func ks_calculateBOLL(index: Int = 0, num: Int = 20, arg: Int = 2, datas: [KSChartItem]) -> [KSChartItem] {
+    static func ks_calculateBOLL(index: Int = 0, num: Int = 20, arg: Int = 2, datas: [KSChartItem]) -> [KSChartItem] {
         var index = index
         // BOLL准备方法
         if index >= (datas.count - 1) {
@@ -212,7 +211,7 @@ extension KSCalculator {
     ///   - index: 结束的index
     ///   - datas: 数据
     /// - Returns: 计算后的std(close , 20)
-    private class func calculateStd(num: Int = 20, arg: Int = 2, index: Int = 0, datas: [KSChartItem]) -> CGFloat {
+    private static func calculateStd(num: Int = 20, arg: Int = 2, index: Int = 0, datas: [KSChartItem]) -> CGFloat {
         var result: CGFloat = 0.0
         
         if index < (num - 1) {
@@ -257,7 +256,7 @@ extension KSCalculator {
      @param dea 默认9
      @param datas 需要处理的数据
      */
-    class func ks_calculateMACD(from index: Int = 0, emaSmall: Int = 12, emaBig: Int = 26, dea: Int = 9, datas: [KSChartItem]) -> [KSChartItem] {
+    static func ks_calculateMACD(from index: Int = 0, emaSmall: Int = 12, emaBig: Int = 26, dea: Int = 9, datas: [KSChartItem]) -> [KSChartItem] {
         var index = index
         if index >= (datas.count - 1) {
             index = datas.count - 1
@@ -290,7 +289,7 @@ extension KSCalculator {
      @param emaBig 默认26
      @param datas 需要处理的数据
      */
-    private class func calculateExpma(index: Int, emaSmall: Int, emaBig: Int, datas: [KSChartItem]) {
+    private static func calculateExpma(index: Int, emaSmall: Int, emaBig: Int, datas: [KSChartItem]) {
         let currentModel = datas[index]
         if index == 0 {
             // 第一日的ema12为收盘价
@@ -310,7 +309,7 @@ extension KSCalculator {
      @param endIndex 结束时的index
      @param datas 需要处理的数据
      */
-    private class func calculateDea(argu: Int, end endIndex: Int, datas: [KSChartItem]) {
+    private static func calculateDea(argu: Int, end endIndex: Int, datas: [KSChartItem]) {
         let endModel = datas[endIndex]
         if endIndex == 0 {
             // 第一日的dea为0
@@ -332,7 +331,7 @@ extension KSCalculator {
      @param index 结束的下标
      @param datas 需要处理的数据
      */
-    class func ks_calculateKDJ(index: Int, rsvArg: Int = 9, kArg: Int = 3, dArg: Int = 3, datas: [KSChartItem]) -> [KSChartItem] {
+    static func ks_calculateKDJ(index: Int, rsvArg: Int = 9, kArg: Int = 3, dArg: Int = 3, datas: [KSChartItem]) -> [KSChartItem] {
         if index > (datas.count - 1) {
             return datas
         }
@@ -364,7 +363,7 @@ extension KSCalculator {
      @param datas 需要处理的数据
      @return 计算后的RSV9
      */
-    private class func calculateRsv(endindex: Int, rsvArg: Int = 9, datas: [KSChartItem]) -> CGFloat {
+    private static func calculateRsv(endindex: Int, rsvArg: Int = 9, datas: [KSChartItem]) -> CGFloat {
         var low             = CGFloat(MAXFLOAT)
         var high            = CGFloat(-MAXFLOAT)
         let close: CGFloat  = datas[endindex].closePrice
@@ -404,7 +403,7 @@ extension KSCalculator {
      @param index 需要计算的模型的下标
      @param datas 需要处理的数据
      */
-    private class func calculateKD(index: Int, kArg: Int = 3, dArg: Int = 3, datas: [KSChartItem]) {
+    private static func calculateKD(index: Int, kArg: Int = 3, dArg: Int = 3, datas: [KSChartItem]) {
         let currentModel = datas[index]
         let lastModel    = datas[index - 1]
         currentModel.k   = ((2.0 * lastModel.k) + currentModel.rsv) / CGFloat(kArg)
@@ -423,7 +422,7 @@ extension KSCalculator {
      @param small 默认5
      @param datas 需要处理的数据
      */
-    class func ks_calculateMA(index: Int, small: Int = 5, middle: Int = 10, big: Int = 30, datas: [KSChartItem]) -> [KSChartItem] {
+    static func ks_calculateMA(index: Int, small: Int = 5, middle: Int = 10, big: Int = 30, datas: [KSChartItem]) -> [KSChartItem] {
         var index = index
         // MA准备数据方法
         if index >= (datas.count - 1) {
@@ -460,7 +459,7 @@ extension KSCalculator {
      @param emaBig 默认26
      @param datas 需要处理的数据
      */
-    class func ks_calculateEMA(index: Int, emaSmall: Int, emaMiddle: Int, emaBig: Int, datas: [KSChartItem]) ->[KSChartItem] {
+    static func ks_calculateEMA(index: Int, emaSmall: Int, emaMiddle: Int, emaBig: Int, datas: [KSChartItem]) ->[KSChartItem] {
         for i in index..<datas.count {
             calculateSingleEMA(index: i, emaSmall: emaSmall, emaMiddle: emaMiddle, emaBig: emaBig, datas: datas)
             let data                        = datas[i]
@@ -471,7 +470,7 @@ extension KSCalculator {
          return datas
     }
     
-    private class func calculateSingleEMA(index: Int, emaSmall: Int, emaMiddle: Int, emaBig: Int, datas: [KSChartItem]) {
+    private static func calculateSingleEMA(index: Int, emaSmall: Int, emaMiddle: Int, emaBig: Int, datas: [KSChartItem]) {
         let tempModel = datas[index]
         if index == 0 {
             // 第一日的ema12为收盘价
@@ -496,7 +495,7 @@ extension KSCalculator {
     ///   - num:计算周期
     ///   - datas:需要处理的数据
     /// - Returns:
-    private class func ks_calculateWR(index: Int, num: Int, datas: [KSChartItem]) -> [KSChartItem] {
+    private static func ks_calculateWR(index: Int, num: Int, datas: [KSChartItem]) -> [KSChartItem] {
         for i in index..<datas.count {
             var wrLow: CGFloat  = CGFloat(MAXFLOAT)
             var wrHigh: CGFloat = 0

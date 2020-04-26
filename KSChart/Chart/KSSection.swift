@@ -371,7 +371,7 @@ extension KSSection {
     /// - Parameter chartSelectedIndex:
     func drawTitle(_ chartSelectedIndex: Int) {
         
-        guard self.showTitle else {
+        if self.showTitle == false {
             return
         }
         

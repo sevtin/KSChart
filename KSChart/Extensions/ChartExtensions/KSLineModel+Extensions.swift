@@ -21,7 +21,7 @@ extension KSLineModel {
         curvelineLayer.shadowOffset  = self.shadowOffset
         curvelineLayer.shadowOpacity = self.shadowOpacity;
         //curvelineLayer.lineCap     = .round
-        //curvelineLayer.lineJoin    = .round
+        curvelineLayer.lineJoin      = .round
 
         let timelinePath             = UIBezierPath()
         timelinePath.lineWidth       = self.lineWidth

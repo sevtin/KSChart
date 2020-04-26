@@ -19,7 +19,7 @@ public enum KSUltimateValueStyle {
     case arrow(UIColor)
     case circle(UIColor, Bool)
     case tag(UIColor)
-    //case line(UIColor)
+    case line(UIColor)
 }
 
 // MARK: - 图表样式配置类
