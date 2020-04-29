@@ -1,0 +1,4948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draft Stage</title>
+    <script id="data">
+        DrafterData = [
+  {
+    "super" : "KSShapeLayer",
+    "id" : "D6F00F9B62DE78FB95DF69DDC7B9D52AD",
+    "methods" : {
+      "D90A1CE48B2EA9CE10778B8D8A4B00E72" : {
+        "isSwift" : true,
+        "invokes" : [
+          {
+            "formatedName" : "UIBezierPath()"
+          },
+          {
+            "formatedName" : "move(to:)"
+          },
+          {
+            "formatedName" : "addLine(to:)"
+          },
+          {
+            "formatedName" : "KSShapeLayer()"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "removeAll()"
+          },
+          {
+            "formatedName" : "drawYAxisTitle(_:, labelX:, labelY:, alignmentMode:, style:, pref:)"
+          }
+        ],
+        "params" : [
+          {
+            "sel" : "_",
+            "name" : "section",
+            "type" : "KSSection"
+          },
+          {
+            "name" : "style",
+            "type" : "KSKLineChartStyle",
+            "sel" : "style"
+          },
+          {
+            "name" : "pref",
+            "type" : "KSChartPref",
+            "sel" : "pref"
+          },
+          {
+            "name" : "topLayer",
+            "sel" : "topLayer",
+            "type" : "KSTopLayer"
+          }
+        ],
+        "static" : false,
+        "returnType" : "",
+        "name" : "drawSectionGrid",
+        "classId" : "D6F00F9B62DE78FB95DF69DDC7B9D52AD",
+        "type" : "method",
+        "id" : "D90A1CE48B2EA9CE10778B8D8A4B00E72",
+        "accessControl" : "internal"
+      }
+    },
+    "accessControl" : "public",
+    "isSwift" : true,
+    "type" : "class",
+    "name" : "KSGridLayer",
+    "protocols" : [
+
+    ]
+  },
+  {
+    "accessControl" : "public",
+    "id" : "D96158589E0F499E54E9E9365AB78FB29",
+    "type" : "class",
+    "isSwift" : true,
+    "super" : "CALayer",
+    "name" : "KSLayer",
+    "protocols" : [
+
+    ],
+    "methods" : {
+
+    }
+  },
+  {
+    "methods" : {
+
+    },
+    "id" : "DE71D19244321AE2A9338EBAB34EBA8DD",
+    "type" : "class",
+    "super" : "",
+    "isSwift" : true,
+    "name" : "KSChartPref",
+    "accessControl" : "public",
+    "protocols" : [
+
+    ]
+  },
+  {
+    "isSwift" : true,
+    "accessControl" : "public",
+    "methods" : {
+      "DB2763842CD0F67DBA4BFEF01558C540A" : {
+        "isSwift" : true,
+        "id" : "DB2763842CD0F67DBA4BFEF01558C540A",
+        "params" : [
+          {
+            "name" : "rect",
+            "sel" : "rect",
+            "type" : "CGRect"
+          }
+        ],
+        "returnType" : "",
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "name" : "updateHorizontalLine",
+        "accessControl" : "internal",
+        "type" : "method",
+        "invokes" : [
+
+        ],
+        "static" : false
+      },
+      "D8B75658C86F3230E716539AED489B0B1" : {
+        "static" : false,
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "name" : "updateYAxisLabel",
+        "invokes" : [
+
+        ],
+        "returnType" : "",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "type" : "method",
+        "id" : "D8B75658C86F3230E716539AED489B0B1",
+        "params" : [
+          {
+            "name" : "rect",
+            "sel" : "rect",
+            "type" : "CGRect"
+          },
+          {
+            "type" : "String",
+            "sel" : "text",
+            "name" : "text"
+          }
+        ]
+      },
+      "DA5DECB76A8B7C4376092ADF82426D227" : {
+        "name" : "createTextLayer",
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "returnType" : "KSVerticalTextLayer",
+        "id" : "DA5DECB76A8B7C4376092ADF82426D227",
+        "params" : [
+          {
+            "sel" : "style",
+            "name" : "style",
+            "type" : "KSKLineChartStyle"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "KSVerticalTextLayer()"
+          }
+        ],
+        "isSwift" : true,
+        "type" : "method",
+        "static" : false,
+        "accessControl" : "internal"
+      },
+      "DE1C0C48F091FD9E1CF92D04CAFDDD345" : {
+        "params" : [
+          {
+            "type" : "KSSection",
+            "sel" : "_",
+            "name" : "section"
+          },
+          {
+            "type" : "CGFloat",
+            "sel" : "labelX",
+            "name" : "labelX"
+          },
+          {
+            "sel" : "labelY",
+            "name" : "labelY",
+            "type" : "CGFloat"
+          },
+          {
+            "type" : "CATextLayerAlignmentMode",
+            "name" : "alignmentMode",
+            "sel" : "alignmentMode"
+          },
+          {
+            "sel" : "style",
+            "type" : "KSKLineChartStyle",
+            "name" : "style"
+          },
+          {
+            "sel" : "pref",
+            "type" : "KSChartPref",
+            "name" : "pref"
+          }
+        ],
+        "type" : "method",
+        "static" : false,
+        "id" : "DE1C0C48F091FD9E1CF92D04CAFDDD345",
+        "invokes" : [
+          {
+            "formatedName" : "KSTextLayer()"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "append(_:)"
+          }
+        ],
+        "returnType" : "",
+        "accessControl" : "internal",
+        "isSwift" : true,
+        "name" : "drawYAxisTitle",
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15"
+      },
+      "D7AFB1375458357FB44BB1BAE4857B514" : {
+        "isSwift" : true,
+        "invokes" : [
+
+        ],
+        "returnType" : "",
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "name" : "rect",
+            "sel" : "rect",
+            "type" : "CGRect"
+          },
+          {
+            "type" : "String",
+            "name" : "text",
+            "sel" : "text"
+          }
+        ],
+        "name" : "updateXAxisLabel",
+        "static" : false,
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "type" : "method",
+        "id" : "D7AFB1375458357FB44BB1BAE4857B514"
+      },
+      "D6C23E825BE263D53217337E4CED4CDAC" : {
+        "static" : false,
+        "name" : "resetLayerData",
+        "params" : [
+
+        ],
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "removeAll()"
+          }
+        ],
+        "isSwift" : true,
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "accessControl" : "internal",
+        "id" : "D6C23E825BE263D53217337E4CED4CDAC",
+        "returnType" : ""
+      },
+      "DA12ED824AD7A877A01B12B413F84AAC4" : {
+        "type" : "method",
+        "isSwift" : true,
+        "id" : "DA12ED824AD7A877A01B12B413F84AAC4",
+        "returnType" : "",
+        "invokes" : [
+
+        ],
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "static" : false,
+        "name" : "updateCross",
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "sel" : "isShow",
+            "name" : "isShow",
+            "type" : "Bool"
+          }
+        ]
+      },
+      "D69A8D112BCB06685FF3FFCC7C9140921" : {
+        "accessControl" : "internal",
+        "returnType" : "",
+        "isSwift" : true,
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "params" : [
+          {
+            "name" : "section",
+            "sel" : "_",
+            "type" : "KSSection"
+          },
+          {
+            "sel" : "xAxisToDraw",
+            "name" : "xAxisToDraw",
+            "type" : "[(CGRect,String)]"
+          },
+          {
+            "sel" : "style",
+            "name" : "style",
+            "type" : "KSKLineChartStyle"
+          }
+        ],
+        "id" : "D69A8D112BCB06685FF3FFCC7C9140921",
+        "static" : false,
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "KSShapeLayer()"
+          },
+          {
+            "formatedName" : "KSTextLayer()"
+          },
+          {
+            "formatedName" : "append(_:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          }
+        ],
+        "name" : "drawXAxisLabel"
+      },
+      "D42DFA6CD2B49D4A9728E4DEA1D02D903" : {
+        "params" : [
+          {
+            "name" : "style",
+            "type" : "KSKLineChartStyle",
+            "sel" : "style"
+          }
+        ],
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "id" : "D42DFA6CD2B49D4A9728E4DEA1D02D903",
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "KSShapeLayer()"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "methodId" : "DA5DECB76A8B7C4376092ADF82426D227",
+            "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15"
+          }
+        ],
+        "static" : false,
+        "isSwift" : true,
+        "name" : "initLayer",
+        "accessControl" : "internal",
+        "returnType" : ""
+      },
+      "D5231CECE6D762E2A57FA7894116AAACA" : {
+        "type" : "method",
+        "name" : "updateVerticalLine",
+        "classId" : "D46D42A92D02E06DACC8F28FE7E7DDF15",
+        "invokes" : [
+
+        ],
+        "accessControl" : "internal",
+        "static" : false,
+        "id" : "D5231CECE6D762E2A57FA7894116AAACA",
+        "returnType" : "",
+        "isSwift" : true,
+        "params" : [
+          {
+            "sel" : "rect",
+            "name" : "rect",
+            "type" : "CGRect"
+          }
+        ]
+      }
+    },
+    "type" : "class",
+    "name" : "KSTopLayer",
+    "protocols" : [
+
+    ],
+    "super" : "KSShapeLayer",
+    "id" : "D46D42A92D02E06DACC8F28FE7E7DDF15"
+  },
+  {
+    "id" : "DCE58EC0B7504DEA5C6C991B4AC4DEB11",
+    "protocols" : [
+
+    ],
+    "methods" : {
+      "D68CF8DE3DC27AA4F517FCFC8B4B0678A" : {
+        "params" : [
+          {
+            "name" : "startIndex",
+            "type" : "Int",
+            "sel" : "_"
+          },
+          {
+            "type" : "Int",
+            "sel" : "endIndex",
+            "name" : "endIndex"
+          }
+        ],
+        "type" : "method",
+        "isSwift" : true,
+        "returnType" : "CAShapeLayer",
+        "invokes" : [
+          {
+            "formatedName" : "CAShapeLayer()"
+          },
+          {
+            "formatedName" : "latticeWidth(_:, endIndex:)"
+          },
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "getLocalY(_:)"
+          },
+          {
+            "formatedName" : "UIBezierPath()"
+          },
+          {
+            "formatedName" : "move(to:)"
+          },
+          {
+            "formatedName" : "addLine(to:)"
+          },
+          {
+            "formatedName" : "append(_:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          }
+        ],
+        "accessControl" : "internal",
+        "static" : false,
+        "classId" : "DCE58EC0B7504DEA5C6C991B4AC4DEB11",
+        "id" : "D68CF8DE3DC27AA4F517FCFC8B4B0678A",
+        "name" : "drawSerie"
+      }
+    },
+    "type" : "class",
+    "name" : "KSBollModel",
+    "isSwift" : true,
+    "accessControl" : "internal",
+    "super" : "KSChartModel"
+  },
+  {
+    "protocols" : [
+      {
+        "id" : "DEFCB81DEC4E0253A86CCFF459F723A74",
+        "name" : "UIGestureRecognizerDelegate"
+      }
+    ],
+    "id" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+    "super" : "UIView",
+    "isSwift" : true,
+    "type" : "class",
+    "methods" : {
+      "D12651F500F72BAC34DE88964FB17F382" : {
+        "static" : false,
+        "type" : "method",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "drawSectionGrid(_:, style:, pref:, topLayer:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          }
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "params" : [
+
+        ],
+        "name" : "drawLevelContent",
+        "returnType" : "",
+        "id" : "D12651F500F72BAC34DE88964FB17F382"
+      },
+      "DE364C06101775379FDD7802C1603B732" : {
+        "name" : "setSection",
+        "isSwift" : true,
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "returnType" : "",
+        "id" : "DE364C06101775379FDD7802C1603B732",
+        "static" : false,
+        "type" : "method",
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "sel" : "hidden",
+            "name" : "hidden",
+            "type" : "Bool"
+          },
+          {
+            "sel" : "byIndex",
+            "name" : "index",
+            "type" : "Int"
+          }
+        ],
+        "invokes" : [
+
+        ]
+      },
+      "D6A8D5187CDE08D9082025E16BF3490AC" : {
+        "isSwift" : true,
+        "returnType" : "(Int,KSSection)",
+        "params" : [
+          {
+            "sel" : "_",
+            "type" : "CGPoint",
+            "name" : "point"
+          }
+        ],
+        "name" : "getSectionByTouchPoint",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "static" : false,
+        "type" : "method",
+        "accessControl" : "internal",
+        "id" : "D6A8D5187CDE08D9082025E16BF3490AC",
+        "invokes" : [
+          {
+            "formatedName" : "for(_:, _:)"
+          },
+          {
+            "formatedName" : "enumerated()"
+          },
+          {
+            "formatedName" : "contains(_:)"
+          },
+          {
+            "formatedName" : "return(_:, _:)"
+          }
+        ]
+      },
+      "DEA6A1A1B92EF614E250EBB5D9EFDB836" : {
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "accessControl" : "private",
+        "name" : "calculatorTai",
+        "params" : [
+          {
+            "type" : "Bool",
+            "sel" : "isAll",
+            "name" : "isAll"
+          }
+        ],
+        "type" : "method",
+        "static" : false,
+        "id" : "DEA6A1A1B92EF614E250EBB5D9EFDB836",
+        "isSwift" : true,
+        "returnType" : "",
+        "invokes" : [
+          {
+            "formatedName" : "dataSource(chart:)"
+          },
+          {
+            "formatedName" : "ks_calculator(algorithm:, index:, datas:)"
+          }
+        ]
+      },
+      "DC220F8F1BC0D6D28D6BD59E35BE953A6" : {
+        "invokes" : [
+          {
+            "methodId" : "DEA6A1A1B92EF614E250EBB5D9EFDB836",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "methodId" : "DAA2741A9FA8217F4F3D294B95C5EA292",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "name" : "reloadData",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "static" : false,
+        "id" : "DC220F8F1BC0D6D28D6BD59E35BE953A6",
+        "type" : "method",
+        "returnType" : "",
+        "params" : [
+          {
+            "type" : "KSScrollPosition",
+            "sel" : "toPosition",
+            "name" : "toPosition"
+          },
+          {
+            "sel" : "resetData",
+            "type" : "Bool",
+            "name" : "resetData"
+          }
+        ],
+        "accessControl" : "internal",
+        "isSwift" : true
+      },
+      "DB3AFBFDEF1184B93EF8E3917AC12BA7E" : {
+        "accessControl" : "internal",
+        "type" : "method",
+        "id" : "DB3AFBFDEF1184B93EF8E3917AC12BA7E",
+        "params" : [
+          {
+            "type" : "KSSection",
+            "sel" : "section",
+            "name" : "section"
+          }
+        ],
+        "name" : "latticeWidth",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "isSwift" : true,
+        "static" : false,
+        "returnType" : "CGFloat",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ]
+      },
+      "DDE02D66B165479B30CD710490ABA1026" : {
+        "invokes" : [
+          {
+            "formatedName" : "drawTitle(_:)"
+          },
+          {
+            "formatedName" : "kLineChart(chart:, didSelectAt:, item:)"
+          }
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "type" : "method",
+        "name" : "setSelectedByIndex",
+        "static" : false,
+        "returnType" : "",
+        "params" : [
+          {
+            "name" : "index",
+            "sel" : "_",
+            "type" : "Int"
+          }
+        ],
+        "id" : "DDE02D66B165479B30CD710490ABA1026"
+      },
+      "DB73B30E8B508A304666B42618C268422" : {
+        "id" : "DB73B30E8B508A304666B42618C268422",
+        "returnType" : "KSShapeLayer",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "invokes" : [
+          {
+            "formatedName" : "drawSerie(_:, endIndex:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          }
+        ],
+        "type" : "method",
+        "static" : false,
+        "accessControl" : "internal",
+        "isSwift" : true,
+        "params" : [
+          {
+            "sel" : "_",
+            "name" : "serie",
+            "type" : "KSSeries"
+          }
+        ],
+        "name" : "drawSerie"
+      },
+      "D25E41DDBF2ADABF29178C5CF97821C22" : {
+        "accessControl" : "internal",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "name" : "setSelectedIndexByPoint",
+        "type" : "method",
+        "id" : "D25E41DDBF2ADABF29178C5CF97821C22",
+        "isSwift" : true,
+        "returnType" : "",
+        "params" : [
+          {
+            "name" : "point",
+            "type" : "CGPoint",
+            "sel" : "_"
+          }
+        ],
+        "static" : false,
+        "invokes" : [
+          {
+            "formatedName" : "equalTo(_:)"
+          },
+          {
+            "formatedName" : "let(_:, _:)"
+          },
+          {
+            "methodId" : "D6A8D5187CDE08D9082025E16BF3490AC",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "DB3AFBFDEF1184B93EF8E3917AC12BA7E"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "methodId" : "DE105A750666F6C27DB8BDA52FF7D4839",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "appendingFormat(_:, _:)"
+          },
+          {
+            "formatedName" : "updateHorizontalLine(rect:)"
+          },
+          {
+            "formatedName" : "getRawValue(_:)"
+          },
+          {
+            "formatedName" : "getSeries(key:)"
+          },
+          {
+            "formatedName" : "getLocalY(_:)"
+          },
+          {
+            "formatedName" : "updateVerticalLine(rect:)"
+          },
+          {
+            "formatedName" : "updateYAxisLabel(rect:, text:)"
+          },
+          {
+            "formatedName" : "kLineChart(chart:, labelOnXAxisForIndex:)"
+          },
+          {
+            "formatedName" : "ks_getTimeByStamp(_:, format:)"
+          },
+          {
+            "formatedName" : "ks_sizeWithConstrained(_:)"
+          },
+          {
+            "formatedName" : "updateXAxisLabel(rect:, text:)"
+          },
+          {
+            "methodId" : "DDE02D66B165479B30CD710490ABA1026",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "CGRect(x:, y:, width:, height:)"
+          },
+          {
+            "formatedName" : "String(format:, _:)"
+          }
+        ]
+      },
+      "DF8F1F0C0A9820D138BCDCB842B839E73" : {
+        "params" : [
+          {
+            "sel" : "_",
+            "type" : "UITapGestureRecognizer",
+            "name" : "sender"
+          }
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "accessControl" : "internal",
+        "returnType" : "",
+        "id" : "DF8F1F0C0A9820D138BCDCB842B839E73",
+        "invokes" : [
+          {
+            "formatedName" : "location(in:)"
+          },
+          {
+            "methodId" : "D6A8D5187CDE08D9082025E16BF3490AC",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "nextPage()"
+          },
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "D54FA0E2CE8FAAB3C8D418DB9AEF588EB"
+          },
+          {
+            "methodId" : "DE580F821586EE2F1A5E756E067F7B526",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "kLineChart(chart:, didFlipPageSeries:, series:, seriesIndex:)"
+          },
+          {
+            "formatedName" : "kLineChartTapAction(chart:)"
+          }
+        ],
+        "type" : "method",
+        "name" : "doTapAction",
+        "isSwift" : true,
+        "static" : false
+      },
+      "DB7B0639776607FEC50DC5FBE31547AAA" : {
+        "id" : "DB7B0639776607FEC50DC5FBE31547AAA",
+        "static" : false,
+        "name" : "removeLayerView",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "DB7B0639776607FEC50DC5FBE31547AAA"
+          },
+          {
+            "formatedName" : "removeFromSuperlayer()"
+          },
+          {
+            "formatedName" : "removeAll()"
+          }
+        ],
+        "params" : [
+
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "type" : "method",
+        "returnType" : ""
+      },
+      "DAD7553DFE51614A755D96BBD12FB09E6" : {
+        "isSwift" : true,
+        "name" : "drawChart",
+        "static" : false,
+        "invokes" : [
+          {
+            "methodId" : "DB73B30E8B508A304666B42618C268422",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          }
+        ],
+        "params" : [
+          {
+            "name" : "section",
+            "sel" : "_",
+            "type" : "KSSection"
+          }
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "type" : "method",
+        "id" : "DAD7553DFE51614A755D96BBD12FB09E6",
+        "returnType" : "",
+        "accessControl" : "internal"
+      },
+      "DD80B67BD1389B22452B42D592FFBC4DA" : {
+        "type" : "method",
+        "params" : [
+          {
+            "type" : "UIPinchGestureRecognizer",
+            "sel" : "_",
+            "name" : "sender"
+          }
+        ],
+        "isSwift" : true,
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "static" : false,
+        "accessControl" : "internal",
+        "id" : "DD80B67BD1389B22452B42D592FFBC4DA",
+        "name" : "doPinchAction",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "Int(_:)"
+          },
+          {
+            "formatedName" : "abs(_:)"
+          },
+          {
+            "methodId" : "DB20A75D85966C7FBB42FF3222721E79F",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "returnType" : ""
+      },
+      "DE580F821586EE2F1A5E756E067F7B526" : {
+        "isSwift" : true,
+        "id" : "DE580F821586EE2F1A5E756E067F7B526",
+        "returnType" : "",
+        "params" : [
+          {
+            "sel" : "isAll",
+            "name" : "isAll",
+            "type" : "Bool"
+          },
+          {
+            "type" : "Bool",
+            "name" : "isDraw",
+            "sel" : "isDraw"
+          },
+          {
+            "type" : "Bool",
+            "sel" : "isChangeTai",
+            "name" : "isChangeTai"
+          }
+        ],
+        "type" : "method",
+        "static" : false,
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "accessControl" : "public",
+        "invokes" : [
+          {
+            "methodId" : "DEA6A1A1B92EF614E250EBB5D9EFDB836",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "methodId" : "DAA2741A9FA8217F4F3D294B95C5EA292",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "name" : "refreshChart"
+      },
+      "DE105A750666F6C27DB8BDA52FF7D4839" : {
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "name" : "getSecionWhichShowXAxis",
+        "params" : [
+
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "for(_:, _:)"
+          },
+          {
+            "formatedName" : "enumerated()"
+          },
+          {
+            "formatedName" : "if(_:)"
+          }
+        ],
+        "returnType" : "KSSection",
+        "id" : "DE105A750666F6C27DB8BDA52FF7D4839",
+        "isSwift" : true,
+        "type" : "method",
+        "static" : false,
+        "accessControl" : "internal"
+      },
+      "D32B311FA2FC8E7D7E55734B1E25CCFFF" : {
+        "static" : false,
+        "id" : "D32B311FA2FC8E7D7E55734B1E25CCFFF",
+        "invokes" : [
+          {
+            "formatedName" : "translation(in:)"
+          },
+          {
+            "formatedName" : "velocity(in:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "removeAllBehaviors()"
+          },
+          {
+            "formatedName" : "abs(_:)"
+          },
+          {
+            "formatedName" : "lroundf(_:)"
+          },
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "D6A3BC150EC68C2BED537694500C3B700"
+          },
+          {
+            "formatedName" : "setTranslation(_:, in:)"
+          },
+          {
+            "formatedName" : "UIDynamicItemBehavior(items:)"
+          },
+          {
+            "formatedName" : "addLinearVelocity(_:, for:)"
+          },
+          {
+            "formatedName" : "addBehavior(_:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          }
+        ],
+        "returnType" : "",
+        "accessControl" : "internal",
+        "isSwift" : true,
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "type" : "method",
+        "name" : "doPanAction",
+        "params" : [
+          {
+            "sel" : "_",
+            "type" : "UIPanGestureRecognizer",
+            "name" : "sender"
+          }
+        ]
+      },
+      "DEA1B70914BA003B083C820A35CCBDB84" : {
+        "isSwift" : true,
+        "params" : [
+
+        ],
+        "static" : false,
+        "name" : "scrollPositionEnd",
+        "returnType" : "Bool",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "id" : "DEA1B70914BA003B083C820A35CCBDB84",
+        "invokes" : [
+          {
+            "formatedName" : "if(_:)"
+          }
+        ],
+        "type" : "method",
+        "accessControl" : "public"
+      },
+      "D1E4AF794ECAD616603BFE00BDEC808AA" : {
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "type" : "method",
+        "name" : "defaultConfigure",
+        "static" : false,
+        "returnType" : "",
+        "id" : "D1E4AF794ECAD616603BFE00BDEC808AA",
+        "invokes" : [
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "D7BBECCD22CB91C7DBADD0194EE0719B1"
+          }
+        ],
+        "params" : [
+
+        ]
+      },
+      "D1BB1F619248235DE6ED79159BF219562" : {
+        "name" : "resetChartData",
+        "accessControl" : "public",
+        "isSwift" : true,
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "invokes" : [
+
+        ],
+        "id" : "D1BB1F619248235DE6ED79159BF219562",
+        "returnType" : "",
+        "params" : [
+
+        ],
+        "type" : "method",
+        "static" : false
+      },
+      "D3B65652CB5CBA1A61F0290D878560DAC" : {
+        "params" : [
+          {
+            "sel" : "hidden",
+            "name" : "hidden",
+            "type" : "Bool"
+          },
+          {
+            "name" : "key",
+            "type" : "String",
+            "sel" : "byKey"
+          }
+        ],
+        "static" : false,
+        "isSwift" : true,
+        "type" : "method",
+        "accessControl" : "internal",
+        "name" : "setSection",
+        "id" : "D3B65652CB5CBA1A61F0290D878560DAC",
+        "invokes" : [
+
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "returnType" : ""
+      },
+      "DB20A75D85966C7FBB42FF3222721E79F" : {
+        "isSwift" : true,
+        "name" : "zoomChart",
+        "static" : false,
+        "returnType" : "",
+        "id" : "DB20A75D85966C7FBB42FF3222721E79F",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "invokes" : [
+          {
+            "methodId" : "DAA2741A9FA8217F4F3D294B95C5EA292",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "type" : "method",
+        "params" : [
+          {
+            "name" : "interval",
+            "type" : "Int",
+            "sel" : "by"
+          },
+          {
+            "type" : "Bool",
+            "name" : "enlarge",
+            "sel" : "enlarge"
+          }
+        ],
+        "accessControl" : "internal"
+      },
+      "DC37A736090A9C7739D9F87A277BE3C77" : {
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "type" : "method",
+        "isSwift" : true,
+        "returnType" : "",
+        "invokes" : [
+          {
+            "formatedName" : "setHeader(titles:)"
+          }
+        ],
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "type" : "[(title:String,color:UIColor)]",
+            "sel" : "titles",
+            "name" : "titles"
+          },
+          {
+            "sel" : "inSection",
+            "name" : "section",
+            "type" : "Int"
+          }
+        ],
+        "id" : "DC37A736090A9C7739D9F87A277BE3C77",
+        "name" : "setHeader",
+        "static" : false
+      },
+      "D54FA0E2CE8FAAB3C8D418DB9AEF588EB" : {
+        "returnType" : "",
+        "id" : "D54FA0E2CE8FAAB3C8D418DB9AEF588EB",
+        "type" : "method",
+        "name" : "updateSerie",
+        "static" : false,
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "params" : [
+          {
+            "sel" : "hidden",
+            "name" : "hidden",
+            "type" : "Bool"
+          },
+          {
+            "sel" : "key",
+            "name" : "key",
+            "type" : "String"
+          },
+          {
+            "name" : "isMasterCandle",
+            "sel" : "isMasterCandle",
+            "type" : "Bool"
+          },
+          {
+            "sel" : "index",
+            "type" : "Int",
+            "name" : "index"
+          }
+        ],
+        "accessControl" : "public",
+        "invokes" : [
+          {
+            "formatedName" : "updateTai(_tai:)"
+          }
+        ],
+        "isSwift" : true
+      },
+      "D49E2514F261B5C1E943D0C8015069ABC" : {
+        "invokes" : [
+          {
+            "formatedName" : "append(_:)"
+          },
+          {
+            "formatedName" : "for(_:, _:)"
+          },
+          {
+            "formatedName" : "enumerated()"
+          }
+        ],
+        "isSwift" : true,
+        "static" : false,
+        "name" : "setSerie",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "id" : "D49E2514F261B5C1E943D0C8015069ABC",
+        "returnType" : "",
+        "type" : "method",
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "type" : "Bool",
+            "sel" : "hidden",
+            "name" : "hidden"
+          },
+          {
+            "sel" : "by",
+            "name" : "key",
+            "type" : "String"
+          },
+          {
+            "sel" : "inSection",
+            "name" : "inSection",
+            "type" : "Int"
+          }
+        ]
+      },
+      "D6A3BC150EC68C2BED537694500C3B700" : {
+        "name" : "moveChart",
+        "returnType" : "",
+        "type" : "method",
+        "accessControl" : "internal",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "static" : false,
+        "isSwift" : true,
+        "id" : "D6A3BC150EC68C2BED537694500C3B700",
+        "invokes" : [
+          {
+            "formatedName" : "if(_:)"
+          },
+          {
+            "methodId" : "DAA2741A9FA8217F4F3D294B95C5EA292",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "params" : [
+          {
+            "sel" : "by",
+            "name" : "interval",
+            "type" : "Int"
+          },
+          {
+            "name" : "direction",
+            "type" : "Bool",
+            "sel" : "direction"
+          }
+        ]
+      },
+      "D542D719D7B072C1F284B2739E2644837" : {
+        "name" : "removeSeries",
+        "id" : "D542D719D7B072C1F284B2739E2644837",
+        "invokes" : [
+          {
+            "formatedName" : "removeSeries(key:)"
+          },
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "DAA2741A9FA8217F4F3D294B95C5EA292"
+          }
+        ],
+        "params" : [
+          {
+            "name" : "key",
+            "type" : "String",
+            "sel" : "key"
+          },
+          {
+            "sel" : "inSection",
+            "name" : "section",
+            "type" : "Int"
+          }
+        ],
+        "type" : "method",
+        "isSwift" : true,
+        "static" : false,
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "accessControl" : "internal",
+        "returnType" : ""
+      },
+      "D0E59E525EB37E2DD11981EBFD83CA922" : {
+        "invokes" : [
+          {
+            "formatedName" : "kLineChart(chart:, displayCross:)"
+          }
+        ],
+        "static" : false,
+        "name" : "hideCross",
+        "isSwift" : true,
+        "params" : [
+
+        ],
+        "accessControl" : "private",
+        "type" : "method",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "returnType" : "",
+        "id" : "D0E59E525EB37E2DD11981EBFD83CA922"
+      },
+      "D3EA394ED4B9D2887ACF1FC21E399C66D" : {
+        "name" : "init",
+        "accessControl" : "internal",
+        "static" : false,
+        "type" : "method",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "returnType" : "",
+        "isSwift" : true,
+        "params" : [
+          {
+            "name" : "frame",
+            "type" : "CGRect",
+            "sel" : "frame"
+          }
+        ],
+        "id" : "D3EA394ED4B9D2887ACF1FC21E399C66D",
+        "invokes" : [
+          {
+            "methodId" : "D398674C2DD9A8462DC12D82AF1EC3FE1",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ]
+      },
+      "DAE24E1D57739650B1C7542ACEF0AC9BE" : {
+        "params" : [
+          {
+            "type" : "KSKLineChartStyle",
+            "sel" : "style",
+            "name" : "style"
+          }
+        ],
+        "static" : false,
+        "name" : "resetStyle",
+        "type" : "method",
+        "returnType" : "",
+        "isSwift" : true,
+        "invokes" : [
+          {
+            "formatedName" : "reloadData()"
+          }
+        ],
+        "accessControl" : "internal",
+        "id" : "DAE24E1D57739650B1C7542ACEF0AC9BE",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+      },
+      "D227CA78A2A913D9CA2C5B8033E2777E5" : {
+        "accessControl" : "internal",
+        "type" : "method",
+        "returnType" : "",
+        "static" : false,
+        "isSwift" : true,
+        "name" : "buildSections",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "params" : [
+          {
+            "name" : "complete",
+            "type" : "(_section:KSSection,_index:Int)->Void",
+            "sel" : "_"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "heightForXAxisInKLineChart(chart:)"
+          },
+          {
+            "formatedName" : "for(_:, _:)"
+          },
+          {
+            "formatedName" : "enumerated()"
+          },
+          {
+            "formatedName" : "widthForYAxisLabelInKLineChart(chart:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "CGRect(x:, y:, width:, height:)"
+          },
+          {
+            "formatedName" : "complete(_:, _:)"
+          }
+        ],
+        "id" : "D227CA78A2A913D9CA2C5B8033E2777E5"
+      },
+      "D51AF39B6409D4F9D7E1482CEDCB49D38" : {
+        "accessControl" : "internal",
+        "returnType" : "Bool",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "id" : "D51AF39B6409D4F9D7E1482CEDCB49D38",
+        "invokes" : [
+
+        ],
+        "type" : "method",
+        "name" : "gestureRecognizer",
+        "params" : [
+          {
+            "type" : "UIGestureRecognizer",
+            "name" : "gestureRecognizer",
+            "sel" : "_"
+          },
+          {
+            "name" : "otherGestureRecognizer",
+            "type" : "UIGestureRecognizer",
+            "sel" : "shouldRecognizeSimultaneouslyWith"
+          }
+        ],
+        "static" : false,
+        "isSwift" : true
+      },
+      "DA760DA765AA79BC251DE3E1A7D4BFC63" : {
+        "returnType" : "",
+        "id" : "DA760DA765AA79BC251DE3E1A7D4BFC63",
+        "static" : false,
+        "invokes" : [
+          {
+            "methodId" : "D0E59E525EB37E2DD11981EBFD83CA922",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "location(in:)"
+          },
+          {
+            "formatedName" : "let(_:, _:)"
+          },
+          {
+            "methodId" : "D6A8D5187CDE08D9082025E16BF3490AC",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "methodId" : "D25E41DDBF2ADABF29178C5CF97821C22",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "type" : "method",
+        "params" : [
+          {
+            "type" : "UILongPressGestureRecognizer",
+            "name" : "sender",
+            "sel" : "_"
+          }
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "name" : "doLongPressAction"
+      },
+      "DAA2741A9FA8217F4F3D294B95C5EA292" : {
+        "params" : [
+
+        ],
+        "id" : "DAA2741A9FA8217F4F3D294B95C5EA292",
+        "static" : false,
+        "type" : "method",
+        "invokes" : [
+          {
+            "methodId" : "DB7B0639776607FEC50DC5FBE31547AAA",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "methodId" : "D26C537217D50C13FE9CA4397D4E55675",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "kLineChart(chart:, decimalAt:)"
+          },
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "D3964408E99098A30738C9D539A5E1C71"
+          },
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "D174CBED244A38B767E837D90B0FB111E"
+          },
+          {
+            "methodId" : "DAD7553DFE51614A755D96BBD12FB09E6",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "drawTitle(_:)"
+          },
+          {
+            "methodId" : "D5F5DA8BBE1B7D96280D30734B3DA44F7",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "methodId" : "DE105A750666F6C27DB8BDA52FF7D4839",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "drawXAxisLabel(_:, xAxisToDraw:, style:)"
+          },
+          {
+            "methodId" : "D25E41DDBF2ADABF29178C5CF97821C22",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "accessControl" : "internal",
+        "name" : "drawLayerView",
+        "returnType" : "",
+        "isSwift" : true
+      },
+      "D26C537217D50C13FE9CA4397D4E55675" : {
+        "accessControl" : "internal",
+        "name" : "initChart",
+        "static" : false,
+        "invokes" : [
+          {
+            "methodId" : "D5661140F1D90097D3EE7D69246F88183",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "id" : "D26C537217D50C13FE9CA4397D4E55675",
+        "type" : "method",
+        "returnType" : "Bool",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "isSwift" : true,
+        "params" : [
+
+        ]
+      },
+      "D3964408E99098A30738C9D539A5E1C71" : {
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "type" : "method",
+        "name" : "initYAxis",
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "buildYAxis(startIndex:, endIndex:, datas:)"
+          }
+        ],
+        "params" : [
+          {
+            "name" : "section",
+            "type" : "KSSection",
+            "sel" : "_"
+          }
+        ],
+        "returnType" : "",
+        "static" : false,
+        "id" : "D3964408E99098A30738C9D539A5E1C71",
+        "isSwift" : true
+      },
+      "D268BAF59752EFE0E9F9E6869BD38870A" : {
+        "type" : "method",
+        "static" : false,
+        "accessControl" : "public",
+        "isSwift" : true,
+        "returnType" : "",
+        "id" : "D268BAF59752EFE0E9F9E6869BD38870A",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "name" : "init",
+        "params" : [
+          {
+            "type" : "NSCoder",
+            "sel" : "coder",
+            "name" : "aDecoder"
+          }
+        ],
+        "invokes" : [
+
+        ]
+      },
+      "D174CBED244A38B767E837D90B0FB111E" : {
+        "static" : false,
+        "params" : [
+          {
+            "sel" : "_",
+            "type" : "KSSection",
+            "name" : "section"
+          }
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "isSwift" : true,
+        "name" : "drawXAxis",
+        "id" : "D174CBED244A38B767E837D90B0FB111E",
+        "type" : "method",
+        "returnType" : "[(CGRect,String)]",
+        "invokes" : [
+          {
+            "formatedName" : "KSShapeLayer()"
+          },
+          {
+            "methodId" : "DB3AFBFDEF1184B93EF8E3917AC12BA7E",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          },
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          },
+          {
+            "formatedName" : "kLineChart(chart:, labelOnXAxisForIndex:)"
+          },
+          {
+            "formatedName" : "ks_sizeWithConstrained(_:)"
+          },
+          {
+            "formatedName" : "if(_:)"
+          },
+          {
+            "formatedName" : "CGRect(x:, y:, width:, height:)"
+          },
+          {
+            "formatedName" : "append(_:)"
+          },
+          {
+            "formatedName" : "UIBezierPath()"
+          },
+          {
+            "formatedName" : "dash(color:, pattern:)"
+          },
+          {
+            "formatedName" : "solid(color:)"
+          },
+          {
+            "formatedName" : "move(to:)"
+          },
+          {
+            "formatedName" : "addLine(to:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          }
+        ],
+        "accessControl" : "internal"
+      },
+      "D7BBECCD22CB91C7DBADD0194EE0719B1" : {
+        "id" : "D7BBECCD22CB91C7DBADD0194EE0719B1",
+        "returnType" : "",
+        "static" : false,
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "removeSubLayer()"
+          },
+          {
+            "formatedName" : "initLayer(style:)"
+          },
+          {
+            "formatedName" : "resetLayerData()"
+          },
+          {
+            "methodId" : "D12651F500F72BAC34DE88964FB17F382",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "params" : [
+
+        ],
+        "type" : "method",
+        "isSwift" : true,
+        "name" : "drawLevelLayer"
+      },
+      "D5F5DA8BBE1B7D96280D30734B3DA44F7" : {
+        "isSwift" : true,
+        "type" : "method",
+        "id" : "D5F5DA8BBE1B7D96280D30734B3DA44F7",
+        "static" : false,
+        "params" : [
+          {
+            "sel" : "_",
+            "name" : "section",
+            "type" : "KSSection"
+          }
+        ],
+        "name" : "updateYAxisTitle",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "kLineChart(chart:, rowTitleInSection:, titleValue:)"
+          }
+        ],
+        "returnType" : "",
+        "accessControl" : "internal",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+      },
+      "DF99A31CC25F40768D4C97698D8DA9348" : {
+        "params" : [
+          {
+            "name" : "series",
+            "sel" : "_",
+            "type" : "KSSeries"
+          },
+          {
+            "sel" : "inSection",
+            "name" : "section",
+            "type" : "Int"
+          }
+        ],
+        "returnType" : "",
+        "accessControl" : "internal",
+        "name" : "addSeries",
+        "invokes" : [
+          {
+            "formatedName" : "append(_:)"
+          },
+          {
+            "methodId" : "DAA2741A9FA8217F4F3D294B95C5EA292",
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5"
+          }
+        ],
+        "static" : false,
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "type" : "method",
+        "isSwift" : true,
+        "id" : "DF99A31CC25F40768D4C97698D8DA9348"
+      },
+      "D8CD752DFD915CD266E7E9D0C9BF45C5D" : {
+        "static" : false,
+        "accessControl" : "internal",
+        "type" : "method",
+        "isSwift" : true,
+        "id" : "D8CD752DFD915CD266E7E9D0C9BF45C5D",
+        "returnType" : "Bool",
+        "params" : [
+          {
+            "sel" : "_",
+            "type" : "UIGestureRecognizer",
+            "name" : "gestureRecognizer"
+          },
+          {
+            "name" : "touch",
+            "type" : "UITouch",
+            "sel" : "shouldReceive"
+          }
+        ],
+        "invokes" : [
+
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "name" : "gestureRecognizer"
+      },
+      "D398674C2DD9A8462DC12D82AF1EC3FE1" : {
+        "name" : "initializeKit",
+        "returnType" : "",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "id" : "D398674C2DD9A8462DC12D82AF1EC3FE1",
+        "params" : [
+
+        ],
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "UIPanGestureRecognizer(target:, action:)"
+          },
+          {
+            "formatedName" : "addGestureRecognizer(_:)"
+          },
+          {
+            "formatedName" : "UITapGestureRecognizer(target:, action:)"
+          },
+          {
+            "formatedName" : "UIPinchGestureRecognizer(target:, action:)"
+          },
+          {
+            "formatedName" : "UILongPressGestureRecognizer(target:, action:)"
+          },
+          {
+            "formatedName" : "selector(_:)"
+          }
+        ],
+        "isSwift" : true,
+        "static" : false,
+        "accessControl" : "internal"
+      },
+      "D77CC7F877B2E15567431D056FDF1D9B2" : {
+        "id" : "D77CC7F877B2E15567431D056FDF1D9B2",
+        "static" : false,
+        "params" : [
+
+        ],
+        "type" : "method",
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "returnType" : "",
+        "accessControl" : "open",
+        "isSwift" : true,
+        "name" : "awakeFromNib",
+        "invokes" : [
+          {
+            "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+            "methodId" : "D77CC7F877B2E15567431D056FDF1D9B2"
+          }
+        ]
+      },
+      "D5661140F1D90097D3EE7D69246F88183" : {
+        "name" : "drawRange",
+        "type" : "method",
+        "accessControl" : "internal",
+        "returnType" : "",
+        "id" : "D5661140F1D90097D3EE7D69246F88183",
+        "static" : false,
+        "isSwift" : true,
+        "invokes" : [
+
+        ],
+        "classId" : "D777AF1FFFCE5C2E393C7C9846B813FA5",
+        "params" : [
+
+        ]
+      }
+    },
+    "name" : "KSKLineChartView",
+    "accessControl" : "open"
+  },
+  {
+    "protocols" : [
+
+    ],
+    "super" : "KSChartModel",
+    "name" : "KSCandleModel",
+    "id" : "D8E2936A139CAAFD42FA6C5AD9850FA02",
+    "type" : "class",
+    "isSwift" : true,
+    "accessControl" : "public",
+    "methods" : {
+      "DC9CF41FB06130AE898A3EB0C964896E4" : {
+        "accessControl" : "internal",
+        "classId" : "D8E2936A139CAAFD42FA6C5AD9850FA02",
+        "invokes" : [
+          {
+            "formatedName" : "CAShapeLayer()"
+          },
+          {
+            "formatedName" : "latticeWidth(_:, endIndex:)"
+          },
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          },
+          {
+            "formatedName" : "UIBezierPath()"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "getLocalY(_:)"
+          },
+          {
+            "formatedName" : "NSLog(_:, _:, _:)"
+          },
+          {
+            "formatedName" : "move(to:)"
+          },
+          {
+            "formatedName" : "addLine(to:)"
+          },
+          {
+            "formatedName" : "UIBezierPath(rect:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          },
+          {
+            "formatedName" : "CGRect(x:, y:, width:, height:)"
+          }
+        ],
+        "returnType" : "CAShapeLayer",
+        "isSwift" : true,
+        "static" : false,
+        "id" : "DC9CF41FB06130AE898A3EB0C964896E4",
+        "params" : [
+          {
+            "name" : "startIndex",
+            "type" : "Int",
+            "sel" : "_"
+          },
+          {
+            "type" : "Int",
+            "sel" : "endIndex",
+            "name" : "endIndex"
+          }
+        ],
+        "type" : "method",
+        "name" : "drawSerie"
+      }
+    }
+  },
+  {
+    "isSwift" : true,
+    "methods" : {
+      "D518CAB1222EF5F89F56EA39A719E381F" : {
+        "name" : "action",
+        "accessControl" : "public",
+        "id" : "D518CAB1222EF5F89F56EA39A719E381F",
+        "params" : [
+          {
+            "name" : "event",
+            "sel" : "forKey",
+            "type" : "String"
+          }
+        ],
+        "invokes" : [
+
+        ],
+        "type" : "method",
+        "static" : false,
+        "classId" : "D343D7F6C6CDD6F3F9A2ACAA39E907388",
+        "returnType" : "CAAction",
+        "isSwift" : true
+      }
+    },
+    "super" : "CATextLayer",
+    "accessControl" : "public",
+    "protocols" : [
+
+    ],
+    "type" : "class",
+    "id" : "D343D7F6C6CDD6F3F9A2ACAA39E907388",
+    "name" : "KSTextLayer"
+  },
+  {
+    "accessControl" : "public",
+    "id" : "D1169E7AF09311DDE9850137B04270985",
+    "name" : "KSLineModel",
+    "protocols" : [
+
+    ],
+    "methods" : {
+      "D2B4A8D9057BA4D50C4C3DBA429468688" : {
+        "classId" : "D1169E7AF09311DDE9850137B04270985",
+        "returnType" : "CAShapeLayer",
+        "invokes" : [
+          {
+            "formatedName" : "CAShapeLayer()"
+          },
+          {
+            "formatedName" : "latticeWidth(_:, endIndex:)"
+          },
+          {
+            "formatedName" : "UIBezierPath()"
+          },
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "getLocalY(_:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          },
+          {
+            "formatedName" : "move(to:)"
+          },
+          {
+            "formatedName" : "addLine(to:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          }
+        ],
+        "id" : "D2B4A8D9057BA4D50C4C3DBA429468688",
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "_",
+            "name" : "startIndex"
+          },
+          {
+            "sel" : "endIndex",
+            "name" : "endIndex",
+            "type" : "Int"
+          }
+        ],
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "name" : "drawSerie",
+        "static" : false,
+        "type" : "method"
+      }
+    },
+    "type" : "class",
+    "super" : "KSChartModel",
+    "isSwift" : true
+  },
+  {
+    "type" : "class",
+    "isSwift" : true,
+    "accessControl" : "public",
+    "id" : "D67E46122637B9DA6B78F74252DEE0EF8",
+    "name" : "KSSeries",
+    "methods" : {
+      "DE763529E59091DD9927D0C4BD146382E" : {
+        "accessControl" : "internal",
+        "id" : "DE763529E59091DD9927D0C4BD146382E",
+        "params" : [
+
+        ],
+        "static" : false,
+        "invokes" : [
+          {
+            "formatedName" : "removeFromSuperlayer()"
+          },
+          {
+            "formatedName" : "removeAll()"
+          }
+        ],
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "type" : "method",
+        "name" : "removeLayerView",
+        "returnType" : "",
+        "isSwift" : true
+      },
+      "D30E34DD8683A533B1C81ACE790E0ACE7" : {
+        "params" : [
+          {
+            "name" : "wrc",
+            "type" : "UIColor",
+            "sel" : "_"
+          },
+          {
+            "sel" : "num",
+            "type" : "Int",
+            "name" : "num"
+          },
+          {
+            "sel" : "section",
+            "name" : "section",
+            "type" : "KSSection"
+          }
+        ],
+        "isSwift" : true,
+        "returnType" : "KSSeries",
+        "id" : "D30E34DD8683A533B1C81ACE790E0ACE7",
+        "name" : "getWR",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          }
+        ],
+        "type" : "method",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "accessControl" : "internal",
+        "static" : false
+      },
+      "D97F8635FC9B040D025C6C05F3D28C440" : {
+        "accessControl" : "internal",
+        "returnType" : "KSSeries",
+        "static" : false,
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "name" : "getKDJ",
+        "params" : [
+          {
+            "name" : "kc",
+            "sel" : "_",
+            "type" : "UIColor"
+          },
+          {
+            "name" : "dc",
+            "sel" : "dc",
+            "type" : "UIColor"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "jc",
+            "name" : "jc"
+          },
+          {
+            "name" : "section",
+            "type" : "KSSection",
+            "sel" : "section"
+          }
+        ],
+        "id" : "D97F8635FC9B040D025C6C05F3D28C440",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          }
+        ],
+        "type" : "method",
+        "isSwift" : true
+      },
+      "DEC200A25F0E16C40934FA3839C2B0BFD" : {
+        "params" : [
+          {
+            "type" : "UIColor",
+            "name" : "difc",
+            "sel" : "_"
+          },
+          {
+            "name" : "deac",
+            "type" : "UIColor",
+            "sel" : "deac"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "barc",
+            "name" : "barc"
+          },
+          {
+            "name" : "upStyle",
+            "sel" : "upStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "name" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "downStyle"
+          },
+          {
+            "type" : "KSSection",
+            "name" : "section",
+            "sel" : "section"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          },
+          {
+            "formatedName" : "getBar(upStyle:, downStyle:, titleColor:, title:, key:)"
+          }
+        ],
+        "returnType" : "KSSeries",
+        "accessControl" : "internal",
+        "name" : "getMACD",
+        "isSwift" : true,
+        "static" : false,
+        "id" : "DEC200A25F0E16C40934FA3839C2B0BFD",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "type" : "method"
+      },
+      "D5EF566CB1BB6E8831C47051AA318DE17" : {
+        "static" : false,
+        "params" : [
+          {
+            "type" : "Bool",
+            "sel" : "isEMA",
+            "name" : "isEMA"
+          },
+          {
+            "sel" : "num",
+            "name" : "num",
+            "type" : "[Int]"
+          },
+          {
+            "name" : "colors",
+            "type" : "[UIColor]",
+            "sel" : "colors"
+          },
+          {
+            "name" : "section",
+            "sel" : "section",
+            "type" : "KSSection"
+          }
+        ],
+        "name" : "getPriceMA",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "id" : "D5EF566CB1BB6E8831C47051AA318DE17",
+        "accessControl" : "internal",
+        "isSwift" : true,
+        "returnType" : "KSSeries",
+        "invokes" : [
+          {
+            "methodId" : "DC438A70A728BD3F883C857EF99157A4F",
+            "classId" : "D67E46122637B9DA6B78F74252DEE0EF8"
+          }
+        ],
+        "type" : "method"
+      },
+      "D2046036C3F93CFB01C1671D029C02784" : {
+        "params" : [
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "upStyle",
+            "name" : "upStyle"
+          },
+          {
+            "sel" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "name" : "downStyle"
+          },
+          {
+            "type" : "Int",
+            "name" : "num",
+            "sel" : "num"
+          },
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "barStyle",
+            "name" : "barStyle"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "lineColor",
+            "name" : "lineColor"
+          },
+          {
+            "type" : "KSSection",
+            "sel" : "section",
+            "name" : "section"
+          }
+        ],
+        "type" : "method",
+        "static" : false,
+        "id" : "D2046036C3F93CFB01C1671D029C02784",
+        "name" : "getVolumeWithSAM",
+        "isSwift" : true,
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "returnType" : "KSSeries",
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+            "methodId" : "DFF03CA4A6260E93CB96EDB5A36A663B6"
+          },
+          {
+            "methodId" : "D53E26BD14489CC6003094304B7597F86",
+            "classId" : "D67E46122637B9DA6B78F74252DEE0EF8"
+          },
+          {
+            "formatedName" : "append(contentsOf:)"
+          }
+        ]
+      },
+      "D7A992E6229D62AEFEB23B23F93E5FB40" : {
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getRound(upStyle:, downStyle:, titleColor:, title:, plotPaddingExt:, key:)"
+          }
+        ],
+        "id" : "D7A992E6229D62AEFEB23B23F93E5FB40",
+        "static" : false,
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "params" : [
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "name" : "upStyle",
+            "sel" : "upStyle"
+          },
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "name" : "downStyle",
+            "sel" : "downStyle"
+          },
+          {
+            "name" : "titleColor",
+            "sel" : "titleColor",
+            "type" : "UIColor"
+          },
+          {
+            "name" : "plotPaddingExt",
+            "type" : "CGFloat",
+            "sel" : "plotPaddingExt"
+          },
+          {
+            "name" : "section",
+            "sel" : "section",
+            "type" : "KSSection"
+          }
+        ],
+        "name" : "getSAR",
+        "returnType" : "KSSeries"
+      },
+      "D8CB555AEC32C44AA6E269B2337F8E7CA" : {
+        "type" : "method",
+        "params" : [
+          {
+            "name" : "num",
+            "type" : "Int",
+            "sel" : "num"
+          },
+          {
+            "sel" : "barStyle",
+            "name" : "barStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "lineColor",
+            "name" : "lineColor"
+          },
+          {
+            "name" : "section",
+            "sel" : "section",
+            "type" : "KSSection"
+          }
+        ],
+        "static" : false,
+        "returnType" : "KSSeries",
+        "name" : "getPriceSAM",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "id" : "D8CB555AEC32C44AA6E269B2337F8E7CA",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          },
+          {
+            "formatedName" : "getCandle(upStyle:, downStyle:, titleColor:, key:)"
+          }
+        ],
+        "accessControl" : "internal",
+        "isSwift" : true
+      },
+      "D0DE485C96A489492248A0B8EDA86F45F" : {
+        "returnType" : "KSSeries",
+        "isSwift" : true,
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "params" : [
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "upStyle",
+            "name" : "upStyle"
+          },
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "downStyle",
+            "name" : "downStyle"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "titleColor",
+            "name" : "titleColor"
+          },
+          {
+            "type" : "[UIColor]",
+            "sel" : "lineColors",
+            "name" : "lineColors"
+          },
+          {
+            "sel" : "section",
+            "type" : "KSSection",
+            "name" : "section"
+          },
+          {
+            "name" : "showGuide",
+            "sel" : "showGuide",
+            "type" : "Bool"
+          },
+          {
+            "sel" : "ultimateValueStyle",
+            "type" : "KSUltimateValueStyle",
+            "name" : "ultimateValueStyle"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getBoll(upStyle:, downStyle:, titleColor:, key:)"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          }
+        ],
+        "static" : false,
+        "type" : "method",
+        "accessControl" : "internal",
+        "name" : "getBollPrice",
+        "id" : "D0DE485C96A489492248A0B8EDA86F45F"
+      },
+      "DFF03CA4A6260E93CB96EDB5A36A663B6" : {
+        "name" : "getDefaultVolume",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "type" : "method",
+        "id" : "DFF03CA4A6260E93CB96EDB5A36A663B6",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "params" : [
+          {
+            "sel" : "upStyle",
+            "name" : "upStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "name" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "downStyle"
+          },
+          {
+            "type" : "KSSection",
+            "sel" : "section",
+            "name" : "section"
+          }
+        ],
+        "returnType" : "KSSeries",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getVolume(upStyle:, downStyle:)"
+          }
+        ],
+        "static" : false
+      },
+      "DC6F4A99198F5D8FF83D17A029F2384FA" : {
+        "accessControl" : "internal",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "isSwift" : true,
+        "returnType" : "KSSeries",
+        "id" : "DC6F4A99198F5D8FF83D17A029F2384FA",
+        "static" : false,
+        "name" : "getCandlePrice",
+        "params" : [
+          {
+            "sel" : "upStyle",
+            "name" : "upStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "sel" : "downStyle",
+            "name" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "titleColor",
+            "name" : "titleColor"
+          },
+          {
+            "name" : "section",
+            "type" : "KSSection",
+            "sel" : "section"
+          },
+          {
+            "sel" : "showGuide",
+            "type" : "Bool",
+            "name" : "showGuide"
+          },
+          {
+            "type" : "KSUltimateValueStyle",
+            "name" : "ultimateValueStyle",
+            "sel" : "ultimateValueStyle"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getCandle(upStyle:, downStyle:, titleColor:)"
+          }
+        ],
+        "type" : "method"
+      },
+      "D53E26BD14489CC6003094304B7597F86" : {
+        "isSwift" : true,
+        "returnType" : "KSSeries",
+        "name" : "getVolumeSAM",
+        "static" : false,
+        "id" : "D53E26BD14489CC6003094304B7597F86",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          },
+          {
+            "formatedName" : "getVolume(upStyle:, downStyle:, key:)"
+          }
+        ],
+        "params" : [
+          {
+            "sel" : "num",
+            "type" : "Int",
+            "name" : "num"
+          },
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "barStyle",
+            "name" : "barStyle"
+          },
+          {
+            "name" : "lineColor",
+            "type" : "UIColor",
+            "sel" : "lineColor"
+          },
+          {
+            "name" : "section",
+            "type" : "KSSection",
+            "sel" : "section"
+          }
+        ],
+        "accessControl" : "internal",
+        "type" : "method",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8"
+      },
+      "D9CBC8CADA17FCD424B99179D804A642A" : {
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "name" : "getRSI",
+        "returnType" : "KSSeries",
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "for(_:, _:)"
+          },
+          {
+            "formatedName" : "enumerated()"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          },
+          {
+            "formatedName" : "append(_:)"
+          }
+        ],
+        "isSwift" : true,
+        "static" : false,
+        "accessControl" : "internal",
+        "id" : "D9CBC8CADA17FCD424B99179D804A642A",
+        "params" : [
+          {
+            "type" : "[Int]",
+            "sel" : "num",
+            "name" : "num"
+          },
+          {
+            "type" : "[UIColor]",
+            "sel" : "colors",
+            "name" : "colors"
+          },
+          {
+            "sel" : "section",
+            "type" : "KSSection",
+            "name" : "section"
+          }
+        ]
+      },
+      "D95C063AB46BFB420122C69A46DC2DB9B" : {
+        "type" : "method",
+        "id" : "D95C063AB46BFB420122C69A46DC2DB9B",
+        "isSwift" : true,
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+            "methodId" : "DFF03CA4A6260E93CB96EDB5A36A663B6"
+          },
+          {
+            "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+            "methodId" : "D1553FFD021940465B2F0E97F435CD616"
+          },
+          {
+            "formatedName" : "append(contentsOf:)"
+          }
+        ],
+        "static" : false,
+        "returnType" : "KSSeries",
+        "accessControl" : "internal",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "name" : "getVolumeWithMA",
+        "params" : [
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "name" : "upStyle",
+            "sel" : "upStyle"
+          },
+          {
+            "sel" : "downStyle",
+            "name" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "type" : "Bool",
+            "name" : "isEMA",
+            "sel" : "isEMA"
+          },
+          {
+            "type" : "[Int]",
+            "name" : "num",
+            "sel" : "num"
+          },
+          {
+            "sel" : "colors",
+            "name" : "colors",
+            "type" : "[UIColor]"
+          },
+          {
+            "sel" : "section",
+            "type" : "KSSection",
+            "name" : "section"
+          }
+        ]
+      },
+      "D1553FFD021940465B2F0E97F435CD616" : {
+        "accessControl" : "internal",
+        "type" : "method",
+        "params" : [
+          {
+            "name" : "isEMA",
+            "type" : "Bool",
+            "sel" : "isEMA"
+          },
+          {
+            "name" : "num",
+            "type" : "[Int]",
+            "sel" : "num"
+          },
+          {
+            "sel" : "colors",
+            "name" : "colors",
+            "type" : "[UIColor]"
+          },
+          {
+            "name" : "section",
+            "sel" : "section",
+            "type" : "KSSection"
+          }
+        ],
+        "name" : "getVolumeMA",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "isSwift" : true,
+        "returnType" : "KSSeries",
+        "static" : false,
+        "id" : "D1553FFD021940465B2F0E97F435CD616",
+        "invokes" : [
+          {
+            "methodId" : "DC438A70A728BD3F883C857EF99157A4F",
+            "classId" : "D67E46122637B9DA6B78F74252DEE0EF8"
+          }
+        ]
+      },
+      "DC438A70A728BD3F883C857EF99157A4F" : {
+        "name" : "getMA",
+        "isSwift" : true,
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "for(_:, _:)"
+          },
+          {
+            "formatedName" : "enumerated()"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          },
+          {
+            "formatedName" : "append(_:)"
+          }
+        ],
+        "id" : "DC438A70A728BD3F883C857EF99157A4F",
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "sel" : "isEMA",
+            "type" : "Bool",
+            "name" : "isEMA"
+          },
+          {
+            "type" : "[Int]",
+            "sel" : "num",
+            "name" : "num"
+          },
+          {
+            "type" : "[UIColor]",
+            "sel" : "colors",
+            "name" : "colors"
+          },
+          {
+            "name" : "section",
+            "type" : "KSSection",
+            "sel" : "section"
+          }
+        ],
+        "static" : false,
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "returnType" : "KSSeries"
+      },
+      "DA9AC970B48BDEC991009C55800A06970" : {
+        "static" : false,
+        "returnType" : "KSSeries",
+        "accessControl" : "internal",
+        "isSwift" : true,
+        "id" : "DA9AC970B48BDEC991009C55800A06970",
+        "type" : "method",
+        "params" : [
+          {
+            "name" : "color",
+            "type" : "UIColor",
+            "sel" : "color"
+          },
+          {
+            "sel" : "section",
+            "type" : "KSSection",
+            "name" : "section"
+          },
+          {
+            "sel" : "showGuide",
+            "type" : "Bool",
+            "name" : "showGuide"
+          },
+          {
+            "type" : "KSUltimateValueStyle",
+            "name" : "ultimateValueStyle",
+            "sel" : "ultimateValueStyle"
+          },
+          {
+            "name" : "lineWidth",
+            "type" : "CGFloat",
+            "sel" : "lineWidth"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "geTimeChart(_:, title:, key:)"
+          },
+          {
+            "formatedName" : "NSLocalizedString(_:, comment:)"
+          }
+        ],
+        "name" : "getTimeChart",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8"
+      },
+      "D227A75F7D419E8D47BB9DD984557AE2C" : {
+        "invokes" : [
+          {
+            "formatedName" : "KSSeries()"
+          },
+          {
+            "formatedName" : "getLine(_:, title:, key:)"
+          }
+        ],
+        "name" : "getBOLL",
+        "classId" : "D67E46122637B9DA6B78F74252DEE0EF8",
+        "isSwift" : true,
+        "static" : false,
+        "id" : "D227A75F7D419E8D47BB9DD984557AE2C",
+        "params" : [
+          {
+            "sel" : "_",
+            "name" : "bollc",
+            "type" : "UIColor"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "ubc",
+            "name" : "ubc"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "lbc",
+            "name" : "lbc"
+          },
+          {
+            "sel" : "section",
+            "name" : "section",
+            "type" : "KSSection"
+          }
+        ],
+        "accessControl" : "internal",
+        "returnType" : "KSSeries",
+        "type" : "method"
+      }
+    },
+    "protocols" : [
+
+    ],
+    "super" : "NSObject"
+  },
+  {
+    "accessControl" : "internal",
+    "isSwift" : true,
+    "super" : "CATextLayer",
+    "protocols" : [
+
+    ],
+    "name" : "KSVerticalTextLayer",
+    "id" : "D1593F931687FC1B3B4D1F9086D652259",
+    "type" : "class",
+    "methods" : {
+      "D098119059EC3A33F6C41910387E8B256" : {
+        "name" : "action",
+        "accessControl" : "internal",
+        "invokes" : [
+
+        ],
+        "params" : [
+          {
+            "sel" : "forKey",
+            "type" : "String",
+            "name" : "event"
+          }
+        ],
+        "static" : false,
+        "classId" : "D1593F931687FC1B3B4D1F9086D652259",
+        "isSwift" : true,
+        "id" : "D098119059EC3A33F6C41910387E8B256",
+        "type" : "method",
+        "returnType" : "CAAction"
+      },
+      "DA47CC16DE18B6763E632E9C18507FBC1" : {
+        "invokes" : [
+          {
+            "formatedName" : "saveGState()"
+          },
+          {
+            "formatedName" : "translateBy(x:, y:)"
+          },
+          {
+            "methodId" : "DA47CC16DE18B6763E632E9C18507FBC1",
+            "classId" : "D1593F931687FC1B3B4D1F9086D652259"
+          },
+          {
+            "formatedName" : "restoreGState()"
+          }
+        ],
+        "isSwift" : true,
+        "classId" : "D1593F931687FC1B3B4D1F9086D652259",
+        "returnType" : "",
+        "id" : "DA47CC16DE18B6763E632E9C18507FBC1",
+        "params" : [
+          {
+            "sel" : "in",
+            "type" : "CGContext",
+            "name" : "ctx"
+          }
+        ],
+        "name" : "draw",
+        "static" : false,
+        "accessControl" : "internal",
+        "type" : "method"
+      },
+      "DF94058252BCC9F760E7182CACACF145E" : {
+        "id" : "DF94058252BCC9F760E7182CACACF145E",
+        "returnType" : "",
+        "invokes" : [
+
+        ],
+        "accessControl" : "internal",
+        "classId" : "D1593F931687FC1B3B4D1F9086D652259",
+        "isSwift" : true,
+        "static" : false,
+        "type" : "method",
+        "name" : "init",
+        "params" : [
+
+        ]
+      },
+      "DD9931217262949A763536E28FC2D877A" : {
+        "isSwift" : true,
+        "static" : false,
+        "accessControl" : "internal",
+        "name" : "init",
+        "type" : "method",
+        "classId" : "D1593F931687FC1B3B4D1F9086D652259",
+        "id" : "DD9931217262949A763536E28FC2D877A",
+        "params" : [
+          {
+            "sel" : "coder",
+            "type" : "NSCoder",
+            "name" : "aDecoder"
+          }
+        ],
+        "invokes" : [
+
+        ],
+        "returnType" : ""
+      },
+      "DCB939BE9DBD8D9F8533E7CDCD3C8B552" : {
+        "id" : "DCB939BE9DBD8D9F8533E7CDCD3C8B552",
+        "static" : false,
+        "params" : [
+          {
+            "sel" : "layer",
+            "type" : "Any",
+            "name" : "layer"
+          }
+        ],
+        "name" : "init",
+        "invokes" : [
+
+        ],
+        "isSwift" : true,
+        "type" : "method",
+        "classId" : "D1593F931687FC1B3B4D1F9086D652259",
+        "returnType" : "",
+        "accessControl" : "internal"
+      }
+    }
+  },
+  {
+    "id" : "D5D8A898D7A71940056D783B07A751778",
+    "protocols" : [
+
+    ],
+    "name" : "KSKLineChartStyle",
+    "accessControl" : "public",
+    "isSwift" : true,
+    "methods" : {
+
+    },
+    "type" : "class",
+    "super" : "NSObject"
+  },
+  {
+    "accessControl" : "internal",
+    "type" : "class",
+    "super" : "KSChartModel",
+    "isSwift" : true,
+    "protocols" : [
+
+    ],
+    "id" : "D535CFA8FEFED6595192FE62196702C46",
+    "methods" : {
+      "D4B50D6F37F3112B46FF0EF119D3473ED" : {
+        "type" : "method",
+        "static" : false,
+        "id" : "D4B50D6F37F3112B46FF0EF119D3473ED",
+        "returnType" : "CAShapeLayer",
+        "name" : "drawSerie",
+        "isSwift" : true,
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "_",
+            "name" : "startIndex"
+          },
+          {
+            "sel" : "endIndex",
+            "type" : "Int",
+            "name" : "endIndex"
+          }
+        ],
+        "classId" : "D535CFA8FEFED6595192FE62196702C46",
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "KSShapeLayer()"
+          },
+          {
+            "formatedName" : "UIBezierPath()"
+          },
+          {
+            "formatedName" : "latticeWidth(_:, endIndex:)"
+          },
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "getLocalY(_:)"
+          },
+          {
+            "formatedName" : "move(to:)"
+          },
+          {
+            "formatedName" : "addLine(to:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          }
+        ]
+      },
+      "DBC9405D065E0166B34C7C150DAA108E3" : {
+        "type" : "method",
+        "classId" : "D535CFA8FEFED6595192FE62196702C46",
+        "returnType" : "CAAnimationGroup",
+        "params" : [
+          {
+            "type" : "Double",
+            "sel" : "_",
+            "name" : "time"
+          }
+        ],
+        "static" : false,
+        "isSwift" : true,
+        "accessControl" : "private",
+        "id" : "DBC9405D065E0166B34C7C150DAA108E3",
+        "invokes" : [
+          {
+            "formatedName" : "CABasicAnimation(keyPath:)"
+          },
+          {
+            "formatedName" : "CAAnimationGroup()"
+          }
+        ],
+        "name" : "getbreathLightAnimate"
+      }
+    },
+    "name" : "KSTimeChartModel"
+  },
+  {
+    "protocols" : [
+      {
+        "name" : "UIDynamicItem",
+        "id" : "DFC0A33DBC38F49D6D4BFE289883B1347"
+      }
+    ],
+    "name" : "KSDynamicItem",
+    "super" : "NSObject",
+    "type" : "class",
+    "methods" : {
+
+    },
+    "accessControl" : "internal",
+    "isSwift" : true,
+    "id" : "D0E79FD9DF2EB389FB186A35C04B60DC2"
+  },
+  {
+    "isSwift" : true,
+    "protocols" : [
+
+    ],
+    "super" : "NSObject",
+    "accessControl" : "open",
+    "id" : "D3817F4AC0EF0C535B973C5ACACD5F70A",
+    "methods" : {
+
+    },
+    "type" : "class",
+    "name" : "KSChartItem"
+  },
+  {
+    "name" : "KSSeriesKey",
+    "isSwift" : true,
+    "protocols" : [
+
+    ],
+    "id" : "D5B9EDE02D8C05686C63F06D7BD219C49",
+    "accessControl" : "public",
+    "type" : "class",
+    "methods" : {
+
+    },
+    "super" : ""
+  },
+  {
+    "protocols" : [
+
+    ],
+    "methods" : {
+      "D1059DAEC66F3FAB7EB21911EDF1ED86B" : {
+        "returnType" : "CAShapeLayer",
+        "classId" : "D98C89CC38BA57133D32F0F771515C601",
+        "invokes" : [
+          {
+            "formatedName" : "CAShapeLayer()"
+          },
+          {
+            "formatedName" : "latticeWidth(_:, endIndex:)"
+          },
+          {
+            "formatedName" : "getLocalY(_:)"
+          },
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "UIBezierPath(rect:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "CGRect(x:, y:, width:, height:)"
+          }
+        ],
+        "params" : [
+          {
+            "name" : "startIndex",
+            "sel" : "_",
+            "type" : "Int"
+          },
+          {
+            "sel" : "endIndex",
+            "name" : "endIndex",
+            "type" : "Int"
+          }
+        ],
+        "accessControl" : "internal",
+        "static" : false,
+        "isSwift" : true,
+        "name" : "drawSerie",
+        "type" : "method",
+        "id" : "D1059DAEC66F3FAB7EB21911EDF1ED86B"
+      }
+    },
+    "isSwift" : true,
+    "type" : "class",
+    "accessControl" : "public",
+    "name" : "KSBarModel",
+    "super" : "KSChartModel",
+    "id" : "D98C89CC38BA57133D32F0F771515C601"
+  },
+  {
+    "methods" : {
+      "DB4DA54842CF695D36B0ACBAE560132CC" : {
+        "isSwift" : true,
+        "static" : false,
+        "returnType" : "CAShapeLayer",
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "_",
+            "name" : "startIndex"
+          },
+          {
+            "sel" : "endIndex",
+            "type" : "Int",
+            "name" : "endIndex"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "CAShapeLayer()"
+          },
+          {
+            "formatedName" : "latticeWidth(_:, endIndex:)"
+          },
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "getLocalY(_:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          },
+          {
+            "formatedName" : "CGSize(width:, height:)"
+          },
+          {
+            "formatedName" : "UIBezierPath(ovalIn:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "CGRect(origin:, size:)"
+          }
+        ],
+        "type" : "method",
+        "classId" : "D2327CBE876C65BADF36BFDC31A4C38FA",
+        "id" : "DB4DA54842CF695D36B0ACBAE560132CC",
+        "name" : "drawSerie",
+        "accessControl" : "internal"
+      }
+    },
+    "type" : "class",
+    "protocols" : [
+
+    ],
+    "isSwift" : true,
+    "super" : "KSChartModel",
+    "name" : "KSRoundModel",
+    "accessControl" : "public",
+    "id" : "D2327CBE876C65BADF36BFDC31A4C38FA"
+  },
+  {
+    "protocols" : [
+
+    ],
+    "isSwift" : true,
+    "id" : "D9A21F983D810BFEE7B92A095731D0C8E",
+    "name" : "KSXAxis",
+    "accessControl" : "public",
+    "methods" : {
+
+    },
+    "type" : "class",
+    "super" : ""
+  },
+  {
+    "accessControl" : "public",
+    "methods" : {
+      "D322A449307597BB927415D28ED474F1D" : {
+        "accessControl" : "internal",
+        "returnType" : "CAShapeLayer",
+        "id" : "D322A449307597BB927415D28ED474F1D",
+        "invokes" : [
+          {
+            "formatedName" : "CAShapeLayer()"
+          },
+          {
+            "formatedName" : "latticeWidth(_:, endIndex:)"
+          },
+          {
+            "formatedName" : "getLocalY(_:)"
+          },
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          },
+          {
+            "formatedName" : "UIBezierPath(rect:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "CGRect(x:, y:, width:, height:)"
+          }
+        ],
+        "params" : [
+          {
+            "type" : "Int",
+            "name" : "startIndex",
+            "sel" : "_"
+          },
+          {
+            "sel" : "endIndex",
+            "name" : "endIndex",
+            "type" : "Int"
+          }
+        ],
+        "static" : false,
+        "type" : "method",
+        "name" : "drawSerie",
+        "isSwift" : true,
+        "classId" : "D238EC7C62AA0215801B45B177FD6A231"
+      }
+    },
+    "type" : "class",
+    "name" : "KSColumnModel",
+    "protocols" : [
+
+    ],
+    "super" : "KSChartModel",
+    "id" : "D238EC7C62AA0215801B45B177FD6A231",
+    "isSwift" : true
+  },
+  {
+    "methods" : {
+      "D8A1FA3D7E91D9291963F43D21DAB5567" : {
+        "id" : "D8A1FA3D7E91D9291963F43D21DAB5567",
+        "accessControl" : "internal",
+        "name" : "ks_calculateRS",
+        "invokes" : [
+          {
+            "formatedName" : "fmax(_:, _:)"
+          },
+          {
+            "formatedName" : "abs(_:)"
+          },
+          {
+            "formatedName" : "fmin(_:, _:)"
+          }
+        ],
+        "params" : [
+          {
+            "type" : "Int",
+            "name" : "index",
+            "sel" : "index"
+          },
+          {
+            "sel" : "avgSmall",
+            "name" : "avgSmall",
+            "type" : "CGFloat"
+          },
+          {
+            "sel" : "avgMiddle",
+            "type" : "CGFloat",
+            "name" : "avgMiddle"
+          },
+          {
+            "type" : "CGFloat",
+            "sel" : "avgBig",
+            "name" : "avgBig"
+          },
+          {
+            "name" : "datas",
+            "type" : "[KSChartItem]",
+            "sel" : "datas"
+          }
+        ],
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "isSwift" : true,
+        "static" : true,
+        "type" : "method",
+        "returnType" : ""
+      },
+      "DE106330C7CB8E576790F7DFB07B6C4D0" : {
+        "type" : "method",
+        "id" : "DE106330C7CB8E576790F7DFB07B6C4D0",
+        "accessControl" : "internal",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "invokes" : [
+          {
+            "formatedName" : "ma(_:, _:, _:)"
+          },
+          {
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+            "methodId" : "D0C8BA319BEC23C0A63A57AB1613DBE23"
+          },
+          {
+            "formatedName" : "ema(_:, _:, _:)"
+          },
+          {
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+            "methodId" : "D959201BA01EA608F35ADDECAF4605E64"
+          },
+          {
+            "formatedName" : "kdj(_:, _:, _:)"
+          },
+          {
+            "methodId" : "D08DE15C943FF18DF56B81D606D7A9282",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "formatedName" : "macd(_:, _:, _:)"
+          },
+          {
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+            "methodId" : "D439DA3336CF1DB6198D22740B4DC1C63"
+          },
+          {
+            "formatedName" : "boll(_:, _:)"
+          },
+          {
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+            "methodId" : "D24051319BA6D1D75252A6952061437CF"
+          },
+          {
+            "formatedName" : "rsi(_:, _:, _:)"
+          },
+          {
+            "methodId" : "DBB39B303B993E5639998B55F4D2A9CE3",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "formatedName" : "avg(_:)"
+          },
+          {
+            "methodId" : "D5B2B4D1F899887AABABE6243EF85187E",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "formatedName" : "wr(_:)"
+          },
+          {
+            "methodId" : "DEEB5B6722703C97E326B373CCB724344",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "name" : "ks_calculator",
+        "isSwift" : true,
+        "static" : true,
+        "returnType" : "[KSChartItem]",
+        "params" : [
+          {
+            "name" : "algorithm",
+            "type" : "KSIndexAlgorithm",
+            "sel" : "algorithm"
+          },
+          {
+            "name" : "index",
+            "type" : "Int",
+            "sel" : "index"
+          },
+          {
+            "sel" : "datas",
+            "type" : "[KSChartItem]",
+            "name" : "datas"
+          }
+        ]
+      },
+      "D581B8CC55A3A4AD02156F31E8595FE04" : {
+        "static" : true,
+        "id" : "D581B8CC55A3A4AD02156F31E8595FE04",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "isSwift" : true,
+        "returnType" : "",
+        "accessControl" : "private",
+        "type" : "method",
+        "params" : [
+          {
+            "sel" : "index",
+            "name" : "index",
+            "type" : "Int"
+          },
+          {
+            "sel" : "kArg",
+            "type" : "Int",
+            "name" : "kArg"
+          },
+          {
+            "type" : "Int",
+            "sel" : "dArg",
+            "name" : "dArg"
+          },
+          {
+            "sel" : "datas",
+            "name" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "name" : "calculateKD"
+      },
+      "DC2755B8B6C81A458476D5837B1384BEC" : {
+        "returnType" : "",
+        "static" : true,
+        "id" : "DC2755B8B6C81A458476D5837B1384BEC",
+        "isSwift" : true,
+        "type" : "method",
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "argu",
+            "name" : "argu"
+          },
+          {
+            "sel" : "end",
+            "type" : "Int",
+            "name" : "endIndex"
+          },
+          {
+            "type" : "[KSChartItem]",
+            "name" : "datas",
+            "sel" : "datas"
+          }
+        ],
+        "name" : "calculateDea",
+        "invokes" : [
+
+        ],
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "accessControl" : "private"
+      },
+      "D959201BA01EA608F35ADDECAF4605E64" : {
+        "name" : "ks_calculateEMA",
+        "returnType" : "[KSChartItem]",
+        "static" : true,
+        "type" : "method",
+        "id" : "D959201BA01EA608F35ADDECAF4605E64",
+        "params" : [
+          {
+            "sel" : "index",
+            "name" : "index",
+            "type" : "Int"
+          },
+          {
+            "name" : "emaSmall",
+            "type" : "Int",
+            "sel" : "emaSmall"
+          },
+          {
+            "type" : "Int",
+            "name" : "emaMiddle",
+            "sel" : "emaMiddle"
+          },
+          {
+            "name" : "emaBig",
+            "type" : "Int",
+            "sel" : "emaBig"
+          },
+          {
+            "type" : "[KSChartItem]",
+            "sel" : "datas",
+            "name" : "datas"
+          }
+        ],
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+            "methodId" : "DA3C7B9BA18CDC98BEA78262705E3791A"
+          }
+        ],
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "isSwift" : true
+      },
+      "D439DA3336CF1DB6198D22740B4DC1C63" : {
+        "name" : "ks_calculateMACD",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "accessControl" : "internal",
+        "id" : "D439DA3336CF1DB6198D22740B4DC1C63",
+        "returnType" : "[KSChartItem]",
+        "static" : true,
+        "params" : [
+          {
+            "sel" : "from",
+            "name" : "index",
+            "type" : "Int"
+          },
+          {
+            "sel" : "emaSmall",
+            "type" : "Int",
+            "name" : "emaSmall"
+          },
+          {
+            "sel" : "emaBig",
+            "name" : "emaBig",
+            "type" : "Int"
+          },
+          {
+            "sel" : "dea",
+            "type" : "Int",
+            "name" : "dea"
+          },
+          {
+            "sel" : "datas",
+            "name" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "type" : "method",
+        "isSwift" : true,
+        "invokes" : [
+          {
+            "methodId" : "DE539F4328B5D7BF7FD9D4762C8C5F851",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "methodId" : "DC2755B8B6C81A458476D5837B1384BEC",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          }
+        ]
+      },
+      "D8E33C964B7D86F9A12A983A73E316548" : {
+        "id" : "D8E33C964B7D86F9A12A983A73E316548",
+        "params" : [
+          {
+            "name" : "endindex",
+            "sel" : "endindex",
+            "type" : "Int"
+          },
+          {
+            "name" : "rsvArg",
+            "sel" : "rsvArg",
+            "type" : "Int"
+          },
+          {
+            "type" : "[KSChartItem]",
+            "sel" : "datas",
+            "name" : "datas"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "static" : true,
+        "accessControl" : "private",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "type" : "method",
+        "isSwift" : true,
+        "returnType" : "CGFloat",
+        "name" : "calculateRsv"
+      },
+      "D24051319BA6D1D75252A6952061437CF" : {
+        "accessControl" : "internal",
+        "returnType" : "[KSChartItem]",
+        "static" : true,
+        "name" : "ks_calculateBOLL",
+        "id" : "D24051319BA6D1D75252A6952061437CF",
+        "invokes" : [
+          {
+            "methodId" : "DF5E362787879CAB1D1E673E12CDF5740",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "methodId" : "D4FF527CBA344BF258F28A589FD4173D5",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "index",
+            "name" : "index"
+          },
+          {
+            "name" : "num",
+            "type" : "Int",
+            "sel" : "num"
+          },
+          {
+            "name" : "arg",
+            "type" : "Int",
+            "sel" : "arg"
+          },
+          {
+            "sel" : "datas",
+            "name" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "type" : "method",
+        "isSwift" : true
+      },
+      "DE539F4328B5D7BF7FD9D4762C8C5F851" : {
+        "type" : "method",
+        "accessControl" : "private",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "isSwift" : true,
+        "id" : "DE539F4328B5D7BF7FD9D4762C8C5F851",
+        "returnType" : "",
+        "static" : true,
+        "name" : "calculateExpma",
+        "params" : [
+          {
+            "name" : "index",
+            "type" : "Int",
+            "sel" : "index"
+          },
+          {
+            "type" : "Int",
+            "sel" : "emaSmall",
+            "name" : "emaSmall"
+          },
+          {
+            "type" : "Int",
+            "sel" : "emaBig",
+            "name" : "emaBig"
+          },
+          {
+            "type" : "[KSChartItem]",
+            "name" : "datas",
+            "sel" : "datas"
+          }
+        ]
+      },
+      "D4FF527CBA344BF258F28A589FD4173D5" : {
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "static" : true,
+        "id" : "D4FF527CBA344BF258F28A589FD4173D5",
+        "type" : "method",
+        "returnType" : "CGFloat",
+        "name" : "calculateStd",
+        "isSwift" : true,
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "num",
+            "name" : "num"
+          },
+          {
+            "name" : "arg",
+            "type" : "Int",
+            "sel" : "arg"
+          },
+          {
+            "type" : "Int",
+            "sel" : "index",
+            "name" : "index"
+          },
+          {
+            "name" : "datas",
+            "sel" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "pow(_:, _:)"
+          },
+          {
+            "formatedName" : "sqrt(_:)"
+          },
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "accessControl" : "private"
+      },
+      "D0C8BA319BEC23C0A63A57AB1613DBE23" : {
+        "isSwift" : true,
+        "id" : "D0C8BA319BEC23C0A63A57AB1613DBE23",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "accessControl" : "internal",
+        "type" : "method",
+        "returnType" : "[KSChartItem]",
+        "name" : "ks_calculateMA",
+        "params" : [
+          {
+            "sel" : "index",
+            "name" : "index",
+            "type" : "Int"
+          },
+          {
+            "name" : "small",
+            "sel" : "small",
+            "type" : "Int"
+          },
+          {
+            "type" : "Int",
+            "sel" : "middle",
+            "name" : "middle"
+          },
+          {
+            "sel" : "big",
+            "name" : "big",
+            "type" : "Int"
+          },
+          {
+            "type" : "[KSChartItem]",
+            "name" : "datas",
+            "sel" : "datas"
+          }
+        ],
+        "static" : true,
+        "invokes" : [
+          {
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+            "methodId" : "DF5E362787879CAB1D1E673E12CDF5740"
+          }
+        ]
+      },
+      "DEEB5B6722703C97E326B373CCB724344" : {
+        "type" : "method",
+        "returnType" : "[KSChartItem]",
+        "params" : [
+          {
+            "sel" : "index",
+            "name" : "index",
+            "type" : "Int"
+          },
+          {
+            "sel" : "num",
+            "type" : "Int",
+            "name" : "num"
+          },
+          {
+            "sel" : "datas",
+            "name" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "accessControl" : "private",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "static" : true,
+        "isSwift" : true,
+        "id" : "DEEB5B6722703C97E326B373CCB724344",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "name" : "ks_calculateWR"
+      },
+      "DA3C7B9BA18CDC98BEA78262705E3791A" : {
+        "static" : true,
+        "accessControl" : "private",
+        "name" : "calculateSingleEMA",
+        "returnType" : "",
+        "params" : [
+          {
+            "name" : "index",
+            "type" : "Int",
+            "sel" : "index"
+          },
+          {
+            "type" : "Int",
+            "name" : "emaSmall",
+            "sel" : "emaSmall"
+          },
+          {
+            "sel" : "emaMiddle",
+            "name" : "emaMiddle",
+            "type" : "Int"
+          },
+          {
+            "sel" : "emaBig",
+            "type" : "Int",
+            "name" : "emaBig"
+          },
+          {
+            "name" : "datas",
+            "type" : "[KSChartItem]",
+            "sel" : "datas"
+          }
+        ],
+        "isSwift" : true,
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "id" : "DA3C7B9BA18CDC98BEA78262705E3791A",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "type" : "method"
+      },
+      "DBB39B303B993E5639998B55F4D2A9CE3" : {
+        "params" : [
+          {
+            "name" : "index",
+            "type" : "Int",
+            "sel" : "index"
+          },
+          {
+            "sel" : "avgSmall",
+            "type" : "CGFloat",
+            "name" : "avgSmall"
+          },
+          {
+            "name" : "avgMiddle",
+            "sel" : "avgMiddle",
+            "type" : "CGFloat"
+          },
+          {
+            "sel" : "avgBig",
+            "type" : "CGFloat",
+            "name" : "avgBig"
+          },
+          {
+            "name" : "datas",
+            "sel" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "accessControl" : "internal",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "name" : "ks_calculateRSI",
+        "returnType" : "[KSChartItem]",
+        "static" : true,
+        "invokes" : [
+          {
+            "methodId" : "D8A1FA3D7E91D9291963F43D21DAB5567",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "formatedName" : "Int(_:)"
+          }
+        ],
+        "type" : "method",
+        "id" : "DBB39B303B993E5639998B55F4D2A9CE3",
+        "isSwift" : true
+      },
+      "D5B2B4D1F899887AABABE6243EF85187E" : {
+        "name" : "ks_calculateAvgPrice",
+        "params" : [
+          {
+            "name" : "index",
+            "sel" : "index",
+            "type" : "Int"
+          },
+          {
+            "sel" : "num",
+            "type" : "Int",
+            "name" : "num"
+          },
+          {
+            "name" : "datas",
+            "sel" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "invokes" : [
+          {
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+            "methodId" : "DF5E362787879CAB1D1E673E12CDF5740"
+          }
+        ],
+        "returnType" : "[KSChartItem]",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "accessControl" : "internal",
+        "static" : true,
+        "isSwift" : true,
+        "type" : "method",
+        "id" : "D5B2B4D1F899887AABABE6243EF85187E"
+      },
+      "DF5E362787879CAB1D1E673E12CDF5740" : {
+        "static" : true,
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "count",
+            "name" : "count"
+          },
+          {
+            "name" : "endIndex",
+            "sel" : "endIndex",
+            "type" : "Int"
+          },
+          {
+            "name" : "datas",
+            "sel" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "accessControl" : "internal",
+        "id" : "DF5E362787879CAB1D1E673E12CDF5740",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "name" : "ks_calculateAveragePrice",
+        "isSwift" : true,
+        "returnType" : "CGFloat",
+        "type" : "method"
+      },
+      "D08DE15C943FF18DF56B81D606D7A9282" : {
+        "id" : "D08DE15C943FF18DF56B81D606D7A9282",
+        "static" : true,
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+        "type" : "method",
+        "params" : [
+          {
+            "sel" : "index",
+            "name" : "index",
+            "type" : "Int"
+          },
+          {
+            "type" : "Int",
+            "name" : "rsvArg",
+            "sel" : "rsvArg"
+          },
+          {
+            "sel" : "kArg",
+            "name" : "kArg",
+            "type" : "Int"
+          },
+          {
+            "sel" : "dArg",
+            "name" : "dArg",
+            "type" : "Int"
+          },
+          {
+            "sel" : "datas",
+            "name" : "datas",
+            "type" : "[KSChartItem]"
+          }
+        ],
+        "invokes" : [
+          {
+            "methodId" : "D8E33C964B7D86F9A12A983A73E316548",
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015"
+          },
+          {
+            "classId" : "D7A5C26622FD7D76E3B61240CF9341015",
+            "methodId" : "D581B8CC55A3A4AD02156F31E8595FE04"
+          }
+        ],
+        "name" : "ks_calculateKDJ",
+        "returnType" : "[KSChartItem]"
+      }
+    },
+    "accessControl" : "internal",
+    "protocols" : [
+
+    ],
+    "name" : "KSCalculator",
+    "isSwift" : true,
+    "super" : "",
+    "id" : "D7A5C26622FD7D76E3B61240CF9341015",
+    "type" : "class"
+  },
+  {
+    "methods" : {
+
+    },
+    "type" : "class",
+    "protocols" : [
+
+    ],
+    "name" : "KSYAxis",
+    "super" : "",
+    "isSwift" : true,
+    "accessControl" : "public",
+    "id" : "D9AC902F1FB56FFB2536B4DB135C81F64"
+  },
+  {
+    "isSwift" : true,
+    "accessControl" : "public",
+    "methods" : {
+      "DA819F5FF6055F4ABB432F8A4E47BBCF9" : {
+        "name" : "removeSubLayer",
+        "classId" : "D3B687C348A421D10EBCAD320AB8CA0F8",
+        "id" : "DA819F5FF6055F4ABB432F8A4E47BBCF9",
+        "returnType" : "",
+        "params" : [
+
+        ],
+        "static" : false,
+        "invokes" : [
+          {
+            "formatedName" : "removeFromSuperlayer()"
+          },
+          {
+            "formatedName" : "removeAll()"
+          }
+        ],
+        "type" : "method",
+        "accessControl" : "internal",
+        "isSwift" : true
+      },
+      "D6D94935CCEE7B9C4C6744BE6B9E7C059" : {
+        "params" : [
+          {
+            "name" : "event",
+            "type" : "String",
+            "sel" : "forKey"
+          }
+        ],
+        "static" : false,
+        "isSwift" : true,
+        "returnType" : "CAAction",
+        "invokes" : [
+
+        ],
+        "type" : "method",
+        "classId" : "D3B687C348A421D10EBCAD320AB8CA0F8",
+        "accessControl" : "public",
+        "name" : "action",
+        "id" : "D6D94935CCEE7B9C4C6744BE6B9E7C059"
+      }
+    },
+    "name" : "KSShapeLayer",
+    "protocols" : [
+
+    ],
+    "super" : "CAShapeLayer",
+    "type" : "class",
+    "id" : "D3B687C348A421D10EBCAD320AB8CA0F8"
+  },
+  {
+    "protocols" : [
+
+    ],
+    "id" : "D4B9592989CE74BFE74E245930CEE7FEE",
+    "super" : "NSObject",
+    "isSwift" : true,
+    "accessControl" : "public",
+    "name" : "KSSection",
+    "type" : "class",
+    "methods" : {
+      "D87B746ED0578422DB9C01DBAA8D81EC3" : {
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "if(_:)"
+          }
+        ],
+        "type" : "method",
+        "name" : "getLocalY",
+        "isSwift" : true,
+        "static" : false,
+        "returnType" : "CGFloat",
+        "id" : "D87B746ED0578422DB9C01DBAA8D81EC3",
+        "params" : [
+          {
+            "sel" : "_",
+            "name" : "val",
+            "type" : "CGFloat"
+          }
+        ]
+      },
+      "D68CB659C7D087E7AA1EA4F4E0FDB747A" : {
+        "isSwift" : true,
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "type" : "method",
+        "returnType" : "",
+        "invokes" : [
+          {
+            "formatedName" : "removeFromSuperlayer()"
+          },
+          {
+            "formatedName" : "removeAll()"
+          }
+        ],
+        "name" : "removeLayerView",
+        "id" : "D68CB659C7D087E7AA1EA4F4E0FDB747A",
+        "params" : [
+
+        ],
+        "accessControl" : "internal",
+        "static" : false
+      },
+      "D99CE3AF9549741676F0C625D14A03E63" : {
+        "id" : "D99CE3AF9549741676F0C625D14A03E63",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "name" : "init",
+        "static" : false,
+        "invokes" : [
+
+        ],
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "returnType" : "",
+        "type" : "method",
+        "params" : [
+          {
+            "type" : "KSSectionValueType",
+            "sel" : "valueType",
+            "name" : "valueType"
+          },
+          {
+            "name" : "key",
+            "type" : "String",
+            "sel" : "key"
+          }
+        ]
+      },
+      "D16A0432008902AA7BE7593F5CF178595" : {
+        "params" : [
+          {
+            "type" : "String",
+            "sel" : "key",
+            "name" : "key"
+          }
+        ],
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "type" : "method",
+        "isSwift" : true,
+        "name" : "getSeries",
+        "returnType" : "KSSeries",
+        "id" : "D16A0432008902AA7BE7593F5CF178595",
+        "accessControl" : "internal",
+        "static" : false,
+        "invokes" : [
+
+        ]
+      },
+      "D66D6F30682DDD7CEB480904BE0A066E2" : {
+        "returnType" : "",
+        "isSwift" : true,
+        "type" : "method",
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "params" : [
+          {
+            "name" : "startIndex",
+            "type" : "Int",
+            "sel" : "startIndex"
+          },
+          {
+            "sel" : "endIndex",
+            "name" : "endIndex",
+            "type" : "Int"
+          },
+          {
+            "sel" : "datas",
+            "type" : "[KSChartItem]",
+            "name" : "datas"
+          }
+        ],
+        "id" : "D66D6F30682DDD7CEB480904BE0A066E2",
+        "invokes" : [
+          {
+            "methodId" : "D27AD38F81950F63CF66C00AE6481DE7E",
+            "classId" : "D4B9592989CE74BFE74E245930CEE7FEE"
+          },
+          {
+            "formatedName" : "if(_:)"
+          }
+        ],
+        "static" : false,
+        "name" : "buildYAxis",
+        "accessControl" : "internal"
+      },
+      "D051CD28778C66EDE53096BF893A6F6A9" : {
+        "static" : false,
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "isSwift" : true,
+        "invokes" : [
+          {
+            "formatedName" : "NSMutableAttributedString()"
+          },
+          {
+            "formatedName" : "for(_:, _:)"
+          },
+          {
+            "formatedName" : "append(_:)"
+          },
+          {
+            "formatedName" : "NSMakeRange(_:, _:)"
+          },
+          {
+            "formatedName" : "addAttributes(_:, range:)"
+          },
+          {
+            "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+            "methodId" : "D98AB5C467D49D84DAA8B82E680CE7299"
+          },
+          {
+            "formatedName" : "NSAttributedString(string:)"
+          }
+        ],
+        "accessControl" : "internal",
+        "returnType" : "",
+        "id" : "D051CD28778C66EDE53096BF893A6F6A9",
+        "params" : [
+          {
+            "type" : "[(title:String,color:UIColor)]",
+            "sel" : "titles",
+            "name" : "titles"
+          }
+        ],
+        "type" : "method",
+        "name" : "setHeader"
+      },
+      "DC942184B9D5672C33E2EE52801A22D11" : {
+        "type" : "method",
+        "id" : "DC942184B9D5672C33E2EE52801A22D11",
+        "params" : [
+
+        ],
+        "name" : "nextPage",
+        "isSwift" : true,
+        "invokes" : [
+          {
+            "formatedName" : "if(_:)"
+          }
+        ],
+        "returnType" : "",
+        "static" : false,
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "accessControl" : "internal"
+      },
+      "D5DD6549C7B476D1E957D672FB54CDADB" : {
+        "name" : "getRawValue",
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "type" : "method",
+        "accessControl" : "internal",
+        "returnType" : "CGFloat",
+        "id" : "D5DD6549C7B476D1E957D672FB54CDADB",
+        "params" : [
+          {
+            "type" : "CGFloat",
+            "sel" : "_",
+            "name" : "y"
+          }
+        ],
+        "invokes" : [
+          {
+            "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+            "methodId" : "D87B746ED0578422DB9C01DBAA8D81EC3"
+          },
+          {
+            "formatedName" : "if(_:)"
+          }
+        ],
+        "isSwift" : true,
+        "static" : false
+      },
+      "D59AF1A240A34C3E2AE05E1D28BA0B4A2" : {
+        "accessControl" : "internal",
+        "isSwift" : true,
+        "type" : "method",
+        "id" : "D59AF1A240A34C3E2AE05E1D28BA0B4A2",
+        "invokes" : [
+
+        ],
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "returnType" : "",
+        "name" : "updateTai",
+        "static" : false,
+        "params" : [
+          {
+            "type" : "String",
+            "sel" : "_tai",
+            "name" : "_tai"
+          }
+        ]
+      },
+      "D30329AB824FBA5F6CB54D83F5E6DB9FD" : {
+        "static" : false,
+        "isSwift" : true,
+        "name" : "removeSeries",
+        "returnType" : "",
+        "id" : "D30329AB824FBA5F6CB54D83F5E6DB9FD",
+        "invokes" : [
+          {
+            "formatedName" : "for(_:, _:)"
+          },
+          {
+            "formatedName" : "enumerated()"
+          },
+          {
+            "formatedName" : "remove(at:)"
+          }
+        ],
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "type" : "method",
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "name" : "key",
+            "sel" : "key",
+            "type" : "String"
+          }
+        ]
+      },
+      "D27AD38F81950F63CF66C00AE6481DE7E" : {
+        "returnType" : "",
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "static" : false,
+        "accessControl" : "internal",
+        "name" : "buildYAxisPerModel",
+        "params" : [
+          {
+            "type" : "KSChartModel",
+            "name" : "model",
+            "sel" : "_"
+          },
+          {
+            "sel" : "startIndex",
+            "name" : "startIndex",
+            "type" : "Int"
+          },
+          {
+            "type" : "Int",
+            "sel" : "endIndex",
+            "name" : "endIndex"
+          }
+        ],
+        "id" : "D27AD38F81950F63CF66C00AE6481DE7E",
+        "invokes" : [
+          {
+            "formatedName" : "stride(from:, to:, by:)"
+          }
+        ],
+        "type" : "method",
+        "isSwift" : true
+      },
+      "D43EEC6669F3DAC32EA46A1C2CAEE1973" : {
+        "isSwift" : true,
+        "static" : false,
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "_",
+            "name" : "chartSelectedIndex"
+          },
+          {
+            "type" : "KSSeries",
+            "sel" : "series",
+            "name" : "series"
+          }
+        ],
+        "name" : "getTitleAttributesByIndex",
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "append(_:)"
+          },
+          {
+            "formatedName" : "ks_volume()"
+          },
+          {
+            "formatedName" : "ks_toString(maximum:)"
+          }
+        ],
+        "id" : "D43EEC6669F3DAC32EA46A1C2CAEE1973",
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "returnType" : "[(title:String,color:UIColor)]"
+      },
+      "D98AB5C467D49D84DAA8B82E680CE7299" : {
+        "static" : false,
+        "id" : "D98AB5C467D49D84DAA8B82E680CE7299",
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "type" : "method",
+        "params" : [
+          {
+            "sel" : "title",
+            "type" : "NSAttributedString",
+            "name" : "title"
+          }
+        ],
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "returnType" : "",
+        "invokes" : [
+          {
+            "formatedName" : "ks_sizeWithConstrained(_:, constraintRect:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          },
+          {
+            "formatedName" : "CGRect(origin:, size:)"
+          },
+          {
+            "formatedName" : "CGSize(width:, height:)"
+          }
+        ],
+        "name" : "drawTitleForHeader"
+      },
+      "DA2A522E3A839731ECB2221458E3FDBD4" : {
+        "params" : [
+          {
+            "sel" : "_",
+            "name" : "chartSelectedIndex",
+            "type" : "Int"
+          }
+        ],
+        "invokes" : [
+          {
+            "methodId" : "D43EEC6669F3DAC32EA46A1C2CAEE1973",
+            "classId" : "D4B9592989CE74BFE74E245930CEE7FEE"
+          },
+          {
+            "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+            "methodId" : "D051CD28778C66EDE53096BF893A6F6A9"
+          },
+          {
+            "formatedName" : "append(contentsOf:)"
+          }
+        ],
+        "accessControl" : "internal",
+        "type" : "method",
+        "static" : false,
+        "classId" : "D4B9592989CE74BFE74E245930CEE7FEE",
+        "name" : "drawTitle",
+        "isSwift" : true,
+        "returnType" : "",
+        "id" : "DA2A522E3A839731ECB2221458E3FDBD4"
+      }
+    }
+  },
+  {
+    "type" : "class",
+    "name" : "KSChartModel",
+    "accessControl" : "public",
+    "isSwift" : true,
+    "id" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+    "super" : "",
+    "protocols" : [
+
+    ],
+    "methods" : {
+      "D64E8E54B03F44376F27F7D55178C9A07" : {
+        "params" : [
+          {
+            "type" : "UIColor",
+            "sel" : "_",
+            "name" : "color"
+          },
+          {
+            "type" : "String",
+            "sel" : "title",
+            "name" : "title"
+          },
+          {
+            "name" : "key",
+            "type" : "String",
+            "sel" : "key"
+          }
+        ],
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "KSLineModel(upStyle:, downStyle:, titleColor:)"
+          }
+        ],
+        "name" : "getLine",
+        "isSwift" : true,
+        "static" : false,
+        "id" : "D64E8E54B03F44376F27F7D55178C9A07",
+        "type" : "method",
+        "returnType" : "KSLineModel",
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B"
+      },
+      "DB5C5954582D3E5E24A03C2FB012C5AB0" : {
+        "accessControl" : "internal",
+        "static" : false,
+        "isSwift" : true,
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "id" : "DB5C5954582D3E5E24A03C2FB012C5AB0",
+        "returnType" : "KSCandleModel",
+        "params" : [
+          {
+            "name" : "upStyle",
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "upStyle"
+          },
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "name" : "downStyle",
+            "sel" : "downStyle"
+          },
+          {
+            "sel" : "titleColor",
+            "type" : "UIColor",
+            "name" : "titleColor"
+          },
+          {
+            "name" : "key",
+            "sel" : "key",
+            "type" : "String"
+          }
+        ],
+        "name" : "getCandle",
+        "type" : "method",
+        "invokes" : [
+          {
+            "formatedName" : "KSCandleModel(upStyle:, downStyle:, titleColor:)"
+          }
+        ]
+      },
+      "D7CA0FCD48A94AFC5D4DDDAE78B7620F9" : {
+        "isSwift" : true,
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "invokes" : [
+          {
+            "formatedName" : "KSColumnModel(upStyle:, downStyle:, titleColor:)"
+          },
+          {
+            "formatedName" : "NSLocalizedString(_:, comment:)"
+          },
+          {
+            "formatedName" : "UIColor(red:, green:, blue:, alpha:)"
+          }
+        ],
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "upStyle",
+            "name" : "upStyle"
+          },
+          {
+            "sel" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "name" : "downStyle"
+          },
+          {
+            "type" : "String",
+            "sel" : "key",
+            "name" : "key"
+          }
+        ],
+        "name" : "getVolume",
+        "returnType" : "KSColumnModel",
+        "static" : false,
+        "id" : "D7CA0FCD48A94AFC5D4DDDAE78B7620F9",
+        "type" : "method"
+      },
+      "D056BA90E4B56430492BC15624CA8DCC9" : {
+        "isSwift" : true,
+        "returnType" : "CGFloat",
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "static" : false,
+        "name" : "latticeWidth",
+        "id" : "D056BA90E4B56430492BC15624CA8DCC9",
+        "type" : "method",
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "CGFloat(_:)"
+          }
+        ],
+        "params" : [
+          {
+            "name" : "startIndex",
+            "sel" : "_",
+            "type" : "Int"
+          },
+          {
+            "sel" : "endIndex",
+            "type" : "Int",
+            "name" : "endIndex"
+          }
+        ]
+      },
+      "DA090CC0158773F2088F6CD53E7A4C5F9" : {
+        "accessControl" : "internal",
+        "returnType" : "CAShapeLayer",
+        "name" : "drawSerie",
+        "params" : [
+          {
+            "type" : "Int",
+            "sel" : "_",
+            "name" : "startIndex"
+          },
+          {
+            "type" : "Int",
+            "sel" : "endIndex",
+            "name" : "endIndex"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "CAShapeLayer()"
+          }
+        ],
+        "type" : "method",
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "id" : "DA090CC0158773F2088F6CD53E7A4C5F9",
+        "isSwift" : true,
+        "static" : false
+      },
+      "D25D8D512739CBC95A4B5A2DDA43135DF" : {
+        "static" : false,
+        "type" : "method",
+        "id" : "D25D8D512739CBC95A4B5A2DDA43135DF",
+        "isSwift" : true,
+        "name" : "drawGuideValue",
+        "accessControl" : "internal",
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "params" : [
+          {
+            "sel" : "value",
+            "name" : "value",
+            "type" : "String"
+          },
+          {
+            "sel" : "section",
+            "type" : "KSSection",
+            "name" : "section"
+          },
+          {
+            "type" : "CGPoint",
+            "name" : "point",
+            "sel" : "point"
+          },
+          {
+            "type" : "KSChartItemTrend",
+            "sel" : "trend",
+            "name" : "trend"
+          }
+        ],
+        "returnType" : "CAShapeLayer",
+        "invokes" : [
+          {
+            "formatedName" : "CAShapeLayer()"
+          },
+          {
+            "formatedName" : "ks_sizeWithConstrained(_:)"
+          },
+          {
+            "formatedName" : "arrow(_:)"
+          },
+          {
+            "formatedName" : "UIBezierPath()"
+          },
+          {
+            "formatedName" : "move(to:)"
+          },
+          {
+            "formatedName" : "addLine(to:)"
+          },
+          {
+            "formatedName" : "addSublayer(_:)"
+          },
+          {
+            "formatedName" : "tag(_:)"
+          },
+          {
+            "formatedName" : "close()"
+          },
+          {
+            "formatedName" : "UIBezierPath(roundedRect:, cornerRadius:)"
+          },
+          {
+            "formatedName" : "circle(_:, _:)"
+          },
+          {
+            "formatedName" : "CGPoint(x:, y:)"
+          },
+          {
+            "formatedName" : "CGSize(width:, height:)"
+          },
+          {
+            "formatedName" : "UIBezierPath(ovalIn:)"
+          },
+          {
+            "formatedName" : "KSTextLayer()"
+          },
+          {
+            "formatedName" : "CGRect(origin:, size:)"
+          },
+          {
+            "formatedName" : "CGRect(x:, y:, width:, height:)"
+          }
+        ]
+      },
+      "DADE12783B3483A580E5FF7A8F90AEB26" : {
+        "invokes" : [
+
+        ],
+        "type" : "method",
+        "isSwift" : true,
+        "id" : "DADE12783B3483A580E5FF7A8F90AEB26",
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "static" : false,
+        "accessControl" : "internal",
+        "params" : [
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "name" : "upStyle",
+            "sel" : "upStyle"
+          },
+          {
+            "sel" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "name" : "downStyle"
+          },
+          {
+            "name" : "title",
+            "type" : "String",
+            "sel" : "title"
+          },
+          {
+            "name" : "titleColor",
+            "sel" : "titleColor",
+            "type" : "UIColor"
+          },
+          {
+            "type" : "[KSChartItem]",
+            "name" : "datas",
+            "sel" : "datas"
+          },
+          {
+            "sel" : "decimal",
+            "name" : "decimal",
+            "type" : "Int"
+          },
+          {
+            "sel" : "plotPaddingExt",
+            "name" : "plotPaddingExt",
+            "type" : "CGFloat"
+          }
+        ],
+        "returnType" : "",
+        "name" : "init"
+      },
+      "D801E2743410352BDF56AD9DBBFE2B438" : {
+        "isSwift" : true,
+        "returnType" : "KSBarModel",
+        "params" : [
+          {
+            "name" : "upStyle",
+            "sel" : "upStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "sel" : "downStyle",
+            "name" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "sel" : "titleColor",
+            "type" : "UIColor",
+            "name" : "titleColor"
+          },
+          {
+            "sel" : "title",
+            "name" : "title",
+            "type" : "String"
+          },
+          {
+            "type" : "String",
+            "name" : "key",
+            "sel" : "key"
+          }
+        ],
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "invokes" : [
+          {
+            "formatedName" : "KSBarModel(upStyle:, downStyle:, titleColor:)"
+          }
+        ],
+        "type" : "method",
+        "static" : false,
+        "accessControl" : "internal",
+        "name" : "getBar",
+        "id" : "D801E2743410352BDF56AD9DBBFE2B438"
+      },
+      "DDA5519DF05FF458E13A2BF7F60BAA977" : {
+        "name" : "getRound",
+        "returnType" : "KSRoundModel",
+        "id" : "DDA5519DF05FF458E13A2BF7F60BAA977",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "KSRoundModel(upStyle:, downStyle:, titleColor:, plotPaddingExt:)"
+          }
+        ],
+        "params" : [
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "upStyle",
+            "name" : "upStyle"
+          },
+          {
+            "name" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "downStyle"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "titleColor",
+            "name" : "titleColor"
+          },
+          {
+            "name" : "title",
+            "sel" : "title",
+            "type" : "String"
+          },
+          {
+            "type" : "CGFloat",
+            "sel" : "plotPaddingExt",
+            "name" : "plotPaddingExt"
+          },
+          {
+            "sel" : "key",
+            "type" : "String",
+            "name" : "key"
+          }
+        ],
+        "static" : false,
+        "type" : "method",
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B"
+      },
+      "D9F7A1F090E02EDD5C9B3855BC5D31EF0" : {
+        "isSwift" : true,
+        "params" : [
+          {
+            "name" : "color",
+            "sel" : "_",
+            "type" : "UIColor"
+          },
+          {
+            "type" : "String",
+            "sel" : "title",
+            "name" : "title"
+          },
+          {
+            "name" : "key",
+            "type" : "String",
+            "sel" : "key"
+          }
+        ],
+        "returnType" : "KSTimeChartModel",
+        "accessControl" : "internal",
+        "invokes" : [
+          {
+            "formatedName" : "KSTimeChartModel(upStyle:, downStyle:, titleColor:)"
+          }
+        ],
+        "static" : false,
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "name" : "geTimeChart",
+        "id" : "D9F7A1F090E02EDD5C9B3855BC5D31EF0",
+        "type" : "method"
+      },
+      "DCBBE8CF403412B485BAF191BDBFD5F7E" : {
+        "id" : "DCBBE8CF403412B485BAF191BDBFD5F7E",
+        "params" : [
+          {
+            "type" : "(color:UIColor,isSolid:Bool)",
+            "sel" : "upStyle",
+            "name" : "upStyle"
+          },
+          {
+            "name" : "downStyle",
+            "sel" : "downStyle",
+            "type" : "(color:UIColor,isSolid:Bool)"
+          },
+          {
+            "type" : "UIColor",
+            "sel" : "titleColor",
+            "name" : "titleColor"
+          },
+          {
+            "type" : "String",
+            "sel" : "key",
+            "name" : "key"
+          }
+        ],
+        "invokes" : [
+          {
+            "formatedName" : "KSBollModel(upStyle:, downStyle:, titleColor:)"
+          }
+        ],
+        "classId" : "DEABC7B571B0E0FE7F28E4EB2D0288B8B",
+        "static" : false,
+        "name" : "getBoll",
+        "returnType" : "KSBollModel",
+        "isSwift" : true,
+        "accessControl" : "internal",
+        "type" : "method"
+      }
+    }
+  }
+]
+    </script>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>
