@@ -556,10 +556,6 @@ extension KSKLineChartView {
     
     /// 初始化图表结构 -> 是否初始化数据
     func initChart() -> Bool {
-        if self.pref.scrollToPosition == .end && self.pref.plotCount != self.datas.count {
-            self.calculatorTai(isAll: true)
-        }
-        
         if self.pref.plotCount > 0 {
             drawRange()
         }
