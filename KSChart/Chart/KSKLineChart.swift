@@ -1166,10 +1166,6 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                 refreshChart(isAll: true, isDraw: true, isChangeTai: true)
                 self.delegate?.kLineChart?(chart: self, didFlipPageSeries: section, series: section.series[section.selectedIndex], seriesIndex: section.selectedIndex)
             }
-            else{
-                //显示点击选中的内容
-                //self.setSelectedIndexByPoint(point)
-            }
         }
         self.delegate?.kLineChartTapAction?(chart: self)
         

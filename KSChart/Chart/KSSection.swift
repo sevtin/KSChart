@@ -412,14 +412,14 @@ extension KSSection {
         self.drawTitleForHeader(title: titleString)
     }
     
-    /// 根据seriesKey获取线段的数值标题
-    ///
+    /*
     func getTitleAttributesByIndex(_ chartSelectedIndex: Int, seriesKey: String) -> [(title: String, color: UIColor)]? {
         guard let series = self.getSeries(key: seriesKey) else {
             return nil
         }
         return self.getTitleAttributesByIndex(chartSelectedIndex, series: series)
     }
+     */
     
     /// 获取标题属性元组
     ///

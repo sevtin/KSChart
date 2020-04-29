@@ -29,7 +29,7 @@ public class KSTextLayer: CATextLayer {
     }
 }
 
-class KSVCTextLayer : CATextLayer {
+class KSVerticalTextLayer : CATextLayer {
     override public func action(forKey event: String) -> CAAction? {
         return nil
     }
@@ -72,8 +72,8 @@ public class KSTopLayer: KSShapeLayer {
     
     var horizontalLineView: KSShapeLayer?
     var verticalLineView: KSShapeLayer?
-    var selectedXAxisLabel: KSVCTextLayer?
-    var selectedYAxisLabel: KSVCTextLayer?
+    var selectedXAxisLabel: KSVerticalTextLayer?
+    var selectedYAxisLabel: KSVerticalTextLayer?
     
     func initLayer(style: KSKLineChartStyle) {
 
@@ -91,8 +91,8 @@ public class KSTopLayer: KSShapeLayer {
         self.addSublayer(selectedYAxisLabel!)
     }
     
-    func createTextLayer(style: KSKLineChartStyle) -> KSVCTextLayer {
-        let textLayer              = KSVCTextLayer()
+    func createTextLayer(style: KSKLineChartStyle) -> KSVerticalTextLayer {
+        let textLayer             = KSVerticalTextLayer()
         textLayer.fontSize        = style.labelFont.pointSize
         textLayer.foregroundColor = style.selectedTextColor.cgColor
         textLayer.backgroundColor = style.selectedBGColor.cgColor
