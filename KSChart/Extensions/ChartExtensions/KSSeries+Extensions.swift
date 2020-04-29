@@ -54,12 +54,11 @@ extension KSSeries {
     }
     
     ///分时图
-    open class func getTimeChart(color: UIColor, section: KSSection, showGuide: Bool = false, ultimateValueStyle: KSUltimateValueStyle = .none, graphType: KSGraphType = .normal, lineWidth: CGFloat = 1) -> KSSeries {
+    open class func getTimeChart(color: UIColor, section: KSSection, showGuide: Bool = false, ultimateValueStyle: KSUltimateValueStyle = .none, lineWidth: CGFloat = 1) -> KSSeries {
         let series                  = KSSeries()
         series.key                  = KSSeriesKey.timeline
         let timeline                = KSTimeChartModel.geTimeChart(color, title: NSLocalizedString("Price", comment: ""), key: "\(KSSeriesKey.timeline)_\(KSSeriesKey.timeline)")
         timeline.fillColor          = color.withAlphaComponent(0.1).cgColor
-        timeline.graphType          = graphType
         timeline.section            = section
         timeline.useTitleColor      = false
         timeline.ultimateValueStyle = ultimateValueStyle

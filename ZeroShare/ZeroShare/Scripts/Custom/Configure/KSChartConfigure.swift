@@ -181,7 +181,6 @@ extension KSChartConfigure {
             section: priceSection,
             showGuide: true,
             ultimateValueStyle: .circle(UIColor.ks_hex(0x03AD8F), true),
-            graphType: .timeChart,
             lineWidth: 1)
         timelineSeries.hidden = true
         

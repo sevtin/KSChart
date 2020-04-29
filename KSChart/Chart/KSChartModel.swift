@@ -30,14 +30,6 @@ public enum KSChartOpenType {
     case equal
 }
 
-/// 曲线类型
-///
-/// - normal: 普通
-/// - timeChart: 渐变分时图
-public enum KSGraphType: Int {
-    case normal,timeChart
-}
-
 /// 数据元素
 open class KSChartItem: NSObject {
     @objc open var time: Int           = 0
@@ -213,10 +205,6 @@ public class KSChartModel {
 /// 线点样式模型
 public class KSLineModel: KSChartModel {
     
-    /// 曲线类型
-    var graphType: KSGraphType = .normal
-    /// 渐变颜色
-    var gradientColors: [CGColor]?
     /// 阴影偏移
     var shadowOffset: CGSize   = CGSize.init(width: 0, height: 2)
     /// 不透明度
@@ -229,10 +217,6 @@ public class KSLineModel: KSChartModel {
     ///   - endIndex: 结束索引
     /// - Returns: 点与点之间间断所占点宽的比例
     override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
-        if self.graphType == .timeChart {
-            return self.drawTimeChartSerie(startIndex, endIndex: endIndex)
-        }
-        
         let serieLayer         = CAShapeLayer()
         let modelLayer         = CAShapeLayer()
         modelLayer.strokeColor = self.upStyle.color.cgColor

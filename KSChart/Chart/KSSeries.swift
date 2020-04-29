@@ -52,32 +52,7 @@ public class KSSeries: NSObject {
 
 // MARK: - 工厂方法
 extension KSSeries {
-    
-    /// 返回一个标准的时分价格系列样式
-    ///
-    /// - Parameters:
-    ///   - color: 线段颜色
-    ///   - section: 分区
-    ///   - showGuide: 是否显示最大最小值
-    /// - Returns: 线系列模型
-    public class func getTimelinePrice(color: UIColor, section: KSSection, showGuide: Bool = false, ultimateValueStyle: KSUltimateValueStyle = .none, graphType: KSGraphType = .normal, lineWidth: CGFloat = 1) -> KSSeries {
-        let series                  = KSSeries()
-        series.key                  = KSSeriesKey.timeline
-        let timeline                = KSChartModel.getLine(color, title: NSLocalizedString("Price", comment: ""), key: "\(KSSeriesKey.timeline)_\(KSSeriesKey.timeline)")
-        if graphType == .timeChart {
-            timeline.gradientColors = [color.withAlphaComponent(0.6).cgColor,color.withAlphaComponent(0.4).cgColor,color.withAlphaComponent(0.2).cgColor]
-        }
-        timeline.graphType          = graphType
-        timeline.section            = section
-        timeline.useTitleColor      = false
-        timeline.ultimateValueStyle = ultimateValueStyle
-        timeline.showMaxVal         = showGuide
-        timeline.showMinVal         = showGuide
-        timeline.lineWidth          = lineWidth
-        series.chartModels          = [timeline]
-        return series
-    }
-    
+
     /// 返回一个标准的蜡烛柱价格系列样式
     ///
     /// - Parameters:

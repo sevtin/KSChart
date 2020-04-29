@@ -9,9 +9,8 @@
 import UIKit
 
 class KSTimeChartModel: KSChartModel {
-    /// 曲线类型
-    var graphType: KSGraphType = .normal
-    /// 渐变颜色
+
+    /// 填充颜色
     var fillColor: CGColor?
     /// 阴影偏移
     var shadowOffset: CGSize   = CGSize.init(width: 0, height: 2)
