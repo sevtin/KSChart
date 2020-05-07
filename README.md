@@ -22,16 +22,6 @@ k线图/kline/kchart，已经集成MA/EMA/MACD/KDJ/BOLL/RSI/WR/AVG等指标，�
 - Xcode 11.0+
 - Swift 5.1+
 
-## CocoaPods安装
-```
-platform :ios, '10.0'
-use_frameworks!
-
-target 'MyApp' do
-    pod 'KSChart', '~> 5.1.9'
-end
-```
-
 ## 示例
 请参考KSKChartView.swift
 ```swift
