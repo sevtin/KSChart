@@ -27,6 +27,7 @@ class KSBollModel: KSChartModel {
         //循环起始到终结
         for i in stride(from: startIndex, to: endIndex, by: 1) {
             let bollLayer = CAShapeLayer()
+            bollLayer.fillColor = KS_Chart_Color_Clear_CgColor
             let item = datas[i]
             
             //开始X: 视图X + 左边间距 + ((i - 开始index) * 蜡烛的宽)
@@ -58,7 +59,19 @@ class KSBollModel: KSChartModel {
                 bollLayer.strokeColor = self.downStyle.color.cgColor
             }
             
-            let axisX      = ix + plotWidth / 2
+            let axisX = ix + plotWidth / 2
+            let bollPath = UIBezierPath()
+            bollPath.move(to: CGPoint(x: ix+plotPadding, y: iyo))
+            bollPath.addLine(to: CGPoint(x: axisX, y: iyo))
+            bollPath.addLine(to: CGPoint(x: axisX, y: iyl))
+            bollPath.addLine(to: CGPoint(x: axisX, y: iyh))
+            bollPath.addLine(to: CGPoint(x: axisX, y: iyc))
+            bollPath.addLine(to: CGPoint(x: iNx-plotPadding, y: iyc))
+            
+            bollLayer.path = bollPath.cgPath
+            serieLayer.addSublayer(bollLayer)
+            
+            /*
             let startPath  = UIBezierPath()
             startPath.move(to: CGPoint(x: ix+plotPadding, y: iyo))
             startPath.addLine(to: CGPoint(x: axisX, y: iyo))
@@ -75,6 +88,7 @@ class KSBollModel: KSChartModel {
             
             bollLayer.path = startPath.cgPath
             serieLayer.addSublayer(bollLayer)
+             */
         }
         return serieLayer
     }
