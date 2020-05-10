@@ -747,15 +747,15 @@ extension KSKLineChartView {
             if showXAxisReference {
                 var xPoint: CGFloat = 0
                 if k == 0 {
-                    xPoint = perPlotWidth / 2
+                    //xPoint = perPlotWidth / 2
                 }
                 else{
-                    xPoint = xPox + textSize.width / 2
+                    xPoint              = xPox + textSize.width / 2
+                    referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY + section.padding.top))
+                    referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY - section.padding.bottom))
+                    referenceLayer.path = referencePath.cgPath
+                    xAxis.addSublayer(referenceLayer)
                 }
-                referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY + section.padding.top))
-                referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY - section.padding.bottom))
-                referenceLayer.path = referencePath.cgPath
-                xAxis.addSublayer(referenceLayer)
             }
             k      = k + xTickInterval
             startX = perPlotWidth * CGFloat(k)
