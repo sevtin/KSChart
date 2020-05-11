@@ -385,7 +385,7 @@ class KSSeriesParam: NSObject, Codable {
         case KSSeriesKey.avg:
             let series         = KSSeries()
             series.key         = KSSeriesKey.avg
-            let average        = KSChartModel.getLine(lineColors[0], title: "\(KSSeriesKey.avg)", key: "\(KSSeriesKey.avg)_\(Int(self.params[0].value))")
+            let average        = KSChartModel.getLine(lineColors[0], title: "\(KSSeriesKey.avg)\(Int(self.params[0].value))", key: "\(KSSeriesKey.avg)_\(Int(self.params[0].value))")
             average.section    = masterSection
             series.chartModels = [average]
             masterSection.series.append(series)
