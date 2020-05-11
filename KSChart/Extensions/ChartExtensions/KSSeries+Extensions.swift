@@ -21,25 +21,23 @@ extension KSSeries {
         let series = KSSeries()
         series.symmetrical              = false
         series.key                      = KSSeriesKey.boll
-        //series.title                    = "POLYLINE BOOL"
         let bollPolyline                = KSChartModel.getBoll(upStyle: upStyle, downStyle: downStyle, titleColor: titleColor, key: KSSeriesKey.boll)
         bollPolyline.section            = section
         bollPolyline.useTitleColor      = false
         bollPolyline.showMaxVal         = showGuide
         bollPolyline.showMinVal         = showGuide
         bollPolyline.ultimateValueStyle = ultimateValueStyle
-        //series.chartModels      = [boll]
 
-        let bollCurve                   = KSChartModel.getLine(lineColors[0], title: "BOLL", key: "\(KSSeriesKey.boll)_BOLL")
+        let ubCurve                     = KSChartModel.getLine(lineColors[0], title: "UP", key: "\(KSSeriesKey.boll)_UB")
+        ubCurve.section                 = section
+        
+        let bollCurve                   = KSChartModel.getLine(lineColors[1], title: "MID", key: "\(KSSeriesKey.boll)_BOLL")
         bollCurve.section               = section
 
-        let ubCurve                     = KSChartModel.getLine(lineColors[1], title: "UB", key: "\(KSSeriesKey.boll)_UB")
-        ubCurve.section                 = section
-
-        let lbCurve                     = KSChartModel.getLine(lineColors[2], title: "LB", key: "\(KSSeriesKey.boll)_LB")
+        let lbCurve                     = KSChartModel.getLine(lineColors[2], title: "LOW", key: "\(KSSeriesKey.boll)_LB")
         lbCurve.section                 = section
 
-        series.chartModels              = [bollPolyline,bollCurve, ubCurve, lbCurve]
+        series.chartModels              = [bollPolyline, ubCurve, bollCurve, lbCurve]
         return series
     }
     

@@ -316,6 +316,7 @@ class KSSeriesParam: NSObject, Codable {
             
             // 附图 [2019.8.7加]
             for assistSection in assistSections {
+
                 let bollSeries = KSSeries.getBollPrice(
                     upStyle: upcolor,
                     downStyle: downcolor,
@@ -324,21 +325,9 @@ class KSSeriesParam: NSObject, Codable {
                     section: assistSection,
                     showGuide: true,
                     ultimateValueStyle: .arrow(UIColor(white: 0.5, alpha: 1)))
-                //bollSeries.title = "BOLL"
-                bollSeries.symmetrical = false
+                bollSeries.title = "BOLL[\(self.params[0].value.ks_indexToString()),\(self.params[1].value.ks_indexToString())]"
+                //bollSeries.symmetrical = false
                 assistSection.series.append(bollSeries)
-                /*
-                 // 附图 [2019.8.7加]
-                 let assistPriceBOLLSeries = KSSeries.getBOLL(
-                 lineColors[0],
-                 ubc: lineColors[1],
-                 lbc: lineColors[2],
-                 section: assistSection)
-                 assistPriceBOLLSeries.title  = "ASSIST BOLL"
-                 assistPriceBOLLSeries.key    = KSSeriesKey.boll
-                 assistPriceBOLLSeries.hidden = false
-                 assistSection.series.append(assistPriceBOLLSeries)
-                 */
             }
         case KSSeriesKey.sar:
             
