@@ -707,7 +707,7 @@ extension KSKLineChartView {
         let startY = section.frame.maxY
         var k: Int = 0
         var showXAxisReference = false
-        var isDrawLine = true
+        //var isDrawLine = true
         
         //相当 for var i = self.rangeFrom; i < self.rangeTo; i = i + xTickInterval
         for i in stride(from: self.pref.rangeFrom, to: self.pref.rangeTo, by: xTickInterval) {
@@ -720,7 +720,7 @@ extension KSKLineChartView {
                 xPox = startX
             } else if (xPox + textSize.width > endX) {
                 xPox = endX - textSize.width
-                isDrawLine = false;
+                //isDrawLine = false;
             }
             let barLabelRect         = CGRect(x: xPox, y: startY, width: textSize.width, height: textSize.height)
             
@@ -752,13 +752,13 @@ extension KSKLineChartView {
                     //xPoint = perPlotWidth / 2
                 }
                 else{
-                    if isDrawLine {
+                    //if isDrawLine {
                         xPoint              = xPox + textSize.width / 2
                         referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY + section.padding.top))
                         referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY - section.padding.bottom))
                         referenceLayer.path = referencePath.cgPath
                         xAxis.addSublayer(referenceLayer)
-                    }
+                    //}
                 }
             }
             k      = k + xTickInterval
