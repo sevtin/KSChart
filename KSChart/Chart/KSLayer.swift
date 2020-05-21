@@ -217,14 +217,14 @@ public class KSGridLayer: KSShapeLayer {
         
         var titleX: CGFloat       = 0
         var alignmentMode         = CATextLayerAlignmentMode.left
-        
+
         switch style.showYAxisLabel {
         case .left:
-            titleX        = leftX
+            titleX        = style.isInnerYAxis ? leftX : section.frame.origin.x
             leftX         = style.isInnerYAxis ? leftX : pref.yAxisLabelWidth
             alignmentMode = style.isInnerYAxis ? .left : .right
         case .right:
-            titleX        = rightX - pref.yAxisLabelWidth
+            titleX        = style.isInnerYAxis ? rightX - pref.yAxisLabelWidth : rightX
             rightX        = style.isInnerYAxis ? rightX : (rightX - pref.yAxisLabelWidth)
             alignmentMode = style.isInnerYAxis ? .right : .left
         case .none: break

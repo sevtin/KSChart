@@ -211,7 +211,7 @@ open class KSKLineChartView: UIView {
     }
     
     func defaultConfigure() {
-        self.backgroundColor                     = self.style.backgroundColor
+        self.backgroundColor = self.style.backgroundColor
 
         //绘制层级Layer
         self.drawLevelLayer()
