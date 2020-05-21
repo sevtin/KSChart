@@ -684,7 +684,7 @@ extension KSKLineChartView {
         var xAxisToDraw              = [(CGRect, String)]()
         let xAxis                    = KSShapeLayer()
         var startX: CGFloat          = section.frame.origin.x + section.padding.left
-        let endX: CGFloat            = section.frame.origin.x + section.frame.size.width - section.padding.right
+        let endX: CGFloat            = section.frame.maxX - section.padding.right
         //x轴分平均分N个间断，显示N+1个x轴坐标，按照图表的值个数，计算每个间断的个数
         let dataRange                = self.pref.rangeTo - self.pref.rangeFrom
         var xTickInterval: Int       = dataRange / self.pref.xAxisPerInterval
@@ -707,6 +707,7 @@ extension KSKLineChartView {
         let startY = section.frame.maxY
         var k: Int = 0
         var showXAxisReference = false
+        var isDrawLine = true
         
         //相当 for var i = self.rangeFrom; i < self.rangeTo; i = i + xTickInterval
         for i in stride(from: self.pref.rangeFrom, to: self.pref.rangeTo, by: xTickInterval) {
@@ -715,10 +716,11 @@ extension KSKLineChartView {
             let textSize   = xLabel.ks_sizeWithConstrained(self.style.labelFont)
             var xPox       = startX + (perPlotWidth / 2) - (textSize.width / 2)
             //计算最左最右的x轴标签不越过边界
-            if (xPox < 0) {
+            if (xPox <= section.padding.left) {
                 xPox = startX
             } else if (xPox + textSize.width > endX) {
                 xPox = endX - textSize.width
+                isDrawLine = false;
             }
             let barLabelRect         = CGRect(x: xPox, y: startY, width: textSize.width, height: textSize.height)
             
@@ -750,15 +752,17 @@ extension KSKLineChartView {
                     //xPoint = perPlotWidth / 2
                 }
                 else{
-                    xPoint              = xPox + textSize.width / 2
-                    referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY + section.padding.top))
-                    referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY - section.padding.bottom))
-                    referenceLayer.path = referencePath.cgPath
-                    xAxis.addSublayer(referenceLayer)
+                    if isDrawLine {
+                        xPoint              = xPox + textSize.width / 2
+                        referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY + section.padding.top))
+                        referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY - section.padding.bottom))
+                        referenceLayer.path = referencePath.cgPath
+                        xAxis.addSublayer(referenceLayer)
+                    }
                 }
             }
             k      = k + xTickInterval
-            startX = perPlotWidth * CGFloat(k)
+            startX = perPlotWidth * CGFloat(k) + section.padding.left
         }
         self.drawLayer.addSublayer(xAxis)
         return xAxisToDraw

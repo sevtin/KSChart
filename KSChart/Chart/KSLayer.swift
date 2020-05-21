@@ -211,7 +211,7 @@ public class KSGridLayer: KSShapeLayer {
     /// 绘制分区格子
     func drawSectionGrid(_ section: KSSection, style: KSKLineChartStyle, pref: KSChartPref, topLayer: KSTopLayer) {
         var leftX                 = section.frame.origin.x + section.padding.left
-        var rightX                = section.frame.maxX - section.padding.right
+        let rightX                = section.frame.maxX - section.padding.right
         let topY                  = section.frame.origin.y + section.padding.top
         let bottomY               = section.frame.maxY - section.padding.bottom
         
@@ -225,7 +225,6 @@ public class KSGridLayer: KSShapeLayer {
             alignmentMode = style.isInnerYAxis ? .left : .right
         case .right:
             titleX        = style.isInnerYAxis ? rightX - pref.yAxisLabelWidth : rightX
-            rightX        = style.isInnerYAxis ? rightX : (rightX - pref.yAxisLabelWidth)
             alignmentMode = style.isInnerYAxis ? .right : .left
         case .none: break
         }
