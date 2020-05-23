@@ -62,7 +62,7 @@ class KSKChartView: KSBaseView {
 1、优化时间线逻辑
 2、精简代理方法
 3、对外API统一风格
-4、添加WR、AVG技术指标
+
 ```
 
 ## 下个版本
