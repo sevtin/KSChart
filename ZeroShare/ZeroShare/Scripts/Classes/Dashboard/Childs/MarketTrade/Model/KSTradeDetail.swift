@@ -19,7 +19,7 @@ class KSTradeDetail: NSObject {
     var side:Int = 0 {
         didSet{
             var type = String.ks_localizde("ks_app_global_text_buy_up")
-            isBuy = (side == 0) ? true : false
+            isBuy = (oldValue == 0) ? true : false
             if isBuy == false {
                 textColor = KS_Const_Color_Chart_Down
                 type = String.ks_localizde("ks_app_global_text_sell_up")

@@ -135,25 +135,25 @@ open class KSKLineChartView: UIView {
     //是否可点选
     var enableTap: Bool = true {
         didSet {
-            self.showSelection = self.enableTap
+            self.showSelection = oldValue
         }
     }
     
     /// 是否显示选中的内容
     var showSelection: Bool = false {
         didSet {
-            self.topLayer.updateCross(isShow: self.showSelection)
+            self.topLayer.updateCross(isShow: oldValue)
         }
     }
     
     public var style: KSKLineChartStyle! {
         didSet {
-            assert(self.style.chartTais != nil, "chartTais 不能为nil")
-            self.enableTap           = self.style.enableTap
-            self.showSelection       = self.style.showSelection
+            assert(oldValue.chartTais != nil, "chartTais 不能为nil")
+            self.enableTap           = oldValue.enableTap
+            self.showSelection       = oldValue.showSelection
             self.pref.minCandleCount = self.pref.range/2
             
-            for section in self.style.sections {
+            for section in oldValue.sections {
                 for serie in section.series {
                     for model in serie.chartModels {
                         model.minCandleCount = self.pref.minCandleCount

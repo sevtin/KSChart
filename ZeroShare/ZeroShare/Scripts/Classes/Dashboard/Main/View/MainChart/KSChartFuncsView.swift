@@ -16,13 +16,13 @@ class KSChartFuncsView: KSBaseView {
 
     var masterSeriesKey: String = "" {
         didSet {
-            KSSingleton.shared.indexConfigure.masterTai = masterSeriesKey
+            KSSingleton.shared.indexConfigure.masterTai = oldValue
         }
     }
     
     var assistSeriesKey: String = "" {
         didSet {
-            KSSingleton.shared.indexConfigure.assistTai = assistSeriesKey
+            KSSingleton.shared.indexConfigure.assistTai = oldValue
         }
     }
 

@@ -17,23 +17,23 @@ struct KSUserDefault {
 class KSIndexConfigure: NSObject {
     var masterTai: String? {
         didSet {
-            if masterTai == nil {
+            if oldValue == nil {
                 KSIndexConfigure.removeString(key: KSUserDefault.master)
             }
             else{
-                KSIndexConfigure.writeString(text: masterTai!, key: KSUserDefault.master)
+                KSIndexConfigure.writeString(text: oldValue!, key: KSUserDefault.master)
             }
         }
     }
     var assistTai: String = KSSeriesKey.volume {
         didSet{
-            KSIndexConfigure.writeString(text: assistTai, key: KSUserDefault.assist)
+            KSIndexConfigure.writeString(text: oldValue, key: KSUserDefault.assist)
         }
     }
 
     var timeID: Int = 0 {
         didSet {
-            KSIndexConfigure.writeInt(num: timeID, key: KSUserDefault.time)
+            KSIndexConfigure.writeInt(num: oldValue, key: KSUserDefault.time)
         }
     }
     
