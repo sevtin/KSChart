@@ -42,14 +42,12 @@ enum KSSelectedPosition {
     /// - Parameter lineChart: self
     /// - Parameter section: 分区
     @objc optional func ksLineChart(_ lineChart: KSKLineChartView, decimalAt section: Int) -> Int
-        
-    /// 点击图表列响应方法
-    ///
-    /// - Parameters:
-    ///   - chart: 图表
-    ///   - index: 点击的位置
-    ///   - item: 数据对象
-    @objc optional func kLineChart(chart: KSKLineChartView, didSelectAt index: Int, item: KSChartItem)
+    
+    /// 点击图表回调
+    /// - Parameter lineChart: self
+    /// - Parameter index: index
+    /// - Parameter item: item
+    @objc optional func ksLineChart(_ lineChart: KSKLineChartView, didSelectAt index: Int, item: KSChartItem)
     
     //行标题
     @objc optional func kLineChart(chart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String
@@ -474,7 +472,7 @@ open class KSKLineChartView: UIView {
                 section.drawTitle(self.pref.selectedIndex)
             }
             //回调
-            self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
+            self.delegate?.ksLineChart?(self, didSelectAt: index, item: item)
         }
     }
     

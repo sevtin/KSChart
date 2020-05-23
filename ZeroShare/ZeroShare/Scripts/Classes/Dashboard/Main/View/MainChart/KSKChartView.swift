@@ -55,6 +55,15 @@ extension KSKChartView: KSKLineChartDelegate {
         return configure.decimal
     }
     
+    func ksLineChart(_ lineChart: KSKLineChartView, didSelectAt index: Int, item: KSChartItem) {
+        if self.klineData.count > 1 && index > 0{
+            let yesterItem   = self.klineData[index - 1]
+            item.yesterPrice = yesterItem.closePrice
+        }
+        //CPU 10%左右的消耗
+        self.delegate?.kchartView?(chart: self, didSelectAt: index, item: item)
+    }
+    
     /**
      数据源索引为对应的对象
      
@@ -66,26 +75,6 @@ extension KSKChartView: KSKLineChartDelegate {
     func kLineChart(chart: KSKLineChartView, valueForPointAtIndex index: Int) -> KSChartItem {
         let item = self.klineData[index]
         return item
-    }
-    
-    func kLineChart(chart: KSKLineChartView, didSelectAt index: Int, item: KSChartItem) {
-        if self.klineData.count > 1 && index > 0{
-            let yesterItem   = self.klineData[index - 1]
-            item.yesterPrice = yesterItem.closePrice
-            /*
-            if yesterItem.close == item.open {
-                item.openType = .equal
-            }
-            else if yesterItem.close > item.open {
-                item.openType = .down
-            }
-            else{
-                item.openType = .up
-            }
-             */
-        }
-        //CPU 10%左右的消耗
-        self.delegate?.kchartView?(chart: self, didSelectAt: index, item: item)
     }
     
     func kLineChart(chart: KSKLineChartView, displayCross: Bool) {
