@@ -68,25 +68,8 @@ extension KSKChartView: KSKLineChartDelegate {
         return titleValue.ks_thousand(section.decimal)
     }
     
-    /**
-     数据源索引为对应的对象
-     
-     - parameter chart:
-     - parameter index: 索引位
-     
-     - returns: K线数据对象
-     */
-    func kLineChart(chart: KSKLineChartView, valueForPointAtIndex index: Int) -> KSChartItem {
-        let item = self.klineData[index]
-        return item
-    }
-    
-    func kLineChart(chart: KSKLineChartView, displayCross: Bool) {
+    func ksLineChart(_ lineChart: KSKLineChartView, displayCross: Bool) {
         self.delegate?.kchartView?(chart: self, displayCross: displayCross)
-    }
-    
-    func kLineChart(chart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String {
-        return titleValue.ks_thousand(section.decimal)
     }
     
 }

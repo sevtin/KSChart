@@ -56,13 +56,18 @@ enum KSSelectedPosition {
     @objc optional func ksLineChart(_ lineChart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String
     
     /// 切换分区用分页方式展示的线组
-    @objc optional func kLineChart(chart: KSKLineChartView, didFlipPageSeries section: KSSection, series: KSSeries, seriesIndex: Int)
+    /// - Parameter lineChart: self
+    /// - Parameter section: section
+    @objc optional func ksLineChart(_ lineChart: KSKLineChartView, didFlipSection section: KSSection)
     
     /// 十字架显示和影藏
-    @objc optional func kLineChart(chart: KSKLineChartView, displayCross: Bool)
+    /// - Parameter lineChart: self
+    /// - Parameter displayCross: display
+    @objc optional func ksLineChart(_ lineChart: KSKLineChartView, displayCross: Bool)
     
-    /// Tap事件回调
-    @objc optional func kLineChartTapAction(chart: KSKLineChartView)
+    /// Tap回调
+    /// - Parameter lineChart: self
+    @objc optional func ksLineChartDidTap(_ lineChart: KSKLineChartView)
 }
 
 public struct KSChartPref {
@@ -476,7 +481,7 @@ open class KSKLineChartView: UIView {
     private func hideCross() {
         if self.showSelection {
             self.showSelection = false
-            self.delegate?.kLineChart?(chart: self, displayCross: false)
+            self.delegate?.ksLineChart?(self, displayCross: false)
         }
     }
 }
@@ -1139,11 +1144,12 @@ extension KSKLineChartView: UIGestureRecognizerDelegate {
                 section.nextPage()
                 updateSerie(hidden: false, key: section.tai, isMasterCandle: false, index: section.index)
                 refreshChart(isAll: true, isDraw: true, isChangeTai: true)
-                self.delegate?.kLineChart?(chart: self, didFlipPageSeries: section, series: section.series[section.selectedIndex], seriesIndex: section.selectedIndex)
+                self.delegate?.ksLineChart?(self, didFlipSection: section)
             }
         }
-        self.delegate?.kLineChartTapAction?(chart: self)
         
+        self.delegate?.ksLineChartDidTap?(self)
+
         if sender.state == .ended {
             self.showSelection = false
         }
