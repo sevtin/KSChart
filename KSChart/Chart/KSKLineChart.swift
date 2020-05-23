@@ -404,7 +404,7 @@ open class KSKLineChartView: UIView {
         let hy                                   = self.style.padding.top
         let hheight                              = lastSection.frame.maxY
         //显示辅助线
-        self.topLayer.updateHorizontalLine(rect: CGRect(x: hx, y: hy, width: self.pref.lineWidth, height: hheight - hy))
+        self.topLayer.updateVerticalLine(rect: CGRect(x: hx, y: hy, width: self.pref.lineWidth, height: hheight - hy))
 
         let vx                                   = section!.frame.origin.x + section!.padding.left
         var vy: CGFloat                          = 0
@@ -430,7 +430,7 @@ open class KSKLineChartView: UIView {
         
         let hwidth = section!.frame.size.width - section!.padding.left - section!.padding.right
         //显示辅助线
-        self.topLayer.updateVerticalLine(rect: CGRect(x: vx, y: vy - self.pref.lineWidth / 2, width: hwidth, height: self.pref.lineWidth))
+        self.topLayer.updateHorizontalLine(rect: CGRect(x: vx, y: vy - self.pref.lineWidth / 2, width: hwidth, height: self.pref.lineWidth))
         
         //控制y轴的label在左还是右显示
         var yAxisStartX: CGFloat = 0
@@ -707,20 +707,23 @@ extension KSKLineChartView {
         let startY = section.frame.maxY
         var k: Int = 0
         var showXAxisReference = false
-        //var isDrawLine = true
         
         //相当 for var i = self.rangeFrom; i < self.rangeTo; i = i + xTickInterval
         for i in stride(from: self.pref.rangeFrom, to: self.pref.rangeTo, by: xTickInterval) {
             
             let xLabel     = self.delegate?.kLineChart?(chart: self, labelOnXAxisForIndex: i) ?? ""
             let textSize   = xLabel.ks_sizeWithConstrained(self.style.labelFont)
-            var xPox       = startX + (perPlotWidth / 2) - (textSize.width / 2)
+            var lineX      = startX + (perPlotWidth / 2)
+            var xPox       = lineX - (textSize.width / 2)
+            
             //计算最左最右的x轴标签不越过边界
             if (xPox <= section.padding.left) {
                 xPox = startX
             } else if (xPox + textSize.width > endX) {
+                if lineX > endX {
+                    lineX = 0
+                }
                 xPox = endX - textSize.width
-                //isDrawLine = false;
             }
             let barLabelRect         = CGRect(x: xPox, y: startY, width: textSize.width, height: textSize.height)
             
@@ -747,18 +750,11 @@ extension KSKLineChartView {
             
             //需要画x轴上的辅助线
             if showXAxisReference {
-                var xPoint: CGFloat = 0
-                if k == 0 {
-                    //xPoint = perPlotWidth / 2
-                }
-                else{
-                    //if isDrawLine {
-                        xPoint              = xPox + textSize.width / 2
-                        referencePath.move(to: CGPoint(x: xPoint, y: section.frame.minY + section.padding.top))
-                        referencePath.addLine(to: CGPoint(x: xPoint, y: section.frame.maxY - section.padding.bottom))
-                        referenceLayer.path = referencePath.cgPath
-                        xAxis.addSublayer(referenceLayer)
-                    //}
+                if lineX > 0 {
+                    referencePath.move(to: CGPoint(x: lineX, y: section.frame.minY + section.padding.top))
+                    referencePath.addLine(to: CGPoint(x: lineX, y: section.frame.maxY - section.padding.bottom))
+                    referenceLayer.path = referencePath.cgPath
+                    xAxis.addSublayer(referenceLayer)
                 }
             }
             k      = k + xTickInterval
