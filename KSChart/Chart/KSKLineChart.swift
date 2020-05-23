@@ -49,8 +49,11 @@ enum KSSelectedPosition {
     /// - Parameter item: item
     @objc optional func ksLineChart(_ lineChart: KSKLineChartView, didSelectAt index: Int, item: KSChartItem)
     
-    //行标题
-    @objc optional func kLineChart(chart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String
+    /// 行标题
+    /// - Parameter lineChart: self
+    /// - Parameter section: section
+    /// - Parameter titleValue: titleValue
+    @objc optional func ksLineChart(_ lineChart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String
     
     /// X轴的布局高度
     ///
@@ -1282,7 +1285,7 @@ extension KSKLineChartView {
                 labelText = (section.yAxis.max - interval * CGFloat(i))
             }
             let yAxisLabel    = section.yAxisTitles[i]
-            yAxisLabel.string = self.delegate?.kLineChart?(chart: self, rowTitleInSection: section, titleValue: labelText)
+            yAxisLabel.string = self.delegate?.ksLineChart?(self, rowTitleInSection: section, titleValue: labelText)
         }
     }
 }

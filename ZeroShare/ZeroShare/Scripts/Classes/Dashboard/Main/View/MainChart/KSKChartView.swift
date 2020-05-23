@@ -64,6 +64,10 @@ extension KSKChartView: KSKLineChartDelegate {
         self.delegate?.kchartView?(chart: self, didSelectAt: index, item: item)
     }
     
+    func ksLineChart(_ lineChart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String {
+        return titleValue.ks_thousand(section.decimal)
+    }
+    
     /**
      数据源索引为对应的对象
      
@@ -79,10 +83,6 @@ extension KSKChartView: KSKLineChartDelegate {
     
     func kLineChart(chart: KSKLineChartView, displayCross: Bool) {
         self.delegate?.kchartView?(chart: self, displayCross: displayCross)
-    }
-    
-    func kLineChartTapAction(chart: KSKLineChartView) {
-        self.delegate?.kchartViewTouch?(chart: self)
     }
     
     func kLineChart(chart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String {
