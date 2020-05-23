@@ -12,8 +12,6 @@ class KSTimeChartModel: KSChartModel {
 
     /// 填充颜色
     var fillColor: CGColor?
-    /// 阴影偏移
-    var shadowOffset: CGSize   = CGSize.init(width: 0, height: 2)
     /// 不透明度
     var shadowOpacity: Float = 0.5;
     

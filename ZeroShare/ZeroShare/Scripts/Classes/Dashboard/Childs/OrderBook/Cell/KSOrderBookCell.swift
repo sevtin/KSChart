@@ -82,8 +82,8 @@ class KSOrderBookInfo: NSObject {
     var price: String?
     var amount: String? {
         didSet {
-            amountValue       = Double(oldValue ?? "0") ?? 0
-            amountDisplay     = oldValue?.ks_volume()
+            amountValue       = Double(amount ?? "0") ?? 0
+            amountDisplay     = amount?.ks_volume()
             let space: CGFloat = -0.8
   
             let color        = isBuy ? KS_Const_Color_Chart_Up: KS_Const_Color_Chart_Down

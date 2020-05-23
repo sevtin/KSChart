@@ -62,17 +62,17 @@ open class KSChartItem: NSObject {
     
     @objc open var low: String = "" {
         didSet {
-            lowPrice = oldValue.ks_floatValue()
+            lowPrice = low.ks_floatValue()
         }
     }
     @objc open var high:String = "" {
         didSet {
-            highPrice = oldValue.ks_floatValue()
+            highPrice = high.ks_floatValue()
         }
     }
     @objc open var volume:String = "" {
         didSet {
-            vol = oldValue.ks_floatValue()
+            vol = volume.ks_floatValue()
         }
     }
     
@@ -84,12 +84,12 @@ open class KSChartItem: NSObject {
     
     @objc open var open:String = "" {
         didSet {
-            openPrice = oldValue.ks_floatValue()
+            openPrice = open.ks_floatValue()
         }
     }
     @objc open var close:String = "" {
         didSet {
-            closePrice    = oldValue.ks_floatValue()
+            closePrice    = close.ks_floatValue()
             isUp          = closePrice > openPrice
         }
     }

@@ -49,7 +49,7 @@ class KSChartMenuCell: UICollectionViewCell {
 class KSChartMenuInfo: NSObject {
     var displayText: String = "" {
         didSet {
-            title = String.ks_localizde(oldValue)
+            title = String.ks_localizde(displayText)
         }
     }
     var title: String                  = ""
