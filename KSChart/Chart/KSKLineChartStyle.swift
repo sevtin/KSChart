@@ -84,4 +84,6 @@ public class KSKLineChartStyle: NSObject {
 
     /// 是否显示所有内容
     public var isShowAll: Bool            = false
+    
+    public var yAxisLabelWidth: CGFloat   = 64
 }

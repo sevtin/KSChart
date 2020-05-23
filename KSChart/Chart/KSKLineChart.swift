@@ -43,13 +43,6 @@ enum KSSelectedPosition {
     /// - Parameter section: 分区
     @objc optional func ksLineChart(_ lineChart: KSKLineChartView, decimalAt section: Int) -> Int
         
-    /// 设置y轴标签的宽度
-    ///
-    /// - parameter chart:
-    ///
-    /// - returns:
-    @objc optional func widthForYAxisLabelInKLineChart(chart: KSKLineChartView) -> CGFloat
-    
     /// 点击图表列响应方法
     ///
     /// - Parameters:
@@ -81,13 +74,12 @@ public struct KSChartPref {
     let kMinRange:Int                        = 16//最小缩放范围
     let kMaxRange:Int                        = 128//最大缩放范围
     let kPerInterval:Int                     = 4//缩放的每段间隔
-    let kYAxisLabelWidth: CGFloat            = 64//默认文字宽度
     let kXAxisHegiht: CGFloat                = 16//默认X坐标的高度
     var minCandleCount: Int                  = 30//最小蜡烛图数量
     var fixedWidth: CGFloat                  = 10//小于最小蜡烛图数量，蜡烛的宽度
     var fixedGrid: Int                       = 2//最小格子数
     var xAxisPerInterval: Int                = 4//x轴的间断个数
-    var yAxisLabelWidth: CGFloat             = 0//Y轴的宽度
+    var yAxisLabelWidth: CGFloat             = 64//Y轴的宽度
     var selectedPosition: KSSelectedPosition = .onClosePrice//选中显示y值的位置
     var selectedIndex: Int                   = -1//选择单个点的索引
     var scrollToPosition: KSScrollPosition   = .none//图表刷新后开始显示位置
@@ -143,9 +135,10 @@ open class KSKLineChartView: UIView {
     public var style: KSKLineChartStyle! {
         didSet {
             assert(self.style.chartTais != nil, "chartTais 不能为nil")
-            self.enableTap           = self.style.enableTap
-            self.showSelection       = self.style.showSelection
-            self.pref.minCandleCount = self.pref.range/2
+            self.enableTap            = self.style.enableTap
+            self.showSelection        = self.style.showSelection
+            self.pref.minCandleCount  = self.pref.range/2
+            self.pref.yAxisLabelWidth = self.style.yAxisLabelWidth
             
             for section in self.style.sections {
                 for serie in section.series {
@@ -621,8 +614,6 @@ extension KSKLineChartView {
         }
         
         var offsetY: CGFloat       = self.style.padding.top
-        //设置y轴标签的宽度
-        self.pref.yAxisLabelWidth = self.delegate?.widthForYAxisLabelInKLineChart?(chart: self) ?? self.pref.kYAxisLabelWidth
         //计算每个区域的高度，并绘制
         for (index, section) in self.style.sections.enumerated() {
             
