@@ -55,12 +55,6 @@ enum KSSelectedPosition {
     /// - Parameter titleValue: titleValue
     @objc optional func ksLineChart(_ lineChart: KSKLineChartView, rowTitleInSection section: KSSection, titleValue: CGFloat) -> String
     
-    /// X轴的布局高度
-    ///
-    /// - Parameter chart: 图表
-    /// - Returns: 返回自定义的高度
-    @objc optional func heightForXAxisInKLineChart(chart: KSKLineChartView) -> CGFloat
-    
     /// 切换分区用分页方式展示的线组
     @objc optional func kLineChart(chart: KSKLineChartView, didFlipPageSeries section: KSSection, series: KSSeries, seriesIndex: Int)
     
@@ -600,7 +594,7 @@ extension KSKLineChartView {
         let width       = self.frame.size.width - (self.style.padding.left + self.style.padding.right)
         
         //X轴的布局高度
-        let xAxisHeight = self.delegate?.heightForXAxisInKLineChart?(chart: self) ?? self.pref.kXAxisHegiht
+        let xAxisHeight = self.pref.kXAxisHegiht
         height          = height - xAxisHeight
         
         var total       = 0
