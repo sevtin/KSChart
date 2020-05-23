@@ -46,6 +46,11 @@ extension KSKChartView: KSKLineChartDelegate {
         return klineData
     }
     
+    func ksLineChart(_ lineChart: KSKLineChartView, xAxisTextForIndex index: Int) -> String {
+        let data = self.klineData[index]
+        return Date.ks_getTimeByStamp(data.time, format: configure.dateFormat)
+    }
+    
     /**
      数据源索引为对应的对象
      
@@ -59,18 +64,6 @@ extension KSKChartView: KSKLineChartDelegate {
         return item
     }
     
-    /**
-     获取图表X轴的显示的内容(KDJ/MACD底部时间)
-     
-     - parameter chart:
-     - parameter index:     索引位
-     
-     - returns:
-     */
-    func kLineChart(chart: KSKLineChartView, labelOnXAxisForIndex index: Int) -> String {
-        let data = self.klineData[index]
-        return Date.ks_getTimeByStamp(data.time, format: configure.dateFormat)
-    }
     /// 配置各个分区小数位保留数
     ///
     /// - parameter chart:

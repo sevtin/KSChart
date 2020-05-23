@@ -34,11 +34,9 @@ enum KSSelectedPosition {
     @objc func ksLineChartDataSource(_ lineChart: KSKLineChartView) -> [KSChartItem]
 
     /// 获取图表X轴的显示的内容
-    ///
-    /// - Parameters:
-    ///   - chart:
-    ///   - index:
-    @objc optional func kLineChart(chart: KSKLineChartView, labelOnXAxisForIndex index: Int) -> String
+    /// - Parameter lineChart: self
+    /// - Parameter index: index
+    @objc optional func ksLineChart(_ lineChart: KSKLineChartView, xAxisTextForIndex index: Int) -> String
     
     /// 配置各个分区小数位保留数
     ///
@@ -443,8 +441,7 @@ open class KSKLineChartView: UIView {
         self.topLayer.updateYAxisLabel(rect: CGRect(x: yAxisStartX, y: vy - self.labelHeight / 2, width: self.pref.yAxisLabelWidth, height: self.labelHeight),
         text: String(format: format, yVal))
         
-        let dateFormat                 = self.delegate?.kLineChart?(chart: self, labelOnXAxisForIndex: currentIndex) ?? "MM-dd HH:mm"
-        let time                       = Date.ks_getTimeByStamp(item.time, format: dateFormat)//显示时间
+        let time                       = self.delegate?.ksLineChart?(self, xAxisTextForIndex: currentIndex) ?? ""
         let size                       = time.ks_sizeWithConstrained(self.style.labelFont)
 
         //判断x是否超过左右边界
@@ -710,7 +707,7 @@ extension KSKLineChartView {
         //相当 for var i = self.rangeFrom; i < self.rangeTo; i = i + xTickInterval
         for i in stride(from: self.pref.rangeFrom, to: self.pref.rangeTo, by: xTickInterval) {
             
-            let xLabel     = self.delegate?.kLineChart?(chart: self, labelOnXAxisForIndex: i) ?? ""
+            let xLabel     = self.delegate?.ksLineChart?(self, xAxisTextForIndex: i) ?? ""
             let textSize   = xLabel.ks_sizeWithConstrained(self.style.labelFont)
             var lineX      = startX + (perPlotWidth / 2)
             var xPox       = lineX - (textSize.width / 2)
