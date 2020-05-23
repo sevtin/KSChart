@@ -29,11 +29,10 @@ enum KSSelectedPosition {
 /// K线数据源代理
 @objc public protocol KSKLineChartDelegate: class {
     
-    /// 更新chart datas:[KSChartItem]数据
-    ///
-    /// - Parameter chart: 视图
-    @objc func dataSource(chart: KSKLineChartView) -> [KSChartItem]
-    
+    /// 数据源
+    /// - Parameter lineChart: self
+    @objc func ksLineChartDataSource(_ lineChart: KSKLineChartView) -> [KSChartItem]
+
     /// 获取图表X轴的显示的内容
     ///
     /// - Parameters:
@@ -239,7 +238,7 @@ open class KSKLineChartView: UIView {
     ///
     /// - Parameter isAll: 是否计算全部指标
     private func calculatorTai(isAll: Bool = true) {
-        guard let myDatas = self.delegate?.dataSource(chart: self) else {
+        guard let myDatas = self.delegate?.ksLineChartDataSource(self) else {
             return
         }
         self.datas          = myDatas

@@ -41,20 +41,11 @@ class KSKChartView: KSBaseView {
 }
 
 extension KSKChartView: KSKLineChartDelegate {
-    /**
-     数据源总数
-     
-     - parameter chart:
-     
-     - returns:
-     */
-    func numberOfPoints(chart: KSKLineChartView) -> Int {
-        return self.klineData.count
-    }
     
-    func dataSource(chart: KSKLineChartView) -> [KSChartItem] {
+    func ksLineChartDataSource(_ lineChart: KSKLineChartView) -> [KSChartItem] {
         return klineData
     }
+    
     /**
      数据源索引为对应的对象
      
