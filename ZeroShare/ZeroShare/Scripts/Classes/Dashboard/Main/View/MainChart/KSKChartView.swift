@@ -51,6 +51,10 @@ extension KSKChartView: KSKLineChartDelegate {
         return Date.ks_getTimeByStamp(data.time, format: configure.dateFormat)
     }
     
+    func ksLineChart(_ lineChart: KSKLineChartView, decimalAt section: Int) -> Int {
+        return configure.decimal
+    }
+    
     /**
      数据源索引为对应的对象
      
@@ -64,16 +68,6 @@ extension KSKChartView: KSKLineChartDelegate {
         return item
     }
     
-    /// 配置各个分区小数位保留数
-    ///
-    /// - parameter chart:
-    /// - parameter decimalForSection: 分区
-    ///
-    /// - returns:
-    func kLineChart(chart: KSKLineChartView, decimalAt section: Int) -> Int {
-        return configure.decimal
-    }
-
     func kLineChart(chart: KSKLineChartView, didSelectAt index: Int, item: KSChartItem) {
         if self.klineData.count > 1 && index > 0{
             let yesterItem   = self.klineData[index - 1]

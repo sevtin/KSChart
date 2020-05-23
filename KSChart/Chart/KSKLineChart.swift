@@ -39,13 +39,10 @@ enum KSSelectedPosition {
     @objc optional func ksLineChart(_ lineChart: KSKLineChartView, xAxisTextForIndex index: Int) -> String
     
     /// 配置各个分区小数位保留数
-    ///
-    /// - parameter chart:
-    /// - parameter decimalForSection: 分区
-    ///
-    /// - returns:
-    @objc optional func kLineChart(chart: KSKLineChartView, decimalAt section: Int) -> Int
-    
+    /// - Parameter lineChart: self
+    /// - Parameter section: 分区
+    @objc optional func ksLineChart(_ lineChart: KSKLineChartView, decimalAt section: Int) -> Int
+        
     /// 设置y轴标签的宽度
     ///
     /// - parameter chart:
@@ -522,7 +519,7 @@ extension KSKLineChartView {
             for index in 0..<self.style.sections.count {
                 let section     = self.style.sections[index]
                 //获取各section的小数保留位数
-                let decimal     = self.delegate?.kLineChart?(chart: self, decimalAt: index) ?? 2
+                let decimal     = self.delegate?.ksLineChart?(self, decimalAt: index) ?? 2
                 section.decimal = decimal
                 //初始Y轴的数据
                 self.initYAxis(section)
