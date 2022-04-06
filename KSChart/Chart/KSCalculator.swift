@@ -433,16 +433,16 @@ extension KSCalculator {
                 let data = datas[i]
                 if i >= (small - 1) {
                     data.ma_small = self.ks_calculateAveragePrice(count: small, endIndex: i, datas: datas)
+                    data.extVal["MA_\(small)"]  = data.ma_small//MA_5
                 }
                 if i >= (middle - 1) {
                     data.ma_middle = self.ks_calculateAveragePrice(count: middle, endIndex: i, datas: datas)
+                    data.extVal["MA_\(middle)"] = data.ma_middle//MA_10
                 }
                 if i >= (big - 1) {
                     data.ma_big = self.ks_calculateAveragePrice(count: big, endIndex: i, datas: datas)
+                    data.extVal["MA_\(big)"]    = data.ma_big//MA_30
                 }
-                data.extVal["MA_\(small)"]  = data.ma_small//MA_5
-                data.extVal["MA_\(middle)"] = data.ma_middle//MA_10
-                data.extVal["MA_\(big)"]    = data.ma_big//MA_30
             }
         }
         return datas
