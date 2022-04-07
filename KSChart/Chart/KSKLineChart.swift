@@ -78,7 +78,7 @@ public struct KSChartPref {
     var minCandleCount: Int                  = 30//最小蜡烛图数量
     var fixedWidth: CGFloat                  = 10//小于最小蜡烛图数量，蜡烛的宽度
     var fixedGrid: Int                       = 2//最小格子数
-    var xAxisPerInterval: Int                = 4//x轴的间断个数
+    var xAxisPerInterval: Int                = 3//x轴的间断个数
     var yAxisLabelWidth: CGFloat             = 64//Y轴的宽度
     var selectedPosition: KSSelectedPosition = .onClosePrice//选中显示y值的位置
     var selectedIndex: Int                   = -1//选择单个点的索引

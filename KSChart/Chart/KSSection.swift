@@ -455,7 +455,7 @@ extension KSSection {
                 if model.key != KSSeriesKey.volume {
                     continue
                 }
-                title += model.title + ": " + item.volume.ks_volume()
+                title += model.title + ": " + "\(item.vol)".ks_volume()
             case is KSBollModel: break
             case is KSTimeChartModel: break
             default:
