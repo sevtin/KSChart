@@ -1,11 +1,13 @@
 k线图/kline/kchart，已经集成MA/EMA/MACD/KDJ/BOLL/RSI/WR/AVG等指标，新增指标及其方便。适用于股票/区块链交易所等种类App。Swift5编写，CPU/内存占用率极低，60FPS稳定运行。示例集成websocket，并接入币安数据（需VPN）。项目采用CAShapelayer+UIBezierPath进行图形绘制，采用CATextLayer进行文本绘制。
 
 ## 项目推荐
-```
+
 Golang + Vue3 加密币模拟交易所。
+
 https://github.com/sevtin/coinex
+
 https://www.eipistar.com/
-```
+
 
 ## KSChart 效果图
 <img src="https://github.com/saeipi/KSChart/blob/master/Resources/time.jpg" alt="分时图" width="600" height="604" align="middle"/>
