@@ -3,10 +3,8 @@ k线图/kline/kchart，已经集成MA/EMA/MACD/KDJ/BOLL/RSI/WR/AVG等指标，�
 ## 项目推荐
 
 Golang + Vue3 加密币模拟交易所。
-
 https://github.com/sevtin/coinex
-
-https://www.eipistar.com/
+[https://www.eipistar.com/](https://eipistar.us.kg/)
 
 
 ## KSChart 效果图
