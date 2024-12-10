@@ -6,7 +6,7 @@ Golang + Vue3 加密币模拟交易所。
 
 https://github.com/sevtin/coinex
 
-[https://www.eipistar.com/](https://eipistar.us.kg/)
+https://eipistar.us.kg/
 
 
 ## KSChart 效果图
